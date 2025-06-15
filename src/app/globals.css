@@ -7,3 +7,27 @@
   --color-light-mode: #f5f0e9;
   --color-accent: #a40b0d;
 }
+
+/* Set Space Grotesk as the default font for headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-space-grotesk);
+}
+
+/* Set Jost as the default font for body text */
+body,
+p,
+div,
+span,
+button,
+a,
+input,
+textarea,
+select,
+option {
+  font-family: var(--font-jost);
+}
