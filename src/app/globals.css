@@ -6,6 +6,8 @@
   --color-dark-mode: #191313;
   --color-light-mode: #f5f0e9;
   --color-accent: #a40b0d;
+
+  --breakpoint-xs: 428px;
 }
 
 /* Set Space Grotesk as the default font for headings */

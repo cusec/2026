@@ -4,12 +4,12 @@ import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-space-grotesk", // Define the CSS variable
+  variable: "--font-space-grotesk",
 });
 
 const jost = Jost({
   subsets: ["latin"],
-  variable: "--font-jost", // Define the CSS variable
+  variable: "--font-jost",
 });
 
 export const metadata: Metadata = {
