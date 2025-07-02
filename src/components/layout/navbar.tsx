@@ -1,7 +1,11 @@
+"use client";
+
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const navItems = [
     "ATTEND THE CONFERENCE",
     "SPONSORS",
@@ -27,11 +31,12 @@ const Navbar: React.FC = () => {
           </div>
           <div className="text-center leading-none">
             <h3 className="text-2xl">CUSEC</h3>
-            <h3 className="text-lg tracking-[0.25em]">2026</h3>
+            <h3 className="text-lg tracking-[0.15em]">2026</h3>
           </div>
         </div>
 
-        <div className="flex items-center gap-8">
+        {/* Desktop Navigation */}
+        <div className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
             <button
               key={item}
@@ -41,7 +46,45 @@ const Navbar: React.FC = () => {
             </button>
           ))}
         </div>
+
+        {/* Mobile Burger Menu Button */}
+        <button
+          className="lg:hidden flex flex-col items-center justify-center w-8 h-8 space-y-1.5"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <div
+            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+              isMenuOpen ? "rotate-45 translate-y-2" : ""
+            }`}
+          />
+          <div
+            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+              isMenuOpen ? "opacity-0" : ""
+            }`}
+          />
+          <div
+            className={`w-6 h-0.5 bg-white transition-all duration-300 ${
+              isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+            }`}
+          />
+        </button>
       </div>
+
+      {/* Mobile Navigation Menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden mt-4 px-8 pb-4 space-y-4">
+          {navItems.map((item) => (
+            <button
+              key={item}
+              className="block w-full text-right text-md font-medium px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              {item}
+            </button>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
