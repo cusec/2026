@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
           {navItems.map((item) => (
             <button
               key={item}
-              className="block w-full text-right text-md font-medium px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10"
+              className="block w-full text-center text-md font-medium px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10"
               onClick={() => setIsMenuOpen(false)}
             >
               {item}
