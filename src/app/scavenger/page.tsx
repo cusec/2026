@@ -37,6 +37,8 @@ export default async function ScavengerPage() {
             </button>
           </a>
           <p>{JSON.stringify(session.user, null, 2)}</p>
+          <p>{typeof session.accessToken}</p>
+          <p>{typeof session.user["cusec/roles"]}</p>
         </div>
       </div>
     </main>
