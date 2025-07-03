@@ -1,9 +1,9 @@
 "use client";
 
-import { Navbar, Hero, Particles } from "@/components";
+import { Navbar, Particles, ScavengerLogin } from "@/components";
 import { useState, useEffect } from "react";
 
-export default function Home() {
+export default function ScavengerPage() {
   const [particleCount, setParticleCount] = useState(500);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function Home() {
       <div className="relative z-10">
         <Navbar />
         <main>
-          <Hero />
+          <ScavengerLogin />
         </main>
       </div>
     </div>
