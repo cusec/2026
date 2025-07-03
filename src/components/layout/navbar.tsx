@@ -7,19 +7,24 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = {
-    "ATTEND THE CONFERENCE": "/attend",
-    SPONSORS: "/sponsors",
-    SPEAKERS: "/speakers",
-    SCHEDULE: "/schedule",
-    "THE TEAM": "/team",
+    HOME: "/",
+    "ATTEND THE CONFERENCE": "#attend",
+    SPONSORS: "#sponsors",
+    SPEAKERS: "#speakers",
+    SCHEDULE: "#schedule",
+    "THE TEAM": "#team",
     "SCAVENGER HUNT": "/scavenger",
-    ABOUT: "/about",
-    FAQ: "/faq",
+    ABOUT: "#about",
+    FAQ: "#faq",
   };
 
   return (
-    <nav className="text-white px-8 py-4">
-      <div className="flex items-center justify-between px-8 pb-2 mx-4 border-b-2 border-white/30">
+    <nav
+      className={`w-full h-[100vh] lg:h-min text-white lg:px-8 py-4 absolute z-30 lg:backdrop-blur-none lg:bg-transparent transition-all duration-300 ease-in-out ${
+        isMenuOpen ? "backdrop-blur-sm bg-black/50" : ""
+      }`}
+    >
+      <div className="flex items-center justify-between px-4 lg:px-8 pb-2 mx-4 border-b-2 border-white/30">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 relative">
             <Image
@@ -30,7 +35,7 @@ const Navbar: React.FC = () => {
               className="object-contain"
             />
           </div>
-          <div className="text-center leading-none">
+          <div className="hidden lg:block text-center leading-none">
             <h3 className="text-2xl">CUSEC</h3>
             <h3 className="text-lg tracking-[0.15em]">2026</h3>
           </div>
