@@ -20,13 +20,13 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`w-full h-[100vh] lg:h-min text-white lg:px-8 py-4 absolute z-30 lg:backdrop-blur-none lg:bg-transparent transition-all duration-300 ease-in-out ${
-        isMenuOpen ? "backdrop-blur-sm bg-black/50" : ""
+      className={`w-full h-[100vh] xl:h-min text-white lg:px-4 2xl:px-8 py-4 absolute z-30 xl:backdrop-blur-none xl:bg-transparent transition-all duration-300 ease-in-out ${
+        isMenuOpen ? "backdrop-blur-sm bg-dark-mode/50" : ""
       }`}
     >
-      <div className="flex items-center justify-between px-4 lg:px-8 pb-2 mx-4 border-b-2 border-white/30">
+      <div className="flex items-center justify-between px-4 xl:px-8 pb-2 mx-4 border-b-2 border-white/40">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 relative">
+          <div className="w-8 h-8 relative">
             <Image
               src="/images/logo.svg"
               alt="CUSEC Logo"
@@ -35,19 +35,19 @@ const Navbar: React.FC = () => {
               className="object-contain"
             />
           </div>
-          <div className="hidden lg:block text-center leading-none">
+          <div className="hidden xl:block text-center leading-none">
             <h3 className="text-2xl">CUSEC</h3>
             <h3 className="text-lg tracking-[0.15em]">2026</h3>
           </div>
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden xl:flex items-center gap-6">
           {Object.entries(navItems).map(([item, url]) => (
             <a
               key={item}
               href={url}
-              className="text-md font-medium px-4 py-2 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+              className="text-sm 2xl: text-md font-medium px-2 2xl:px-4 py-2 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
             >
               {item}
             </a>
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Burger Menu Button */}
         <button
-          className="lg:hidden flex flex-col items-center justify-center w-8 h-8 space-y-1.5"
+          className="xl:hidden flex flex-col items-center justify-center w-8 h-8 space-y-1.5"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -80,7 +80,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden mt-4 px-8 pb-4 space-y-4">
+        <div className="xl:hidden mt-4 px-8 pb-4 space-y-4">
           {Object.entries(navItems).map(([item, url]) => (
             <a
               key={item}

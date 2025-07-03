@@ -1,16 +1,9 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Jost } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-});
-
-const jost = Jost({
-  subsets: ["latin"],
-  variable: "--font-jost",
-});
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 export const metadata: Metadata = {
   title: "CUSEC 2026",
@@ -23,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${jost.variable}`}>
+    <html lang="en">
       <body className={`antialiased`}>{children}</body>
     </html>
   );

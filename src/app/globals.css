@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -8,6 +10,9 @@
   --color-accent: #a40b0d;
 
   --breakpoint-xs: 428px;
+
+  --font-jost: "Jost", sans-serif;
+  --font-space-grotesk: "Space Grotesk", sans-serif;
 }
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 @custom-variant dark (&:where(.dark, .dark *));
