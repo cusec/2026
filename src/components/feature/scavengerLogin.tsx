@@ -1,20 +1,10 @@
-"use client";
+"use server";
 
-import { useUser } from "@auth0/nextjs-auth0";
+import { auth0 } from "@/lib/auth0";
 
-const ScavengerLogin: React.FC = () => {
-  const { user, isLoading } = useUser();
-
-  // Loading state
-  if (isLoading) {
-    return (
-      <main>
-        <div className="flex items-center justify-center">
-          <div className="text-white text-xl">Loading...</div>
-        </div>
-      </main>
-    );
-  }
+const ScavengerLogin = async () => {
+  const session = await auth0.getSession();
+  const user = session?.user;
 
   // User not logged in
   if (!user) {
@@ -52,7 +42,6 @@ const ScavengerLogin: React.FC = () => {
               Log Out
             </button>
           </a>
-          <p>{JSON.stringify(user, null, 2)}</p>
         </div>
       </div>
     </main>
