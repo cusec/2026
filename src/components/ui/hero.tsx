@@ -7,7 +7,7 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
 const Hero: React.FC = () => {
   return (
-    <div className="xl:max-w-4xl  flex flex-col gap-6 lg:gap-10 backdrop-blur-xs bg-dark-mode/60 p-6 mx-8 rounded-lg text-left text-light-mode">
+    <div className="xl:max-w-4xl flex flex-col gap-6 lg:gap-10 backdrop-blur-xs bg-dark-mode/60 p-6 mx-8 rounded-lg text-left text-light-mode">
       <div className="flex items-center gap-3 lg:gap-8 border-b-2 lg:border-b-0 pb-5 border-light-mode/40">
         <div className="lg:border-r-2 border-light-mode/40 relative">
           <div className="w-[8vh] h-[8vh] lg:w-[10vh] lg:h-[10vh] lg:mr-10">
@@ -42,30 +42,36 @@ const Hero: React.FC = () => {
       </div>
       <div className="w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-row gap-2 xs:gap-6">
-          <div className="w-fit border-b-2 border-light-mode/40">
-            <a className="font-space-grotesk!">Speak at CUSEC</a>
-            <FontAwesomeIcon
-              icon={faMicrophone}
-              size="sm"
-              className="ml-1 text-accent"
-            />
+          <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
+            <a className="font-space-grotesk!">
+              Speak at CUSEC
+              <FontAwesomeIcon
+                icon={faMicrophone}
+                size="sm"
+                className="ml-1 text-accent"
+              />
+            </a>
           </div>
-          <div className="w-fit border-b-2 border-light-mode/40">
-            <a className="font-space-grotesk!">Sponsor CUSEC</a>
-            <FontAwesomeIcon
-              icon={faUserPlus}
-              size="sm"
-              className="ml-1 text-secondary"
-            />
+          <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
+            <a className="font-space-grotesk!">
+              Sponsor CUSEC
+              <FontAwesomeIcon
+                icon={faUserPlus}
+                size="sm"
+                className="ml-1 text-secondary"
+              />
+            </a>
           </div>
         </div>
-        <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 border-2 border-secondary/50 text-center">
-          <a className="font-space-grotesk!">Join us for 2026</a>
-          <FontAwesomeIcon
-            icon={faArrowUpRightFromSquare}
-            size="xs"
-            className="ml-2"
-          />
+        <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 border-2 border-secondary/50 text-center hero-button-hover">
+          <a className="font-space-grotesk!">
+            Join us for 2026
+            <FontAwesomeIcon
+              icon={faArrowUpRightFromSquare}
+              size="xs"
+              className="ml-2"
+            />
+          </a>
         </div>
       </div>
     </div>

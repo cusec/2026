@@ -6,7 +6,7 @@ export default function Home() {
       <Particles />
       <ParallaxCityscape />
       <div className="relative z-10">
-        <main className="w-full flex justify-center items-center pt-[15vh] lg:pt-[20vh]">
+        <main className="w-full flex justify-center items-center pt-[15vh] lg:pt-[25vh]">
           <Hero />
         </main>
         <section className="min-h-[100vh]"></section>

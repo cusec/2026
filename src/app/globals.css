@@ -51,3 +51,8 @@ html {
 html::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+/* Button hover effects class */
+.hero-button-hover {
+  @apply transition-all duration-300 ease-out cursor-pointer hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
+}
