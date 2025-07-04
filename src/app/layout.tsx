@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Navbar, Particles } from "@/components";
+import { Navbar } from "@/components";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -19,12 +19,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <Particles
-          className="absolute inset-0 z-0 animate-fade-in"
-          quantity={300}
-        />
         <Navbar />
-        <div className="relative z-10">{children}</div>
+        {children}
       </body>
     </html>
   );

@@ -12,8 +12,8 @@ interface ParticlesProps {
 }
 
 export default function Particles({
-  className = "",
-  quantity = 30,
+  className = "absolute inset-0 z-0 animate-fade-in",
+  quantity = 300,
   staticity = 50,
   ease = 50,
   refresh = false,
