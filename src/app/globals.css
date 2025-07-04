@@ -40,3 +40,14 @@ select,
 option {
   font-family: var(--font-jost);
 }
+
+/* Hide scrollbars but keep scroll functionality */
+html {
+  overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
