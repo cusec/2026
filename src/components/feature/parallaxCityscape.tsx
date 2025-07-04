@@ -35,6 +35,7 @@ const ParallaxCityscape: React.FC = () => {
   // Calculate parallax offset - buildings move up as user scrolls down
   const building1Offset = scrollY * 1.6;
   const building2Offset = scrollY * 1.3;
+  const building3Offset = scrollY * 2;
   const lighthouseOffset = scrollY * 1.7;
   const groundOffset = scrollY * 2.1; // Ground moves with buildings
 
@@ -82,7 +83,7 @@ const ParallaxCityscape: React.FC = () => {
 
       {/* Building 1 (Background) */}
       <div
-        className="w-32 h-64 xl:w-44 xl:h-80 absolute bottom-20 left-0 -z-10 transition-transform duration-75 ease-out"
+        className="w-26 h-64 xl:w-52 xl:h-[500px] absolute bottom-20 left-0 -z-10 transition-transform duration-75 ease-out"
         style={{
           transform: `translateY(-${building1Offset}px)`,
         }}
@@ -90,14 +91,14 @@ const ParallaxCityscape: React.FC = () => {
         <Image
           src="/images/building1.svg"
           alt="Building 1"
-          className="object-contain opacity-80"
+          className="object-contain"
           fill
         />
       </div>
 
       {/* Building 2 (Middle) */}
       <div
-        className="w-24 h-52 xl:w-32 xl:h-60 absolute bottom-20 left-26 -z-10 transition-transform duration-75 ease-out"
+        className="w-22 h-52 xl:w-46 xl:h-[380px] absolute bottom-20 left-25 xl:left-42 -z-10 transition-transform duration-75 ease-out"
         style={{
           transform: `translateY(-${building2Offset}px)`,
         }}
@@ -105,14 +106,29 @@ const ParallaxCityscape: React.FC = () => {
         <Image
           src="/images/building2.svg"
           alt="Building 2"
-          className="object-contain opacity-90"
+          className="object-contain"
+          fill
+        />
+      </div>
+
+      {/* Building 3 (Small) */}
+      <div
+        className="hidden xl:block w-52 h-[115px] absolute bottom-18 left-0 -z-10 transition-transform duration-75 ease-out"
+        style={{
+          transform: `translateY(-${building3Offset}px)`,
+        }}
+      >
+        <Image
+          src="/images/building3.svg"
+          alt="Building 2"
+          className="object-contain"
           fill
         />
       </div>
 
       {/* Lighthouse (Foreground) */}
       <div
-        className="w-32 h-72 xl:w-44 xl:h-96 absolute bottom-14 right-2 -z-10 transition-transform duration-75 ease-out"
+        className="w-32 h-72 xl:w-60 xl:h-[550px] absolute bottom-14 right-2 -z-10 transition-transform duration-75 ease-out"
         style={{
           transform: `translateY(-${lighthouseOffset}px)`,
         }}
