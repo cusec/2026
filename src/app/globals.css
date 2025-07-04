@@ -10,6 +10,7 @@
   --color-accent: #a40b0d;
 
   --breakpoint-xs: 428px;
+  --breakpoint-xxs: 364px;
 
   --font-jost: "Jost", sans-serif;
   --font-space-grotesk: "Space Grotesk", sans-serif;
@@ -54,5 +55,5 @@ html::-webkit-scrollbar {
 
 /* Button hover effects class */
 .hero-button-hover {
-  @apply transition-all duration-300 ease-out cursor-pointer hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
+  @apply transition-all duration-300 ease-out cursor-pointer hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
 }

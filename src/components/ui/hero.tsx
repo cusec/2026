@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
         </h3>
       </div>
       <div className="w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
-        <div className="text-sm md:text-2xl flex flex-row gap-2 xs:gap-6">
+        <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
             <a className="font-space-grotesk!">
               Speak at CUSEC
