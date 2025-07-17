@@ -29,7 +29,7 @@ const ParallaxCityscape: React.FC = () => {
 
     // Debug code
     scrollYProgress.onChange((latest) => {
-      console.log("Scroll Progress:", latest);
+      //console.log("Scroll Progress:", latest);
     });
 
     window.addEventListener("resize", handleResize);
@@ -68,7 +68,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Building 1 (Background) */}
         <motion.div
           style={{ y: b1 }}
-          className="absolute left-0 top-[5vh] max-h-[70vh] w-[8vh] h-[20vh] xl:w-[20vh] xl:h-[50vh] -z-10 transition-transform duration-75 ease-out"
+          className="absolute left-0 top-[1vh] max-h-[70vh] w-[10vh] h-[25vh] xl:w-[20vh] xl:h-[50vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
             src="/images/building1.svg"
@@ -81,7 +81,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Building 2 (Middle) */}
         <motion.div
           style={{ y: b2 }}
-          className="absolute top-[10vh] left-[6vh] xl:left-[15vh] max-h-[60vh] w-[6vh] h-[15vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
+          className="absolute top-[5vh] xl:top-[15vh] left-[8vh] xl:left-[15vh] max-h-[60vh] w-[10vh] h-[20vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
             src="/images/building2.svg"
@@ -107,7 +107,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Lighthouse (Foreground) */}
         <motion.div
           style={{ y: l }}
-          className="absolute top-[5vh] xl:top-0 right-0 max-h-[70vh] w-[11vh] h-[25vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
+          className="absolute xl:top-0 right-0 max-h-[70vh] w-[15vh] h-[35vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
             src="/images/lighthouse.svg"

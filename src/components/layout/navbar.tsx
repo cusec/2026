@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`w-full h-[100vh] xl:h-min text-white lg:px-4 2xl:px-8 py-4 fixed top-0 z-30 xl:backdrop-blur-none xl:bg-transparent transition-all duration-300 ease-in-out ${
+      className={`w-full h-[100vh] xl:h-min text-white lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:backdrop-blur-md xl:bg-white/2 xl:rounded-3xl transition-all duration-300 ease-in-out ${
         isMenuOpen ? "backdrop-blur-sm bg-dark-mode/70" : ""
       }`}
     >

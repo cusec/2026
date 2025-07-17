@@ -4,7 +4,6 @@ export default function Home() {
   return (
     <div className="bg-linear-[90deg] from-primary from-0% to-sunset to-100% -z-20 bg-cover bg-center h-full w-screen">
       <Navbar />
-
       <div className="relative z-10">
         <Particles />
         <ParallaxCityscape />
