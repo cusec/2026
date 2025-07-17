@@ -28,9 +28,9 @@ const ParallaxCityscape: React.FC = () => {
     handleResize();
 
     // Debug code
-    scrollYProgress.onChange((latest) => {
-      //console.log("Scroll Progress:", latest);
-    });
+    //scrollYProgress.onChange((latest) => {
+    //console.log("Scroll Progress:", latest);
+    //});
 
     window.addEventListener("resize", handleResize);
     return () => {
