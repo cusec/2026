@@ -26,6 +26,8 @@ const ParallaxCityscape: React.FC = () => {
       setIsMobile(window.innerWidth < 768); // 768px is typical tablet breakpoint
     };
     handleResize();
+
+    // Debug code
     scrollYProgress.onChange((latest) => {
       console.log("Scroll Progress:", latest);
     });
