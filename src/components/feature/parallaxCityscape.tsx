@@ -81,7 +81,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Building 2 (Middle) */}
         <motion.div
           style={{ y: b2 }}
-          className="absolute top-[5vh] xl:top-[15vh] left-[8vh] xl:left-[15vh] max-h-[60vh] w-[10vh] h-[20vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
+          className="absolute top-[5vh] xl:top-[18vh] left-[8vh] xl:left-[15vh] max-h-[60vh] w-[10vh] h-[20vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
             src="/images/building2.svg"
