@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTransform, useScroll, motion } from "framer-motion";
+import Lenis from "lenis";
 
 const ParallaxCityscape: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -15,7 +16,7 @@ const ParallaxCityscape: React.FC = () => {
   const b2 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-50%"]);
   const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-30%"]);
   const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "-110%"]);
-  const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "-70%"]);
+  const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "-68%"]);
 
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
@@ -26,6 +27,17 @@ const ParallaxCityscape: React.FC = () => {
       setIsMobile(window.innerWidth < 768); // 768px is typical tablet breakpoint
     };
     handleResize();
+
+    // Initialize Lenis
+    const lenis = new Lenis();
+
+    // Use requestAnimationFrame to continuously update the scroll
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
 
     // Debug code
     //scrollYProgress.onChange((latest) => {
