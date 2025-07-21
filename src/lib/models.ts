@@ -2,7 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema(
   {
-    email: String,
+    email: { type: String, required: true, unique: true },
+    name: String,
     points: { type: Number, default: 0 },
     history: [
       {

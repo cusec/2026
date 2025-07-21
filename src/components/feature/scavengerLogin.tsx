@@ -1,10 +1,23 @@
 "use server";
 
 import { auth0 } from "@/lib/auth0";
+import { findOrCreateUser } from "@/lib/userService";
 
 const ScavengerLogin = async () => {
   const session = await auth0.getSession();
   const user = session?.user;
+
+  const handleLogin = async () => {
+    if (!user?.email) return;
+    try {
+      await findOrCreateUser({
+        email: user.email,
+        name: user.name || "",
+      });
+    } catch (error) {
+      console.error("Error creating/finding user:", error);
+    }
+  };
 
   // User not logged in
   if (!user) {

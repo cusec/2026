@@ -1,10 +1,6 @@
-import {
-  ScavengerLogin,
-  Particles,
-  Navbar,
-  ScavengerOptions,
-} from "@/components";
+import { ScavengerLogin, Particles, Navbar } from "@/components";
 import { auth0 } from "@/lib/auth0";
+import ScavengerOptionsClient from "@/components/feature/scavengerOptionsClient";
 
 export default async function ScavengerPage() {
   const session = await auth0.getSession();
@@ -18,7 +14,7 @@ export default async function ScavengerPage() {
         <div className="flex items-center justify-center">
           <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode dark:bg-dark-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
             <ScavengerLogin />
-            {user && <ScavengerOptions />}
+            {user && <ScavengerOptionsClient />}
           </div>
         </div>
       </main>
