@@ -76,7 +76,7 @@ const ParallaxCityscape: React.FC = () => {
       </motion.div>
 
       {/* Cityscape */}
-      <div className="absolute top-[70vh] xl:top-[45vh] w-full">
+      <div className="hidden xxs:block absolute top-[70vh] xl:top-[45vh] w-full">
         {/* Building 1 (Background) */}
         <motion.div
           style={{ y: b1 }}
