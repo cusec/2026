@@ -1,4 +1,10 @@
-import { Hero, ParallaxCityscape, Particles, Navbar } from "@/components";
+import {
+  Hero,
+  ParallaxCityscape,
+  Particles,
+  Navbar,
+  Cusec,
+} from "@/components";
 
 export default function Home() {
   return (
@@ -12,6 +18,7 @@ export default function Home() {
             <Hero />
           </div>
         </main>
+        <Cusec />
         <section className="min-h-[100vh]"></section>
       </div>
     </div>

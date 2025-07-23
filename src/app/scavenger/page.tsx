@@ -1,6 +1,10 @@
-import { ScavengerLogin, Particles, Navbar } from "@/components";
+import {
+  ScavengerLogin,
+  Particles,
+  Navbar,
+  ScavengerOptionsClient,
+} from "@/components";
 import { auth0 } from "@/lib/auth0";
-import ScavengerOptionsClient from "@/components/feature/scavengerOptionsClient";
 
 export default async function ScavengerPage() {
   const session = await auth0.getSession();

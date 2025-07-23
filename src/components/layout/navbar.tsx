@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <div className="xl:hidden mt-22 px-8 pb-4 space-y-4">
+        <div className="xl:hidden mt-12 px-8 pb-4 space-y-3">
           {Object.entries(navItems).map(([item, url]) => (
             <Link
               key={item}

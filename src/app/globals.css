@@ -58,3 +58,13 @@ html::-webkit-scrollbar {
 .hero-button-hover {
   @apply transition-all duration-300 ease-out cursor-pointer hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
 }
+
+.heading-gradient {
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-accent)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+}

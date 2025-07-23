@@ -17,6 +17,11 @@ const ParallaxCityscape: React.FC = () => {
   const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-30%"]);
   const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "-110%"]);
   const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "-68%"]);
+  const waveHeight = useTransform(
+    scrollYProgress,
+    [0.33, 0.6],
+    ["25vh", "110vh"]
+  );
 
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
@@ -53,11 +58,21 @@ const ParallaxCityscape: React.FC = () => {
   return (
     <div className="absolute w-full h-[100vh] z-10" ref={container}>
       {/* Wavy Ground/Base */}
-      <motion.div style={{ y: w }} className="absolute top-[76vh]">
+      <motion.div
+        style={{
+          y: w,
+          height: waveHeight,
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 90%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 90%, transparent 100%)",
+        }}
+        className="absolute top-[76vh]"
+      >
         <svg
           viewBox="0 0 1200 200"
           preserveAspectRatio="none"
-          className="w-full h-[80vh]"
+          className="w-[100vw] h-full"
         >
           <defs>
             <linearGradient
