@@ -83,7 +83,7 @@ const ParallaxCityscape: React.FC = () => {
               y2="0%"
             >
               <stop offset="0%" stopColor="#000072" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6d072f" stopOpacity="1" />
+              <stop offset="100%" stopColor="#802b36" stopOpacity="1" />
             </linearGradient>
           </defs>
           <path d={path} fill="url(#groundGradient)" />

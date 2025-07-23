@@ -23,25 +23,18 @@ export default function Particles({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
-  const [isMobile, setIsMobile] = useState(false);
-  const quantity = isMobile ? 300 : 600;
-  const staticity = isMobile ? 100 : 50;
 
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+    console.log(window.innerWidth);
     initCanvas();
     animate();
     window.addEventListener("resize", initCanvas);
-    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", initCanvas);
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -152,7 +145,7 @@ export default function Particles({
 
   const drawParticles = () => {
     clearContext();
-    const particleCount = quantity;
+    const particleCount = window.innerWidth < 768 ? 300 : 600;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);
@@ -196,10 +189,14 @@ export default function Particles({
       circle.x += circle.dx;
       circle.y += circle.dy;
       circle.translateX +=
-        (mouse.current.x / (staticity / circle.magnetism) - circle.translateX) /
+        (mouse.current.x /
+          (window.innerWidth < 768 ? 100 : 50 / circle.magnetism) -
+          circle.translateX) /
         ease;
       circle.translateY +=
-        (mouse.current.y / (staticity / circle.magnetism) - circle.translateY) /
+        (mouse.current.y /
+          (window.innerWidth < 768 ? 100 : 50 / circle.magnetism) -
+          circle.translateY) /
         ease;
       // circle gets out of the canvas
       if (
