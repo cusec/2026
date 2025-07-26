@@ -4,6 +4,7 @@ import {
   Particles,
   Navbar,
   Cusec,
+  Sponsors,
 } from "@/components";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
           </div>
         </main>
         <Cusec />
+        <Sponsors />
         <section className="min-h-[100vh]"></section>
       </div>
     </div>

@@ -7,5 +7,6 @@ export { default as ScavengerOptions } from "./feature/scavengerOptions";
 export { default as ParallaxCityscape } from "./feature/parallaxCityscape";
 export { default as ScavengerOptionsClient } from "./feature/scavengerOptionsClient";
 export { default as Cusec } from "./ui/cusec";
+export { default as Sponsors } from "./ui/sponsors";
 
 // Add other component exports here as they are created
