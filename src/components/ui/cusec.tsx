@@ -2,7 +2,7 @@ const Cusec: React.FC = () => {
   return (
     <>
       <div className="mt-[15vh] ml-[8vw]">
-        <div className="w-fit heading-gradient text-light-mode/70 ">
+        <div className="w-fit text-light-mode ">
           <h1 className="text-3xl xl:text-6xl font-bold mb-1 border-b-1">
             What Is CUSEC ?
           </h1>
