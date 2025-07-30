@@ -10,8 +10,8 @@ const sponsorData: Sponsor[] = [
     id: "rbc",
     name: "RBC",
     image: "/2025_sponsors/rbc.webp",
-    position: { x: "5vw", y: "10vh" },
-    size: { width: "15vw", height: "10vh" },
+    position: { x: "2vw", y: "5vh" },
+    size: { width: "32vw", height: "16vh" },
     rotation: -2,
     zIndex: 2,
   },
@@ -19,8 +19,8 @@ const sponsorData: Sponsor[] = [
     id: "ciena",
     name: "Ciena",
     image: "/2025_sponsors/ciena.webp",
-    position: { x: "25vw", y: "5vh" },
-    size: { width: "14vw", height: "9vh" },
+    position: { x: "16vw", y: "34vh" },
+    size: { width: "25vw", height: "14vh" },
     rotation: 1,
     zIndex: 1,
   },
@@ -28,8 +28,8 @@ const sponsorData: Sponsor[] = [
     id: "wolfram",
     name: "Wolfram",
     image: "/2025_sponsors/wolfram.webp",
-    position: { x: "45vw", y: "15vh" },
-    size: { width: "12vw", height: "8vh" },
+    position: { x: "40vw", y: "3vh" },
+    size: { width: "17vw", height: "13vh" },
     rotation: -1,
     zIndex: 3,
   },
@@ -37,8 +37,8 @@ const sponsorData: Sponsor[] = [
     id: "fellow",
     name: "Fellow",
     image: "/2025_sponsors/fellow.webp",
-    position: { x: "65vw", y: "8vh" },
-    size: { width: "13vw", height: "8vh" },
+    position: { x: "60vw", y: "38vh" },
+    size: { width: "23vw", height: "13vh" },
     rotation: 2,
     zIndex: 1,
   },
@@ -46,8 +46,8 @@ const sponsorData: Sponsor[] = [
     id: "cse",
     name: "CSE",
     image: "/2025_sponsors/cse.svg",
-    position: { x: "10vw", y: "25vh" },
-    size: { width: "10vw", height: "6vh" },
+    position: { x: "10vw", y: "50vh" },
+    size: { width: "25vw", height: "11vh" },
     rotation: -3,
     zIndex: 2,
   },
@@ -55,8 +55,8 @@ const sponsorData: Sponsor[] = [
     id: "gadget",
     name: "Gadget",
     image: "/2025_sponsors/gadget.svg",
-    position: { x: "75vw", y: "22vh" },
-    size: { width: "9vw", height: "6vh" },
+    position: { x: "65vw", y: "8vh" },
+    size: { width: "20vw", height: "12vh" },
     rotation: 1,
     zIndex: 1,
   },
@@ -64,8 +64,8 @@ const sponsorData: Sponsor[] = [
     id: "compulsion-games",
     name: "Compulsion Games",
     image: "/2025_sponsors/Compulsion_Games.webp",
-    position: { x: "35vw", y: "30vh" },
-    size: { width: "13vw", height: "8vh" },
+    position: { x: "48vw", y: "55vh" },
+    size: { width: "22vw", height: "13vh" },
     rotation: -2,
     zIndex: 2,
   },
@@ -73,8 +73,8 @@ const sponsorData: Sponsor[] = [
     id: "tailed",
     name: "Tailed",
     image: "/2025_sponsors/tailed.webp",
-    position: { x: "55vw", y: "35vh" },
-    size: { width: "10vw", height: "6vh" },
+    position: { x: "42vw", y: "23vh" },
+    size: { width: "20vw", height: "10vh" },
     rotation: 3,
     zIndex: 1,
   },
@@ -88,47 +88,45 @@ const Sponsors: React.FC = () => {
   };
 
   return (
-    <section id="sponsors" className="mt-[15vh] px-4 md:px-8">
-      <div className="ml-[4vw] mb-12">
-        <div className="w-fit heading-gradient text-light-mode/70">
-          <h1 className="text-3xl xl:text-6xl font-bold mb-1 border-b-1">
-            Our Sponsors
-          </h1>
-        </div>
+    <div className="mt-[50vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto">
+      <div className="w-full text-center flex justify-center">
+        <h1 className="w-fit text-light-mode text-3xl xl:text-6xl font-bold mb-1 border-b-1">
+          Our Sponsors
+        </h1>
       </div>
 
       {/* Sponsors Container */}
-      <div className="relative max-w-6xl mx-auto h-[50vh]">
-        {sponsorData.map((sponsor) => {
-          return (
-            <div
-              key={sponsor.id}
-              className={`absolute hover:scale-105 transition-transform duration-300 ${
-                sponsor.website ? "cursor-pointer" : ""
-              }`}
-              style={{
-                left: sponsor.position.x,
-                top: sponsor.position.y,
-                width: sponsor.size.width,
-                height: sponsor.size.height,
-              }}
-              onClick={() => handleSponsorClick(sponsor)}
-              title={sponsor.name}
-            >
-              <div className="relative w-full h-full rounded-lg overflow-hidden bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-colors duration-300">
+      <div className="w-full text-center flex justify-left">
+        <div className="relative">
+          {sponsorData.map((sponsor) => {
+            return (
+              <div
+                key={sponsor.id}
+                className={`absolute hover:scale-105 transition-transform duration-300 ${
+                  sponsor.website ? "cursor-pointer" : ""
+                }`}
+                style={{
+                  left: sponsor.position.x,
+                  top: sponsor.position.y,
+                  height: sponsor.size.height,
+                  width: sponsor.size.width,
+                }}
+                onClick={() => handleSponsorClick(sponsor)}
+                title={sponsor.name}
+              >
                 <Image
                   src={sponsor.image}
                   alt={sponsor.name}
                   fill
-                  className="object-contain p-2"
+                  className="object-contain"
                   sizes={sponsor.size.width}
                 />
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
