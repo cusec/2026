@@ -3,6 +3,7 @@ import {
   ParallaxCityscape,
   Particles,
   Navbar,
+  Footer,
   Cusec,
   Sponsors,
 } from "@/components";
@@ -21,8 +22,8 @@ export default function Home() {
         </main>
         <Cusec />
         <Sponsors />
-        <section className="min-h-[100vh]"></section>
       </div>
+      <Footer />
     </div>
   );
 }

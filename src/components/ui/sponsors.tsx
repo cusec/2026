@@ -96,7 +96,7 @@ const Sponsors: React.FC = () => {
       </div>
 
       {/* Sponsors Container */}
-      <div className="w-full text-center flex justify-left">
+      <div className="w-full h-[70vh] text-center flex justify-left">
         <div className="relative">
           {sponsorData.map((sponsor) => {
             return (

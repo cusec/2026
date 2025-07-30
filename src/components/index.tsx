@@ -1,5 +1,6 @@
 // Export layout components
 export { default as Navbar } from "./layout/navbar";
+export { default as Footer } from "./layout/footer";
 export { default as Hero } from "./ui/hero";
 export { default as Particles } from "./feature/particles";
 export { default as ScavengerLogin } from "./feature/scavengerLogin";
