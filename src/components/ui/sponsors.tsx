@@ -98,7 +98,7 @@ const Sponsors: React.FC = () => {
       </div>
 
       {/* Sponsors Container */}
-      <div className="relative max-w-6xl mx-auto h-[50vh] overflow-hidden">
+      <div className="relative max-w-6xl mx-auto h-[50vh]">
         {sponsorData.map((sponsor) => {
           return (
             <div
