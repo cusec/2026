@@ -6,6 +6,7 @@ import {
   Footer,
   Cusec,
   Sponsors,
+  Pricing,
 } from "@/components";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
         </main>
         <Cusec />
         <Sponsors />
+        <Pricing />
       </div>
       <Footer />
     </div>

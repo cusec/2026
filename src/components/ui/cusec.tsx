@@ -3,7 +3,7 @@ const Cusec: React.FC = () => {
     <>
       <div className="mt-[50vh] w-full flex flex-col justify-center mx-auto">
         <div className="w-full flex justify-center text-center">
-          <h1 className="text-3xl md:text-5xl xl:text-6xl font-bold mb-1 border-b-1 text-light-mode">
+          <h1 className="text-3xl md:text-5xl xl:text-6xl font-bold pb-4 border-b-1 text-light-mode">
             What Is CUSEC ?
           </h1>
         </div>
