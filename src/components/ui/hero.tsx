@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
       <div className="mt-2 xxs:mt-0 w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <a
-            className="font-space-grotesk! w-fit lg:p-2 border-b-2 border-light-mode/40 md:email-hover"
+            className="font-space-grotesk! w-fit lg:p-2 border-b-2 border-light-mode/40 email-hover"
             href="mailto:talks@cusec.net"
             target="_blank"
             rel="noopener noreferrer"
@@ -73,7 +73,7 @@ const Hero: React.FC = () => {
           </a>
 
           <a
-            className="font-space-grotesk! mt-2 xxs:mt-0  w-fit lg:p-2 border-b-2 border-light-mode/40 md:email-hover"
+            className="font-space-grotesk! mt-2 xxs:mt-0  w-fit lg:p-2 border-b-2 border-light-mode/40 email-hover"
             href="mailto:sponsor@cusec.net"
             target="_blank"
             rel="noopener noreferrer"
@@ -87,7 +87,7 @@ const Hero: React.FC = () => {
           </a>
         </div>
         <a
-          className="font-space-grotesk! w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center border-2 border-secondary/50 md:register-hover"
+          className="font-space-grotesk! w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center border-2 border-secondary/50 register-hover"
           href="https://2025.cusec.net/"
           target="_blank"
           rel="noopener noreferrer"

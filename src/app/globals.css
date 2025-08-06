@@ -55,73 +55,75 @@ html::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
 
-/* Button hover effects class */
-.email-hover {
-  @apply relative transition-all duration-300 ease-out cursor-pointer;
-}
+/* Button hover effects class - only on md screens and above */
+@media (min-width: 768px) {
+  .email-hover {
+    @apply relative transition-all duration-300 ease-out cursor-pointer;
+  }
 
-.email-hover::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: rgb(0, 0, 114, 0.7);
-  transition: width 0.3s ease-out;
-}
+  .email-hover::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(0, 0, 114, 0.7);
+    transition: width 0.3s ease-out;
+  }
 
-.email-hover:hover::after {
-  width: 100%;
-}
+  .email-hover:hover::after {
+    width: 100%;
+  }
 
-.register-hover {
-  @apply relative overflow-hidden cursor-pointer;
-  transition: border-color 0.3s ease-out;
-}
+  .register-hover {
+    @apply relative overflow-hidden cursor-pointer;
+    transition: border-color 0.3s ease-out;
+  }
 
-.register-hover::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  background: rgba(245, 240, 233, 0.85);
-  border-radius: 50%;
-  transform: translate(-50%, 50%);
-  transition: all 0.3s ease-out;
-  z-index: -1;
-}
+  .register-hover::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    background: rgba(245, 240, 233, 0.85);
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    transition: all 0.3s ease-out;
+    z-index: -1;
+  }
 
-.register-hover:hover::before {
-  width: 300%;
-  height: 300%;
-}
+  .register-hover:hover::before {
+    width: 300%;
+    height: 300%;
+  }
 
-.register-hover:hover {
-  @apply border-secondary/70;
-}
+  .register-hover:hover {
+    @apply border-secondary/70;
+  }
 
-.register-hover {
-  position: relative;
-  z-index: 2;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    var(--color-dark-mode) 100%
-  );
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: background-size 0.3s ease-out, color 0.3s ease-out;
-}
+  .register-hover {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      var(--color-dark-mode) 100%
+    );
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    -webkit-background-clip: text;
+    background-clip: text;
+    transition: background-size 0.3s ease-out, color 0.3s ease-out;
+  }
 
-.register-hover:hover {
-  background-size: 100% 100%;
-  color: var(--color-dark-mode);
+  .register-hover:hover {
+    background-size: 100% 100%;
+    color: var(--color-dark-mode);
+  }
 }
 
 .heading-gradient {
