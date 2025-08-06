@@ -57,8 +57,6 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/images/logo.svg",
-        width: 1200,
-        height: 630,
         alt: "CUSEC 2026 Logo",
       },
     ],
