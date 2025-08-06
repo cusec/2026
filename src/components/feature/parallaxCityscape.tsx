@@ -32,7 +32,7 @@ const ParallaxCityscape: React.FC = () => {
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
     : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-300%" : "-110%";
+  const wave_gradient_pull = isMobile ? "-70%" : "-20%";
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,7 +58,10 @@ const ParallaxCityscape: React.FC = () => {
   }, []);
 
   return (
-    <div className="absolute w-full h-[100vh] z-10" ref={container}>
+    <div
+      className="absolute w-full h-[100vh] z-10 overflow-hidden"
+      ref={container}
+    >
       {/* Wavy Ground/Base */}
       <motion.div
         style={{
@@ -69,7 +72,7 @@ const ParallaxCityscape: React.FC = () => {
           WebkitMaskImage:
             "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
         }}
-        className="absolute top-[76vh]"
+        className="absolute top-[80vh]"
       >
         <svg
           viewBox="0 0 1200 200"
@@ -80,12 +83,12 @@ const ParallaxCityscape: React.FC = () => {
             <linearGradient
               id="groundGradient"
               x1={wave_gradient_pull}
-              y1="10%"
-              x2="100%"
-              y2="0%"
+              y1="0%"
+              x2="80%"
+              y2="-20%"
             >
               <stop offset="0%" stopColor="#000072" stopOpacity="1" />
-              <stop offset="100%" stopColor="#692347" stopOpacity="1" />
+              <stop offset="100%" stopColor="#802b36" stopOpacity="1" />
             </linearGradient>
           </defs>
           <path d={path} fill="url(#groundGradient)" />
@@ -93,7 +96,7 @@ const ParallaxCityscape: React.FC = () => {
       </motion.div>
 
       {/* Cityscape */}
-      <div className="hidden xxs:block absolute top-[61vh] xl:top-[38vh] w-full">
+      <div className="hidden xxs:block absolute top-[65vh] xl:top-[42vh] w-full">
         {/* Building 1 (Background) */}
         <motion.div
           style={{ y: b1, scaleY: b1Height, transformOrigin: "bottom" }}

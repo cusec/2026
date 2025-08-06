@@ -35,12 +35,16 @@ const Hero: React.FC = () => {
           Canadian University Software Engineering Conference
         </h2>
       </div>
-      <div>
-        <h3 className="text-xl xs:text-2xl md:text-3xl leading-none font-medium text-center lg:text-left">
+      <div className="flex flex-col mx-auto lg:mx-0 xs:flex-row gap-4 text-xg md:text-3xl leading-none font-medium text-center lg:text-left">
+        <h3>
           25<sup>th</sup> Anniversary
         </h3>
+        <h3 className="lg:mx-4 hidden xs:flex">|</h3>
+        <h3>
+          January 8<sup>th</sup> - 10<sup>th</sup>
+        </h3>
       </div>
-      <div className="w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
+      <div className="mt-2 xs:mt-0 w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
             <a className="font-space-grotesk!">
@@ -52,7 +56,7 @@ const Hero: React.FC = () => {
               />
             </a>
           </div>
-          <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
+          <div className="mt-2 xs:mt-0  w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
             <a className="font-space-grotesk!">
               Sponsor CUSEC
               <FontAwesomeIcon
@@ -65,7 +69,7 @@ const Hero: React.FC = () => {
         </div>
         <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 border-2 border-secondary/50 text-center hero-button-hover">
           <a className="font-space-grotesk!">
-            Join us for 2026
+            Coming Soon
             <FontAwesomeIcon
               icon={faArrowUpRightFromSquare}
               size="xs"
