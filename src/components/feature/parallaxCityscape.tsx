@@ -59,7 +59,7 @@ const ParallaxCityscape: React.FC = () => {
 
   return (
     <div
-      className="absolute w-full h-[100vh] z-10 overflow-hidden"
+      className="absolute w-full h-[100vh] pointer-events-none z-10 overflow-hidden"
       ref={container}
     >
       {/* Wavy Ground/Base */}
