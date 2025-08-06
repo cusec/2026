@@ -57,7 +57,7 @@ html::-webkit-scrollbar {
 
 /* Button hover effects class */
 .hero-button-hover {
-  @apply transition-all duration-300 ease-out cursor-pointer hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
+  @apply transition-all duration-300 ease-out cursor-pointer hover:shadow-md hover:shadow-white/5 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-[0.99];
 }
 
 .heading-gradient {
@@ -68,4 +68,35 @@ html::-webkit-scrollbar {
   );
   -webkit-background-clip: text;
   background-clip: text;
+}
+
+/* ----------bobbing---------- */
+@keyframes bobbing {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.bobbing-animation {
+  animation: bobbing 3.5s ease-in-out infinite;
+}
+
+/* ----------bouncing---------- */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.bouncing-animation {
+  animation: bounce 1s ease-in-out infinite;
+  box-shadow: 1px 2px 0px rgba(73, 72, 130, 0.4);
 }
