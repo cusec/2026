@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // this determines the transition logic for all animations
 const transitionConfig = (delay = 0) => ({
-  type: "spring",
+  type: "spring" as const,
   stiffness: 50,
   duration: 0.5,
   delay: delay,
@@ -32,6 +32,23 @@ const fadeConfig = (
 });
 
 export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   //removes splashpage loading from DOM after animation sequence
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,11 +61,11 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
   return (
     <AnimatePresence>
       <motion.main
-        className={`flex items-center justify-center text-light-mode/80 flex-col h-screen !overflow-hidden`}
+        className={`flex items-center justify-center text-light-mode/80 flex-col h-screen !overflow-hidden px-4`}
       >
-        <div className="flex flex-row justify-center items-center h-[150px] w-full mx-auto gap-[14px]">
-          {/* LEFT SIDE */}
-          <div className="w-[44.5%] flex flex-row justify-end items-center flex-grow gap-1 px-5">
+        <div className="flex flex-col sm:flex-row justify-center items-center h-auto sm:h-[150px] w-full mx-auto gap-8 sm:gap-[14px] max-w-4xl">
+          {/* LEFT SIDE / TOP ON MOBILE */}
+          <div className="w-full sm:w-[44.5%] flex flex-col sm:flex-row justify-center sm:justify-end items-center flex-grow gap-4 sm:gap-1 px-2 sm:px-5">
             <motion.div
               id="logo"
               {...fadeConfig(20, 0, 0, 0)}
@@ -56,11 +73,11 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
             >
               <motion.div
                 initial={{ rotate: 0, x: 0 }}
-                animate={{ rotate: 1080, x: "50%" }}
+                animate={{ rotate: 1080, x: isMobile ? "0%" : "50%" }}
                 transition={transitionConfig(1.05)}
               >
                 <Image
-                  className="bobbing-animation w-[75px] h-[75px] max-w-[250px] max-h-[250px]"
+                  className="bobbing-animation w-12 h-12 sm:w-[75px] sm:h-[75px] max-w-[250px] max-h-[250px]"
                   src="/images/logo.svg"
                   alt="2025 logo main"
                   width={1080}
@@ -71,28 +88,28 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
             </motion.div>
 
             <motion.div
-              className="flex flex-col items-center"
+              className="flex flex-col items-center mt-4 sm:mt-0"
               {...fadeConfig(0, 50, 0, 0)}
               transition={transitionConfig(0.1)}
             >
               <motion.div
                 className="flex flex-col items-center"
                 initial={{ y: 0, opacity: 1 }}
-                animate={{ y: "50vw", opacity: 0 }}
+                animate={{ y: isMobile ? "30vh" : "50vw", opacity: 0 }}
                 transition={transitionConfig(1)}
               >
-                <h2 className="text-[40px] font-bold leading-[80%] bobbing-animation">
+                <h2 className="text-2xl sm:text-[40px] font-bold leading-[80%] bobbing-animation mb-1">
                   CUSEC
                 </h2>
-                <h2 className="text-[40px] font-bold leading-[80%] bobbing-animation">
+                <h2 className="text-2xl sm:text-[40px] font-bold leading-[80%] bobbing-animation">
                   2025
                 </h2>
               </motion.div>
             </motion.div>
           </div>
-          {/* MIDDLE DIVIDER */}
+          {/* MIDDLE DIVIDER - HIDDEN ON MOBILE */}
           <motion.div
-            className="w-[1%] max-w-[2px] h-3/5"
+            className="hidden sm:block w-[1%] max-w-[2px] h-3/5"
             {...fadeConfig(0, -10, 0, 0)}
             transition={transitionConfig(0.2)}
           >
@@ -103,19 +120,19 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
               transition={transitionConfig(1.1)}
             ></motion.div>
           </motion.div>
-          {/* RIGHT */}
+          {/* RIGHT / BOTTOM ON MOBILE */}
           <motion.div
-            className="w-[44.5%] flex flex-grow px-5"
+            className="w-full sm:w-[44.5%] flex flex-grow px-2 sm:px-5 justify-center mt-6 sm:mt-0"
             {...fadeConfig(0, 50, 0, 0)}
             transition={transitionConfig(0.3)}
           >
             <motion.div
-              className="flex flex-col items-center"
+              className="flex flex-col items-center text-center"
               initial={{ y: 0, opacity: 1 }}
-              animate={{ y: "50vw", opacity: 0 }}
+              animate={{ y: isMobile ? "30vh" : "50vw", opacity: 0 }}
               transition={transitionConfig(1.2)}
             >
-              <p className="textFont text-base font-extrabold bobbing-animation">
+              <p className="textFont text-xs sm:text-base font-extrabold bobbing-animation max-w-xs sm:max-w-none leading-relaxed">
                 Canadian University Software Engineering Conference
               </p>
             </motion.div>
@@ -124,17 +141,17 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
 
         {/* LOADING ANIMATION */}
         <motion.div
-          className={`absolute flex flex-row items-baseline justify-center h-auto gap-2`}
+          className={`absolute flex flex-row items-baseline justify-center h-auto gap-1 sm:gap-2 mt-8 sm:mt-0`}
           {...fadeConfig(5, 10, 5, 0)}
           transition={transitionConfig(1.3)}
         >
-          <p className="textFont text-4xl font-extrabold animate-bounce duration-1 ">
+          <p className="textFont text-xl sm:text-4xl font-extrabold animate-bounce duration-1">
             Loading
           </p>
-          <div className="flex justify-center items-center gap-3 font-bold mt-[10px]">
-            <span className="block w-[0.5vh] h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation" />
-            <span className="block w-[0.5vh] h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation delay-1" />
-            <span className="block w-[0.5vh] h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation delay-2" />
+          <div className="flex justify-center items-center gap-1 sm:gap-3 font-bold">
+            <span className="block w-[0.3vh] h-[0.3vh] sm:w-[0.5vh] sm:h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation" />
+            <span className="block w-[0.3vh] h-[0.3vh] sm:w-[0.5vh] sm:h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation delay-1" />
+            <span className="block w-[0.3vh] h-[0.3vh] sm:w-[0.5vh] sm:h-[0.5vh] bg-[#494882] rounded-2xl bouncing-animation delay-2" />
           </div>
         </motion.div>
       </motion.main>

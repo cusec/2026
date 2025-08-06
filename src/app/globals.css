@@ -57,7 +57,7 @@ html::-webkit-scrollbar {
 
 /* Button hover effects class */
 .email-hover {
-  @apply relative transition-all duration-300 ease-out cursor-pointer border-b-2 border-light-mode/40;
+  @apply relative transition-all duration-300 ease-out cursor-pointer;
 }
 
 .email-hover::after {
@@ -76,7 +76,7 @@ html::-webkit-scrollbar {
 }
 
 .register-hover {
-  @apply relative overflow-hidden cursor-pointer border-2 border-secondary/50;
+  @apply relative overflow-hidden cursor-pointer;
   transition: border-color 0.3s ease-out;
 }
 
