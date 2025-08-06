@@ -1,4 +1,4 @@
-import { Hero, ParallaxCityscape, Particles, Navbar } from "@/components";
+import { Hero, ParallaxCityscape, Particles } from "@/components";
 
 export default function Home() {
   return (
