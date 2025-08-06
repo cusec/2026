@@ -1,3 +1,5 @@
+import SmoothFollower from "./feature/smoothFollower";
+
 // Export layout components
 export { default as Navbar } from "./layout/navbar";
 export { default as Footer } from "./layout/footer";
@@ -10,5 +12,6 @@ export { default as ScavengerOptionsClient } from "./feature/scavengerOptionsCli
 export { default as Cusec } from "./ui/cusec";
 export { default as Sponsors } from "./ui/sponsors";
 export { default as Pricing } from "./ui/pricing";
+export { default as SmoothFollower } from "./feature/smoothFollower";
 
 // Add other component exports here as they are created

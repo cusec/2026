@@ -103,7 +103,7 @@ html::-webkit-scrollbar {
   @apply border-secondary/70;
 }
 
-.register-hover * {
+.register-hover {
   position: relative;
   z-index: 2;
   background: linear-gradient(
@@ -119,7 +119,7 @@ html::-webkit-scrollbar {
   transition: background-size 0.3s ease-out, color 0.3s ease-out;
 }
 
-.register-hover:hover * {
+.register-hover:hover {
   background-size: 100% 100%;
   color: var(--color-dark-mode);
 }
@@ -136,7 +136,8 @@ html::-webkit-scrollbar {
 
 /* Anniversary Animation Effects */
 @keyframes pulse-subtle {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
   }
@@ -147,7 +148,8 @@ html::-webkit-scrollbar {
 }
 
 @keyframes sparkle-1 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.6;
   }
@@ -166,7 +168,8 @@ html::-webkit-scrollbar {
 }
 
 @keyframes sparkle-2 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.4;
   }
@@ -181,7 +184,8 @@ html::-webkit-scrollbar {
 }
 
 @keyframes sparkle-3 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.5;
   }
@@ -204,7 +208,8 @@ html::-webkit-scrollbar {
 }
 
 @keyframes sparkle-4 {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(0, 0) scale(1);
     opacity: 0.45;
   }

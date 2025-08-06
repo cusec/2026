@@ -58,52 +58,47 @@ const Hero: React.FC = () => {
       </div>
       <div className="mt-2 xxs:mt-0 w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
-          <div className="w-fit lg:p-2 email-hover">
-            <a
-              className="font-space-grotesk!"
-              href="mailto:speakers@cusec.net"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Speak at CUSEC
-              <FontAwesomeIcon
-                icon={faMicrophone}
-                size="sm"
-                className="ml-1 text-accent"
-              />
-            </a>
-          </div>
-          <div className="mt-2 xxs:mt-0  w-fit lg:p-2 email-hover">
-            <a
-              className="font-space-grotesk!"
-              href="mailto:sponsor@cusec.net"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Sponsor CUSEC
-              <FontAwesomeIcon
-                icon={faUserPlus}
-                size="sm"
-                className="ml-1 text-secondary"
-              />
-            </a>
-          </div>
-        </div>
-        <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center register-hover">
           <a
-            className="font-space-grotesk!"
-            href="https://2025.cusec.net/"
+            className="font-space-grotesk! w-fit lg:p-2 email-hover"
+            href="mailto:speakers@cusec.net"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Previous Year
+            Speak at CUSEC
             <FontAwesomeIcon
-              icon={faArrowUpRightFromSquare}
-              size="xs"
-              className="ml-2"
+              icon={faMicrophone}
+              size="sm"
+              className="ml-1 text-accent"
+            />
+          </a>
+
+          <a
+            className="font-space-grotesk! mt-2 xxs:mt-0  w-fit lg:p-2 email-hover"
+            href="mailto:sponsor@cusec.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Sponsor CUSEC
+            <FontAwesomeIcon
+              icon={faUserPlus}
+              size="sm"
+              className="ml-1 text-secondary"
             />
           </a>
         </div>
+        <a
+          className="font-space-grotesk! w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center register-hover"
+          href="https://2025.cusec.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Previous Year
+          <FontAwesomeIcon
+            icon={faArrowUpRightFromSquare}
+            size="xs"
+            className="ml-2"
+          />
+        </a>
       </div>
     </div>
   );
