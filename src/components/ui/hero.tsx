@@ -36,9 +36,18 @@ const Hero: React.FC = () => {
         </h2>
       </div>
       <div className="flex flex-col mx-auto lg:mx-0 xs:flex-row gap-4 text-xg md:text-3xl leading-none font-medium text-center lg:text-left">
-        <h3>
-          25<sup>th</sup> Anniversary
-        </h3>
+        <div className="relative group">
+          <h3 className="relative z-10 animate-pulse-subtle">
+            25<sup>th</sup> Anniversary
+          </h3>
+          {/* Revolving sparkles positioned around the text */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-2 -left-3 w-2 h-2 bg-white rounded-full opacity-60 animate-sparkle-1"></div>
+            <div className="absolute -top-1 -right-3 w-1.5 h-1.5 bg-white rounded-full opacity-40 animate-sparkle-2"></div>
+            <div className="absolute -bottom-2 -left-2 w-1 h-1 bg-white rounded-full opacity-50 animate-sparkle-3"></div>
+            <div className="absolute -bottom-1 -right-2 w-1.5 h-1.5 bg-white rounded-full opacity-45 animate-sparkle-4"></div>
+          </div>
+        </div>
         <h3 className="lg:mx-4 hidden xs:flex">|</h3>
         <h3 className="hidden lg:inline">
           January 8<sup>th</sup> - 10<sup>th</sup>, 2026

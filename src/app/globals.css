@@ -133,3 +133,111 @@ html::-webkit-scrollbar {
   -webkit-background-clip: text;
   background-clip: text;
 }
+
+/* Anniversary Animation Effects */
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    opacity: 0.95;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@keyframes sparkle-1 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(10px, -5px) scale(1.2);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(15px, 5px) scale(0.8);
+    opacity: 0.4;
+  }
+  75% {
+    transform: translate(5px, 10px) scale(1.1);
+    opacity: 0.7;
+  }
+}
+
+@keyframes sparkle-2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.4;
+  }
+  33% {
+    transform: translate(-8px, 12px) scale(1.3);
+    opacity: 0.6;
+  }
+  66% {
+    transform: translate(-15px, -8px) scale(0.7);
+    opacity: 0.3;
+  }
+}
+
+@keyframes sparkle-3 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  20% {
+    transform: translate(12px, -10px) scale(1.1);
+    opacity: 0.7;
+  }
+  40% {
+    transform: translate(8px, -15px) scale(0.9);
+    opacity: 0.3;
+  }
+  60% {
+    transform: translate(-5px, -12px) scale(1.2);
+    opacity: 0.6;
+  }
+  80% {
+    transform: translate(-10px, -5px) scale(0.8);
+    opacity: 0.4;
+  }
+}
+
+@keyframes sparkle-4 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translate(-12px, -8px) scale(1.2);
+    opacity: 0.7;
+  }
+  60% {
+    transform: translate(-18px, 5px) scale(0.8);
+    opacity: 0.3;
+  }
+  90% {
+    transform: translate(-8px, 12px) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+.animate-sparkle-1 {
+  animation: sparkle-1 8s ease-in-out infinite;
+}
+
+.animate-sparkle-2 {
+  animation: sparkle-2 10s ease-in-out infinite 0.5s;
+}
+
+.animate-sparkle-3 {
+  animation: sparkle-3 12s ease-in-out infinite 1s;
+}
+
+.animate-sparkle-4 {
+  animation: sparkle-4 9s ease-in-out infinite 1.5s;
+}

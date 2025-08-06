@@ -99,7 +99,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = Math.floor(Math.random() * 2) + 1;
+    const size = Math.floor(Math.random() * 2) + 0.5;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
@@ -193,12 +193,14 @@ export default function Particles({
       circle.y += circle.dy;
       circle.translateX +=
         (mouse.current.x /
-          (window.innerWidth < 768 ? 100 : 50 / circle.magnetism) -
+          (window.innerWidth < 768 ? 100 : 75) /
+          circle.magnetism -
           circle.translateX) /
         ease;
       circle.translateY +=
         (mouse.current.y /
-          (window.innerWidth < 768 ? 100 : 50 / circle.magnetism) -
+          (window.innerWidth < 768 ? 100 : 75) /
+          circle.magnetism -
           circle.translateY) /
         ease;
       // circle gets out of the canvas
