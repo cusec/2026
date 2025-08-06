@@ -14,8 +14,8 @@ export default function SmoothFollower() {
   });
   const [isHovering, setIsHovering] = useState(false);
 
-  const DOT_SMOOTHNESS = 0.2;
-  const BORDER_DOT_SMOOTHNESS = 0.1;
+  const DOT_SMOOTHNESS = 0.6;
+  const BORDER_DOT_SMOOTHNESS = 0.3;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -114,7 +114,7 @@ export default function SmoothFollower() {
           transform: "translate(-50%, -50%)",
           left: `${renderPos.border.x}px`,
           top: `${renderPos.border.y}px`,
-          transition: "width 0.3s, height 0.3s",
+          transition: "width 0.1s, height 0.1s",
         }}
       />
     </div>

@@ -12,6 +12,7 @@ export { default as ScavengerOptionsClient } from "./feature/scavengerOptionsCli
 export { default as Cusec } from "./ui/cusec";
 export { default as Sponsors } from "./ui/sponsors";
 export { default as Pricing } from "./ui/pricing";
+export { default as SplashLoad } from "./ui/splashLoad";
 export { default as SmoothFollower } from "./feature/smoothFollower";
 
 // Add other component exports here as they are created

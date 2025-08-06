@@ -3,7 +3,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #000072;
+  --color-primary: rgb(0, 0, 114);
   --color-secondary: #41578c;
   --color-dark-mode: #191313;
   --color-light-mode: #f5f0e9;
@@ -67,7 +67,7 @@ html::-webkit-scrollbar {
   left: 0;
   width: 0;
   height: 2px;
-  background-color: rgba(65, 87, 140, 1); /* secondary/50 */
+  background-color: rgb(0, 0, 114, 0.7);
   transition: width 0.3s ease-out;
 }
 
@@ -139,11 +139,11 @@ html::-webkit-scrollbar {
   0%,
   100% {
     opacity: 1;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.15);
   }
   50% {
     opacity: 0.95;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 }
 
@@ -228,7 +228,7 @@ html::-webkit-scrollbar {
 }
 
 .animate-pulse-subtle {
-  animation: pulse-subtle 3s ease-in-out infinite;
+  animation: pulse-subtle 5s ease-in-out infinite;
 }
 
 .animate-sparkle-1 {
@@ -245,4 +245,35 @@ html::-webkit-scrollbar {
 
 .animate-sparkle-4 {
   animation: sparkle-4 9s ease-in-out infinite 1.5s;
+}
+
+/* ----------bobbing---------- */
+@keyframes bobbing {
+  0%,
+  100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+.bobbing-animation {
+  animation: bobbing 3.5s ease-in-out infinite;
+}
+
+/* ----------bouncing---------- */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.bouncing-animation {
+  animation: bounce 1s ease-in-out infinite;
+  box-shadow: 1px 2px 0px rgba(73, 72, 130, 0.4);
 }

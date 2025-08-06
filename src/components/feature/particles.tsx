@@ -28,12 +28,17 @@ export default function Particles({
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
-    console.log(window.innerWidth);
-    initCanvas();
-    animate();
+    
+    // Add a small delay to ensure DOM is ready, especially in Firefox
+    const initTimeout = setTimeout(() => {
+      initCanvas();
+      animate();
+    }, 100);
+    
     window.addEventListener("resize", initCanvas);
 
     return () => {
+      clearTimeout(initTimeout);
       window.removeEventListener("resize", initCanvas);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,9 +54,31 @@ export default function Particles({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh]);
 
+  // Additional effect to handle visibility and force re-initialization in Firefox
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && canvasContainerRef.current) {
+        // Small delay to ensure proper initialization after visibility change
+        setTimeout(() => {
+          initCanvas();
+        }, 50);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const initCanvas = () => {
-    resizeCanvas();
-    drawParticles();
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+      resizeCanvas();
+      drawParticles();
+    });
   };
 
   const onMouseMove = () => {
@@ -84,8 +111,13 @@ export default function Particles({
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0;
-      canvasSize.current.w = canvasContainerRef.current.offsetWidth;
-      canvasSize.current.h = canvasContainerRef.current.offsetHeight;
+      
+      // Ensure we have valid dimensions
+      const containerWidth = canvasContainerRef.current.offsetWidth || window.innerWidth;
+      const containerHeight = canvasContainerRef.current.offsetHeight || window.innerHeight;
+      
+      canvasSize.current.w = containerWidth;
+      canvasSize.current.h = containerHeight;
       canvasRef.current.width = canvasSize.current.w * dpr;
       canvasRef.current.height = canvasSize.current.h * dpr;
       canvasRef.current.style.width = `${canvasSize.current.w}px`;
@@ -148,6 +180,12 @@ export default function Particles({
 
   const drawParticles = () => {
     clearContext();
+    
+    // Ensure we have valid canvas dimensions before drawing
+    if (canvasSize.current.w === 0 || canvasSize.current.h === 0) {
+      return;
+    }
+    
     const particleCount = window.innerWidth < 768 ? 300 : 600;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
