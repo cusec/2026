@@ -14,3 +14,5 @@ jobs:
         run: npm install
       - name: Build website
         run: npm run build
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
