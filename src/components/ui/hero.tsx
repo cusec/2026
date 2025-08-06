@@ -40,13 +40,16 @@ const Hero: React.FC = () => {
           25<sup>th</sup> Anniversary
         </h3>
         <h3 className="lg:mx-4 hidden xs:flex">|</h3>
-        <h3>
+        <h3 className="hidden lg:inline">
+          January 8<sup>th</sup> - 10<sup>th</sup>, 2026
+        </h3>
+        <h3 className="lg:hidden">
           January 8<sup>th</sup> - 10<sup>th</sup>
         </h3>
       </div>
       <div className="mt-2 xxs:mt-0 w-full text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
-          <div className="w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
+          <div className="w-fit lg:p-2 email-hover">
             <a
               className="font-space-grotesk!"
               href="mailto:speakers@cusec.net"
@@ -61,7 +64,7 @@ const Hero: React.FC = () => {
               />
             </a>
           </div>
-          <div className="mt-2 xxs:mt-0  w-fit lg:p-2 border-b-2 border-light-mode/40 hero-button-hover">
+          <div className="mt-2 xxs:mt-0  w-fit lg:p-2 email-hover">
             <a
               className="font-space-grotesk!"
               href="mailto:sponsor@cusec.net"
@@ -77,7 +80,7 @@ const Hero: React.FC = () => {
             </a>
           </div>
         </div>
-        <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 border-2 border-secondary/50 text-center hero-button-hover">
+        <div className="w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center register-hover">
           <a
             className="font-space-grotesk!"
             href="https://2025.cusec.net/"
