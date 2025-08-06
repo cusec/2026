@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <a
             className="font-space-grotesk! w-fit lg:p-2 border-b-2 border-light-mode/40 md:email-hover"
-            href="mailto:speakers@cusec.net"
+            href="mailto:talks@cusec.net"
             target="_blank"
             rel="noopener noreferrer"
           >
