@@ -24,7 +24,7 @@ export default function Home() {
       setHideContent(false);
       // Force particles refresh when splash is skipped (helps with Firefox)
       setTimeout(() => {
-        setParticlesKey(prev => prev + 1);
+        setParticlesKey((prev) => prev + 1);
       }, 100);
     }
   }, []);

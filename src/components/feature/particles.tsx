@@ -28,13 +28,13 @@ export default function Particles({
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
-    
+
     // Add a small delay to ensure DOM is ready, especially in Firefox
     const initTimeout = setTimeout(() => {
       initCanvas();
       animate();
     }, 100);
-    
+
     window.addEventListener("resize", initCanvas);
 
     return () => {
@@ -65,10 +65,10 @@ export default function Particles({
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -111,11 +111,13 @@ export default function Particles({
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
       circles.current.length = 0;
-      
+
       // Ensure we have valid dimensions
-      const containerWidth = canvasContainerRef.current.offsetWidth || window.innerWidth;
-      const containerHeight = canvasContainerRef.current.offsetHeight || window.innerHeight;
-      
+      const containerWidth =
+        canvasContainerRef.current.offsetWidth || window.innerWidth;
+      const containerHeight =
+        canvasContainerRef.current.offsetHeight || window.innerHeight;
+
       canvasSize.current.w = containerWidth;
       canvasSize.current.h = containerHeight;
       canvasRef.current.width = canvasSize.current.w * dpr;
@@ -180,12 +182,12 @@ export default function Particles({
 
   const drawParticles = () => {
     clearContext();
-    
+
     // Ensure we have valid canvas dimensions before drawing
     if (canvasSize.current.w === 0 || canvasSize.current.h === 0) {
       return;
     }
-    
+
     const particleCount = window.innerWidth < 768 ? 300 : 600;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
