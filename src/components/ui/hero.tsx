@@ -31,7 +31,7 @@ const Hero: React.FC = () => {
         </div>
       </div>
       <div className="lg:hidden">
-        <h2 className="text-2xl xs:text-3xl md:text-4xl leading-none text-light-mode/20 bg-clip-text bg-linear-[180deg] from-secondary from-0% to-accent to-180%">
+        <h2 className="text-center md:text-left text-2xl xs:text-3xl md:text-4xl leading-none text-light-mode/20 bg-clip-text bg-linear-[180deg] from-secondary from-0% to-accent to-180%">
           Canadian University Software Engineering Conference
         </h2>
       </div>
