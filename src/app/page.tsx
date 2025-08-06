@@ -4,7 +4,7 @@ import { Hero, ParallaxCityscape, Particles, SplashLoad } from "@/components";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
 
   // checks if we need to show splashpage (only shows on intial load)
   useEffect(() => {
