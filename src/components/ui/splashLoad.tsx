@@ -72,14 +72,14 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
               transition={transitionConfig(0)}
             >
               <motion.div
-                initial={{ rotate: 0, x: 0 }}
-                animate={{ rotate: 1080, x: isMobile ? "0%" : "50%" }}
+                initial={{ opacity: 0, x: 0 }}
+                animate={{ opacity: 1, x: isMobile ? "0%" : "50%" }}
                 transition={transitionConfig(1.05)}
               >
                 <Image
                   className="bobbing-animation w-12 h-12 sm:w-[75px] sm:h-[75px] max-w-[250px] max-h-[250px]"
                   src="/images/logo.svg"
-                  alt="2025 logo main"
+                  alt="2026 logo main"
                   width={1080}
                   height={1080}
                   priority
@@ -102,7 +102,7 @@ export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
                   CUSEC
                 </h2>
                 <h2 className="text-2xl sm:text-[40px] font-bold leading-[80%] bobbing-animation">
-                  2025
+                  2026
                 </h2>
               </motion.div>
             </motion.div>
