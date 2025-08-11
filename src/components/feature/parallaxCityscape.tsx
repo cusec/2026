@@ -20,7 +20,7 @@ const ParallaxCityscape: React.FC = () => {
   const waveHeight = useTransform(
     scrollYProgress,
     [0.33, 0.6],
-    ["35vh", "50vh"]
+    ["40vh", "65vh"]
   );
 
   // Height transforms - scale down as they move up
@@ -32,7 +32,7 @@ const ParallaxCityscape: React.FC = () => {
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
     : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-70%" : "-20%";
+  const wave_gradient_pull = isMobile ? "-70%" : "0%";
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,7 +59,7 @@ const ParallaxCityscape: React.FC = () => {
 
   return (
     <div
-      className="absolute w-full h-[100vh] pointer-events-none z-10 overflow-hidden"
+      className="absolute w-full h-[100vh] pointer-events-none z-10"
       ref={container}
     >
       {/* Wavy Ground/Base */}
@@ -85,7 +85,7 @@ const ParallaxCityscape: React.FC = () => {
               x1={wave_gradient_pull}
               y1="0%"
               x2="80%"
-              y2="-20%"
+              y2="-5%"
             >
               <stop offset="0%" stopColor="#000072" stopOpacity="1" />
               <stop offset="100%" stopColor="#802b36" stopOpacity="1" />

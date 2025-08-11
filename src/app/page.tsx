@@ -6,6 +6,11 @@ import {
   Particles,
   SplashLoad,
   SmoothFollower,
+  Navbar,
+  Cusec,
+  Sponsors,
+  Pricing,
+  Footer,
 } from "@/components";
 import { useEffect, useState } from "react";
 
@@ -30,7 +35,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-linear-[50deg] from-primary from-0% to-sunset to-100% -z-20 bg-cover bg-center h-full w-screen">
+    <div className="bg-linear-[70deg] from-primary from-0% via-primary via-40% to-sunset to-80% -z-20 bg-cover bg-center h-full w-screen">
       {showSplash ? (
         <SplashLoad
           onComplete={() => {
@@ -42,6 +47,7 @@ export default function Home() {
         <>
           <div className={`${hideContent ? "min-h-[100vh]" : "hidden"}`}></div>
           <div className={`relative z-10 ${hideContent ? "hidden" : ""}`}>
+            <Navbar />
             <Particles key={particlesKey} />
             <SmoothFollower />
             <ParallaxCityscape />
@@ -50,6 +56,10 @@ export default function Home() {
                 <Hero />
               </div>
             </main>
+            <Cusec />
+            <Sponsors />
+            <Pricing />
+            <Footer />
           </div>
         </>
       )}
