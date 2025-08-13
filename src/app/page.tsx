@@ -4,10 +4,10 @@ import {
   Hero,
   ParallaxCityscape,
   Particles,
-  SplashLoad,
+  LoadingScreen,
   SmoothFollower,
   Navbar,
-  Cusec,
+  About,
   Sponsors,
   Pricing,
   Footer,
@@ -37,7 +37,7 @@ export default function Home() {
   return (
     <div className="bg-linear-[70deg] from-night from-0% via-primary via-40% to-sunset to-80% -z-20 bg-cover bg-center h-full w-screen">
       {showSplash ? (
-        <SplashLoad
+        <LoadingScreen
           onComplete={() => {
             setShowSplash(false);
             setHideContent(false);
@@ -56,7 +56,7 @@ export default function Home() {
                 <Hero />
               </div>
             </main>
-            <Cusec />
+            <About />
             <Sponsors />
             <Pricing />
             <Footer />

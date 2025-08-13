@@ -1,14 +1,14 @@
 // Export layout components
-export { default as Navbar } from "./layout/navbar";
-export { default as Footer } from "./layout/footer";
-export { default as Hero } from "./ui/hero";
-export { default as Particles } from "./feature/particles";
-export { default as ScavengerLogin } from "./feature/scavengerLogin";
-export { default as ScavengerOptions } from "./feature/scavengerOptions";
-export { default as ParallaxCityscape } from "./feature/parallaxCityscape";
-export { default as ScavengerOptionsClient } from "./feature/scavengerOptionsClient";
-export { default as Cusec } from "./ui/cusec";
-export { default as Sponsors } from "./ui/sponsors";
-export { default as Pricing } from "./ui/pricing";
-export { default as SplashLoad } from "./ui/splashLoad";
-export { default as SmoothFollower } from "./feature/smoothFollower";
+export { default as Navbar } from "./general/Navbar";
+export { default as Footer } from "./general/Footer";
+export { default as Hero } from "./home/Hero";
+export { default as Particles } from "./general/Particles";
+export { default as ScavengerLogin } from "./scavenger/ScavengerLogin";
+export { default as ScavengerOptions } from "./scavenger/ScavengerOptions";
+export { default as ParallaxCityscape } from "./home/ParallaxCityscape";
+export { default as ScavengerOptionsClient } from "./scavenger/ScavengerOptionsClient";
+export { default as About } from "./home/About";
+export { default as Sponsors } from "./home/Sponsors";
+export { default as Pricing } from "./home/pricing/Pricing";
+export { default as LoadingScreen } from "./general/LoadingScreen";
+export { default as SmoothFollower } from "./general/SmoothFollower";

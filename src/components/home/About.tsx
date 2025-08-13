@@ -1,4 +1,4 @@
-const Cusec: React.FC = () => {
+const About: React.FC = () => {
   return (
     <>
       <div className="mt-[50vh] w-full flex flex-col justify-center mx-auto">
@@ -25,4 +25,4 @@ const Cusec: React.FC = () => {
   );
 };
 
-export default Cusec;
+export default About;

@@ -1,4 +1,4 @@
-import BasicCard from "./basicCard";
+import BasicCard from "./BasicCard";
 
 const Pricing: React.FC = () => {
   return (

@@ -31,7 +31,11 @@ const fadeConfig = (
   },
 });
 
-export default function SplashLoad({ onComplete }: { onComplete: () => void }) {
+export default function LoadingScreen({
+  onComplete,
+}: {
+  onComplete: () => void;
+}) {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
