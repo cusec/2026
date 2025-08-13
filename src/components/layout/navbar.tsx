@@ -10,9 +10,6 @@ const Navbar: React.FC = () => {
   const navItems = {
     "ATTEND THE CONFERENCE": "#attend",
     SPONSORS: "#sponsors",
-    SPEAKERS: "#speakers",
-    SCHEDULE: "#schedule",
-    "THE TEAM": "#team",
     "SCAVENGER HUNT": "/scavenger",
     ABOUT: "#about",
     FAQ: "#faq",
