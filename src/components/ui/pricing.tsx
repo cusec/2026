@@ -11,7 +11,7 @@ const Pricing: React.FC = () => {
       <div className="w-full text-center flex justify-center mt-6 mb-16">
         <h1 className="w-fit text-xl xl:text-3xl">Pricing</h1>
       </div>
-      <div className="w-full text-center flex justify-center gap-[8vw]">
+      <div className="w-full text-center items-center flex flex-col md:flex-row justify-center gap-[8vw]">
         <BasicCard />
         <BasicCard />
       </div>
