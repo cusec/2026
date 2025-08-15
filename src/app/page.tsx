@@ -36,7 +36,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-linear-[70deg] from-night from-0% via-primary via-40% to-sunset to-80% -z-20 bg-cover bg-center h-full w-screen">
+    <div className="bg-linear-[70deg] from-night from-0% via-primary via-40% to-sunset to-80% bg-cover bg-center h-full w-screen">
       {showSplash ? (
         <LoadingScreen
           onComplete={() => {
@@ -47,9 +47,9 @@ export default function Home() {
       ) : (
         <>
           <div className={`${hideContent ? "min-h-[100vh]" : "hidden"}`}></div>
-          <div className={`relative z-10 ${hideContent ? "hidden" : ""}`}>
-            <Navbar />
+          <div className={`relative ${hideContent ? "hidden" : ""}`}>
             <Particles key={particlesKey} />
+            <Navbar />
             <SmoothFollower />
             <ParallaxCityscape />
             <main className="w-full h-[100vh] flex justify-center items-center bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-140%">
@@ -57,11 +57,13 @@ export default function Home() {
                 <Hero />
               </div>
             </main>
-            <About />
-            <Sponsors />
-            <Pricing />
-            <FAQ />
-            <Footer />
+            <div className="relative z-10">
+              <About />
+              <Sponsors />
+              <Pricing />
+              <FAQ />
+              <Footer />
+            </div>
           </div>
         </>
       )}

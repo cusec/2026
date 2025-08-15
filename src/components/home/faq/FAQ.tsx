@@ -1,4 +1,5 @@
 import faqData from "./FAQData";
+import FAQItem from "./FAQItem";
 
 const FAQ: React.FC = () => {
   return (
@@ -8,13 +9,16 @@ const FAQ: React.FC = () => {
           Frequently Asked Questions
         </h2>
       </div>
-      <div className="w-full items-center grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-        {faqData.map((item, index) => (
-          <div key={index} className="p-4 border-b border-light-mode">
-            <h3 className="font-semibold">{item.question}</h3>
-            <div className="mt-2">{item.answer}</div>
-          </div>
-        ))}
+      <div className="w-full flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 items-start">
+          {faqData.map((item, index) => (
+            <FAQItem
+              key={index}
+              question={item.question}
+              answer={item.answer}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
