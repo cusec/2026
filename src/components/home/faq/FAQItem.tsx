@@ -1,3 +1,5 @@
+"use client";
+
 // FAQItem.tsx
 import { useState, ReactNode } from "react";
 import { motion } from "framer-motion";

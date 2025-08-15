@@ -3,7 +3,10 @@ import FAQItem from "./FAQItem";
 
 const FAQ: React.FC = () => {
   return (
-    <div className="mt-[50vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode">
+    <div
+      id="FAQ"
+      className="mt-[50vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
+    >
       <div className="w-full flex justify-center text-center">
         <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold pb-4 border-b-1 text-light-mode">
           Frequently Asked Questions

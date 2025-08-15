@@ -48,8 +48,8 @@ option {
 /* Hide scrollbars but keep scroll functionality */
 html {
   overflow-x: hidden;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scroll-behavior: smooth;
+  scroll-padding-top: 15vh;
 }
 
 html::-webkit-scrollbar {

@@ -8,11 +8,11 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = {
-    "ATTEND THE CONFERENCE": "#attend",
-    SPONSORS: "#sponsors",
+    "ATTEND THE CONFERENCE": "#PRICING",
+    SPONSORS: "#SPONSORS",
     "SCAVENGER HUNT": "/scavenger",
-    ABOUT: "#about",
-    FAQ: "#faq",
+    ABOUT: "#ABOUT",
+    FAQ: "#FAQ",
   };
 
   return (
