@@ -17,8 +17,8 @@ const Navbar: React.FC = () => {
 
   return (
     <nav
-      className={`w-full h-[100vh] xl:h-min text-white lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:backdrop-blur-md xl:bg-white/2 xl:rounded-3xl transition-all duration-300 ease-in-out ${
-        isMenuOpen ? "backdrop-blur-sm bg-dark-mode/70" : ""
+      className={`w-full xl:h-min text-white lg:px-4 2xl:px-8 pt-4 fixed top-0 z-30 xl:backdrop-blur-md xl:bg-white/2 xl:rounded-3xl transition-all duration-300 ease-in-out ${
+        isMenuOpen ? "h-[100vh] backdrop-blur-sm bg-dark-mode/70" : "h-min"
       }`}
     >
       <div className="flex items-center justify-between px-4 xl:px-8 pb-2 mx-4 border-b-2 border-white/40">
