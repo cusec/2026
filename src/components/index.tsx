@@ -12,3 +12,4 @@ export { default as Sponsors } from "./home/Sponsors";
 export { default as Pricing } from "./home/pricing/Pricing";
 export { default as LoadingScreen } from "./general/LoadingScreen";
 export { default as SmoothFollower } from "./general/SmoothFollower";
+export { default as FAQ } from "./home/faq/FAQ";

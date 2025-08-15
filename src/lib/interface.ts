@@ -18,3 +18,8 @@ export interface Sponsor {
   zIndex?: number; // Optional z-index for layering
   website?: string; // Optional website URL
 }
+
+export interface FAQItem {
+  question: string;
+  answer: React.ReactNode;
+}

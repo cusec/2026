@@ -11,6 +11,7 @@ import {
   Sponsors,
   Pricing,
   Footer,
+  FAQ,
 } from "@/components";
 import { useEffect, useState } from "react";
 
@@ -59,6 +60,7 @@ export default function Home() {
             <About />
             <Sponsors />
             <Pricing />
+            <FAQ />
             <Footer />
           </div>
         </>
