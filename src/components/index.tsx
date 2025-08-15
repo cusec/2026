@@ -7,7 +7,7 @@ export { default as ScavengerLogin } from "./scavenger/ScavengerLogin";
 export { default as ScavengerOptions } from "./scavenger/ScavengerOptions";
 export { default as ParallaxCityscape } from "./home/ParallaxCityscape";
 export { default as ScavengerOptionsClient } from "./scavenger/ScavengerOptionsClient";
-export { default as About } from "./home/About";
+export { default as About } from "./home/about/About";
 export { default as Sponsors } from "./home/Sponsors";
 export { default as Pricing } from "./home/pricing/Pricing";
 export { default as LoadingScreen } from "./general/LoadingScreen";

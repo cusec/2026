@@ -96,8 +96,8 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         Refreshments will be available for delegates. While meals are not
-        provided, there are numerous nearby dining options to explore Montreal's
-        culinary scene!
+        provided, there are numerous nearby dining options to explore
+        Montreal&apos;s culinary scene!
       </>
     ),
   },

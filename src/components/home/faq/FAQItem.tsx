@@ -1,5 +1,5 @@
 // FAQItem.tsx
-import { useState, useRef, useEffect, ReactNode } from "react";
+import { useState, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { FaChevronDown } from "react-icons/fa";
 
