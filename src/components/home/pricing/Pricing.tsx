@@ -1,4 +1,5 @@
 import BasicCard from "./BasicCard";
+import VipCard from "./VipCard";
 
 const Pricing: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const Pricing: React.FC = () => {
       </div>
       <div className="w-full text-center items-center flex flex-col md:flex-row justify-center gap-[8vw]">
         <BasicCard />
-        <BasicCard />
+        <VipCard />
       </div>
     </div>
   );

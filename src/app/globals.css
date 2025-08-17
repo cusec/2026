@@ -89,7 +89,7 @@ html::-webkit-scrollbar {
     left: 0;
     width: 0;
     height: 0;
-    background: rgba(245, 240, 233, 0.85);
+    background: rgba(245, 240, 233, 0.75);
     border-radius: 50%;
     transform: translate(-50%, 50%);
     transition: all 0.3s ease-out;
@@ -124,6 +124,33 @@ html::-webkit-scrollbar {
   .register-hover:hover {
     background-size: 100% 100%;
     color: var(--color-dark-mode);
+  }
+
+  .register-hover-gradient {
+    @apply relative overflow-hidden cursor-pointer;
+  }
+
+  .register-hover-gradient::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(
+      135deg,
+      rgb(53, 53, 126) 50%,
+      rgba(129, 61, 70) 100%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    transition: all 0.3s ease-out;
+    z-index: -1;
+  }
+
+  .register-hover-gradient:hover::before {
+    width: 300%;
+    height: 300%;
   }
 }
 
