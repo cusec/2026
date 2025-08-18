@@ -3,12 +3,12 @@ import { EmblaOptionsType } from "embla-carousel";
 import "../../../app/embla.css";
 
 const slideImages: string[] = [
-  "/images/gallery/1.jpg",
+  "/images/gallery/6.jpg",
   "/images/gallery/2.jpg",
   "/images/gallery/3.webp",
   "/images/gallery/4.jpg",
   "/images/gallery/5.jpg",
-  "/images/gallery/6.jpg",
+  "/images/gallery/1.jpg",
 ];
 
 const About: React.FC = () => {

@@ -58,14 +58,12 @@ export default function Home() {
                 <Hero />
               </div>
             </main>
-            <div className="relative z-10">
-              <About />
-              <Gallery />
-              <Sponsors />
-              <Pricing />
-              <FAQ />
-              <Footer />
-            </div>
+            <About />
+            <Gallery />
+            <Sponsors />
+            <Pricing />
+            <FAQ />
+            <Footer />
           </div>
         </>
       )}

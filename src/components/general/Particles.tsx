@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useMousePosition } from "@/lib/mouse";
 
 interface ParticlesProps {
@@ -23,14 +23,90 @@ export default function Particles({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const [frozen, setFrozen] = useState(false);
+  const [islandHovered, setIslandHovered] = useState(false);
 
   const mobileParticleCount = 200;
   const desktopParticleCount = 600;
 
   const mobileStaticity = 100;
-  const desktopStaticity = 25;
+  const desktopStaticity = 15;
 
   const averageParticleSize = 2;
+
+  // Always run the animation loop, but skip updates if frozen
+  useEffect(() => {
+    let running = true;
+    const loop = () => {
+      if (!running) return;
+      if (!frozen) {
+        clearContext();
+        circles.current.forEach((circle: Circle, i: number) => {
+          // ...existing update/draw logic...
+          const edge = [
+            circle.x + circle.translateX - circle.size,
+            canvasSize.current.w - circle.x - circle.translateX - circle.size,
+            circle.y + circle.translateY - circle.size,
+            canvasSize.current.h - circle.y - circle.translateY - circle.size,
+          ];
+          const closestEdge = edge.reduce((a, b) => Math.min(a, b));
+          const remapClosestEdge = parseFloat(
+            remapValue(closestEdge, 0, 20, 0, 1).toFixed(2)
+          );
+          if (remapClosestEdge > 1) {
+            circle.alpha += 0.02;
+            if (circle.alpha > circle.targetAlpha) {
+              circle.alpha = circle.targetAlpha;
+            }
+          } else {
+            circle.alpha = circle.targetAlpha * remapClosestEdge;
+          }
+          circle.x += circle.dx;
+          circle.y += circle.dy;
+          circle.translateX +=
+            (mouse.current.x /
+              (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
+              circle.magnetism -
+              circle.translateX) /
+            ease;
+          circle.translateY +=
+            (mouse.current.y /
+              (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
+              circle.magnetism -
+              circle.translateY) /
+            ease;
+          if (
+            circle.x < -circle.size ||
+            circle.x > canvasSize.current.w + circle.size ||
+            circle.y < -circle.size ||
+            circle.y > canvasSize.current.h + circle.size
+          ) {
+            circles.current.splice(i, 1);
+            const newCircle = circleParams();
+            drawCircle(newCircle);
+          } else {
+            drawCircle(
+              {
+                ...circle,
+                x: circle.x,
+                y: circle.y,
+                translateX: circle.translateX,
+                translateY: circle.translateY,
+                alpha: circle.alpha,
+              },
+              true
+            );
+          }
+        });
+      }
+      requestAnimationFrame(loop);
+    };
+    loop();
+    return () => {
+      running = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frozen, ease, mobileStaticity, desktopStaticity]);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -40,7 +116,6 @@ export default function Particles({
     // Add a small delay to ensure DOM is ready, especially in Firefox
     const initTimeout = setTimeout(() => {
       initCanvas();
-      animate();
     }, 100);
 
     window.addEventListener("resize", initCanvas);
@@ -216,75 +291,73 @@ export default function Particles({
     return remapped > 0 ? remapped : 0;
   };
 
-  const animate = () => {
-    clearContext();
-    circles.current.forEach((circle: Circle, i: number) => {
-      // Handle the alpha value
-      const edge = [
-        circle.x + circle.translateX - circle.size, // distance from left edge
-        canvasSize.current.w - circle.x - circle.translateX - circle.size, // distance from right edge
-        circle.y + circle.translateY - circle.size, // distance from top edge
-        canvasSize.current.h - circle.y - circle.translateY - circle.size, // distance from bottom edge
-      ];
-      const closestEdge = edge.reduce((a, b) => Math.min(a, b));
-      const remapClosestEdge = parseFloat(
-        remapValue(closestEdge, 0, 20, 0, 1).toFixed(2)
-      );
-      if (remapClosestEdge > 1) {
-        circle.alpha += 0.02;
-        if (circle.alpha > circle.targetAlpha) {
-          circle.alpha = circle.targetAlpha;
-        }
-      } else {
-        circle.alpha = circle.targetAlpha * remapClosestEdge;
-      }
-      circle.x += circle.dx;
-      circle.y += circle.dy;
-      circle.translateX +=
-        (mouse.current.x /
-          (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
-          circle.magnetism -
-          circle.translateX) /
-        ease;
-      circle.translateY +=
-        (mouse.current.y /
-          (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
-          circle.magnetism -
-          circle.translateY) /
-        ease;
-      // circle gets out of the canvas
-      if (
-        circle.x < -circle.size ||
-        circle.x > canvasSize.current.w + circle.size ||
-        circle.y < -circle.size ||
-        circle.y > canvasSize.current.h + circle.size
-      ) {
-        // remove the circle from the array
-        circles.current.splice(i, 1);
-        // create a new circle
-        const newCircle = circleParams();
-        drawCircle(newCircle);
-        // update the circle position
-      } else {
-        drawCircle(
-          {
-            ...circle,
-            x: circle.x,
-            y: circle.y,
-            translateX: circle.translateX,
-            translateY: circle.translateY,
-            alpha: circle.alpha,
-          },
-          true
-        );
-      }
-    });
-    window.requestAnimationFrame(animate);
-  };
-
   return (
     <div className={className} ref={canvasContainerRef} aria-hidden="true">
       <canvas ref={canvasRef} />
+      {/* Island Button */}
+      <div
+        onMouseEnter={() => setIslandHovered(true)}
+        onMouseLeave={() => setIslandHovered(false)}
+        onClick={() => setFrozen((f) => !f)}
+        style={{
+          position: "fixed",
+          left: "50%",
+          bottom: "20px",
+          transform: "translateX(-50%)",
+          zIndex: 10,
+          cursor: "pointer",
+          transition: "width 0.3s, background 0.3s, box-shadow 0.3s",
+          width: islandHovered ? 180 : 48,
+          height: 48,
+          background: "rgba(30,30,40,0.85)",
+          borderRadius: 24,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: islandHovered ? "center" : "center",
+          boxShadow: islandHovered
+            ? "0 4px 24px rgba(0,0,0,0.25)"
+            : "0 2px 8px rgba(0,0,0,0.15)",
+          overflow: "hidden",
+          userSelect: "none",
+        }}
+        tabIndex={0}
+        aria-label="Freeze Particles"
+      >
+        <span
+          style={{
+            fontSize: 22,
+            marginRight: islandHovered ? 12 : 0,
+            transition: "margin 0.3s",
+            color: frozen ? "#60a5fa" : "#fff",
+            display: "inline-flex",
+            alignItems: "center",
+          }}
+        >
+          {/* Snowflake Icon */}
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path
+              d="M12 2v20M12 12l7.07-7.07M12 12l-7.07-7.07M12 12l7.07 7.07M12 12l-7.07 7.07M4 12h16"
+              stroke={frozen ? "#60a5fa" : "#fff"}
+              strokeWidth="2"
+              strokeLinecap="round"
+            />
+          </svg>
+        </span>
+        <span
+          style={{
+            opacity: islandHovered ? 1 : 0,
+            maxWidth: islandHovered ? 120 : 0,
+            transition: "opacity 0.3s, max-width 0.3s",
+            whiteSpace: "nowrap",
+            color: "#fff",
+            fontWeight: 500,
+            fontSize: 16,
+            letterSpacing: 0.2,
+          }}
+        >
+          Freeze Particles
+        </span>
+      </div>
     </div>
   );
 }
