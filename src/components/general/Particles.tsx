@@ -24,6 +24,14 @@ export default function Particles({
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
+  const mobileParticleCount = 200;
+  const desktopParticleCount = 600;
+
+  const mobileStaticity = 100;
+  const desktopStaticity = 10;
+
+  const averageParticleSize = 2;
+
   useEffect(() => {
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
@@ -133,7 +141,7 @@ export default function Particles({
     const y = Math.floor(Math.random() * canvasSize.current.h);
     const translateX = 0;
     const translateY = 0;
-    const size = Math.floor(Math.random() * 2) + 0.5;
+    const size = Math.floor(Math.random() * 2) + averageParticleSize;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
     const dx = (Math.random() - 0.5) * 0.2;
@@ -188,7 +196,8 @@ export default function Particles({
       return;
     }
 
-    const particleCount = window.innerWidth < 768 ? 300 : 600;
+    const particleCount =
+      window.innerWidth < 768 ? mobileParticleCount : desktopParticleCount;
     for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);
@@ -233,13 +242,13 @@ export default function Particles({
       circle.y += circle.dy;
       circle.translateX +=
         (mouse.current.x /
-          (window.innerWidth < 768 ? 100 : 75) /
+          (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
           circle.magnetism -
           circle.translateX) /
         ease;
       circle.translateY +=
         (mouse.current.y /
-          (window.innerWidth < 768 ? 100 : 75) /
+          (window.innerWidth < 768 ? mobileStaticity : desktopStaticity) /
           circle.magnetism -
           circle.translateY) /
         ease;
