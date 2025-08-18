@@ -12,6 +12,7 @@ import {
   Pricing,
   Footer,
   FAQ,
+  Gallery,
 } from "@/components";
 import { useEffect, useState } from "react";
 
@@ -59,6 +60,7 @@ export default function Home() {
             </main>
             <div className="relative z-10">
               <About />
+              <Gallery />
               <Sponsors />
               <Pricing />
               <FAQ />
