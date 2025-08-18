@@ -1,13 +1,7 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
 import faqData from "./FAQData";
+import FAQItem from "./FAQItem";
 
-const FAQ: React.FC = () => {
+const OldFAQ: React.FC = () => {
   return (
     <div
       id="FAQ"
@@ -19,17 +13,18 @@ const FAQ: React.FC = () => {
         </h2>
       </div>
       <div className="w-full flex justify-center">
-        <Accordion type="single" collapsible>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 items-start">
           {faqData.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent>{item.answer}</AccordionContent>
-            </AccordionItem>
+            <FAQItem
+              key={index}
+              question={item.question}
+              answer={item.answer}
+            />
           ))}
-        </Accordion>
+        </div>
       </div>
     </div>
   );
 };
 
-export default FAQ;
+export default OldFAQ;
