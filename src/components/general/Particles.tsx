@@ -28,7 +28,7 @@ export default function Particles({
   const desktopParticleCount = 600;
 
   const mobileStaticity = 100;
-  const desktopStaticity = 10;
+  const desktopStaticity = 25;
 
   const averageParticleSize = 2;
 
