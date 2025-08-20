@@ -5,7 +5,7 @@ const Pricing: React.FC = () => {
   return (
     <div
       id="PRICING"
-      className="mt-[60vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
+      className="mt-[60vh] mb-12 w-full flex flex-col justify-center mx-auto text-light-mode"
     >
       <div className="w-full text-center flex justify-center">
         <h2 className="w-fit text-3xl xl:text-6xl font-bold pb-6 border-b-1">
