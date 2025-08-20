@@ -11,9 +11,9 @@ const FAQ: React.FC = () => {
   return (
     <div
       id="FAQ"
-      className="relative mt-[50vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
+      className="relative mt-[60vh] mb-[20vh] px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
     >
-      <div className="w-full flex justify-center text-center">
+      <div className="w-full flex justify-center text-center mb-14">
         <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold pb-4 border-b-1 text-light-mode">
           Frequently Asked Questions
         </h2>
