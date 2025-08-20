@@ -6,7 +6,7 @@ const VipCard: React.FC = () => {
     <div className="relative max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-4 py-12 bg-black/25 border-6 border-white/10 rounded-4xl shadow-lg backdrop-blur-xs">
       <div className="absolute top-6.5 -right-8.25 z-10">
         <div
-          className="bg-linear-[135deg] from-primary/85 from-0% via-light-mode/25 via-40% to-sunset/85 to-150% text-white text-md md:text-md px-8 py-1 tracking-widest shadow-lg"
+          className="bg-linear-[135deg] from-primary/85 from-0% via-light-mode/25 via-40% to-sunset/85 to-150% text-white text-md px-8 py-1 tracking-widest shadow-lg"
           style={{
             transform: "rotate(45deg)",
             clipPath: "polygon(21% 0, 79% 0, 100% 100%, 0 100%)",
