@@ -47,23 +47,20 @@ option {
   font-family: var(--font-jost), sans-serif;
 }
 
-/* Hide scrollbars but keep scroll functionality */
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: 15vh;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
+  scrollbar-width: thick;
+  scrollbar-color: rgba(25, 19, 19, 0.7) rgba(0, 0, 0, 0);
 }
 
 *,
 *::before,
 *::after {
   box-sizing: inherit;
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
 }
 
 /* Button hover effects class - only on md screens and above */
