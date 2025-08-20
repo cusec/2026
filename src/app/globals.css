@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -16,8 +14,8 @@
   --breakpoint-xs: 428px;
   --breakpoint-xxs: 364px;
 
-  --font-jost: "Jost", sans-serif;
-  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-jost: var(--font-jost);
+  --font-space-grotesk: var(--font-space-grotesk);
 
   --text-body: rgba(250, 250, 250, 0.562);
   --detail-medium-contrast: rgba(89, 83, 172, 0.452);
@@ -32,7 +30,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-space-grotesk);
+  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Set Jost as the default font for body text */
@@ -46,7 +44,7 @@ input,
 textarea,
 select,
 option {
-  font-family: var(--font-jost);
+  font-family: var(--font-jost), sans-serif;
 }
 
 /* Hide scrollbars but keep scroll functionality */

@@ -49,7 +49,7 @@ const Navbar: React.FC = () => {
             <Link
               key={item}
               href={url}
-              className="text-sm 2xl:text-md px-2 2xl:px-4 py-2 tracking-normal rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+              className="text-sm 2xl:text-md px-2 2xl:px-4 py-2 tracking-wide rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
             >
               {item}
             </Link>
@@ -87,7 +87,7 @@ const Navbar: React.FC = () => {
             <Link
               key={item}
               href={url}
-              className="block w-full text-left tracking-normal text-md px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10"
+              className="block w-full text-left tracking-wide text-md px-4 py-3 rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10"
               onClick={() => setIsMenuOpen(false)}
             >
               {item}
