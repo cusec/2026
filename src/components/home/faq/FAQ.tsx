@@ -1,13 +1,18 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useState } from "react";
 
 import faqData from "./FAQData";
 
 const FAQ: React.FC = () => {
+  const [openItem, setOpenItem] = useState<string | undefined>(undefined);
+
   return (
     <div
       id="FAQ"
@@ -19,9 +24,22 @@ const FAQ: React.FC = () => {
         </h2>
       </div>
       <div className="w-full flex justify-center">
-        <Accordion type="single" collapsible>
+        <Accordion
+          type="single"
+          collapsible
+          value={openItem}
+          onValueChange={setOpenItem}
+        >
           {faqData.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
+            <AccordionItem
+              key={index}
+              value={`item-${index}`}
+              className={`transition-opacity duration-300 ${
+                openItem && openItem !== `item-${index}`
+                  ? "opacity-50"
+                  : "opacity-100"
+              }`}
+            >
               <AccordionTrigger>{item.question}</AccordionTrigger>
               <AccordionContent>{item.answer}</AccordionContent>
             </AccordionItem>
