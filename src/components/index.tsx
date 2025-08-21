@@ -14,3 +14,5 @@ export { default as LoadingScreen } from "./general/LoadingScreen";
 export { default as SmoothFollower } from "./general/SmoothFollower";
 export { default as Gallery } from "./home/gallery/Gallery";
 export { default as FAQ } from "./home/faq/FAQ";
+export { default as CodeOfConduct } from "./code-of-conduct/CodeOfConduct";
+export { default as PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
