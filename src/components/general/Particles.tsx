@@ -8,12 +8,14 @@ interface ParticlesProps {
   staticity?: number;
   ease?: number;
   refresh?: boolean;
+  desktopParticleCount?: number;
 }
 
 export default function Particles({
   className = "hidden md:block absolute inset-0 animate-fade-in",
   ease = 50,
   refresh = false,
+  desktopParticleCount = 300,
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -27,7 +29,6 @@ export default function Particles({
   const [islandHovered, setIslandHovered] = useState(false);
 
   const mobileParticleCount = 200;
-  const desktopParticleCount = 600;
 
   const mobileStaticity = 100;
   const desktopStaticity = 15;

@@ -49,7 +49,7 @@ export default function Home() {
         <>
           <div className={`${hideContent ? "min-h-[100vh]" : "hidden"}`}></div>
           <div className={`relative ${hideContent ? "hidden" : ""}`}>
-            <Particles key={particlesKey} />
+            <Particles key={particlesKey} desktopParticleCount={1000} />
             <Navbar />
             <SmoothFollower />
             <ParallaxCityscape />
