@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
     {
       name: "YouTube",
       icon: "/icons/youtube.svg",
-      url: "https://youtube.com/@cusecofficial",
+      url: "https://youtube.com/@cusec_cucgl",
     },
     {
       name: "GitHub",
