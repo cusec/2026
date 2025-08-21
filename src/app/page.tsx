@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-linear-[70deg] from-night from-0% via-primary via-40% to-sunset to-80% bg-cover bg-center h-full w-screen">
+    <div className="bg-linear-[80deg] from-night from-10% via-primary via-40% to-sunset to-85% bg-cover bg-center h-full w-screen">
       {showSplash ? (
         <LoadingScreen
           onComplete={() => {

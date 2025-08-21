@@ -32,11 +32,11 @@ const ParallaxCityscape: React.FC = () => {
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
     : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-70%" : "0%";
+  const wave_gradient_pull = isMobile ? "-50%" : "0%";
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // 768px is typical tablet breakpoint
+      setIsMobile(window.innerWidth < 1024);
     };
     handleResize();
 
