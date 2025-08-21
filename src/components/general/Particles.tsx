@@ -11,7 +11,7 @@ interface ParticlesProps {
 }
 
 export default function Particles({
-  className = "hidden md:block absolute inset-0 z-0 animate-fade-in",
+  className = "hidden md:block absolute inset-0 animate-fade-in",
   ease = 50,
   refresh = false,
 }: ParticlesProps) {
@@ -293,7 +293,7 @@ export default function Particles({
 
   return (
     <div className={className} ref={canvasContainerRef} aria-hidden="true">
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} className="z-0" />
       {/* Island Button */}
       <div
         onMouseEnter={() => setIslandHovered(true)}
@@ -304,7 +304,7 @@ export default function Particles({
           left: "50%",
           bottom: "20px",
           transform: "translateX(-50%)",
-          zIndex: 10,
+          zIndex: 30,
           cursor: "pointer",
           transition: "width 0.3s, background 0.3s, box-shadow 0.3s",
           width: islandHovered ? 180 : 48,
