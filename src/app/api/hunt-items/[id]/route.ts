@@ -7,7 +7,7 @@ import isAdmin from "@/lib/isAdmin";
 // PUT - Update a hunt item (Admin only - name, description, and points)
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth0.getSession();
@@ -64,9 +64,8 @@ export async function PUT(
 // DELETE - Delete a hunt item (Admin only)
 export async function DELETE(
   request: Request,
-  props: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const params = await props.params;
   try {
     const session = await auth0.getSession();
 
@@ -82,7 +81,7 @@ export async function DELETE(
       );
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     await connectMongoDB();
 

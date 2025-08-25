@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { HuntItem, HuntItemFormData } from "../types/huntItem";
-import { HuntItemService } from "../utils/huntItemService";
+import { HuntItem, HuntItemFormData } from "@/lib/interface";
 
 const emptyFormData: HuntItemFormData = {
   name: "",
@@ -25,8 +24,15 @@ export const useHuntItems = (isOpen: boolean) => {
     try {
       setLoading(true);
       setError(null);
-      const items = await HuntItemService.fetchHuntItems();
-      setHuntItems(items);
+
+      const response = await fetch("/api/hunt-items");
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to fetch hunt items");
+      }
+
+      setHuntItems(data.huntItems);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Failed to fetch hunt items"
@@ -42,8 +48,22 @@ export const useHuntItems = (isOpen: boolean) => {
     try {
       setIsSubmitting(true);
       setError(null);
-      const newItem = await HuntItemService.createHuntItem(formData);
-      setHuntItems([newItem, ...huntItems]);
+
+      const response = await fetch("/api/hunt-items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to create hunt item");
+      }
+
+      setHuntItems([data.huntItem, ...huntItems]);
       setFormData(emptyFormData);
       setShowAddForm(false);
     } catch (err) {
@@ -60,10 +80,28 @@ export const useHuntItems = (isOpen: boolean) => {
   const updateHuntItem = async (item: HuntItem) => {
     try {
       setError(null);
-      const updatedItem = await HuntItemService.updateHuntItem(item);
+
+      const response = await fetch(`/api/hunt-items/${item._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: item.name,
+          description: item.description,
+          points: item.points,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to update hunt item");
+      }
+
       setHuntItems(
         huntItems.map((huntItem) =>
-          huntItem._id === item._id ? updatedItem : huntItem
+          huntItem._id === item._id ? data.huntItem : huntItem
         )
       );
       setEditingItem(null);
@@ -83,7 +121,17 @@ export const useHuntItems = (isOpen: boolean) => {
 
     try {
       setError(null);
-      await HuntItemService.deleteHuntItem(id);
+
+      const response = await fetch(`/api/hunt-items/${id}`, {
+        method: "DELETE",
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to delete hunt item");
+      }
+
       setHuntItems(huntItems.filter((item) => item._id !== id));
     } catch (err) {
       setError(

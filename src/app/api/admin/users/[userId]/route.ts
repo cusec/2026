@@ -7,7 +7,7 @@ import isAdmin from "@/lib/isAdmin";
 // GET - Fetch user history with hunt item details (Admin only)
 export async function GET(
   request: Request,
-  { params }: { params: { userId: string } }
+  { params }: { params: Promise<{ userId: string }> }
 ) {
   try {
     const session = await auth0.getSession();
@@ -24,7 +24,7 @@ export async function GET(
       );
     }
 
-    const { userId } = params;
+    const { userId } = await params;
 
     await connectMongoDB();
 

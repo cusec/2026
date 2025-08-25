@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import Modal from "@/components/ui/modal";
-import { HuntItem } from "./types/huntItem";
+import { HuntItem } from "@/lib/interface";
 import { useHuntItems } from "./hooks/useHuntItems";
 import { HuntItemAddForm, HuntItemsList, QRCodeModal } from "./huntItems";
 import ClaimAttemptsMonitor from "./ClaimAttemptsMonitor";
