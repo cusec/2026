@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertTriangle, Clock, CheckCircle, XCircle } from "lucide-react";
+import { Clock, CheckCircle, XCircle } from "lucide-react";
 
 interface ClaimAttempt {
   userEmail: string;
@@ -67,16 +67,9 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="mt-6 border-t border-gray-200 dark:border-gray-700 pt-6">
-      <div className="flex items-center gap-2 mb-4">
-        <AlertTriangle className="w-5 h-5 text-yellow-600" />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          Claim Attempts Monitor
-        </h3>
-      </div>
-
+    <div className="space-y-6">
       {/* Controls */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex gap-4">
         <button
           onClick={fetchClaimAttempts}
           disabled={loading}

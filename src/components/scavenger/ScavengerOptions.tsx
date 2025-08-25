@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import HuntItemsModal from "./HuntItemsModal";
 import ClaimHuntItemModal from "./ClaimHuntItemModal";
 import UsersManagementModal from "./UsersManagementModal";
+import ClaimAttemptsModal from "./ClaimAttemptsModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
@@ -21,6 +22,8 @@ const ScavengerOptions = ({
   const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
+  const [isClaimAttemptsModalOpen, setIsClaimAttemptsModalOpen] =
+    useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -150,6 +153,12 @@ const ScavengerOptions = ({
           >
             Users
           </button>
+          <button
+            onClick={() => setIsClaimAttemptsModalOpen(true)}
+            className="px-4 py-2 rounded-lg bg-orange-600 text-white font-semibold shadow hover:bg-orange-700 transition"
+          >
+            Claim Attempts
+          </button>
         </>
       ) : null}
       <button
@@ -173,6 +182,11 @@ const ScavengerOptions = ({
       <UsersManagementModal
         isOpen={isUsersModalOpen}
         onClose={() => setIsUsersModalOpen(false)}
+      />
+
+      <ClaimAttemptsModal
+        isOpen={isClaimAttemptsModalOpen}
+        onClose={() => setIsClaimAttemptsModalOpen(false)}
       />
     </div>
   );
