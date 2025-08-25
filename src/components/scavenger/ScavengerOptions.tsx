@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import HuntItemsModal from "./HuntItemsModal";
 import ClaimHuntItemModal from "./ClaimHuntItemModal";
-import UsersManagementModal from "./UsersManagementModal";
-import ClaimAttemptsModal from "./ClaimAttemptsModal";
+import UsersManagementModal from "./users/UsersManagementModal";
+import ClaimAttemptsModal from "./claimAttempts/ClaimAttemptsModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
