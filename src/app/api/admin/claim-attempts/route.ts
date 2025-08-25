@@ -130,6 +130,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const validClearTypes = ["failed", "all", "rate-limit"];
+    if (!validClearTypes.includes(clearType)) {
+      return NextResponse.json(
+        {
+          error: "Invalid clear type. Must be 'failed', 'all', or 'rate-limit'",
+        },
+        { status: 400 }
+      );
+    }
+
     await connectMongoDB();
 
     const user = await User.findOne({ email: userEmail });
@@ -156,6 +166,15 @@ export async function POST(request: Request) {
       user.claim_attempts = user.claim_attempts.filter(
         (attempt: { success: boolean }) => attempt.success
       );
+    } else if (clearType === "rate-limit") {
+      // Clear only recent failed attempts (last 15 minutes) to reset rate limit
+      const now = new Date();
+      const windowStart = new Date(now.getTime() - 15 * 60 * 1000); // 15 minutes ago
+
+      user.claim_attempts = user.claim_attempts.filter(
+        (attempt: { success: boolean; timestamp: Date }) =>
+          attempt.success || new Date(attempt.timestamp) < windowStart
+      );
     } else {
       // Clear all attempts
       user.claim_attempts = [];
@@ -174,10 +193,12 @@ export async function POST(request: Request) {
     // Log the admin action
     const adminEmail = session.user.email;
     if (adminEmail) {
-      const action =
-        clearType === "failed"
-          ? "CLEAR_CLAIM_ATTEMPTS_FAILED"
-          : "CLEAR_CLAIM_ATTEMPTS_ALL";
+      const actionMap = {
+        failed: "CLEAR_CLAIM_ATTEMPTS_FAILED",
+        all: "CLEAR_CLAIM_ATTEMPTS_ALL",
+        "rate-limit": "RESET_RATE_LIMIT",
+      };
+      const action = actionMap[clearType as keyof typeof actionMap];
 
       await logAdminAction({
         adminEmail,
@@ -196,11 +217,16 @@ export async function POST(request: Request) {
       });
     }
 
+    const messageMap = {
+      failed: "failed",
+      all: "all",
+      "rate-limit": "rate limit (recent failed attempts)",
+    };
+    const message = messageMap[clearType as keyof typeof messageMap];
+
     return NextResponse.json({
       success: true,
-      message: `Cleared ${
-        clearType === "failed" ? "failed" : "all"
-      } claim attempts for ${userEmail}`,
+      message: `Cleared ${message} claim attempts for ${userEmail}`,
     });
   } catch (error) {
     console.error("Error clearing claim attempts:", error);

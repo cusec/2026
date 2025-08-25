@@ -5,7 +5,7 @@ import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
-// GET - Fetch all users with optional search (Admin only)
+// GET - Fetch all users with optional search and pagination (Admin only)
 export async function GET(request: Request) {
   try {
     const session = await auth0.getSession();

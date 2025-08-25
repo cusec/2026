@@ -4,10 +4,10 @@ import { User } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 
-// GET - Fetch detailed user information including history (Admin only)
+// GET - Get user details (self or admin access)
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ userId: string }> }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth0.getSession();
@@ -16,19 +16,11 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Check if user is admin
-    if (!(await isAdmin())) {
-      return NextResponse.json(
-        { error: "Forbidden: Admin access required" },
-        { status: 403 }
-      );
-    }
-
-    const { userId } = await params;
+    const { id } = await params;
 
     await connectMongoDB();
 
-    const user = await User.findById(userId).populate({
+    const user = await User.findById(id).populate({
       path: "history",
       select: "name description identifier points createdAt",
     });
@@ -37,6 +29,18 @@ export async function GET(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    const isOwner = session.user.email === user.email;
+    const userIsAdmin = await isAdmin();
+
+    // Check authorization - user can access their own data, admins can access any
+    if (!isOwner && !userIsAdmin) {
+      return NextResponse.json(
+        { error: "Forbidden: Cannot access another user's data" },
+        { status: 403 }
+      );
+    }
+
+    // Return full details for owner or admin
     return NextResponse.json({
       success: true,
       user: {
@@ -46,10 +50,12 @@ export async function GET(
         points: user.points,
         history: user.history,
         claim_attempts: user.claim_attempts || [],
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
       },
     });
   } catch (error) {
-    console.error("Error fetching user history:", error);
+    console.error("Error fetching user details:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

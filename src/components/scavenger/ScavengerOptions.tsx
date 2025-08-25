@@ -33,9 +33,9 @@ const ScavengerOptions = ({
 
       try {
         setLoading(true);
-        console.log("Making POST request to /api/user to initialize user...");
+        console.log("Making POST request to /api/users to initialize user...");
 
-        const response = await fetch("/api/user", {
+        const response = await fetch("/api/users", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -185,6 +185,7 @@ const ScavengerOptions = ({
         isOpen={isClaimModalOpen}
         onClose={() => setIsClaimModalOpen(false)}
         onClaimSuccess={handleClaimSuccess}
+        userId={dbUser?._id}
       />
 
       <UsersManagementModal

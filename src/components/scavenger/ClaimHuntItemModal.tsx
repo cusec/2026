@@ -15,18 +15,27 @@ interface ClaimResult {
   };
   newPoints?: number;
   totalItemsClaimed?: number;
+  remainingAttempts?: number;
+  rateLimitExceeded?: boolean;
+  resetTime?: string;
+  rateLimitInfo?: {
+    maxAttempts: number;
+    windowMinutes: number;
+  };
 }
 
 interface ClaimHuntItemModalProps {
   isOpen: boolean;
   onClose: () => void;
   onClaimSuccess: (newPoints: number, totalItems: number) => void;
+  userId?: string; // Add userId prop
 }
 
 const ClaimHuntItemModal = ({
   isOpen,
   onClose,
   onClaimSuccess,
+  userId,
 }: ClaimHuntItemModalProps) => {
   const [claimMethod, setClaimMethod] = useState<"scan" | "manual">("manual");
   const [identifier, setIdentifier] = useState("");
@@ -52,7 +61,13 @@ const ClaimHuntItemModal = ({
       setError(null);
       setClaimResult(null);
 
-      const response = await fetch("/api/claim-hunt-item", {
+      if (!userId) {
+        setError("User ID is required");
+        return;
+      }
+
+      // Claim the hunt item using the RESTful endpoint
+      const response = await fetch(`/api/users/${userId}/hunt-items`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,6 +97,10 @@ const ClaimHuntItemModal = ({
         setClaimResult({
           success: false,
           message: data.error || "Failed to claim hunt item",
+          remainingAttempts: data.remainingAttempts,
+          rateLimitExceeded: data.rateLimitExceeded,
+          resetTime: data.resetTime,
+          rateLimitInfo: data.rateLimitInfo,
         });
       }
     } catch (err) {
@@ -240,11 +259,50 @@ const ClaimHuntItemModal = ({
                     : "text-red-800 dark:text-red-200"
                 }`}
               >
-                {claimResult.success ? "Success!" : "Failed"}
+                {claimResult.success
+                  ? "Success!"
+                  : claimResult.rateLimitExceeded
+                  ? "Rate Limit Exceeded"
+                  : "Failed"}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mt-2">
                 {claimResult.message}
               </p>
+
+              {/* Rate limit information for failed attempts */}
+              {!claimResult.success &&
+                !claimResult.rateLimitExceeded &&
+                claimResult.remainingAttempts !== undefined && (
+                  <div className="mt-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                    <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                      {claimResult.remainingAttempts > 0 ? (
+                        <>
+                          <strong>{claimResult.remainingAttempts}</strong>{" "}
+                          attempts remaining before rate limit
+                        </>
+                      ) : (
+                        <>
+                          Rate limit:{" "}
+                          {claimResult.rateLimitInfo?.maxAttempts || 10} failed
+                          attempts per{" "}
+                          {claimResult.rateLimitInfo?.windowMinutes || 15}{" "}
+                          minutes
+                        </>
+                      )}
+                    </p>
+                  </div>
+                )}
+
+              {/* Rate limit exceeded warning */}
+              {claimResult.rateLimitExceeded && claimResult.resetTime && (
+                <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                  <p className="text-sm text-red-800 dark:text-red-200">
+                    <strong>Too many failed attempts.</strong> Please wait until{" "}
+                    {new Date(claimResult.resetTime).toLocaleTimeString()}{" "}
+                    before trying again.
+                  </p>
+                </div>
+              )}
             </div>
 
             {claimResult.success && claimResult.item && (
@@ -275,9 +333,16 @@ const ClaimHuntItemModal = ({
                   setIdentifier("");
                   setError(null);
                 }}
-                className="flex-1 px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                disabled={claimResult.rateLimitExceeded}
+                className={`flex-1 px-4 py-2 rounded-lg transition-colors ${
+                  claimResult.rateLimitExceeded
+                    ? "bg-gray-400 text-gray-200 cursor-not-allowed"
+                    : "bg-gray-600 text-white hover:bg-gray-700"
+                }`}
               >
-                Claim Another
+                {claimResult.rateLimitExceeded
+                  ? "Rate Limited"
+                  : "Claim Another"}
               </button>
               <button
                 onClick={handleModalClose}

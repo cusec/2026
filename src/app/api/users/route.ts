@@ -1,9 +1,54 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { findOrCreateUser } from "@/lib/userService";
+import { findOrCreateUser, getUserByEmail } from "@/lib/userService";
 
+// GET - Get current user profile
+export async function GET() {
+  try {
+    const session = await auth0.getSession();
+
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { email } = session.user;
+
+    if (!email) {
+      return NextResponse.json(
+        { error: "Missing user email" },
+        { status: 400 }
+      );
+    }
+
+    const user = await getUserByEmail(email);
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({
+      success: true,
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+        points: user.points,
+        history: user.history,
+        claimAttemptsCount: user.claim_attempts?.length || 0,
+      },
+    });
+  } catch (error) {
+    console.error("Error in user GET API:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+// POST - Create or initialize current user
 export async function POST() {
-  console.log("POST /api/user called");
+  console.log("POST /api/users called");
 
   try {
     const session = await auth0.getSession();
@@ -45,49 +90,6 @@ export async function POST() {
     });
   } catch (error) {
     console.error("Error in user API:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function GET() {
-  try {
-    const session = await auth0.getSession();
-
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    const { email } = session.user;
-
-    if (!email) {
-      return NextResponse.json(
-        { error: "Missing user email" },
-        { status: 400 }
-      );
-    }
-
-    const { getUserByEmail } = await import("@/lib/userService");
-    const user = await getUserByEmail(email);
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
-
-    return NextResponse.json({
-      success: true,
-      user: {
-        id: user._id,
-        email: user.email,
-        name: user.name,
-        points: user.points,
-        history: user.history,
-      },
-    });
-  } catch (error) {
-    console.error("Error in user GET API:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
