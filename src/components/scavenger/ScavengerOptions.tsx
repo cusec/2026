@@ -112,7 +112,7 @@ const ScavengerOptions = ({ dbUser: initialDbUser }: ScavengerOptionsProps) => {
         </div>
       )}
       <button className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition">
-        Create Hunt Item
+        Hunt Items
       </button>
       <button className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition">
         Find Items
