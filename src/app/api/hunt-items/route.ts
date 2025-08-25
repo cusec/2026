@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
 import { HuntItem } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
+import isAdmin from "@/lib/isAdmin";
 
-// GET - Fetch all hunt items
+// GET - Fetch all hunt items (Available to all authenticated users)
 export async function GET() {
   try {
     const session = await auth0.getSession();
@@ -28,13 +29,21 @@ export async function GET() {
   }
 }
 
-// POST - Create a new hunt item
+// POST - Create a new hunt item (Admin only)
 export async function POST(request: Request) {
   try {
     const session = await auth0.getSession();
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    if (!(await isAdmin())) {
+      return NextResponse.json(
+        { error: "Forbidden: Admin access required" },
+        { status: 403 }
+      );
     }
 
     const { name, description, identifier, points } = await request.json();

@@ -17,8 +17,8 @@ export default async function ScavengerPage() {
       <main className="w-full h-full flex justify-center relative z-10 items-center">
         <div className="flex items-center justify-center">
           <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode dark:bg-dark-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
-            <ScavengerLogin />
-            {user && <ScavengerOptions />}
+            <ScavengerLogin user={user} />
+            {user && <ScavengerOptions user={user} />}
           </div>
         </div>
       </main>

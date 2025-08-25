@@ -1,24 +1,13 @@
 "use server";
 
-import { auth0 } from "@/lib/auth0";
-// import { findOrCreateUser } from "@/lib/userService";
+import { Auth0User } from "@/lib/interface";
+import isAdmin from "@/lib/isAdmin";
 
-const ScavengerLogin = async () => {
-  const session = await auth0.getSession();
-  const user = session?.user;
+interface ScavengerLoginProps {
+  user?: Auth0User | null;
+}
 
-  // const handleLogin = async () => {
-  //   if (!user?.email) return;
-  //   try {
-  //     await findOrCreateUser({
-  //       email: user.email,
-  //       name: user.name || "",
-  //     });
-  //   } catch (error) {
-  //     console.error("Error creating/finding user:", error);
-  //   }
-  // };
-
+const ScavengerLogin = async ({ user }: ScavengerLoginProps) => {
   // User not logged in
   if (!user) {
     return (
@@ -41,8 +30,7 @@ const ScavengerLogin = async () => {
   return (
     <>
       <h1 className="text-primary dark:text-light-mode">
-        Welcome, {user.name}!{" "}
-        {user["cusec/roles"]?.includes("Admin") ? `(Admin)` : ""}
+        Welcome, {user.name}! {(await isAdmin()) ? `(Admin)` : ""}
       </h1>
       <a
         href={`/auth/logout?returnTo=${process.env.NEXT_PUBLIC_URL}/scavenger`}

@@ -2,18 +2,17 @@
 
 import { useEffect, useState } from "react";
 import HuntItemsModal from "./HuntItemsModal";
+import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
-  dbUser?: {
-    _id: string;
-    email: string;
-    name?: string;
-    points: number;
-    history: string[];
-  } | null;
+  user?: Auth0User | null;
+  dbUser?: DbUser | null;
 }
 
-const ScavengerOptions = ({ dbUser: initialDbUser }: ScavengerOptionsProps) => {
+const ScavengerOptions = ({
+  user,
+  dbUser: initialDbUser,
+}: ScavengerOptionsProps) => {
   const [dbUser, setDbUser] = useState(initialDbUser);
   const [loading, setLoading] = useState(!initialDbUser);
   const [error, setError] = useState<string | null>(null);
@@ -113,12 +112,14 @@ const ScavengerOptions = ({ dbUser: initialDbUser }: ScavengerOptionsProps) => {
           </p>
         </div>
       )}
-      <button
-        onClick={() => setIsHuntItemsModalOpen(true)}
-        className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
-      >
-        Hunt Items
-      </button>
+      {user?.["cusec/roles"]?.includes("Admin") ? (
+        <button
+          onClick={() => setIsHuntItemsModalOpen(true)}
+          className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
+        >
+          Hunt Items
+        </button>
+      ) : null}
       <button className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition">
         Find Items
       </button>

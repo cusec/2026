@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
 import { HuntItem } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
+import isAdmin from "@/lib/isAdmin";
 
-// PUT - Update a hunt item (only name, description, and points)
+// PUT - Update a hunt item (Admin only - name, description, and points)
 export async function PUT(
   request: Request,
   { params }: { params: { id: string } }
@@ -13,6 +14,14 @@ export async function PUT(
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    if (!(await isAdmin())) {
+      return NextResponse.json(
+        { error: "Forbidden: Admin access required" },
+        { status: 403 }
+      );
     }
 
     const { name, description, points } = await request.json();
@@ -52,7 +61,7 @@ export async function PUT(
   }
 }
 
-// DELETE - Delete a hunt item
+// DELETE - Delete a hunt item (Admin only)
 export async function DELETE(
   request: Request,
   { params }: { params: { id: string } }
@@ -62,6 +71,14 @@ export async function DELETE(
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    if (!(await isAdmin())) {
+      return NextResponse.json(
+        { error: "Forbidden: Admin access required" },
+        { status: 403 }
+      );
     }
 
     const { id } = params;

@@ -32,3 +32,19 @@ export interface FAQItem {
   question: string;
   answer: React.ReactNode;
 }
+
+export interface Auth0User {
+  email?: string;
+  name?: string;
+  picture?: string;
+  sub?: string;
+  "cusec/roles"?: string[];
+}
+
+export interface DbUser {
+  _id: string;
+  email: string;
+  name?: string;
+  points: number;
+  history: string[];
+}
