@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import HuntItemsModal from "./HuntItemsModal";
 
 interface ScavengerOptionsProps {
   dbUser?: {
@@ -16,6 +17,7 @@ const ScavengerOptions = ({ dbUser: initialDbUser }: ScavengerOptionsProps) => {
   const [dbUser, setDbUser] = useState(initialDbUser);
   const [loading, setLoading] = useState(!initialDbUser);
   const [error, setError] = useState<string | null>(null);
+  const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -111,12 +113,20 @@ const ScavengerOptions = ({ dbUser: initialDbUser }: ScavengerOptionsProps) => {
           </p>
         </div>
       )}
-      <button className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition">
+      <button
+        onClick={() => setIsHuntItemsModalOpen(true)}
+        className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
+      >
         Hunt Items
       </button>
       <button className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition">
         Find Items
       </button>
+
+      <HuntItemsModal
+        isOpen={isHuntItemsModalOpen}
+        onClose={() => setIsHuntItemsModalOpen(false)}
+      />
     </div>
   );
 };
