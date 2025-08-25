@@ -48,3 +48,20 @@ export interface DbUser {
   points: number;
   history: string[];
 }
+
+export interface HuntItem {
+  _id: string;
+  name: string;
+  description: string;
+  identifier: string;
+  points: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface HuntItemFormData {
+  name: string;
+  description: string;
+  identifier: string;
+  points: number;
+}

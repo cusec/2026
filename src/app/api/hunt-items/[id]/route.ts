@@ -25,7 +25,7 @@ export async function PUT(
     }
 
     const { name, description, points } = await request.json();
-    const { id } = params;
+    const { id } = await params;
 
     if (!name) {
       return NextResponse.json({ error: "Name is required" }, { status: 400 });
