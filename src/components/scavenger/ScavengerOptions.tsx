@@ -5,6 +5,7 @@ import HuntItemsModal from "./HuntItemsModal";
 import ClaimHuntItemModal from "./ClaimHuntItemModal";
 import UsersManagementModal from "./users/UsersManagementModal";
 import ClaimAttemptsModal from "./claimAttempts/ClaimAttemptsModal";
+import AuditLogsModal from "./admin/AuditLogsModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
@@ -24,6 +25,7 @@ const ScavengerOptions = ({
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isClaimAttemptsModalOpen, setIsClaimAttemptsModalOpen] =
     useState(false);
+  const [isAuditLogsModalOpen, setIsAuditLogsModalOpen] = useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -159,6 +161,12 @@ const ScavengerOptions = ({
           >
             Claim Attempts
           </button>
+          <button
+            onClick={() => setIsAuditLogsModalOpen(true)}
+            className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition"
+          >
+            Audit Logs
+          </button>
         </>
       ) : null}
       <button
@@ -187,6 +195,11 @@ const ScavengerOptions = ({
       <ClaimAttemptsModal
         isOpen={isClaimAttemptsModalOpen}
         onClose={() => setIsClaimAttemptsModalOpen(false)}
+      />
+
+      <AuditLogsModal
+        isOpen={isAuditLogsModalOpen}
+        onClose={() => setIsAuditLogsModalOpen(false)}
       />
     </div>
   );

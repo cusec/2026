@@ -3,6 +3,7 @@ import { auth0 } from "@/lib/auth0";
 import { HuntItem } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
+import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
 // PUT - Update a hunt item (Admin only - name, description, and points)
 export async function PUT(
@@ -41,12 +42,44 @@ export async function PUT(
       );
     }
 
+    // Store previous data for audit logging
+    const previousData = sanitizeDataForLogging({
+      name: huntItem.name,
+      description: huntItem.description,
+      points: huntItem.points,
+    });
+
     // Update only allowed fields (not identifier)
     huntItem.name = name;
     huntItem.description = description;
     huntItem.points = points || 0;
 
     await huntItem.save();
+
+    // Store new data for audit logging
+    const newData = sanitizeDataForLogging({
+      name: huntItem.name,
+      description: huntItem.description,
+      points: huntItem.points,
+    });
+
+    // Log the admin action
+    const adminEmail = session.user.email;
+    if (adminEmail) {
+      await logAdminAction({
+        adminEmail,
+        action: "UPDATE_HUNT_ITEM",
+        resourceType: "huntItem",
+        resourceId: id,
+        details: {
+          name: huntItem.name,
+          identifier: huntItem.identifier,
+        },
+        previousData,
+        newData,
+        request,
+      });
+    }
 
     return NextResponse.json({
       success: true,
@@ -85,12 +118,40 @@ export async function DELETE(
 
     await connectMongoDB();
 
-    const huntItem = await HuntItem.findByIdAndDelete(id);
+    const huntItem = await HuntItem.findById(id);
     if (!huntItem) {
       return NextResponse.json(
         { error: "Hunt item not found" },
         { status: 404 }
       );
+    }
+
+    // Store data for audit logging before deletion
+    const deletedData = sanitizeDataForLogging({
+      name: huntItem.name,
+      description: huntItem.description,
+      identifier: huntItem.identifier,
+      points: huntItem.points,
+    });
+
+    // Delete the hunt item
+    await HuntItem.findByIdAndDelete(id);
+
+    // Log the admin action
+    const adminEmail = session.user.email;
+    if (adminEmail) {
+      await logAdminAction({
+        adminEmail,
+        action: "DELETE_HUNT_ITEM",
+        resourceType: "huntItem",
+        resourceId: id,
+        details: {
+          name: huntItem.name,
+          identifier: huntItem.identifier,
+        },
+        previousData: deletedData,
+        request,
+      });
     }
 
     return NextResponse.json({

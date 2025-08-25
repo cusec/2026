@@ -3,6 +3,7 @@ import { auth0 } from "@/lib/auth0";
 import { User } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
+import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
 // GET - Fetch claim attempts for monitoring (Admin only)
 export async function GET(request: Request) {
@@ -141,6 +142,15 @@ export async function POST(request: Request) {
       user.claim_attempts = [];
     }
 
+    // Store previous data for audit logging
+    const previousAttempts = [...user.claim_attempts];
+    const previousData = sanitizeDataForLogging({
+      claimAttemptsCount: user.claim_attempts.length,
+      failedAttemptsCount: user.claim_attempts.filter(
+        (attempt: { success: boolean }) => !attempt.success
+      ).length,
+    });
+
     if (clearType === "failed") {
       // Clear only failed attempts
       user.claim_attempts = user.claim_attempts.filter(
@@ -152,6 +162,39 @@ export async function POST(request: Request) {
     }
 
     await user.save();
+
+    // Store new data for audit logging
+    const newData = sanitizeDataForLogging({
+      claimAttemptsCount: user.claim_attempts.length,
+      failedAttemptsCount: user.claim_attempts.filter(
+        (attempt: { success: boolean }) => !attempt.success
+      ).length,
+    });
+
+    // Log the admin action
+    const adminEmail = session.user.email;
+    if (adminEmail) {
+      const action =
+        clearType === "failed"
+          ? "CLEAR_CLAIM_ATTEMPTS_FAILED"
+          : "CLEAR_CLAIM_ATTEMPTS_ALL";
+
+      await logAdminAction({
+        adminEmail,
+        action,
+        resourceType: "claimAttempts",
+        targetUserEmail: userEmail,
+        resourceId: user._id.toString(),
+        details: {
+          clearType,
+          attemptsClearedCount:
+            previousAttempts.length - user.claim_attempts.length,
+        },
+        previousData,
+        newData,
+        request,
+      });
+    }
 
     return NextResponse.json({
       success: true,

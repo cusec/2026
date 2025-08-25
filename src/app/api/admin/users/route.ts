@@ -3,6 +3,7 @@ import { auth0 } from "@/lib/auth0";
 import { User } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
+import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
 // GET - Fetch all users with optional search (Admin only)
 export async function GET(request: Request) {
@@ -108,6 +109,14 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    // Store previous data for audit logging
+    const previousData = sanitizeDataForLogging({
+      name: user.name,
+      points: user.points,
+      historyLength: user.history.length,
+      claimAttemptsLength: user.claim_attempts?.length || 0,
+    });
+
     // Apply updates
     if (updates.name !== undefined) user.name = updates.name;
     if (updates.points !== undefined) user.points = updates.points;
@@ -123,6 +132,43 @@ export async function PUT(request: Request) {
     }
 
     await user.save();
+
+    // Store new data for audit logging
+    const newData = sanitizeDataForLogging({
+      name: user.name,
+      points: user.points,
+      historyLength: user.history.length,
+      claimAttemptsLength: user.claim_attempts?.length || 0,
+    });
+
+    // Log the admin action
+    const adminEmail = session.user.email;
+    if (adminEmail) {
+      let action = "UPDATE_USER";
+
+      if (
+        updates.clearHistory === true &&
+        updates.clearClaimAttempts === true
+      ) {
+        action = "CLEAR_USER_HISTORY_AND_ATTEMPTS";
+      } else if (updates.clearHistory === true) {
+        action = "CLEAR_USER_HISTORY";
+      } else if (updates.clearClaimAttempts === true) {
+        action = "CLEAR_USER_CLAIM_ATTEMPTS";
+      }
+
+      await logAdminAction({
+        adminEmail,
+        action,
+        resourceType: "user",
+        targetUserEmail: user.email,
+        resourceId: userId,
+        details: { updates },
+        previousData,
+        newData,
+        request,
+      });
+    }
 
     return NextResponse.json({
       success: true,
