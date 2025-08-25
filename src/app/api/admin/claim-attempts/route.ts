@@ -136,6 +136,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    // Ensure claim_attempts array exists
+    if (!user.claim_attempts) {
+      user.claim_attempts = [];
+    }
+
     if (clearType === "failed") {
       // Clear only failed attempts
       user.claim_attempts = user.claim_attempts.filter(

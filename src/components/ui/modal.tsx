@@ -64,7 +64,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
         )}
 
         {/* Content */}
-        <div className={cn("p-6", title && "pt-0")}>{children}</div>
+        <div className={cn("p-6", title)}>{children}</div>
       </div>
     </div>
   );

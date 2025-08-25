@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import HuntItemsModal from "./HuntItemsModal";
 import ClaimHuntItemModal from "./ClaimHuntItemModal";
+import UsersManagementModal from "./UsersManagementModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
@@ -19,6 +20,7 @@ const ScavengerOptions = ({
   const [error, setError] = useState<string | null>(null);
   const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
+  const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -135,12 +137,20 @@ const ScavengerOptions = ({
         </div>
       )}
       {user?.["cusec/roles"]?.includes("Admin") ? (
-        <button
-          onClick={() => setIsHuntItemsModalOpen(true)}
-          className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
-        >
-          Hunt Items
-        </button>
+        <>
+          <button
+            onClick={() => setIsHuntItemsModalOpen(true)}
+            className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
+          >
+            Hunt Items
+          </button>
+          <button
+            onClick={() => setIsUsersModalOpen(true)}
+            className="px-4 py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition"
+          >
+            Users
+          </button>
+        </>
       ) : null}
       <button
         onClick={() => setIsClaimModalOpen(true)}
@@ -158,6 +168,11 @@ const ScavengerOptions = ({
         isOpen={isClaimModalOpen}
         onClose={() => setIsClaimModalOpen(false)}
         onClaimSuccess={handleClaimSuccess}
+      />
+
+      <UsersManagementModal
+        isOpen={isUsersModalOpen}
+        onClose={() => setIsUsersModalOpen(false)}
       />
     </div>
   );

@@ -29,6 +29,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    // Ensure claim_attempts array exists (for existing users who might not have this field)
+    if (!user.claim_attempts) {
+      user.claim_attempts = [];
+    }
+
     // Find the hunt item by identifier
     const huntItem = await HuntItem.findOne({ identifier });
 

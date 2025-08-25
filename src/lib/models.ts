@@ -5,24 +5,30 @@ const userSchema = new Schema(
     email: { type: String, required: true, unique: true },
     name: String,
     points: { type: Number, default: 0 },
-    history: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "HuntItem",
-      },
-    ],
-    claim_attempts: [
-      {
-        identifier: String,
-        success: Boolean,
-        timestamp: { type: Date, default: Date.now },
-        item_id: {
+    history: {
+      type: [
+        {
           type: Schema.Types.ObjectId,
           ref: "HuntItem",
-          required: false,
         },
-      },
-    ],
+      ],
+      default: [],
+    },
+    claim_attempts: {
+      type: [
+        {
+          identifier: String,
+          success: Boolean,
+          timestamp: { type: Date, default: Date.now },
+          item_id: {
+            type: Schema.Types.ObjectId,
+            ref: "HuntItem",
+            required: false,
+          },
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,

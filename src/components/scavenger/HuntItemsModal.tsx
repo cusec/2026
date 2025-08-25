@@ -57,7 +57,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
         isOpen={isOpen}
         onClose={onClose}
         title="Manage Hunt Items"
-        className="max-w-4xl"
+        className="max-w-4xl max-h-[70vh]"
       >
         <div className="space-y-6">
           {error && (
