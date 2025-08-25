@@ -39,7 +39,8 @@ export async function POST() {
         email: user.email,
         name: user.name,
         points: user.points,
-        historyCount: user.history.length,
+        history: user.history,
+        claimAttemptsCount: user.claim_attempts?.length || 0,
       },
     });
   } catch (error) {

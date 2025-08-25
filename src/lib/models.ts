@@ -11,6 +11,18 @@ const userSchema = new Schema(
         ref: "HuntItem",
       },
     ],
+    claim_attempts: [
+      {
+        identifier: String,
+        success: Boolean,
+        timestamp: { type: Date, default: Date.now },
+        item_id: {
+          type: Schema.Types.ObjectId,
+          ref: "HuntItem",
+          required: false,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

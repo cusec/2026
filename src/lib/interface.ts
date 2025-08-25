@@ -47,6 +47,14 @@ export interface DbUser {
   name?: string;
   points: number;
   history: string[];
+  claim_attempts?: ClaimAttempt[];
+}
+
+export interface ClaimAttempt {
+  identifier: string;
+  success: boolean;
+  timestamp: string;
+  item_id?: string;
 }
 
 export interface HuntItem {

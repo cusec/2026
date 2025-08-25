@@ -6,6 +6,7 @@ import Modal from "@/components/ui/modal";
 import { HuntItem } from "./types/huntItem";
 import { useHuntItems } from "./hooks/useHuntItems";
 import { HuntItemAddForm, HuntItemsList, QRCodeModal } from "./huntItems";
+import ClaimAttemptsMonitor from "./ClaimAttemptsMonitor";
 
 interface HuntItemsModalProps {
   isOpen: boolean;
@@ -109,6 +110,9 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
             onShowQR={showQRCode}
             onEditingItemChange={setEditingItem}
           />
+
+          {/* Claim Attempts Monitor for Admins */}
+          <ClaimAttemptsMonitor isVisible={isOpen} />
         </div>
       </Modal>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import HuntItemsModal from "./HuntItemsModal";
+import ClaimHuntItemModal from "./ClaimHuntItemModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
@@ -17,6 +18,7 @@ const ScavengerOptions = ({
   const [loading, setLoading] = useState(!initialDbUser);
   const [error, setError] = useState<string | null>(null);
   const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
+  const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -49,7 +51,8 @@ const ScavengerOptions = ({
             email: data.user.email,
             name: data.user.name,
             points: data.user.points,
-            history: [],
+            history: data.user.history || [],
+            claim_attempts: [],
           });
         } else {
           throw new Error(data.error || "Unknown error");
@@ -64,6 +67,25 @@ const ScavengerOptions = ({
 
     initializeUser();
   }, [dbUser]);
+
+  // Handle successful claim - update user points and history
+  const handleClaimSuccess = (newPoints: number, totalItems: number) => {
+    if (dbUser) {
+      // Create a new history array with the updated count
+      // Note: The actual item ID would be added by the API, but for UI purposes
+      // we just need to update the count to reflect the new total
+      const updatedHistory = [...dbUser.history];
+      while (updatedHistory.length < totalItems) {
+        updatedHistory.push("claimed"); // Placeholder - actual IDs managed by API
+      }
+
+      setDbUser({
+        ...dbUser,
+        points: newPoints,
+        history: updatedHistory,
+      });
+    }
+  };
 
   if (loading) {
     return (
@@ -120,13 +142,22 @@ const ScavengerOptions = ({
           Hunt Items
         </button>
       ) : null}
-      <button className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition">
-        Find Items
+      <button
+        onClick={() => setIsClaimModalOpen(true)}
+        className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition"
+      >
+        Claim Hunt Item
       </button>
 
       <HuntItemsModal
         isOpen={isHuntItemsModalOpen}
         onClose={() => setIsHuntItemsModalOpen(false)}
+      />
+
+      <ClaimHuntItemModal
+        isOpen={isClaimModalOpen}
+        onClose={() => setIsClaimModalOpen(false)}
+        onClaimSuccess={handleClaimSuccess}
       />
     </div>
   );
