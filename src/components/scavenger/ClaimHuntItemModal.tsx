@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { QrCode, Type, CheckCircle, AlertCircle } from "lucide-react";
 import Modal from "@/components/ui/modal";
+import ScannerPage from "./ScannerPage";
 
 interface ClaimResult {
   success: boolean;
@@ -32,6 +33,7 @@ const ClaimHuntItemModal = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [claimResult, setClaimResult] = useState<ClaimResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isScannerOpen, setIsScannerOpen] = useState(false);
 
   // Reset state when modal opens/closes
   const handleModalClose = () => {
@@ -39,6 +41,7 @@ const ClaimHuntItemModal = ({
     setClaimResult(null);
     setError(null);
     setIsSubmitting(false);
+    setIsScannerOpen(false);
     onClose();
   };
 
@@ -99,17 +102,24 @@ const ClaimHuntItemModal = ({
     await claimHuntItem(identifier.trim());
   };
 
-  // Handle QR code scan (for now, we'll simulate this with a text input)
+  // Handle QR code scan
   const handleQRScan = async () => {
-    // In a real implementation, this would open the camera and scan QR codes
-    // For now, we'll use the same manual input method but with enhanced UI
     setClaimMethod("scan");
+    setIsScannerOpen(true);
+  };
 
-    // Future: Integrate with camera API or QR scanner library
-    // navigator.mediaDevices.getUserMedia({ video: true })
-    //   .then(stream => {
-    //     // Setup QR scanner with video stream
-    //   });
+  // Handle successful QR scan
+  const handleScanSuccess = async (scannedIdentifier: string) => {
+    setIdentifier(scannedIdentifier);
+    setIsScannerOpen(false);
+    // Automatically attempt to claim with the scanned identifier
+    await claimHuntItem(scannedIdentifier);
+  };
+
+  // Handle QR scan error
+  const handleScanError = (errorMessage: string) => {
+    setError(errorMessage);
+    setIsScannerOpen(false);
   };
 
   return (
@@ -163,16 +173,26 @@ const ClaimHuntItemModal = ({
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                   placeholder={
                     claimMethod === "scan"
-                      ? "Point camera at QR code or enter identifier manually"
+                      ? "Scanned QR code will appear here or enter manually"
                       : "Enter the identifier"
                   }
                   disabled={isSubmitting}
                 />
                 {claimMethod === "scan" && (
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    💡 Camera QR scanning will be available in a future update.
-                    For now, enter the identifier manually.
-                  </p>
+                  <div className="mt-2">
+                    <button
+                      type="button"
+                      onClick={() => setIsScannerOpen(true)}
+                      className="w-full px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2"
+                      disabled={isSubmitting}
+                    >
+                      <QrCode size={20} />
+                      Open Camera Scanner
+                    </button>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 text-center">
+                      📱 Use your device camera to scan QR codes
+                    </p>
+                  </div>
                 )}
               </div>
 
@@ -269,6 +289,14 @@ const ClaimHuntItemModal = ({
           </div>
         )}
       </div>
+
+      {/* QR Scanner */}
+      <ScannerPage
+        isOpen={isScannerOpen}
+        onClose={() => setIsScannerOpen(false)}
+        onScanSuccess={handleScanSuccess}
+        onError={handleScanError}
+      />
     </Modal>
   );
 };
