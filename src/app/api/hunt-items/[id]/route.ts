@@ -64,8 +64,9 @@ export async function PUT(
 // DELETE - Delete a hunt item (Admin only)
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  const params = await props.params;
   try {
     const session = await auth0.getSession();
 
