@@ -15,7 +15,7 @@ const ParallaxCityscape: React.FC = () => {
   const b1 = useTransform(scrollYProgress, [0.33, 1], ["0%", "10%"]);
   const b2 = useTransform(scrollYProgress, [0.33, 1], ["0%", "20%"]);
   const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "40%"]);
-  const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "10%"]);
+  const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "30%"]);
   const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "-20%"]);
   const waveHeight = useTransform(
     scrollYProgress,
@@ -27,7 +27,7 @@ const ParallaxCityscape: React.FC = () => {
   const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.5]);
   const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 0]);
   const b3Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
-  const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 0.3]);
+  const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 1]);
 
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
@@ -139,7 +139,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Lighthouse (Foreground) */}
         <motion.div
           style={{ y: l, scaleY: lHeight, transformOrigin: "bottom" }}
-          className="absolute xl:top-0 right-0 max-h-[70vh] w-[15vh] h-[35vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
+          className="absolute xl:top-0 right-8 max-h-[70vh] w-[15vh] h-[35vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
             src="/images/lighthouse.svg"
