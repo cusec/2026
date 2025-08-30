@@ -24,8 +24,8 @@ const ParallaxCityscape: React.FC = () => {
   );
 
   // Height transforms - scale down as they move up
-  const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.5]);
-  const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 0]);
+  const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.9]);
+  const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.7]);
   const b3Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
   const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 1]);
 
