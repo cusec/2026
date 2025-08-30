@@ -9,7 +9,7 @@ const statData: Stat[] = [
     content: "10K+",
     description: "Attendees",
     image: "/icons/stat.svg",
-    position: { x: "12vw", y: "3vh" },
+    position: { x: "12%", y: "30%" },
     size: { width: "9vw", height: "18vh" },
   },
   {
@@ -64,8 +64,9 @@ const Stats: React.FC = () => {
               top: stat.position.y,
               height: stat.size.height,
               minHeight: "120px",
+              maxHeight: "320px",
               width: stat.size.width,
-              minWidth: "120px",
+              maxWidth: "320px",
             }}
             title={stat.name}
           >
