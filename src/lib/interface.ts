@@ -22,10 +22,14 @@ export interface Sponsor {
 export interface Stat {
   id: string;
   name: string;
-  content: React.ReactNode;
+  content: string;
+  description: string;
   image: string;
   position: Position;
   size: Size;
+  font_sizes?: {
+    [key: string]: string;
+  };
 }
 
 export interface FAQItem {
