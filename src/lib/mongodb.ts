@@ -35,7 +35,6 @@ const connectMongoDB = async () => {
       maxPoolSize: 100, // Maintain up to 100 socket connections
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      bufferMaxEntries: 0, // Disable mongoose buffering
       // Automatically close connections after 30 seconds of inactivity
       maxIdleTimeMS: 30000,
     };
