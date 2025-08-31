@@ -147,25 +147,25 @@ const ScavengerOptions = ({
             onClick={() => setIsHuntItemsModalOpen(true)}
             className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
           >
-            Hunt Items
+            Hunt Items (Admin)
           </button>
           <button
             onClick={() => setIsUsersModalOpen(true)}
             className="px-4 py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition"
           >
-            Users
+            Users (Admin)
           </button>
           <button
             onClick={() => setIsClaimAttemptsModalOpen(true)}
             className="px-4 py-2 rounded-lg bg-orange-600 text-white font-semibold shadow hover:bg-orange-700 transition"
           >
-            Claim Attempts
+            Claim Attempts (Admin)
           </button>
           <button
             onClick={() => setIsAuditLogsModalOpen(true)}
             className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition"
           >
-            Audit Logs
+            Audit Logs (Admin)
           </button>
         </>
       ) : null}
