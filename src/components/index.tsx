@@ -16,3 +16,4 @@ export { default as Gallery } from "./home/gallery/Gallery";
 export { default as FAQ } from "./home/faq/FAQ";
 export { default as CodeOfConduct } from "./code-of-conduct/CodeOfConduct";
 export { default as PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
+export { default as Leaderboard } from "./scavenger/leaderboard/Leaderboard";
