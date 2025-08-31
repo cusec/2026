@@ -6,6 +6,7 @@ import ClaimHuntItemModal from "./ClaimHuntItemModal";
 import UsersManagementModal from "./users/UsersManagementModal";
 import ClaimAttemptsModal from "./claimAttempts/ClaimAttemptsModal";
 import AuditLogsModal from "./admin/AuditLogsModal";
+import RedeemPointsModal from "./RedeemPointsModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
 interface ScavengerOptionsProps {
@@ -26,6 +27,7 @@ const ScavengerOptions = ({
   const [isClaimAttemptsModalOpen, setIsClaimAttemptsModalOpen] =
     useState(false);
   const [isAuditLogsModalOpen, setIsAuditLogsModalOpen] = useState(false);
+  const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);
 
   useEffect(() => {
     const initializeUser = async () => {
@@ -169,6 +171,17 @@ const ScavengerOptions = ({
           </button>
         </>
       ) : null}
+
+      {(user?.["cusec/roles"]?.includes("Admin") ||
+        user?.["cusec/roles"]?.includes("Volunteer")) && (
+        <button
+          onClick={() => setIsRedeemPointsModalOpen(true)}
+          className="px-4 py-2 rounded-lg bg-red-600 text-white font-semibold shadow hover:bg-red-700 transition"
+        >
+          Redeem Points (Volunteer)
+        </button>
+      )}
+
       <button
         onClick={() => setIsClaimModalOpen(true)}
         className="px-4 py-2 rounded-lg bg-accent text-white font-semibold shadow hover:bg-accent/80 transition"
@@ -201,6 +214,11 @@ const ScavengerOptions = ({
       <AuditLogsModal
         isOpen={isAuditLogsModalOpen}
         onClose={() => setIsAuditLogsModalOpen(false)}
+      />
+
+      <RedeemPointsModal
+        isOpen={isRedeemPointsModalOpen}
+        onClose={() => setIsRedeemPointsModalOpen(false)}
       />
     </div>
   );
