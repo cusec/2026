@@ -31,6 +31,13 @@ const connectMongoDB = async () => {
     const opts = {
       dbName: "CUSEC2026",
       bufferCommands: false,
+      // Optimize connection pool for serverless functions
+      maxPoolSize: 100, // Maintain up to 100 socket connections
+      serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
+      socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
+      bufferMaxEntries: 0, // Disable mongoose buffering
+      // Automatically close connections after 30 seconds of inactivity
+      maxIdleTimeMS: 30000,
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
@@ -48,6 +55,20 @@ const connectMongoDB = async () => {
   }
 
   return cached.conn;
+};
+
+// Function to explicitly close the connection (useful for cleanup)
+export const disconnectMongoDB = async () => {
+  try {
+    if (cached.conn) {
+      await cached.conn.disconnect();
+      cached.conn = null;
+      cached.promise = null;
+      console.log("Disconnected from MongoDB.");
+    }
+  } catch (error) {
+    console.error("Error disconnecting from MongoDB:", error);
+  }
 };
 
 export default connectMongoDB;
