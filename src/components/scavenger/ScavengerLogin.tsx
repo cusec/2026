@@ -32,9 +32,7 @@ const ScavengerLogin = async ({ user }: ScavengerLoginProps) => {
       <h1 className="text-primary dark:text-light-mode">
         Welcome, {user.name}! {(await isAdmin()) ? `(Admin)` : ""}
       </h1>
-      <a
-        href={`/auth/logout?returnTo=${process.env.NEXT_PUBLIC_URL}/scavenger`}
-      >
+      <a href={`/auth/logout?returnTo=${process.env.APP_BASE_URL}/scavenger`}>
         <button className="px-6 py-2 rounded-lg bg-light-mode text-primary font-semibold shadow hover:bg-primary hover:text-white transition">
           Log Out
         </button>
