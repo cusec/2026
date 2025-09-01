@@ -22,8 +22,8 @@
       white 90%,
       transparent 100%
     );
-    max-width: 65vw;
-    --slide-height: 30vw;
+    max-width: 75vw;
+    --slide-height: 35vw;
   }
 }
 
@@ -49,12 +49,13 @@
   object-fit: cover;
 }
 .embla__controls {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  justify-content: space-between;
+  width: 100%;
+  display: flex;
+  justify-content: center;
   gap: 1.2rem;
   margin-top: 1.8rem;
 }
+
 .embla__buttons {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

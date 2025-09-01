@@ -3,19 +3,19 @@ import Image from "next/image";
 
 const VipCard: React.FC = () => {
   return (
-    <div className="relative max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-4 py-12 transition-all duration-500 ease-in-out bg-dark-mode/25 hover:bg-dark-mode/50 border-6 border-white/10 rounded-4xl shadow-lg backdrop-blur-xs">
-      <div className="absolute top-5.75 -right-8 z-10">
+    <div className="relative max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-2 md:px-4 py-6 md:py-12 transition-all duration-500 ease-in-out bg-dark-mode/25 hover:bg-dark-mode/50 border-6 border-white/10 rounded-4xl shadow-lg backdrop-blur-xs">
+      <div className="absolute top-4.25 -right-7.5 z-10">
         <div
-          className="bg-linear-[135deg] from-primary/85 from-0% via-light-mode/25 via-40% to-sunset/85 to-150% text-light-mode px-8 py-1 tracking-widest shadow-lg"
+          className="bg-linear-[135deg] from-primary/85 from-0% via-light-mode/25 via-40% to-sunset/85 to-150% text-light-mode px-6 py-1 tracking-widest shadow-lg"
           style={{
             transform: "rotate(45deg)",
-            clipPath: "polygon(22% 0, 78% 0, 100% 100%, 0 100%)",
+            clipPath: "polygon(25% 0, 75% 0, 100% 100%, 0 100%)",
           }}
         >
           POPULAR
         </div>
       </div>
-      <div className="absolute top-76 md:top-90 right-3 -z-30">
+      <div className="absolute top-56 md:top-90 right-2 -z-30">
         <Image
           src="images/vip_price.svg"
           alt="CUSEC Logo"
@@ -23,14 +23,14 @@ const VipCard: React.FC = () => {
           height={0}
         />
       </div>
-      <h2 className="text-xl md:text-3xl mb-8 font-semibold">VIP</h2>
-      <h3 className="text-lg md:text-xl mb-8 font-semibold">
+      <h2 className="text-xl md:text-3xl mb-6 md:mb-8 font-semibold">VIP</h2>
+      <h3 className="text-lg md:text-xl mb-4 md:mb-8 font-semibold">
         Learn, network and grow with CUSEC
       </h3>
-      <h3 className="text-xl md:text-3xl mb-8">$120 / Student</h3>
-      <h3 className="text-xl md:text-3xl mb-6">$240 / Professional</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-8">$120 / Student</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$240 / Professional</h3>
       <a
-        className="w-fit mx-auto text-sm md:text-xl font-space-grotesk! border-1 border-white/50 rounded-4xl py-1 px-12 mb-6 register-hover-gradient"
+        className="w-fit mx-auto text-sm md:text-xl font-space-grotesk! border-1 border-white/50 backdrop-blur-xs rounded-4xl py-1 px-12 mb-4 md:mb-6 register-hover-gradient"
         href="/#PRICING"
         target="_blank"
         rel="noopener noreferrer"

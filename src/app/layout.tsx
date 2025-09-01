@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import connectMongoDB from "@/lib/mongodb";
 import { Jost, Space_Grotesk } from "next/font/google";
 
 const jost = Jost({
@@ -19,6 +20,13 @@ const spaceGrotesk = Space_Grotesk({
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 config.autoAddCss = false;
+
+// Initialize MongoDB connection when the server starts
+if (typeof window === "undefined") {
+  connectMongoDB().catch((error) => {
+    console.error("Failed to connect to MongoDB on startup:", error);
+  });
+}
 
 export const metadata: Metadata = {
   title: "CUSEC 2026 - Canadian University Software Engineering Conference",

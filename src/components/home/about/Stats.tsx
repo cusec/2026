@@ -58,14 +58,15 @@ const Stats: React.FC = () => {
         return (
           <div
             key={stat.id}
-            className="absolute hover:scale-105 transition-transform duration-300"
+            className="absolute hover:scale-105 transition-transform duration-300 z-10"
             style={{
               left: stat.position.x,
               top: stat.position.y,
               height: stat.size.height,
               minHeight: "120px",
-              maxHeight: "320px",
+              minWidth: "120px",
               width: stat.size.width,
+              maxHeight: "320px",
               maxWidth: "320px",
             }}
             title={stat.name}
@@ -74,10 +75,10 @@ const Stats: React.FC = () => {
               src={stat.image}
               alt={stat.name}
               fill
-              className="object-contain opacity-70"
+              className="object-contain opacity-50"
               sizes={stat.size.width}
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-white/90 font-semibold z-10">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-white/90 font-semibold">
               <div
                 className={`text-xl pb-2 ${
                   stat.font_sizes?.content || "lg:text-3xl"
