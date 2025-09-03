@@ -58,7 +58,7 @@ export default function Home() {
             <SmoothFollower />
             <ParallaxCityscape />
             <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-140%">
-              <div className="absolute top-[13vh] sm:top-[25vh]">
+              <div className="absolute xs:top-[13vh] sm:top-[25vh]">
                 <Hero />
               </div>
             </main>

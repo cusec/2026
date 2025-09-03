@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
           January 8<sup>th</sup> - 10<sup>th</sup>
         </h3>
       </div>
-      <div className="md:justify-center text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
+      <div className="px-4 md:justify-center text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
         <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <a
             className="font-space-grotesk! w-fit lg:p-2 border-b-2 border-light-mode/40 email-hover"
