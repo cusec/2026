@@ -3,7 +3,6 @@ import Stats from "./Stats";
 const About: React.FC = () => {
   return (
     <div className="mt-[50vh]">
-      <Stats />
       <div
         id="ABOUT"
         className="max-w-[1800px] w-full flex flex-col justify-center mx-auto"
@@ -17,6 +16,7 @@ const About: React.FC = () => {
         <div className="w-full flex justify-center text-center">
           <div className="mx-[8vw] mt-10 md:max-w-[48vw] rounded-3xl shadow-2xl">
             <div className="p-8 md:p-12 xl:p-16 text-light-mode bg-dark-mode/50 rounded-3xl backdrop-blur-xs shadow-2xl">
+              <Stats />
               <p className="text-xl md:text-xl lg:text-2xl xl:text-3xl leading-relaxed">
                 As Canada&apos;s longest-running student-led software
                 engineering conference, CUSEC has been offering unique and

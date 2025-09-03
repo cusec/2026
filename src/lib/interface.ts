@@ -1,6 +1,6 @@
 export interface Position {
-  x: string; // vh/vw format like "10vw" or "20vh"
-  y: string; // vh/vw format like "15vh" or "25vw"
+  x: string | number; // vh/vw format like "10vw" or "20vh"
+  y: string | number; // vh/vw format like "15vh" or "25vw"
 }
 
 export interface Size {

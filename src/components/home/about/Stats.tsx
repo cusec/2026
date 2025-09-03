@@ -9,7 +9,7 @@ const statData: Stat[] = [
     content: "10K+",
     description: "Attendees",
     image: "/icons/stat.svg",
-    position: { x: "12%", y: "30%" },
+    position: { x: "-30%", y: -25 },
     size: { width: "9vw", height: "18vh" },
   },
   {
@@ -18,7 +18,7 @@ const statData: Stat[] = [
     content: "50+",
     description: "Sponsors",
     image: "/icons/stat.svg",
-    position: { x: "12vw", y: "56vh" },
+    position: { x: "-30%", y: 400 },
     size: { width: "9vw", height: "18vh" },
   },
   {
@@ -27,7 +27,7 @@ const statData: Stat[] = [
     content: "25",
     description: "Years",
     image: "/icons/stat.svg",
-    position: { x: "4vw", y: "26vh" },
+    position: { x: "-50%", y: 175 },
     size: { width: "10vw", height: "22vh" },
     font_sizes: { content: "lg:text-5xl", description: "lg:text-xl" },
   },
@@ -37,7 +37,7 @@ const statData: Stat[] = [
     content: "100+",
     description: "VIP Members",
     image: "/icons/stat.svg",
-    position: { x: "79vw", y: "7vh" },
+    position: { x: "130%", y: -15 },
     size: { width: "9vw", height: "18vh" },
   },
   {
@@ -46,14 +46,14 @@ const statData: Stat[] = [
     content: "220+",
     description: "Speakers",
     image: "/icons/stat.svg",
-    position: { x: "79vw", y: "52vh" },
+    position: { x: "130%", y: 375 },
     size: { width: "9vw", height: "18vh" },
   },
 ];
 
 const Stats: React.FC = () => {
   return (
-    <div className="hidden md:block relative">
+    <div className="hidden lg:block relative w-full h-full">
       {statData.map((stat) => {
         return (
           <div
@@ -62,6 +62,7 @@ const Stats: React.FC = () => {
             style={{
               left: stat.position.x,
               top: stat.position.y,
+              transform: "translate(-50%, -50%)",
               height: stat.size.height,
               minHeight: "120px",
               minWidth: "120px",
