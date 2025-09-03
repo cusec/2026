@@ -2,7 +2,7 @@ import Stats from "./Stats";
 
 const About: React.FC = () => {
   return (
-    <div className="mt-[50vh]">
+    <div className="mt-[25vh] md:mt-[50vh]">
       <div
         id="ABOUT"
         className="max-w-[1800px] w-full flex flex-col justify-center mx-auto"

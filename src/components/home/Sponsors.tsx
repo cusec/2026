@@ -90,7 +90,7 @@ const Sponsors: React.FC = () => {
   return (
     <div
       id="SPONSORS"
-      className="mt-[60vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto"
+      className="mt-[25vh] md:mt-[60vh] mb-12 px-4 md:px-8 w-full flex flex-col justify-center mx-auto"
     >
       <div className="w-full text-center flex justify-center mb-8">
         <h1 className="w-fit text-light-mode text-3xl xl:text-6xl font-bold pb-4 border-b-1">
