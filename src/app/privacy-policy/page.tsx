@@ -8,7 +8,7 @@ import {
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="relative bg-linear-[80deg] from-night from-10% via-primary via-40% to-sunset to-85% bg-cover bg-center h-full w-screen">
+    <div className="relative bg-linear-[60deg] from-night from-0% via-light-primary via-40% to-sunset to-135% bg-cover bg-center h-full w-screen">
       <Particles />
       <Navbar />
       <SmoothFollower />

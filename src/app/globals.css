@@ -3,6 +3,7 @@
 
 @theme {
   --color-primary: rgb(0, 0, 114);
+  --color-light-primary: #311a99;
   --color-secondary: #41578c;
   --color-dark-mode: #191313;
   --color-light-mode: #f5f0e9;
@@ -11,7 +12,7 @@
   --color-sunset: #802b36;
   --color-night: #4b1555;
 
-  --breakpoint-xs: 428px;
+  --breakpoint-xs: 400px;
   --breakpoint-xxs: 364px;
 
   --font-jost: var(--font-jost);

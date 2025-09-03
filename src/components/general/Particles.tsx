@@ -9,6 +9,7 @@ interface ParticlesProps {
   ease?: number;
   refresh?: boolean;
   desktopParticleCount?: number;
+  sizeMultiplier?: number;
 }
 
 export default function Particles({
@@ -16,6 +17,7 @@ export default function Particles({
   ease = 50,
   refresh = false,
   desktopParticleCount = 300,
+  sizeMultiplier = 1,
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -33,7 +35,7 @@ export default function Particles({
   const mobileStaticity = 100;
   const desktopStaticity = 15;
 
-  const averageParticleSize = 2;
+  const averageParticleSize = 2 * sizeMultiplier;
 
   // Always run the animation loop, but skip updates if frozen
   useEffect(() => {

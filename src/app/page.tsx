@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-linear-[80deg] from-night from-10% via-primary via-40% to-sunset to-85% bg-cover bg-center h-full w-screen">
+    <div className="bg-linear-[60deg] from-night from-5% via-light-primary via-40% to-sunset to-105% bg-cover bg-center h-full w-screen">
       {showSplash ? (
         <LoadingScreen
           onComplete={() => {
@@ -49,11 +49,15 @@ export default function Home() {
         <>
           <div className={`${hideContent ? "min-h-[100vh]" : "hidden"}`}></div>
           <div className={`relative ${hideContent ? "hidden" : ""}`}>
-            <Particles key={particlesKey} desktopParticleCount={1000} />
+            <Particles
+              key={particlesKey}
+              desktopParticleCount={400}
+              sizeMultiplier={1.5}
+            />
             <Navbar />
             <SmoothFollower />
             <ParallaxCityscape />
-            <main className="w-full h-[100vh] flex justify-center items-center bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-140%">
+            <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-140%">
               <div className="absolute top-[13vh] sm:top-[25vh]">
                 <Hero />
               </div>

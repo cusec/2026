@@ -11,27 +11,27 @@ const ParallaxCityscape: React.FC = () => {
     target: container,
     offset: ["center end", "end start"],
   });
-  const b1 = useTransform(scrollYProgress, [0.33, 1], ["0%", "10%"]);
-  const b2 = useTransform(scrollYProgress, [0.33, 1], ["0%", "20%"]);
-  const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "40%"]);
-  const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "30%"]);
-  const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "-20%"]);
+  const b1 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-50%"]);
+  const b2 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-70%"]);
+  const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-90%"]);
+  const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "50%"]);
+  const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "0%"]);
   const waveHeight = useTransform(
     scrollYProgress,
     [0.33, 0.6],
-    ["40vh", "65vh"]
+    ["40vh", "40vh"]
   );
 
   // Height transforms - scale down as they move up
-  const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.9]);
-  const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.7]);
-  const b3Height = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
-  const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 1]);
+  const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.2]);
+  const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.3]);
+  const b3Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.6]);
+  const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 1.7]);
 
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
     : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-50%" : "0%";
+  const wave_gradient_pull = isMobile ? "-150%" : "-40%";
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,18 +47,18 @@ const ParallaxCityscape: React.FC = () => {
 
   return (
     <div
-      className="absolute w-full h-[100vh] pointer-events-none z-10"
+      className="absolute w-full h-[100vh] pointer-events-none z-10 overflow-hidden"
       ref={container}
     >
       {/* Wavy Ground/Base */}
       <motion.div
         style={{
-          y: w,
+          x: w,
           height: waveHeight,
           maskImage:
-            "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+            "linear-gradient(to bottom, black 0%, black 45%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black 0%, black 70%, transparent 100%)",
+            "linear-gradient(to bottom, black 0%, black 45%, transparent 100%)",
         }}
         className="absolute top-[80vh]"
       >
@@ -75,8 +75,8 @@ const ParallaxCityscape: React.FC = () => {
               x2="80%"
               y2="-5%"
             >
-              <stop offset="0%" stopColor="#000072" stopOpacity="1" />
-              <stop offset="100%" stopColor="#802b36" stopOpacity="1" />
+              <stop offset="0%" stopColor="#311a99" stopOpacity="1" />
+              <stop offset="100%" stopColor="#6c264d" stopOpacity="1" />
             </linearGradient>
           </defs>
           <path d={path} fill="url(#groundGradient)" />
@@ -87,7 +87,7 @@ const ParallaxCityscape: React.FC = () => {
       <div className="hidden xxs:block absolute top-[65vh] xl:top-[42vh] w-full">
         {/* Building 1 (Background) */}
         <motion.div
-          style={{ y: b1, scaleY: b1Height, transformOrigin: "bottom" }}
+          style={{ x: b1, scale: b1Height, transformOrigin: "bottom" }}
           className="absolute left-0 top-[1vh] max-h-[70vh] w-[10vh] h-[25vh] xl:w-[20vh] xl:h-[50vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
@@ -100,7 +100,7 @@ const ParallaxCityscape: React.FC = () => {
 
         {/* Building 2 (Middle) */}
         <motion.div
-          style={{ y: b2, scaleY: b2Height, transformOrigin: "bottom" }}
+          style={{ x: b2, scale: b2Height, transformOrigin: "bottom" }}
           className="absolute top-[5vh] xl:top-[18vh] left-[8vh] xl:left-[15vh] max-h-[60vh] w-[10vh] h-[20vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
@@ -113,7 +113,7 @@ const ParallaxCityscape: React.FC = () => {
 
         {/* Building 3 (Small) */}
         <motion.div
-          style={{ y: b3, scaleY: b3Height, transformOrigin: "bottom" }}
+          style={{ x: b3, scale: b3Height, transformOrigin: "bottom" }}
           className="absolute hidden xl:block top-[38vh] w-[20vh] h-[11vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
@@ -126,7 +126,7 @@ const ParallaxCityscape: React.FC = () => {
 
         {/* Lighthouse (Foreground) */}
         <motion.div
-          style={{ y: l, scaleY: lHeight, transformOrigin: "bottom" }}
+          style={{ x: l, scale: lHeight, transformOrigin: "bottom" }}
           className="absolute xl:top-0 right-8 max-h-[70vh] w-[15vh] h-[35vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
         >
           <Image
