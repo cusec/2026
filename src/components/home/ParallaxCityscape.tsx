@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTransform, useScroll, motion } from "framer-motion";
-import Lenis from "lenis";
 
 const ParallaxCityscape: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -39,17 +38,6 @@ const ParallaxCityscape: React.FC = () => {
       setIsMobile(window.innerWidth < 1024);
     };
     handleResize();
-
-    // Initialize Lenis
-    const lenis = new Lenis();
-
-    // Use requestAnimationFrame to continuously update the scroll
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
 
     window.addEventListener("resize", handleResize);
     return () => {
