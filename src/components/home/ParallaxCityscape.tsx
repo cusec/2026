@@ -19,7 +19,7 @@ const ParallaxCityscape: React.FC = () => {
   const waveHeight = useTransform(
     scrollYProgress,
     [0.33, 0.6],
-    ["40vh", "40vh"]
+    ["45vh", "45vh"]
   );
 
   // Height transforms - scale down as they move up
@@ -31,7 +31,7 @@ const ParallaxCityscape: React.FC = () => {
   const path = isMobile
     ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
     : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-150%" : "-40%";
+  const wave_gradient_pull = isMobile ? "-150%" : "-50%";
 
   useEffect(() => {
     const handleResize = () => {
@@ -56,11 +56,11 @@ const ParallaxCityscape: React.FC = () => {
           x: w,
           height: waveHeight,
           maskImage:
-            "linear-gradient(to bottom, black 0%, black 45%, transparent 100%)",
+            "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black 0%, black 45%, transparent 100%)",
+            "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
         }}
-        className="absolute top-[80vh]"
+        className="absolute top-[75vh]"
       >
         <svg
           viewBox="0 0 1200 200"
@@ -76,7 +76,7 @@ const ParallaxCityscape: React.FC = () => {
               y2="-5%"
             >
               <stop offset="0%" stopColor="#311a99" stopOpacity="1" />
-              <stop offset="100%" stopColor="#6c264d" stopOpacity="1" />
+              <stop offset="100%" stopColor="#79293e" stopOpacity="1" />
             </linearGradient>
           </defs>
           <path d={path} fill="url(#groundGradient)" />
