@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const VipCard: React.FC = () => {
   return (
-    <div className="relative max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-2 md:px-4 py-6 md:py-12 transition-all duration-500 ease-in-out bg-dark-mode/25 hover:bg-dark-mode/50 border-6 border-white/10 rounded-4xl shadow-lg backdrop-blur-xs">
+    <div className="relative max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-2 md:px-4 py-6 md:py-12 transition-all duration-300 ease-in-out bg-dark-mode/25 border-6 border-white/10 rounded-4xl hover:shadow-2xl shadow-light-mode/15 backdrop-blur-xs">
       <div className="absolute top-4.25 -right-7.5 z-10">
         <div
           className="bg-linear-[135deg] from-primary/85 from-0% via-light-mode/25 via-40% to-sunset/85 to-150% text-light-mode px-6 py-1 tracking-widest shadow-lg"
