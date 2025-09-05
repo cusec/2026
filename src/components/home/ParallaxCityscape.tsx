@@ -65,7 +65,7 @@ const ParallaxCityscape: React.FC = () => {
         {/* Boat */}
         <motion.div
           style={{ x: b, scale: bScale, transformOrigin: "bottom" }}
-          className="absolute right-35 top-[46vh] w-[200px] h-[400px]"
+          className="absolute right-45 top-[35vh] w-[250px] h-[500px]"
         >
           <Image
             src="/splash/boat.svg"
