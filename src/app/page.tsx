@@ -37,7 +37,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-linear-[60deg] from-night from-5% via-light-primary via-40% to-sunset to-95% bg-cover bg-center h-full w-screen">
+    <div className="bg-linear-[180deg] from-sea from-0% via-sea via-20% to-dark-mode to-100% bg-cover bg-center h-full w-screen">
       {showSplash ? (
         <LoadingScreen
           onComplete={() => {
@@ -57,8 +57,8 @@ export default function Home() {
             <Navbar />
             <SmoothFollower />
             <ParallaxCityscape />
-            <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-140%">
-              <div className="absolute xs:top-[13vh] sm:top-[25vh]">
+            <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140%">
+              <div className="absolute xs:top-[13vh] sm:top-[25vh] z-10">
                 <Hero />
               </div>
             </main>

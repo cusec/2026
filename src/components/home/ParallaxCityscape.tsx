@@ -11,27 +11,10 @@ const ParallaxCityscape: React.FC = () => {
     target: container,
     offset: ["center end", "end start"],
   });
-  const b1 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-50%"]);
-  const b2 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-70%"]);
-  const b3 = useTransform(scrollYProgress, [0.33, 1], ["0%", "-90%"]);
-  const l = useTransform(scrollYProgress, [0.33, 1], ["0%", "50%"]);
-  const w = useTransform(scrollYProgress, [0.33, 0.6], ["0%", "0%"]);
-  const waveHeight = useTransform(
-    scrollYProgress,
-    [0.33, 0.6],
-    ["45vh", "45vh"]
-  );
+  const b = useTransform(scrollYProgress, [0.33, 1], ["0%", "80%"]);
 
   // Height transforms - scale down as they move up
-  const b1Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.2]);
-  const b2Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.3]);
-  const b3Height = useTransform(scrollYProgress, [0.33, 1], [1, 1.6]);
-  const lHeight = useTransform(scrollYProgress, [0.33, 1], [1, 1.7]);
-
-  const path = isMobile
-    ? "M -1 40 C 203 48 436 34 734 41 C 997 48 1067 46 1200 40 L 1200 200 L 0 200 Z"
-    : "M -1 40 C 205 61 438 20 734 41 C 999 62 1063 60 1200 40 L 1200 200 L 0 200 Z";
-  const wave_gradient_pull = isMobile ? "-150%" : "-50%";
+  const bScale = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -47,91 +30,46 @@ const ParallaxCityscape: React.FC = () => {
 
   return (
     <div
-      className="absolute w-full h-[100vh] pointer-events-none z-10 overflow-hidden"
+      className="absolute top-0 w-full h-[100vh] pointer-events-none z-10 x-overflow-hidden"
       ref={container}
     >
-      {/* Wavy Ground/Base */}
+      {/* Wave */}
       <motion.div
+        className="absolute left-0 -bottom-25 min-w-[1600px] min-h-[325px] w-[100vw] h-[20vw] overflow-hidden"
         style={{
-          x: w,
-          height: waveHeight,
-          maskImage:
-            "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+          maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black 0%, black 65%, transparent 100%)",
+            "linear-gradient(to bottom, black 70%, transparent 100%)",
         }}
-        className="absolute top-[75vh]"
       >
-        <svg
-          viewBox="0 0 1200 200"
-          preserveAspectRatio="none"
-          className="w-[100vw] h-full"
-        >
-          <defs>
-            <linearGradient
-              id="groundGradient"
-              x1={wave_gradient_pull}
-              y1="0%"
-              x2="80%"
-              y2="-5%"
-            >
-              <stop offset="0%" stopColor="#311a99" stopOpacity="1" />
-              <stop offset="100%" stopColor="#79293e" stopOpacity="1" />
-            </linearGradient>
-          </defs>
-          <path d={path} fill="url(#groundGradient)" />
-        </svg>
+        <Image
+          src="/splash/wave.svg"
+          alt="Wave"
+          className="object-contain"
+          fill
+        />
       </motion.div>
 
-      {/* Cityscape */}
-      <div className="hidden xxs:block absolute top-[65vh] xl:top-[42vh] w-full">
-        {/* Building 1 (Background) */}
-        <motion.div
-          style={{ x: b1, scale: b1Height, transformOrigin: "bottom" }}
-          className="absolute left-0 top-[1vh] max-h-[70vh] w-[10vh] h-[25vh] xl:w-[20vh] xl:h-[50vh] -z-10 transition-transform duration-75 ease-out"
-        >
+      {/* Lighthouse & Boat */}
+      <div className="hidden xxs:block absolute top-0 w-full -z-10">
+        {/* Lighthouse */}
+        <motion.div className="absolute left-8 top-[48vh] w-[500px] h-[375px]">
           <Image
-            src="/images/building1.svg"
-            alt="Building 1"
-            className="object-contain"
-            fill
-          />
-        </motion.div>
-
-        {/* Building 2 (Middle) */}
-        <motion.div
-          style={{ x: b2, scale: b2Height, transformOrigin: "bottom" }}
-          className="absolute top-[5vh] xl:top-[18vh] left-[8vh] xl:left-[15vh] max-h-[60vh] w-[10vh] h-[20vh] xl:w-[18vh] xl:h-[38vh] -z-10 transition-transform duration-75 ease-out"
-        >
-          <Image
-            src="/images/building2.svg"
-            alt="Building 2"
-            className="object-contain"
-            fill
-          />
-        </motion.div>
-
-        {/* Building 3 (Small) */}
-        <motion.div
-          style={{ x: b3, scale: b3Height, transformOrigin: "bottom" }}
-          className="absolute hidden xl:block top-[38vh] w-[20vh] h-[11vh] -z-10 transition-transform duration-75 ease-out"
-        >
-          <Image
-            src="/images/building3.svg"
-            alt="Building 3"
-            className="object-contain"
-            fill
-          />
-        </motion.div>
-
-        {/* Lighthouse (Foreground) */}
-        <motion.div
-          style={{ x: l, scale: lHeight, transformOrigin: "bottom" }}
-          className="absolute xl:top-0 right-8 max-h-[70vh] w-[15vh] h-[35vh] xl:w-[24vh] xl:h-[55vh] -z-10 transition-transform duration-75 ease-out"
-        >
-          <Image
-            src="/images/lighthouse.svg"
+            src="/splash/lighthouse.svg"
             alt="Lighthouse"
+            className="object-contain"
+            fill
+          />
+        </motion.div>
+
+        {/* Boat */}
+        <motion.div
+          style={{ x: b, scale: bScale, transformOrigin: "bottom" }}
+          className="absolute right-35 top-[46vh] w-[200px] h-[400px]"
+        >
+          <Image
+            src="/splash/boat.svg"
+            alt="Boat"
             className="object-contain"
             fill
           />
