@@ -21,7 +21,7 @@ const OceanSurface: React.FC = () => {
       ref={container}
     >
       {/* Wave */}
-      <motion.div
+      <div
         className="absolute left-0 -bottom-[8vw] sm:-bottom-[13vw] lg:-bottom-[18vw] w-[100vw] h-[30vw]"
         style={{
           maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
@@ -35,7 +35,7 @@ const OceanSurface: React.FC = () => {
           className="object-contain"
           fill
         />
-      </motion.div>
+      </div>
 
       {/* Lighthouse & Boat */}
       <div className="absolute top-0 w-full h-full -z-10">
@@ -52,7 +52,13 @@ const OceanSurface: React.FC = () => {
         {/* Boat 0.595 */}
         <motion.div
           style={{ x: b, scale: bScale, transformOrigin: "bottom" }}
-          className="absolute right-[11vw] bottom-[16vw] sm:bottom-[11vw] lg:bottom-[6vw] w-[20vw] h-[33.5vw]"
+          animate={{ y: ["0vw", "-1vw", "0vw"] }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute right-[11vw] bottom-[15vw] sm:bottom-[10vw] lg:bottom-[5vw] w-[20vw] h-[33.5vw]"
         >
           <Image
             src="/splash/boat.svg"
