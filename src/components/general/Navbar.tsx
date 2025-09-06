@@ -8,12 +8,12 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = {
-    ABOUT: "/#ABOUT",
-    GALLERY: "/#GALLERY",
-    SPONSORS: "/#SPONSORS",
-    PRICING: "/#PRICING",
-    FAQ: "/#FAQ",
-    "SCAVENGER HUNT": "/scavenger",
+    About: "/#About",
+    Gallery: "/#Gallery",
+    Sponsors: "/#Sponsors",
+    Pricing: "/#Pricing",
+    Faq: "/#Faq",
+    "Scavenger Hunt": "/scavenger",
   };
 
   return (
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     >
       <div className="flex items-center justify-between py-2 px-4 xl:px-8 mx-4">
         <Link
-          href="/"
+          href="/#Hero"
           className="flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
           onClick={() => setIsMenuOpen(false)}
         >

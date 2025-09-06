@@ -18,7 +18,7 @@ const About: React.FC = () => {
 
   return (
     <div
-      id="GALLERY"
+      id="Gallery"
       className="mt-[25vh] md:mt-[60vh] max-w-[1800px] w-full flex flex-col justify-center mx-auto"
     >
       <div className="w-full flex justify-center text-center mb-12">

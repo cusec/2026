@@ -4,7 +4,7 @@ import VipCard from "./VipCard";
 const Pricing: React.FC = () => {
   return (
     <div
-      id="PRICING"
+      id="Pricing"
       className="mt-[25vh] md:mt-[60vh] mb-12 w-full flex flex-col justify-center mx-auto text-light-mode"
     >
       <div className="w-full text-center flex justify-center">

@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
       <div className="w-full md:max-w-[80vw] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo Section */}
         <Link
-          href="/"
+          href="/#Hero"
           className="flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
         >
           <div className="w-8 h-8 relative">

@@ -57,7 +57,10 @@ export default function Home() {
             <Navbar />
             <SmoothFollower />
             <OceanSurface />
-            <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-dark-mode/60 from-0% via-primary/100 via-35% to-accent to-140%">
+            <main
+              id="Hero"
+              className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-dark-mode/60 from-0% via-primary/100 via-35% to-accent to-140%"
+            >
               <div className="absolute xs:top-[13vh] sm:top-[25vh] z-10">
                 <Hero />
               </div>
