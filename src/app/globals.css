@@ -14,6 +14,7 @@
 
   --breakpoint-xs: 400px;
   --breakpoint-xxs: 364px;
+  --breakpoint-3xl: 1920px;
 
   --font-jost: var(--font-jost);
   --font-space-grotesk: var(--font-space-grotesk);

@@ -30,16 +30,16 @@ const ParallaxCityscape: React.FC = () => {
 
   return (
     <div
-      className="absolute top-0 w-full h-[100vh] pointer-events-none z-10 x-overflow-hidden"
+      className="absolute top-0 w-full h-[100vh] pointer-events-none z-10 "
       ref={container}
     >
       {/* Wave */}
       <motion.div
-        className="absolute left-0 -bottom-25 min-w-[1600px] min-h-[325px] w-[100vw] h-[20vw] overflow-hidden"
+        className="absolute left-0 -bottom-[8vw] sm:-bottom-[13vw] lg:-bottom-[18vw] w-[100vw] h-[30vw]"
         style={{
-          maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
+          maskImage: "linear-gradient(to bottom, black 50%, transparent 100%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, black 70%, transparent 100%)",
+            "linear-gradient(to bottom, black 50%, transparent 100%)",
         }}
       >
         <Image
@@ -51,9 +51,9 @@ const ParallaxCityscape: React.FC = () => {
       </motion.div>
 
       {/* Lighthouse & Boat */}
-      <div className="hidden xxs:block absolute top-0 w-full -z-10">
-        {/* Lighthouse */}
-        <motion.div className="absolute left-8 top-[48vh] w-[500px] h-[375px]">
+      <div className="hidden xxs:block absolute top-0 w-full h-full -z-10">
+        {/* Lighthouse 1.3235 */}
+        <motion.div className="absolute left-8 bottom-[19vw] sm:bottom-[14vw] lg:bottom-[9vw] w-[33vw] h-[25vw]">
           <Image
             src="/splash/lighthouse.svg"
             alt="Lighthouse"
@@ -62,10 +62,10 @@ const ParallaxCityscape: React.FC = () => {
           />
         </motion.div>
 
-        {/* Boat */}
+        {/* Boat 0.595 */}
         <motion.div
           style={{ x: b, scale: bScale, transformOrigin: "bottom" }}
-          className="absolute right-45 top-[35vh] w-[250px] h-[500px]"
+          className="absolute right-[11vw] bottom-[16vw] sm:bottom-[11vw] lg:bottom-[6vw] w-[20vw] h-[33.5vw]"
         >
           <Image
             src="/splash/boat.svg"
