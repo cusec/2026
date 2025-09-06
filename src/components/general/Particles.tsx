@@ -13,7 +13,7 @@ interface ParticlesProps {
 }
 
 export default function Particles({
-  className = "hidden md:block absolute inset-0 animate-fade-in",
+  className = "absolute inset-0 animate-fade-in",
   ease = 50,
   refresh = false,
   desktopParticleCount = 300,
@@ -27,7 +27,7 @@ export default function Particles({
   const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
-  const [frozen, setFrozen] = useState(false);
+  const [frozen, setFrozen] = useState(true);
   const [islandHovered, setIslandHovered] = useState(false);
 
   const mobileParticleCount = 200;

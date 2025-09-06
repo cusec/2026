@@ -27,12 +27,12 @@ const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-dark-mode w-full py-6 relative z-40">
+    <footer className="bg-dark-mode/60 w-full py-6 relative z-40">
       <div className="w-full md:max-w-[80vw] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Logo Section */}
         <Link
           href="/"
-          className="flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+          className="flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
         >
           <div className="w-8 h-8 relative">
             <Image

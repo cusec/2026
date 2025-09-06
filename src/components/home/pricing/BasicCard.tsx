@@ -5,7 +5,7 @@ const BasicCard: React.FC = () => {
   return (
     <div className="max-w-[400px] md:max-w-full flex flex-col justify-center text-center text-light-mode px-2 md:px-4 py-6 md:py-12 transition-all duration-300 ease-in-out bg-dark-mode/25 border-6 border-white/10 rounded-4xl hover:shadow-2xl shadow-light-mode/15 backdrop-blur-xs">
       <div className="relative">
-        <div className="absolute top-68 md:top-[420px] lg:top-96 right-3">
+        <div className="absolute top-64 md:top-96 right-3">
           <Image
             src="images/basic_price.svg"
             alt="CUSEC Logo"

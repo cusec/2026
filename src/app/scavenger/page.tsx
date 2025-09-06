@@ -12,7 +12,7 @@ export default async function ScavengerPage() {
   const user = session?.user;
 
   return (
-    <div className="bg-linear-[35deg] from-primary from-0% via-primary/100 via-55% to-accent to-120% -z-20 bg-cover bg-center min-h-screen w-screen">
+    <div className="bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen w-screen">
       <Navbar />
       <Particles />
       <main className="w-full min-h-[100vh] h-full flex justify-center relative z-10 py-auto pt-24">
