@@ -51,7 +51,7 @@ const ParallaxCityscape: React.FC = () => {
       </motion.div>
 
       {/* Lighthouse & Boat */}
-      <div className="hidden xxs:block absolute top-0 w-full h-full -z-10">
+      <div className="absolute top-0 w-full h-full -z-10">
         {/* Lighthouse 1.3235 */}
         <motion.div className="absolute left-8 bottom-[19vw] sm:bottom-[14vw] lg:bottom-[9vw] w-[33vw] h-[25vw]">
           <Image
