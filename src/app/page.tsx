@@ -2,7 +2,7 @@
 
 import {
   Hero,
-  ParallaxCityscape,
+  OceanSurface,
   Particles,
   LoadingScreen,
   SmoothFollower,
@@ -59,7 +59,7 @@ export default function Home() {
               />
               <Navbar />
               <SmoothFollower />
-              <ParallaxCityscape />
+              <OceanSurface />
               <main className="w-full h-[95vh] flex justify-center items-center bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140%">
                 <div className="absolute xs:top-[13vh] sm:top-[25vh] z-10">
                   <Hero />

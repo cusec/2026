@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { useTransform, useScroll, motion } from "framer-motion";
 
-const ParallaxCityscape: React.FC = () => {
-  const [isMobile, setIsMobile] = useState(false);
+const OceanSurface: React.FC = () => {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
@@ -15,18 +14,6 @@ const ParallaxCityscape: React.FC = () => {
 
   // Height transforms - scale down as they move up
   const bScale = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div
@@ -79,4 +66,4 @@ const ParallaxCityscape: React.FC = () => {
   );
 };
 
-export default ParallaxCityscape;
+export default OceanSurface;

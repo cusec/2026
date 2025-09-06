@@ -4,7 +4,7 @@ export { default as Footer } from "./general/Footer";
 export { default as Hero } from "./home/Hero";
 export { default as Particles } from "./general/Particles";
 export { default as ScavengerLogin } from "./scavenger/ScavengerLogin";
-export { default as ParallaxCityscape } from "./home/ParallaxCityscape";
+export { default as OceanSurface } from "./home/OceanSurface";
 export { default as ScavengerOptions } from "./scavenger/ScavengerOptions";
 export { default as ScannerPage } from "./scavenger/ScannerPage";
 export { default as About } from "./home/about/About";
