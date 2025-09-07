@@ -14,6 +14,7 @@ const Navbar: React.FC = () => {
     Sponsors: "/#Sponsors",
     Pricing: "/#Pricing",
     Faq: "/#Faq",
+    Schedule: "/schedule",
     "Scavenger Hunt": "/scavenger",
   };
 

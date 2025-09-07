@@ -77,3 +77,12 @@ export interface HuntItemFormData {
   identifier: string;
   points: number;
 }
+
+export interface ScheduleItem {
+  start_time: string;
+  end_time: string;
+  title: string;
+  description?: string;
+  location?: string;
+  items?: ScheduleItem[];
+}
