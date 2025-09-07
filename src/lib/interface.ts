@@ -8,17 +8,6 @@ export interface Size {
   height: string; // vh/vw format like "8vh"
 }
 
-export interface Sponsor {
-  id: string;
-  name: string;
-  image: string;
-  position: Position;
-  size: Size;
-  rotation?: number; // Optional rotation in degrees
-  zIndex?: number; // Optional z-index for layering
-  website?: string; // Optional website URL
-}
-
 export interface Stat {
   id: string;
   name: string;
@@ -87,3 +76,8 @@ export interface ScheduleItem {
   location?: string;
   items?: ScheduleItem[];
 }
+
+export type Sponsor = {
+  image: string;
+  link: string;
+};

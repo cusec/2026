@@ -7,7 +7,7 @@ export { default as OceanSurface } from "./home/OceanSurface";
 export { default as ScavengerOptions } from "./scavenger/ScavengerOptions";
 export { default as ScannerPage } from "./scavenger/ScannerPage";
 export { default as About } from "./home/about/About";
-export { default as Sponsors } from "./home/Sponsors";
+export { default as Sponsors } from "./home/sponsors/Sponsors";
 export { default as Pricing } from "./home/pricing/Pricing";
 export { default as LoadingScreen } from "./general/LoadingScreen";
 export { default as SmoothFollower } from "./general/SmoothFollower";
