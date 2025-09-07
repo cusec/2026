@@ -7,8 +7,8 @@ import {
   Leaderboard,
   Footer,
 } from "@/components";
-import Link from "next/link";
 import { auth0 } from "@/lib/auth0";
+import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
 
 export default async function ScavengerPage() {
   const session = await auth0.getSession();
@@ -38,80 +38,94 @@ export default async function ScavengerPage() {
         ) : (
           <div className="max-w-6xl mx-auto text-center z-10">
             {/* Hero Section */}
-            <div className="mb-16 mt-16">
-              <div className="mb-8">
-                <h1 className="text-6xl md:text-8xl font-bold text-light-mode mb-4 tracking-wider">
+            <div className="mt-[20vh] md:mt-[25vh]">
+              <div className="mb-12">
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-light-mode mb-4 tracking-wider">
                   SCAVENGER
                 </h1>
                 <h2 className="text-4xl md:text-6xl font-bold text-accent mb-6">
                   HUNT
                 </h2>
               </div>
-              <p className="text-xl md:text-2xl text-light-mode/90 max-w-3xl mx-auto leading-relaxed">
+              <p className="mb-12 text-lg sm:text-xl md:text-2xl text-light-mode/90 max-w-3xl mx-auto leading-relaxed">
                 An epic adventure awaits! Scan codes, solve puzzles, compete
                 with fellow attendees, and win exclusive prizes at CUSEC 2026.
+              </p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
+                <a
+                  className="flex max-w-fit px-8 py-4 text-lg font-semibold pointer-events-none border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50"
+                  href="#"
+                >
+                  <Trophy className="mr-3 h-6 w-6" />
+                  Start Hunting
+                </a>
+
+                <a
+                  className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                  href="#"
+                >
+                  <Users className="mr-3 h-6 w-6" />
+                  Rules & Guidelines
+                </a>
+              </div>
+              <p className="mt-6 text-md text-muted-foreground text-light-mode">
+                ⏰ The hunt will be available closer to the conference date
               </p>
             </div>
 
             {/* Features Grid */}
-            <div className="grid md:grid-cols-3 gap-8 mb-16">
-              <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                <div className="text-4xl mb-4">🔍</div>
-                <h3 className="text-2xl font-bold text-light-mode mb-4">
-                  Scan & Earn
-                </h3>
-                <p className="text-light-mode/80">
-                  Find hidden QR codes throughout the venue & events. Each scan
-                  earns you points.
+            <div className="mt-[28vh] text-center mx-2">
+              <div className="mb-16 text-center text-light-mode">
+                <h2 className="mb-4 text-4xl font-black text-foreground">
+                  How It Works
+                </h2>
+                <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                  Three simple steps to become the ultimate CUSEC 2026 scavenger
+                  hunt champion
                 </p>
               </div>
+              <div className="grid md:grid-cols-3 gap-8 mb-16">
+                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                    <QrCode className="h-8 w-8 text-light-mode" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    Scan & Earn
+                  </h3>
+                  <p className="text-light-mode/80">
+                    Find hidden QR codes throughout the venue & events such as a
+                    presentation or at sponsor booths. Each scan earns you
+                    points.
+                  </p>
+                </div>
 
-              <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                <div className="text-4xl mb-4">🧩</div>
-                <h3 className="text-2xl font-bold text-light-mode mb-4">
-                  Solve Puzzles
-                </h3>
-                <p className="text-light-mode/80">
-                  Earn more points by challenging yourself with riddles and
-                  technical puzzles, designed to test your skills.
-                </p>
+                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                    <Puzzle className="h-8 w-8 text-green-300/80" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    Solve Puzzles
+                  </h3>
+                  <p className="text-light-mode/80">
+                    Earn more points by challenging yourself with riddles and
+                    technical puzzles, designed to test your skills.
+                  </p>
+                </div>
+
+                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                    <Trophy className="h-8 w-8 text-yellow-300/80" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    Win Prizes
+                  </h3>
+                  <p className="text-light-mode/80">
+                    Compete against the other attendees, climb the leaderboard
+                    and build your score to redeem exclusive CUSEC merchandise
+                    and stickers.
+                  </p>
+                </div>
               </div>
-
-              <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                <div className="text-4xl mb-4">🏆</div>
-                <h3 className="text-2xl font-bold text-light-mode mb-4">
-                  Win Prizes
-                </h3>
-                <p className="text-light-mode/80">
-                  Climb the leaderboard and build your score to redeem exclusive
-                  CUSEC merchandise and stickers.
-                </p>
-              </div>
-            </div>
-
-            {/* Coming Soon Banner */}
-            <div className="bg-light-mode/10 backdrop-blur-sm rounded-4xl p-8 border-2 border-light-mode/50 mb-12">
-              <div className="flex items-center justify-center mb-4">
-                <div className="text-4xl mr-4">⏰</div>
-                <h3 className="text-3xl font-bold text-light-mode">
-                  Coming Soon
-                </h3>
-              </div>
-              <p className="text-xl text-light-mode/90 mb-2">
-                The Scavenger Hunt will be available closer to the event date.
-              </p>
-              <p className="text-lg text-light-mode/70">
-                Get ready for an unforgettable adventure at CUSEC 2026!
-              </p>
-            </div>
-
-            {/* Action Button */}
-            <div className="flex justify-center">
-              <Link href="/auth/login?returnTo=/scavenger">
-                <button className="bg-accent hover:bg-accent/80 text-light-mode font-bold text-xl px-12 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  Enter the Hunt (Staging)
-                </button>
-              </Link>
             </div>
           </div>
         )}

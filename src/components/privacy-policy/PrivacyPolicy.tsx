@@ -1,6 +1,6 @@
 export default function PrivacyPolicy() {
   return (
-    <div className="text-lg h-fit bg-light-mode/40 text-black w-11/12 sm:w-8/12 md:w-9/12 lg:w-4/5 p-8 rounded-4xl backdrop-blur-sm">
+    <div className="text-lg h-fit bg-light-mode/70 text-black w-11/12 sm:w-8/12 md:w-9/12 lg:w-4/5 p-8 rounded-4xl backdrop-blur-sm">
       <h1 className="text-5xl font-bold mb-6 text-left">Privacy Policy</h1>
       <p className="mb-4 text-left">
         Your privacy is important to us. It is CUSEC&apos;s policy to respect

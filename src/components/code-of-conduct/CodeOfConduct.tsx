@@ -1,6 +1,6 @@
 export default function CodeOfConduct() {
   return (
-    <div className="text-lg h-fit bg-light-mode/40 text-black w-11/12 sm:w-8/12 md:w-9/12 lg:w-4/5 p-8 rounded-4xl backdrop-blur-sm">
+    <div className="text-lg h-fit bg-light-mode/70 text-black w-11/12 sm:w-8/12 md:w-9/12 lg:w-4/5 p-8 rounded-4xl backdrop-blur-sm">
       <h1 className="text-4xl font-bold mb-6 text-left">Code of Conduct</h1>
       <p className="mb-4 text-left">
         All participants of CUSEC are expected to abide by our Code of Conduct,
