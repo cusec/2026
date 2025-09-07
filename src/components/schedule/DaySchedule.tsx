@@ -77,12 +77,6 @@ function calculateEventLayout(events: ScheduleItem[]) {
 export default function DaySchedule({ events }: ScheduleProps) {
   const eventLayout = calculateEventLayout(events);
 
-  // Find the time range
-  const startTimes = events.map((e) => timeToMinutes(e.startTime));
-  const endTimes = events.map((e) => timeToMinutes(e.endTime));
-  const earliestTime = Math.min(...startTimes);
-  const latestTime = Math.max(...endTimes);
-
   // Round to nearest hour for display
   const displayStart = 8 * 60; // Start at 8:00 AM
   const displayEnd = 18 * 60; // End at 6:00 PM

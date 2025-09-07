@@ -12,7 +12,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/rbc.webp",
     position: { x: "2vw", y: "5vh" },
     size: { width: "32vw", height: "16vh" },
-    rotation: -2,
     zIndex: 2,
     website: "https://www.rbc.com",
   },
@@ -22,7 +21,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/ciena.webp",
     position: { x: "16vw", y: "34vh" },
     size: { width: "25vw", height: "14vh" },
-    rotation: 1,
     zIndex: 1,
   },
   {
@@ -31,7 +29,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/wolfram.webp",
     position: { x: "40vw", y: "3vh" },
     size: { width: "17vw", height: "13vh" },
-    rotation: -1,
     zIndex: 3,
   },
   {
@@ -40,7 +37,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/fellow.webp",
     position: { x: "60vw", y: "38vh" },
     size: { width: "23vw", height: "13vh" },
-    rotation: 2,
     zIndex: 1,
   },
   {
@@ -49,7 +45,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/cse.svg",
     position: { x: "10vw", y: "50vh" },
     size: { width: "25vw", height: "11vh" },
-    rotation: -3,
     zIndex: 2,
   },
   {
@@ -58,7 +53,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/gadget.svg",
     position: { x: "65vw", y: "8vh" },
     size: { width: "20vw", height: "12vh" },
-    rotation: 1,
     zIndex: 1,
   },
   {
@@ -67,7 +61,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/Compulsion_Games.webp",
     position: { x: "48vw", y: "55vh" },
     size: { width: "22vw", height: "13vh" },
-    rotation: -2,
     zIndex: 2,
   },
   {
@@ -76,7 +69,6 @@ const sponsorData: Sponsor[] = [
     image: "/2025_sponsors/tailed.webp",
     position: { x: "42vw", y: "23vh" },
     size: { width: "20vw", height: "10vh" },
-    rotation: 3,
     zIndex: 1,
   },
 ];
