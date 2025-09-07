@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Sponsor } from "@/lib/interface";
 import sponsors from "./SponsorData";
+import TopKoi from "./TopKoi";
+import BottomKoi from "./BottomKoi";
 
 const Sponsors = () => {
   return (
@@ -8,6 +10,7 @@ const Sponsors = () => {
       className="w-full py-12 mt-[25vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
       id="Sponsors"
     >
+      <TopKoi />
       {/* Header */}
       <div className="w-full text-center flex justify-center mb-8">
         <h1 className="w-fit text-light-mode text-3xl xl:text-6xl font-bold pb-4 border-b-1">
@@ -146,6 +149,8 @@ const Sponsors = () => {
           </div>
         </div>
       )}
+
+      <BottomKoi />
     </section>
   );
 };
