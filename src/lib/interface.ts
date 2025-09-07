@@ -79,8 +79,9 @@ export interface HuntItemFormData {
 }
 
 export interface ScheduleItem {
-  start_time: string;
-  end_time: string;
+  id: string;
+  startTime: string;
+  endTime: string;
   title: string;
   description?: string;
   location?: string;
