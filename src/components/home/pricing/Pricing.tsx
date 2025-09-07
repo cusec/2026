@@ -1,3 +1,5 @@
+"use server";
+
 import BasicCard from "./BasicCard";
 import VipCard from "./VipCard";
 

@@ -1,3 +1,5 @@
+"use server";
+
 import EmblaCarousel from "./embla/EmblaCarousel";
 import { EmblaOptionsType } from "embla-carousel";
 import "../../../app/embla.css";

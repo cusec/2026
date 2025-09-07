@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import React from "react";
 import Image from "next/image";
@@ -14,6 +14,7 @@ const sponsorData: Sponsor[] = [
     size: { width: "32vw", height: "16vh" },
     rotation: -2,
     zIndex: 2,
+    website: "https://www.rbc.com",
   },
   {
     id: "ciena",
@@ -81,12 +82,6 @@ const sponsorData: Sponsor[] = [
 ];
 
 const Sponsors: React.FC = () => {
-  const handleSponsorClick = (sponsor: Sponsor) => {
-    if (sponsor.website) {
-      window.open(sponsor.website, "_blank");
-    }
-  };
-
   return (
     <div
       id="Sponsors"
@@ -103,19 +98,19 @@ const Sponsors: React.FC = () => {
         <div className="relative">
           {sponsorData.map((sponsor) => {
             return (
-              <div
+              <a
                 key={sponsor.id}
-                className={`absolute hover:scale-105 transition-transform duration-300 ${
-                  sponsor.website ? "cursor-pointer" : ""
-                }`}
+                className={`absolute hover:scale-105 transition-transform duration-300`}
                 style={{
                   left: sponsor.position.x,
                   top: sponsor.position.y,
                   height: sponsor.size.height,
                   width: sponsor.size.width,
                 }}
-                onClick={() => handleSponsorClick(sponsor)}
                 title={sponsor.name}
+                href={sponsor.website || undefined}
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <Image
                   src={sponsor.image}
@@ -124,7 +119,7 @@ const Sponsors: React.FC = () => {
                   className="object-contain"
                   sizes={sponsor.size.width}
                 />
-              </div>
+              </a>
             );
           })}
         </div>

@@ -1,3 +1,5 @@
+"use server";
+
 import Stats from "./Stats";
 
 const About: React.FC = () => {
