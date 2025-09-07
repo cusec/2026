@@ -13,7 +13,7 @@ const OceanSurface: React.FC = () => {
   const b = useTransform(scrollYProgress, [0.33, 1], ["0%", "80%"]);
 
   // Height transforms - scale down as they move up
-  const bScale = useTransform(scrollYProgress, [0.33, 1], [1, 0.6]);
+  const bScale = useTransform(scrollYProgress, [0.33, 1], [0.8, 0.2]);
 
   return (
     <div
