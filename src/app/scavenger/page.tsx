@@ -48,8 +48,8 @@ export default async function ScavengerPage() {
                 </h2>
               </div>
               <p className="text-xl md:text-2xl text-light-mode/90 max-w-3xl mx-auto leading-relaxed">
-                An epic adventure awaits! Scan tags, solve puzzles, compete with
-                fellow attendees, and win amazing prizes at CUSEC 2026.
+                An epic adventure awaits! Scan codes, solve puzzles, compete
+                with fellow attendees, and win exclusive prizes at CUSEC 2026.
               </p>
             </div>
 
@@ -58,11 +58,11 @@ export default async function ScavengerPage() {
               <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
                 <div className="text-4xl mb-4">🔍</div>
                 <h3 className="text-2xl font-bold text-light-mode mb-4">
-                  Scan & Discover
+                  Scan & Earn
                 </h3>
                 <p className="text-light-mode/80">
-                  Find hidden QR codes throughout the venue. Each scan reveals a
-                  new challenge or clue to solve.
+                  Find hidden QR codes throughout the venue & events. Each scan
+                  earns you points.
                 </p>
               </div>
 
@@ -72,8 +72,8 @@ export default async function ScavengerPage() {
                   Solve Puzzles
                 </h3>
                 <p className="text-light-mode/80">
-                  Challenge your mind with riddles, brain teasers, and technical
-                  puzzles designed to test your skills.
+                  Earn more points by challenging yourself with riddles and
+                  technical puzzles, designed to test your skills.
                 </p>
               </div>
 
@@ -83,7 +83,7 @@ export default async function ScavengerPage() {
                   Win Prizes
                 </h3>
                 <p className="text-light-mode/80">
-                  Earn points and climb the leaderboard to unlock exclusive
+                  Climb the leaderboard and build your score to redeem exclusive
                   CUSEC merchandise and stickers.
                 </p>
               </div>
@@ -109,7 +109,7 @@ export default async function ScavengerPage() {
             <div className="flex justify-center">
               <Link href="/auth/login?returnTo=/scavenger">
                 <button className="bg-accent hover:bg-accent/80 text-light-mode font-bold text-xl px-12 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-                  Enter the Hunt
+                  Enter the Hunt (Staging)
                 </button>
               </Link>
             </div>
