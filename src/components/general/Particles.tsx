@@ -112,6 +112,12 @@ export default function Particles({
   }, [frozen, ease, mobileStaticity, desktopStaticity]);
 
   useEffect(() => {
+    // checks if we need to unfreeze (only unfreezes when specified in session storage)
+    const frozen = sessionStorage.getItem("frozen");
+    if (frozen === "f") {
+      setFrozen(false);
+    }
+
     if (canvasRef.current) {
       context.current = canvasRef.current.getContext("2d");
     }
@@ -301,7 +307,10 @@ export default function Particles({
       <div
         onMouseEnter={() => setIslandHovered(true)}
         onMouseLeave={() => setIslandHovered(false)}
-        onClick={() => setFrozen((f) => !f)}
+        onClick={() => {
+          sessionStorage.setItem("frozen", !frozen ? "t" : "f");
+          setFrozen((f) => !f);
+        }}
         style={{
           position: "fixed",
           left: "50%",
