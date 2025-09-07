@@ -310,7 +310,7 @@ export default function Particles({
           zIndex: 30,
           cursor: "pointer",
           transition: "width 0.3s, background 0.3s, box-shadow 0.3s",
-          width: islandHovered ? 180 : 48,
+          width: islandHovered ? 120 : 48,
           height: 48,
           background: "rgba(30,30,40,0.85)",
           borderRadius: 24,
@@ -358,7 +358,7 @@ export default function Particles({
             letterSpacing: 0.2,
           }}
         >
-          Freeze Particles
+          Freeze
         </span>
       </div>
     </div>
