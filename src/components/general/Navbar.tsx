@@ -8,6 +8,7 @@ const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = {
+    Home: "/#Hero",
     About: "/#About",
     Gallery: "/#Gallery",
     Sponsors: "/#Sponsors",
