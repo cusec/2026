@@ -7,7 +7,7 @@ import BottomKoi from "./BottomKoi";
 const Sponsors = () => {
   return (
     <section
-      className="w-full py-12 mt-[25vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
+      className="w-full relative py-12 mt-[25vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
       id="Sponsors"
     >
       <TopKoi />
@@ -36,7 +36,7 @@ const Sponsors = () => {
                     src={sponsor.image}
                     alt={`Gold Sponsor ${index + 1}`}
                     width={585}
-                    height={455}
+                    height={329}
                     className="object-contain"
                   />
                 </a>
@@ -62,7 +62,7 @@ const Sponsors = () => {
                   src={sponsor.image}
                   alt={`Silver Sponsor ${index + 1}`}
                   width={390}
-                  height={275}
+                  height={152}
                   className="object-contain"
                 />
               </a>
@@ -87,7 +87,7 @@ const Sponsors = () => {
                   src={sponsor.image}
                   alt={`Bronze Sponsor ${index + 1}`}
                   width={260}
-                  height={145}
+                  height={122}
                   className="object-contain"
                 />
               </a>
@@ -113,7 +113,7 @@ const Sponsors = () => {
                   src={sponsor.image}
                   alt={`Collaborator ${index + 1}`}
                   width={260}
-                  height={145}
+                  height={82}
                   className="object-contain"
                 />
               </a>
