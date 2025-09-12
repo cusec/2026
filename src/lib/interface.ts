@@ -67,6 +67,12 @@ export interface HuntItemFormData {
   points: number;
 }
 
+export interface Day {
+  Day: string;
+  Date: string;
+  Schedule: ScheduleItem[];
+}
+
 export interface ScheduleItem {
   id: string;
   startTime: string;

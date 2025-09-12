@@ -110,6 +110,25 @@ adminAuditLogSchema.index({ adminEmail: 1, createdAt: -1 });
 adminAuditLogSchema.index({ targetUserEmail: 1, createdAt: -1 });
 adminAuditLogSchema.index({ action: 1, createdAt: -1 });
 
+// Day & ScheduleItem models
+
+const ScheduleItemSchema = new Schema({
+  id: { type: String, required: true },
+  startTime: { type: String, required: true },
+  endTime: { type: String, required: true },
+  title: { type: String, required: true },
+  location: { type: String },
+  description: { type: String },
+});
+
+const DaySchema = new Schema({
+  Day: { type: String, required: true },
+  Date: { type: String, required: true },
+  Schedule: { type: [ScheduleItemSchema], required: true },
+});
+
+const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);
+
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 const HuntItem =
   mongoose.models.HuntItem || mongoose.model("HuntItem", huntItemSchema);
@@ -117,4 +136,4 @@ const AdminAuditLog =
   mongoose.models.AdminAuditLog ||
   mongoose.model("AdminAuditLog", adminAuditLogSchema);
 
-export { User, HuntItem, AdminAuditLog };
+export { User, HuntItem, AdminAuditLog, Day };

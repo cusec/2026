@@ -91,7 +91,7 @@ export default function DaySchedule({ events }: ScheduleProps) {
   const pixelsPerMinute = 3; // Adjust this to change the scale
 
   return (
-    <div className="relative w-[90vw] lg:w-[80vw] max-w-[1400px] mx-auto mt-12 bg-light-mode backdrop-blur-xs px-4 lg:px-12 py-12 lg:py-16 rounded-4xl shadow-lg">
+    <div className="relative w-[90vw] lg:w-[80vw] max-w-[1400px] mx-auto mt-12 bg-light-mode/90 backdrop-blur-xs px-4 lg:px-12 py-12 lg:py-16 rounded-4xl shadow-lg">
       <div className="relative">
         {/* Time axis with absolute positioning */}
         <div className="absolute left-0 -top-4 w-16">
@@ -136,7 +136,7 @@ export default function DaySchedule({ events }: ScheduleProps) {
             return (
               <div
                 key={event.id}
-                className={`absolute border-l-4 border-l-primary bg-light-mode shadow-md hover:shadow-md transition-shadow min-h-16 bg-card`}
+                className={`absolute items-center flex rounded-r-4xl border-l-4 border-l-primary bg-light-mode/90 shadow-lg/20 hover:shadow-xl/20 transition-shadow min-h-16 bg-card`}
                 style={{
                   top: `${top}px`,
                   height: `${height}px`,
@@ -144,19 +144,21 @@ export default function DaySchedule({ events }: ScheduleProps) {
                   left,
                 }}
               >
-                <div className="p-3 pb-0">
-                  <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
-                    {event.title}
-                  </h1>
-                  <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
-                    {event.startTime} - {event.endTime}
-                    {event.location ? ` | ${event.location}` : ""}
-                  </h2>
-                </div>
-                <div className="hidden xs:block p-3 pt-0">
-                  <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
-                    {event.description}
-                  </p>
+                <div>
+                  <div className="p-3 pb-0">
+                    <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                      {event.title}
+                    </h1>
+                    <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
+                      {event.startTime} - {event.endTime}
+                      {event.location ? ` | ${event.location}` : ""}
+                    </h2>
+                  </div>
+                  <div className="hidden xs:block p-3 pt-0">
+                    <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
+                      {event.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
