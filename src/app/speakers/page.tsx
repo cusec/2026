@@ -1,10 +1,4 @@
-import {
-  Particles,
-  Navbar,
-  SmoothFollower,
-  Footer,
-  PrivacyPolicy,
-} from "@/components";
+import { Particles, Navbar, SmoothFollower, Footer } from "@/components";
 
 export default function SpeakersPage() {
   return (
