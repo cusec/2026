@@ -1,5 +1,6 @@
 "use client";
 
+import { Speaker } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -14,6 +15,7 @@ const Navbar: React.FC = () => {
     Sponsors: "/#Sponsors",
     Pricing: "/#Pricing",
     Faq: "/#Faq",
+    Speakers: "/speakers",
     Schedule: "/schedule",
     "Scavenger Hunt": "/scavenger",
   };
