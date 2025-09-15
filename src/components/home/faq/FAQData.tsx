@@ -5,7 +5,7 @@ const faqData: FAQItem[] = [
     question: "When and where is CUSEC 2025 happening?",
     answer: (
       <>
-        CUSEC 2025 will be held in Montreal from January 9th to 11th, 2025 at:
+        CUSEC 2026 will be held in Montreal from January 8th to 10th, 2026 at:
         <br />
         <strong>Le Centre Sheraton Montreal Hotel</strong>
         <br />
@@ -33,11 +33,11 @@ const faqData: FAQItem[] = [
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>
             <strong>Student Ticket</strong>: $80 CAD - For students still
-            registered as of January 2024.
+            registered as of January 2025.
           </li>
           <li>
             <strong>Professional Ticket</strong>: $200 CAD - For professionals
-            or students who have graduated by January 2024.
+            or students who have graduated by January 2025.
           </li>
         </ul>
         <p className="mt-2">
