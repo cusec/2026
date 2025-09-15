@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useMousePosition } from "@/lib/mouse";
+import ParticleTooltip from "./ParticleTooltip";
 
 interface ParticlesProps {
   className?: string;
@@ -304,6 +305,7 @@ export default function Particles({
     <div className={className} ref={canvasContainerRef} aria-hidden="true">
       <canvas ref={canvasRef} className="z-0" />
       {/* Island Button */}
+      <ParticleTooltip setIslandHovered={setIslandHovered} />
       <div
         onMouseEnter={() => setIslandHovered(true)}
         onMouseLeave={() => setIslandHovered(false)}
@@ -319,7 +321,7 @@ export default function Particles({
           zIndex: 30,
           cursor: "pointer",
           transition: "width 0.3s, background 0.3s, box-shadow 0.3s",
-          width: islandHovered ? 120 : 48,
+          width: islandHovered ? 150 : 48,
           height: 48,
           background: "rgba(30,30,40,0.85)",
           borderRadius: 24,
@@ -367,7 +369,7 @@ export default function Particles({
             letterSpacing: 0.2,
           }}
         >
-          Freeze
+          Ambience
         </span>
       </div>
     </div>
