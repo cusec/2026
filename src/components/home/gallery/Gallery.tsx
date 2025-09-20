@@ -5,17 +5,26 @@ import { EmblaOptionsType } from "embla-carousel";
 import "../../../app/embla.css";
 
 const slideImages: string[] = [
-  "/images/gallery/6.jpg",
+  "/images/gallery/1.jpg",
   "/images/gallery/2.jpg",
-  "/images/gallery/3.webp",
+  "/images/gallery/3.jpg",
   "/images/gallery/4.jpg",
   "/images/gallery/5.jpg",
-  "/images/gallery/1.jpg",
+  "/images/gallery/6.jpg",
+  "/images/gallery/7.jpg",
+  "/images/gallery/8.jpg",
+  "/images/gallery/9.jpg",
+  "/images/gallery/10.jpg",
+  "/images/gallery/11.jpg",
+  "/images/gallery/12.jpg",
+  "/images/gallery/13.jpg",
+  "/images/gallery/14.jpg",
+  "/images/gallery/15.jpg",
 ];
 
 const About: React.FC = () => {
   const OPTIONS: EmblaOptionsType = { dragFree: true, loop: true };
-  const SLIDE_COUNT = 5;
+  const SLIDE_COUNT = slideImages.length;
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
   return (
