@@ -36,12 +36,12 @@ export default function LoadingScreen() {
     // Start text disappear animation after typewriter completes + additional time
     const textTimer = setTimeout(() => {
       setTextVisible(false);
-    }, 2500);
+    }, 3000);
 
     // Start screen disappear animation after text animation completes
     const screenTimer = setTimeout(() => {
       setScreenVisible(false);
-    }, 3500);
+    }, 4000);
 
     return () => {
       clearInterval(typewriterTimer);
