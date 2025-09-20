@@ -337,7 +337,7 @@ export default function Particles({
         tabIndex={0}
         aria-label="Freeze Particles"
       >
-        <span
+        <a
           style={{
             fontSize: 22,
             marginRight: islandHovered ? 12 : 0,
@@ -356,8 +356,8 @@ export default function Particles({
               strokeLinecap="round"
             />
           </svg>
-        </span>
-        <span
+        </a>
+        <a
           style={{
             opacity: islandHovered ? 1 : 0,
             maxWidth: islandHovered ? 120 : 0,
@@ -370,7 +370,7 @@ export default function Particles({
           }}
         >
           Ambience
-        </span>
+        </a>
       </div>
     </div>
   );

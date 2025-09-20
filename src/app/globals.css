@@ -59,10 +59,27 @@ html {
   scrollbar-color: rgba(25, 19, 19, 0.7) rgba(0, 0, 0, 0);
 }
 
+/* Hide default cursor when SmoothFollower is active */
+@media (min-width: 768px) {
+  html,
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [tabindex="0"] {
+    cursor: none !important;
+  }
+}
+
 /* Button hover effects class - only on md screens and above */
 @media (min-width: 768px) {
   .email-hover {
-    @apply relative transition-all duration-300 ease-out cursor-pointer;
+    @apply relative transition-all duration-300 ease-out;
   }
 
   .email-hover::after {
@@ -81,7 +98,7 @@ html {
   }
 
   .register-hover {
-    @apply relative overflow-hidden cursor-pointer;
+    @apply relative overflow-hidden;
     transition: border-color 0.3s ease-out;
   }
 
@@ -130,7 +147,7 @@ html {
   }
 
   .register-hover-gradient {
-    @apply relative overflow-hidden cursor-pointer;
+    @apply relative overflow-hidden;
   }
 
   .register-hover-gradient::before {

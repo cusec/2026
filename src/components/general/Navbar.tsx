@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between py-2 px-4 xl:px-8 mx-4">
           <Link
             href="/#Hero"
-            className="flex items-center gap-3 p-2 px-4 rounded-lg cursor-pointer transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+            className="flex items-center gap-3 p-2 px-4 rounded-lg transition-all duration-300 ease-out hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
             onClick={() => setIsMenuOpen(false)}
           >
             <div className="w-8 h-8 relative">
