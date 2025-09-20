@@ -39,10 +39,10 @@ const OceanSurface: React.FC = () => {
 
       {/* Lighthouse & Boat */}
       <div className="absolute top-0 w-full h-full -z-10">
-        {/* Lighthouse 1.3235 */}
-        <motion.div className="absolute left-8 bottom-[19vw] sm:bottom-[14vw] lg:bottom-[9vw] w-[33vw] h-[25vw]">
+        {/* Lighthouse 1.25 */}
+        <motion.div className="absolute left-2 bottom-[17vw] sm:bottom-[12vw] lg:bottom-[6vw] w-[37.5vw] h-[30vw]">
           <Image
-            src="/splash/lighthouse.svg"
+            src="/splash/new_lighthouse.svg"
             alt="Lighthouse"
             className="object-contain"
             fill
