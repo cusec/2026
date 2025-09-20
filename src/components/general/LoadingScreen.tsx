@@ -6,7 +6,7 @@ export default function LoadingScreen() {
   const [displayedText, setDisplayedText] = useState("");
   const [textVisible, setTextVisible] = useState(true);
   const [screenVisible, setScreenVisible] = useState(true);
-  const fullText = "CUSEC 2026";
+  const fullText = "25th Anniversary";
 
   // The splash flag + content hiding ensures smooth transition without flicker
   const [showSplash, setShowSplash] = useState(false);
