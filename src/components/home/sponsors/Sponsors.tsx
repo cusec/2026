@@ -30,7 +30,7 @@ const Sponsors = () => {
                   href={sponsor.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="max-w-[450px] lg:max-w-[585px]"
+                  className="max-w-[450px] lg:max-w-[585px] hover:scale-103 transition-transform duration-500"
                 >
                   <Image
                     src={sponsor.image}
@@ -56,7 +56,7 @@ const Sponsors = () => {
                 href={sponsor.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="max-w-[450px] lg:max-w-[585px]"
+                className="max-w-[450px] lg:max-w-[585px] hover:scale-103 transition-transform duration-500"
               >
                 <Image
                   src={sponsor.image}
@@ -81,7 +81,7 @@ const Sponsors = () => {
                 href={sponsor.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="max-w-[450px] lg:max-w-[585px]"
+                className="max-w-[450px] lg:max-w-[585px] hover:scale-103 transition-transform duration-500"
               >
                 <Image
                   src={sponsor.image}
@@ -107,7 +107,7 @@ const Sponsors = () => {
                 href={sponsor.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="max-w-[450px] lg:max-w-[585px]"
+                className="max-w-[450px] lg:max-w-[585px] hover:scale-103 transition-transform duration-500"
               >
                 <Image
                   src={sponsor.image}
@@ -135,7 +135,7 @@ const Sponsors = () => {
                 href={sponsor.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="max-w-[450px] lg:max-w-[585px]"
+                className="max-w-[450px] lg:max-w-[585px] hover:scale-103 transition-transform duration-500"
               >
                 <Image
                   src={sponsor.image}
