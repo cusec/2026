@@ -14,12 +14,14 @@ export default function LoadingScreen() {
 
   useEffect(() => {
     // checks if we need to show splashpage (only shows on intial load)
-    const splashShown = sessionStorage.getItem("splashShown");
-    if (!splashShown) {
-      setShowSplash(true);
-      sessionStorage.setItem("splashShown", "true");
-    } else {
-      setTemporaryContent(false);
+    if (typeof window !== "undefined") {
+      const splashShown = sessionStorage.getItem("splashShown");
+      if (!splashShown) {
+        setShowSplash(true);
+        sessionStorage.setItem("splashShown", "true");
+      } else {
+        setTemporaryContent(false);
+      }
     }
 
     // Typewriter effect

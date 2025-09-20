@@ -13,11 +13,15 @@ export default function SmoothFollower() {
     border: { x: 0, y: 0 },
   });
   const [isHovering, setIsHovering] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const DOT_SMOOTHNESS = 0.8;
   const BORDER_DOT_SMOOTHNESS = 0.6;
 
   useEffect(() => {
+    // Mark as mounted on client
+    setIsMounted(true);
+
     const handleMouseMove = (e: MouseEvent) => {
       mousePosition.current = { x: e.clientX, y: e.clientY };
     };
@@ -91,8 +95,7 @@ export default function SmoothFollower() {
     };
   }, []);
 
-  if (typeof window === "undefined") return null;
-
+  // Return the same structure on both server and client
   return (
     <div className="hidden md:block pointer-events-none fixed inset-0 z-50">
       <div
@@ -101,8 +104,9 @@ export default function SmoothFollower() {
           width: "8px",
           height: "8px",
           transform: "translate(-50%, -50%)",
-          left: `${renderPos.dot.x}px`,
-          top: `${renderPos.dot.y}px`,
+          left: isMounted ? `${renderPos.dot.x}px` : "0px",
+          top: isMounted ? `${renderPos.dot.y}px` : "0px",
+          opacity: isMounted ? 1 : 0, // Hide until client-side hydration
         }}
       />
 
@@ -112,9 +116,10 @@ export default function SmoothFollower() {
           width: isHovering ? "44px" : "28px",
           height: isHovering ? "44px" : "28px",
           transform: "translate(-50%, -50%)",
-          left: `${renderPos.border.x}px`,
-          top: `${renderPos.border.y}px`,
+          left: isMounted ? `${renderPos.border.x}px` : "0px",
+          top: isMounted ? `${renderPos.border.y}px` : "0px",
           transition: "width 0.1s, height 0.1s",
+          opacity: isMounted ? 1 : 0, // Hide until client-side hydration
         }}
       />
     </div>

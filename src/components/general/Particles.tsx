@@ -114,9 +114,11 @@ export default function Particles({
 
   useEffect(() => {
     // checks if we need to unfreeze (only unfreezes when specified in session storage)
-    const frozen = sessionStorage.getItem("frozen");
-    if (frozen === "f") {
-      setFrozen(false);
+    if (typeof window !== "undefined") {
+      const frozen = sessionStorage.getItem("frozen");
+      if (frozen === "f") {
+        setFrozen(false);
+      }
     }
 
     if (canvasRef.current) {
