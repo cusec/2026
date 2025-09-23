@@ -6,6 +6,7 @@ import {
   ScavengerOptions,
   Leaderboard,
   Footer,
+  SmoothFollower,
 } from "@/components";
 import { auth0 } from "@/lib/auth0";
 import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
@@ -19,6 +20,7 @@ export default async function ScavengerPage() {
       <Navbar />
       <main className="relative w-full min-h-[100vh] h-full flex justify-center items-center px-4 py-16">
         <Particles />
+        <SmoothFollower />
         {user ? (
           <div className="z-10 flex flex-col md:flex-row items-center justify-center gap-4">
             <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
