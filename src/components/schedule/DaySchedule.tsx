@@ -60,7 +60,7 @@ function calculateEventLayout(events: ScheduleItem[]) {
     }
 
     columns[columnIndex].push(event);
-    eventLayout.set(event.id, {
+    eventLayout.set(event.itemId, {
       column: columnIndex,
       totalColumns: columns.length,
     });
@@ -123,7 +123,7 @@ export default function DaySchedule({ events }: ScheduleProps) {
 
           {/* Events container */}
           {events.map((event) => {
-            const layout = eventLayout.get(event.id)!;
+            const layout = eventLayout.get(event.itemId)!;
             const startMinutes = timeToMinutes(event.startTime) - displayStart;
             const duration =
               timeToMinutes(event.endTime) - timeToMinutes(event.startTime);
@@ -135,7 +135,7 @@ export default function DaySchedule({ events }: ScheduleProps) {
 
             return (
               <div
-                key={event.id}
+                key={event.itemId}
                 className={`absolute items-center flex rounded-r-4xl border-l-4 border-l-primary bg-light-mode/90 shadow-lg/20 hover:shadow-xl/20 transition-shadow min-h-16 bg-card`}
                 style={{
                   top: `${top}px`,

@@ -74,6 +74,7 @@ export interface Day {
 }
 
 export interface ScheduleItem {
+  itemId: string;
   startTime: string;
   endTime: string;
   title: string;
