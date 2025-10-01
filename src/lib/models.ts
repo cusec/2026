@@ -113,7 +113,6 @@ adminAuditLogSchema.index({ action: 1, createdAt: -1 });
 // Day & ScheduleItem models
 
 const ScheduleItemSchema = new Schema({
-  id: { type: String, required: true },
   startTime: { type: String, required: true },
   endTime: { type: String, required: true },
   title: { type: String, required: true },
@@ -122,9 +121,9 @@ const ScheduleItemSchema = new Schema({
 });
 
 const DaySchema = new Schema({
-  Day: { type: String, required: true },
-  Date: { type: String, required: true },
-  Schedule: { type: [ScheduleItemSchema], required: true },
+  day: { type: String, required: true },
+  date: { type: String, required: true },
+  schedule: { type: [ScheduleItemSchema], required: true },
 });
 
 const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);

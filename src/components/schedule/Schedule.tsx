@@ -51,15 +51,15 @@ const Schedule = () => {
             {days.map((day, index) => (
               <DayButton
                 key={index}
-                Day={day.Day}
-                Date={day.Date}
+                Day={day.day}
+                Date={day.date}
                 selected={selectedDay === index}
                 onDayButtonClick={() => handleDayButtonClick(index)}
               />
             ))}
           </div>
           {days[selectedDay] && (
-            <DaySchedule events={days[selectedDay].Schedule} />
+            <DaySchedule events={days[selectedDay].schedule} />
           )}
         </>
       )}

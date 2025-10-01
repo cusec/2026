@@ -60,22 +60,6 @@ html {
 }
 
 /* Hide default cursor when SmoothFollower is active */
-@media (min-width: 768px) {
-  html,
-  *,
-  *::before,
-  *::after,
-  a,
-  button,
-  input,
-  select,
-  textarea,
-  [role="button"],
-  [tabindex="0"] {
-    cursor: none !important;
-  }
-}
-
 /* Button hover effects class - only on md screens and above */
 @media (min-width: 768px) {
   .email-hover {

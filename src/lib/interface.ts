@@ -68,13 +68,12 @@ export interface HuntItemFormData {
 }
 
 export interface Day {
-  Day: string;
-  Date: string;
-  Schedule: ScheduleItem[];
+  day: string;
+  date: string;
+  schedule: ScheduleItem[];
 }
 
 export interface ScheduleItem {
-  id: string;
   startTime: string;
   endTime: string;
   title: string;
