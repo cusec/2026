@@ -13,21 +13,21 @@ export default function LoadingScreen() {
   const [TemporaryContent, setTemporaryContent] = useState(true);
 
   useEffect(() => {
-    // Prevent scrolling while loading animation is active
-    if (typeof document !== "undefined") {
-      // Apply overflow hidden to both body and html to ensure no scrolling
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-
-      document.body.style.touchAction = "none";
-    }
-
     // checks if we need to show splashpage (only shows on intial load)
     if (typeof window !== "undefined") {
       const splashShown = sessionStorage.getItem("splashShown");
       if (!splashShown) {
         setShowSplash(true);
         sessionStorage.setItem("splashShown", "true");
+
+        // Prevent scrolling while loading animation is active
+        if (typeof document !== "undefined") {
+          // Apply overflow hidden to both body and html to ensure no scrolling
+          document.body.style.overflow = "hidden";
+          document.documentElement.style.overflow = "hidden";
+
+          document.body.style.touchAction = "none";
+        }
       } else {
         setTemporaryContent(false);
       }
