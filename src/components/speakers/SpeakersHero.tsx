@@ -1,6 +1,6 @@
 export default function SpeakersHero() {
   return (
-    <div className="mx-[10vw] lg:mx-[20vw] mt-[5vh] text-light-mode">
+    <div className="mx-[10vw] lg:mx-[20vw] text-light-mode">
       <h1 className="text-3xl md:text-6xl pb-4 mb-8 md:mb-14 w-fit border-b-1 border-light-mode/70">
         CUSEC Speakers
       </h1>

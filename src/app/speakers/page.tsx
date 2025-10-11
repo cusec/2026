@@ -4,6 +4,7 @@ import {
   SmoothFollower,
   Footer,
   SpeakersHero,
+  Heart,
 } from "@/components";
 
 export default function SpeakersPage() {
@@ -12,8 +13,9 @@ export default function SpeakersPage() {
       <Particles />
       <Navbar />
       <SmoothFollower />
-      <div className="flex justify-center items-center min-h-[100vh] pb-[10vh]">
+      <div className="flex flex-col justify-center items-center min-h-[100vh] pb-[10vh] pt-[25vh]">
         <SpeakersHero />
+        <Heart />
       </div>
       <Footer />
     </div>

@@ -87,3 +87,17 @@ export type Sponsor = {
   image: string;
   link: string;
 };
+
+export interface Speaker {
+  name: string;
+  pronouns?: string;
+  title?: string;
+  bio: string;
+  image: string;
+  socials?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    website?: string;
+  };
+}

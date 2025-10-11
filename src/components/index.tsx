@@ -18,3 +18,4 @@ export { default as PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
 export { default as Leaderboard } from "./scavenger/leaderboard/Leaderboard";
 export { default as Schedule } from "./schedule/Schedule";
 export { default as SpeakersHero } from "./speakers/SpeakersHero";
+export { default as Heart } from "./speakers/Heart";
