@@ -2,14 +2,14 @@ import { FAQItem } from "@/lib/interface";
 
 const faqData: FAQItem[] = [
   {
-    question: "When and where is CUSEC 2025 happening?",
+    question: "When and where is CUSEC 2026 happening?",
     answer: (
       <>
         CUSEC 2026 will be held in Montreal from January 8th to 10th, 2026 at:
         <br />
-        <strong>Le Centre Sheraton Montreal Hotel</strong>
+        <strong>Hotel Omni Mont-Royal</strong>
         <br />
-        1201 René-Lévesque Blvd W, Montreal, Quebec H3B 2L7
+        1050 Sherbrooke St W, Montreal, Quebec H3A 2R6
       </>
     ),
   },
@@ -33,16 +33,16 @@ const faqData: FAQItem[] = [
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>
             <strong>Student Ticket</strong>: $80 CAD - For students still
-            registered as of January 2025.
+            registered as of January 2026.
           </li>
           <li>
             <strong>Professional Ticket</strong>: $200 CAD - For professionals
-            or students who have graduated by January 2025.
+            or students who have graduated by January 2026.
           </li>
         </ul>
         <p className="mt-2">
           Tickets do not include travel or accommodation costs. Check the
-          Pricing Plans section for more details on ticket benefits.
+          Pricing section for more details on ticket benefits.
         </p>
       </>
     ),
