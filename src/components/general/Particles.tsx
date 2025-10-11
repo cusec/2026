@@ -304,7 +304,11 @@ export default function Particles({
   };
 
   return (
-    <div className={className} ref={canvasContainerRef} aria-hidden="true">
+    <div
+      className={`${className} hidden md:block`}
+      ref={canvasContainerRef}
+      aria-hidden="true"
+    >
       <canvas ref={canvasRef} className="z-0" />
       {/* Island Button */}
       <ParticleTooltip setIslandHovered={setIslandHovered} />
