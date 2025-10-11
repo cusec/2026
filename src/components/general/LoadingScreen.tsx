@@ -13,6 +13,15 @@ export default function LoadingScreen() {
   const [TemporaryContent, setTemporaryContent] = useState(true);
 
   useEffect(() => {
+    // Prevent scrolling while loading animation is active
+    if (typeof document !== "undefined") {
+      // Apply overflow hidden to both body and html to ensure no scrolling
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+
+      document.body.style.touchAction = "none";
+    }
+
     // checks if we need to show splashpage (only shows on intial load)
     if (typeof window !== "undefined") {
       const splashShown = sessionStorage.getItem("splashShown");
@@ -45,10 +54,38 @@ export default function LoadingScreen() {
       setScreenVisible(false);
     }, 4000);
 
+    // Create a reference to the function that can be used in the cleanup
+    const preventScroll = (e: TouchEvent) => {
+      e.preventDefault();
+    };
+    if (typeof document !== "undefined") {
+      document.addEventListener("touchmove", preventScroll, { passive: false });
+    }
+
+    // Re-enable scrolling after animation completes
+    const enableScrollingTimer = setTimeout(() => {
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "auto";
+        document.documentElement.style.overflow = "auto";
+        document.body.style.touchAction = "";
+
+        document.removeEventListener("touchmove", preventScroll);
+      }
+    }, 4200); // slightly after the screen animation completes
+
     return () => {
       clearInterval(typewriterTimer);
       clearTimeout(textTimer);
       clearTimeout(screenTimer);
+      clearTimeout(enableScrollingTimer);
+      // Reset overflow if component unmounts
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "auto";
+        document.documentElement.style.overflow = "auto";
+        document.body.style.touchAction = "";
+
+        document.removeEventListener("touchmove", preventScroll);
+      }
     };
   }, []);
 
