@@ -13,7 +13,7 @@ export default function SpeakersPage() {
       <Particles />
       <Navbar />
       <SmoothFollower />
-      <div className="flex flex-col justify-center items-center min-h-[100vh] pb-[10vh] pt-[25vh]">
+      <div className="flex relative flex-col justify-center items-center min-h-[100vh] pb-[10vh] pt-[25vh]">
         <SpeakersHero />
         <Heart />
       </div>
