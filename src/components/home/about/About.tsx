@@ -26,7 +26,12 @@ const About: React.FC = () => {
                 CUSEC 2026 will mark our 25th conference, providing a premier
                 platform for attendees to learn from world-renowned experts,
                 connect with like-minded peers, and discover career
-                opportunities with exciting companies.
+                opportunities with exciting companies, while engaging in our
+                first rendition of the{" "}
+                <a href="/scavenger" className="underline">
+                  CUSEC Scavenger Hunt
+                </a>
+                !
               </p>
             </div>
           </div>

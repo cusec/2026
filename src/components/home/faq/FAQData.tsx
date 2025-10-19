@@ -52,10 +52,9 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         <strong>Pre-sale</strong> for schools with a Head Delegate starts on{" "}
-        <u>TBD</u>
-        and closes on <u>TBD</u> (or until tickets are sold out). Speak with
-        your Head Delegate about potential pre-purchased tickets for your
-        school.
+        <u>TBD</u> and closes on <u>TBD</u> (or until tickets are sold out).
+        Speak with your Head Delegate about potential pre-purchased tickets for
+        your school.
         <br />
         <br />
         <strong>General Admission</strong> opens on <u>TBD</u> and remains open
