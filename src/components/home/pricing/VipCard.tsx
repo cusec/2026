@@ -37,25 +37,7 @@ const VipCard: React.FC = () => {
       >
         BUY NOW
       </a>
-      <div className="flex flex-col gap-6 mx-6 lg:mx-12 text-sm md:text-xl text-start">
-        <div className="w-fit flex items-center gap-6">
-          <Image
-            src="icons/vip_checkmark.svg"
-            alt="Checkmark"
-            width={24}
-            height={24}
-          />
-          <h4>Social Events</h4>
-        </div>
-        <div className="w-fit flex items-center gap-6">
-          <Image
-            src="icons/vip_checkmark.svg"
-            alt="Checkmark"
-            width={24}
-            height={24}
-          />
-          <h4>Networking Benefits</h4>
-        </div>
+      <div className="flex flex-col gap-6 mx-6 lg:mx-12 text-sm md:text-lg text-start">
         <div className="w-fit flex items-center gap-6">
           <Image
             src="icons/vip_checkmark.svg"
@@ -64,10 +46,28 @@ const VipCard: React.FC = () => {
             height={24}
           />
           <h4>
-            Workshops and Sponsor
+            Workshops, Sponsor-Hosted
             <br />
-            hosted talks
+            Talks and Social Events
           </h4>
+        </div>
+        <div className="w-fit flex items-center gap-6">
+          <Image
+            src="icons/vip_checkmark.svg"
+            alt="Checkmark"
+            width={24}
+            height={24}
+          />
+          <h4>Priority Networking</h4>
+        </div>
+        <div className="w-fit flex items-center gap-6">
+          <Image
+            src="icons/vip_checkmark.svg"
+            alt="Checkmark"
+            width={24}
+            height={24}
+          />
+          <h4>Exclusive CUSEC Merchandise</h4>
         </div>
       </div>
     </div>
