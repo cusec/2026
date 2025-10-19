@@ -51,14 +51,15 @@ const faqData: FAQItem[] = [
     question: "How can I get a ticket?",
     answer: (
       <>
-        <strong>Pre-sale</strong> for schools with a Head Delegate starts on
-        October 23 at 12:00am ET and closes on November 6 at 11:59pm ET (or
-        until tickets are sold out). Speak with your Head Delegate about
-        potential pre-purchased tickets for your school.
+        <strong>Pre-sale</strong> for schools with a Head Delegate starts on{" "}
+        <u>TBD</u>
+        and closes on <u>TBD</u> (or until tickets are sold out). Speak with
+        your Head Delegate about potential pre-purchased tickets for your
+        school.
         <br />
         <br />
-        <strong>General Admission</strong> opens on November 12 at 5:00pm ET and
-        remains open until tickets are sold out.
+        <strong>General Admission</strong> opens on <u>TBD</u> and remains open
+        until tickets are sold out.
       </>
     ),
   },
@@ -66,10 +67,17 @@ const faqData: FAQItem[] = [
     question: "Where should I book my hotel room? How much does it cost?",
     answer: (
       <>
-        We’ve partnered with Le Centre Sheraton to provide a discounted rate of{" "}
-        <strong>$203 CAD</strong> per room per night for up to two adults.
-        Additional adults can be added for{" "}
-        <strong>$10 per night per person</strong>.
+        We&apos;ve partnered with Hotel Omni Mont-Royal to provide a discounted
+        rate of{" "}
+        <strong>
+          $<u>TBD</u> CAD
+        </strong>{" "}
+        per room per night for up to two adults. Additional adults can be added
+        for{" "}
+        <strong>
+          $<u>TBD</u> per night per person
+        </strong>
+        .
         <br />
         <br />
         Book soon to secure your rate. Contact us with any questions.
@@ -83,7 +91,7 @@ const faqData: FAQItem[] = [
         Reselling a CUSEC ticket above the purchased price is prohibited.
         <br />
         Refunds are available up to <strong>30 days after purchase</strong> or
-        until December 27, 2024, at 23:00 ET, whichever is earlier.
+        until December 27, 2025, at 23:00 ET, whichever is earlier.
         <br />
         <br />
         If you cannot attend, please email <strong>info@cusec.net</strong> and
