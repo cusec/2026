@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const Hero: React.FC = () => {
   return (
@@ -88,19 +89,17 @@ const Hero: React.FC = () => {
             />
           </a>
         </div>
-        <a
+        <Link
           className="font-space-grotesk! w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center border-2 border-secondary/50 register-hover"
-          href="https://2025.cusec.net/"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/#Pricing"
         >
-          Previous Year
+          2026 Pricing
           <FontAwesomeIcon
             icon={faArrowUpRightFromSquare}
             size="xs"
             className="ml-2"
           />
-        </a>
+        </Link>
       </div>
     </div>
   );
