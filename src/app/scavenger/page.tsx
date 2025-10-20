@@ -55,20 +55,22 @@ export default async function ScavengerPage() {
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
                 <a
-                  className="flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
-                  href="/auth/login?returnTo=/scavenger"
+                  className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
+                  // href="/auth/login?returnTo=/scavenger"
                 >
                   <Trophy className="mr-3 h-6 w-6" />
-                  Start Hunting (Beta)
+                  Start Hunting
                 </a>
 
-                <a
-                  className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
-                  href="#"
-                >
-                  <Users className="mr-3 h-6 w-6" />
-                  Rules & Guidelines
-                </a>
+                <div className="hidden">
+                  <a
+                    className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                    href="#"
+                  >
+                    <Users className="mr-3 h-6 w-6" />
+                    Rules & Guidelines
+                  </a>
+                </div>
               </div>
               <p className="mt-6 text-md text-muted-foreground text-light-mode">
                 ⏰ The hunt will be available closer to the conference date
