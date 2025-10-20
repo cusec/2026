@@ -13,10 +13,20 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
+  const [isClosing, setIsClosing] = React.useState(false);
+
+  const handleClose = React.useCallback(() => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsClosing(false);
+      onClose();
+    }, 200); // Match the animation duration
+  }, [onClose]);
+
   React.useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        onClose();
+        handleClose();
       }
     };
 
@@ -29,22 +39,37 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, handleClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen && !isClosing) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      className={cn(
+        "fixed inset-0 z-50 flex items-center justify-center",
+        isClosing
+          ? "animate-out fade-out duration-200"
+          : "animate-in fade-in duration-200"
+      )}
+    >
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/30 backdrop-blur-sm"
-        onClick={onClose}
+        className={cn(
+          "absolute inset-0 bg-black/30 backdrop-blur-sm",
+          isClosing
+            ? "animate-out fade-out duration-200"
+            : "animate-in fade-in duration-200"
+        )}
+        onClick={handleClose}
       />
 
       {/* Modal Content */}
       <div
         className={cn(
           "relative z-10 w-full max-w-2xl max-h-[80vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg shadow-xl",
+          isClosing
+            ? "animate-out fade-out zoom-out-95 duration-200"
+            : "animate-in fade-in zoom-in-95 duration-200",
           className
         )}
       >
@@ -53,7 +78,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
           <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <h2 className="text-xl font-semibold ">{title}</h2>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
             >
               <X size={20} />

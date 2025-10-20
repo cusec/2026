@@ -38,7 +38,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onClose={onClose}
       title="Credits"
-      className="max-w-lg bg-dark-mode/80 text-light-mode p-6 rounded-2xl"
+      className="max-w-[80vw] md:max-w-lg bg-dark-mode/80 text-light-mode p-6 rounded-2xl"
     >
       <div className="space-y-6 font-jost">
         {/* Team Section */}
