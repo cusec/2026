@@ -18,8 +18,8 @@ const BasicCard: React.FC = () => {
       <h3 className="text-lg md:text-xl mb-4 md:mb-8 font-semibold">
         Learn, network and grow with CUSEC
       </h3>
-      <h3 className="text-xl md:text-3xl mb-4 md:mb-8">$80 / Student</h3>
-      <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$200 / Professional</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-8">$95 / Student</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$250 / Professional</h3>
       <a
         className="w-fit mx-auto text-sm md:text-xl font-space-grotesk! border-1 border-white/50 backdrop-blur-xs rounded-4xl py-1 px-12 mb-4 md:mb-6 register-hover"
         href="/#PRICING"

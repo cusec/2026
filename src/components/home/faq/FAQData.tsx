@@ -32,11 +32,11 @@ const faqData: FAQItem[] = [
         are welcome to attend.
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>
-            <strong>Student Ticket</strong>: $80 CAD - For students still
+            <strong>Student Ticket</strong>: $95 CAD - For students still
             registered as of January 2026.
           </li>
           <li>
-            <strong>Professional Ticket</strong>: $200 CAD - For professionals
+            <strong>Professional Ticket</strong>: $250 CAD - For professionals
             or students who have graduated by January 2026.
           </li>
         </ul>
@@ -90,7 +90,7 @@ const faqData: FAQItem[] = [
         Reselling a CUSEC ticket above the purchased price is prohibited.
         <br />
         Refunds are available up to <strong>30 days after purchase</strong> or
-        until December 27, 2025, at 23:00 ET, whichever is earlier.
+        until <u>TBD</u>, at 23:00 ET, whichever is earlier.
         <br />
         <br />
         If you cannot attend, please email <strong>info@cusec.net</strong> and
