@@ -11,43 +11,44 @@ type SponsorData = {
 const sponsors: SponsorData = {
   gold: [
     {
-      image: "/images/2025_sponsors/rbc.png",
+      image: "/images/sponsors/rbc.png",
       link: "https://www.rbc.com/about-rbc.html",
     },
   ],
   silver: [
     {
-      image: "/images/2025_sponsors/Compulsion_Games.png",
+      image: "/images/sponsors/nokia.svg",
+      link: "https://www.nokia.com/",
+    },
+    {
+      image: "/images/sponsors/Compulsion_Games.png",
       link: "https://compulsiongames.com/",
     },
-    { image: "/images/2025_sponsors/fellow.webp", link: "https://fellow.app/" },
+    //{ image: "/images/sponsors/fellow.webp", link: "https://fellow.app/" },
   ],
   bronze: [
-    { image: "/images/2025_sponsors/ciena.png", link: "https://www.ciena.com" },
+    //{ image: "/images/2025_sponsors/ciena.png", link: "https://www.ciena.com" },
     {
-      image: "/images/2025_sponsors/cse.svg",
+      image: "/images/sponsors/cse.svg",
       link: "https://www.cse-cst.gc.ca/",
     },
     {
-      image: "/images/2025_sponsors/gadget.svg",
-      link: "https://www.gadget.dev/",
-    },
-  ],
-  collaborators: [
-    {
-      image: "/images/2025_sponsors/tailed.png",
+      image: "/images/sponsors/tailed.png",
       link: "https://www.tailed.ca",
     },
   ],
+  collaborators: [],
   inkind: [
+    /*
     {
-      image: "/images/2025_sponsors/wolfram.png",
+      image: "/images/sponsors/wolfram.png",
       link: "https://www.wolframalpha.com/",
     },
     {
-      image: "/images/2025_sponsors/stickerbeaver.png",
+      image: "/images/sponsors/stickerbeaver.png",
       link: "https://www.stickerbeaver.com",
     },
+    */
   ],
 };
 
