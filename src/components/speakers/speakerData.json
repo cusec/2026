@@ -1,0 +1,64 @@
+{
+  "primarySpeakers": [
+    {
+      "name": "Alice Johnson",
+      "pronouns": "she/her",
+      "title": "CTO at Tech Innovations",
+      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
+      "image": "/images/speakers/test.jpg",
+      "socials": {
+        "x": "https://twitter.com/alicejohnson",
+        "linkedin": "https://linkedin.com/in/alicejohnson",
+        "github": "https://github.com/alicejohnson"
+      }
+    },
+    {
+      "name": "Bob Smith",
+      "pronouns": "he/him",
+      "title": "AI Researcher at Future Labs",
+      "bio": "Bob specializes in artificial intelligence and machine learning, with numerous publications in top journals. He is dedicated to advancing AI ethics and responsible technology development.",
+      "image": "/images/speakers/test.jpg",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/bobsmith",
+        "github": "https://github.com/bobsmith"
+      }
+    }
+  ],
+  "secondarySpeakers": [
+    {
+      "name": "Alice Johnson",
+      "pronouns": "she/her",
+      "title": "CTO at Tech Innovations",
+      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
+      "image": "/images/speakers/test.jpg",
+      "socials": {
+        "x": "https://twitter.com/alicejohnson",
+        "linkedin": "https://linkedin.com/in/alicejohnson",
+        "github": "https://github.com/alicejohnson"
+      }
+    },
+    {
+      "name": "Bob Smith",
+      "pronouns": "he/him",
+      "title": "AI Researcher at Future Labs",
+      "bio": "Bob specializes in artificial intelligence and machine learning, with numerous publications in top journals. He is dedicated to advancing AI ethics and responsible technology development.",
+      "image": "/images/speakers/test.jpg",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/bobsmith",
+        "github": "https://github.com/bobsmith"
+      }
+    },
+    {
+      "name": "Alice Johnson",
+      "pronouns": "she/her",
+      "title": "CTO at Tech Innovations",
+      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
+      "image": "/images/speakers/test.jpg",
+      "socials": {
+        "x": "https://twitter.com/alicejohnson",
+        "linkedin": "https://linkedin.com/in/alicejohnson",
+        "github": "https://github.com/alicejohnson"
+      }
+    }
+  ]
+}

@@ -1,7 +1,20 @@
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { auth0 } from "./lib/auth0";
 
+const disabledRoutes = ["/speakers", "/schedule", "/auth/login"];
+
 export async function middleware(request: NextRequest) {
+  // Check if route is disabled
+  if (
+    disabledRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
+  ) {
+    return new NextResponse(
+      "Path/Page under construction. Why are you even on this path lmaooo?",
+      { status: 404 }
+    );
+  }
+
   return await auth0.middleware(request);
 }
 

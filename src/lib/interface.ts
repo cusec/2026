@@ -1,20 +1,103 @@
-export interface SponsorPosition {
-  x: string; // vh/vw format like "10vw" or "20vh"
-  y: string; // vh/vw format like "15vh" or "25vw"
+export interface Position {
+  x: string | number; // vh/vw format like "10vw" or "20vh"
+  y: string | number; // vh/vw format like "15vh" or "25vw"
 }
 
-export interface SponsorSize {
+export interface Size {
   width: string; // vh/vw format like "12vw"
   height: string; // vh/vw format like "8vh"
 }
 
-export interface Sponsor {
+export interface Stat {
   id: string;
   name: string;
+  content: string;
+  description: string;
   image: string;
-  position: SponsorPosition;
-  size: SponsorSize;
-  rotation?: number; // Optional rotation in degrees
-  zIndex?: number; // Optional z-index for layering
-  website?: string; // Optional website URL
+  position: Position;
+  size: Size;
+  font_sizes?: {
+    [key: string]: string;
+  };
+}
+
+export interface FAQItem {
+  question: string;
+  answer: React.ReactNode;
+}
+
+export interface Auth0User {
+  email?: string;
+  name?: string;
+  picture?: string;
+  sub?: string;
+  "cusec/roles"?: string[];
+}
+
+export interface DbUser {
+  _id: string;
+  email: string;
+  name?: string;
+  points: number;
+  history: string[];
+  claim_attempts?: ClaimAttempt[];
+}
+
+export interface ClaimAttempt {
+  identifier: string;
+  success: boolean;
+  timestamp: string;
+  item_id?: string;
+}
+
+export interface HuntItem {
+  _id: string;
+  name: string;
+  description: string;
+  identifier: string;
+  points: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface HuntItemFormData {
+  name: string;
+  description: string;
+  identifier: string;
+  points: number;
+}
+
+export interface Day {
+  day: string;
+  date: string;
+  schedule: ScheduleItem[];
+}
+
+export interface ScheduleItem {
+  itemId: string;
+  startTime: string;
+  endTime: string;
+  title: string;
+  description?: string;
+  location?: string;
+  items?: ScheduleItem[];
+}
+
+export type Sponsor = {
+  image: string;
+  link: string;
+};
+
+export interface Speaker {
+  name: string;
+  pronouns?: string;
+  title?: string;
+  bio: string;
+  image: string;
+  socials?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    website?: string;
+  };
 }
