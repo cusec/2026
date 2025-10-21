@@ -17,8 +17,8 @@ import {
 
 const Home = () => {
   return (
-    <div className="bg-linear-[180deg] from-sea from-0% via-sea via-20% to-dark-mode to-100% bg-cover bg-center h-full w-screen">
-      <div className="w-full h-full bg-linear-[45deg] from-accent/25 from-0% via-accent/5 via-10% to-dark-mode/0 to-100%">
+    <div className="bg-linear-[180deg] from-sea from-0% via-sea via-20% to-dark-mode to-100% bg-cover bg-center h-full">
+      <div className="overflow-x-hidden w-full h-full bg-linear-[45deg] from-accent/25 from-0% via-accent/5 via-10% to-dark-mode/0 to-100%">
         <LoadingScreen />
         <div className="relative">
           <Particles desktopParticleCount={400} sizeMultiplier={1.5} />
