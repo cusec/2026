@@ -1,0 +1,70 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import DaySchedule from "./DaySchedule";
+import DayButton from "./DayButton";
+import { Day as DayType } from "../../lib/interface";
+
+const Schedule = () => {
+  const [days, setDays] = useState<DayType[]>([]);
+  const [selectedDay, setSelectedDay] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchDays = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch("/api/schedule");
+        if (!res.ok) throw new Error("Failed to fetch schedule");
+        const data = await res.json();
+        setDays(data);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("Unknown error");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDays();
+  }, []);
+
+  const handleDayButtonClick = (index: number) => {
+    setSelectedDay(index);
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="text-5xl md:text-7xl font-bold text-light-mode mb-2 pb-6 pt-6 text-center">
+        SCHEDULE
+      </h2>
+      {loading ? (
+        <div className="text-lg text-gray-500">Loading...</div>
+      ) : error ? (
+        <div className="text-red-500">{error}</div>
+      ) : (
+        <>
+          <div className="flex justify-center mb-4">
+            {days.map((day, index) => (
+              <DayButton
+                key={index}
+                Day={day.day}
+                Date={day.date}
+                selected={selectedDay === index}
+                onDayButtonClick={() => handleDayButtonClick(index)}
+              />
+            ))}
+          </div>
+          {days[selectedDay] && (
+            <DaySchedule events={days[selectedDay].schedule} />
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+export default Schedule;

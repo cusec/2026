@@ -1,21 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Share+Tech&family=Space+Grotesk:wght@300..700&display=swap");
 @import "tailwindcss";
+@import "tw-animate-css";
 
 @theme {
   --color-primary: rgb(0, 0, 114);
+  --color-light-primary: #311a99;
   --color-secondary: #41578c;
   --color-dark-mode: #191313;
   --color-light-mode: #f5f0e9;
   --color-accent: #a40b0d;
   /* --color-sunset: #6d072f; */
   --color-sunset: #802b36;
+  --color-sea: #1e2371;
 
-  --breakpoint-xs: 428px;
+  --breakpoint-xs: 400px;
   --breakpoint-xxs: 364px;
+  --breakpoint-3xl: 1920px;
 
-  --font-jost: "Jost", sans-serif;
-  --font-space-grotesk: "Space Grotesk", sans-serif;
+  --font-jost: var(--font-jost);
+  --font-space-grotesk: var(--font-space-grotesk);
+
+  --text-body: rgba(250, 250, 250, 0.562);
+  --detail-medium-contrast: rgba(89, 83, 172, 0.452);
 }
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -27,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-space-grotesk);
+  font-family: var(--font-space-grotesk), sans-serif;
 }
 
 /* Set Jost as the default font for body text */
@@ -41,24 +46,42 @@ input,
 textarea,
 select,
 option {
-  font-family: var(--font-jost);
+  font-family: var(--font-jost), sans-serif;
 }
 
-/* Hide scrollbars but keep scroll functionality */
 html {
   overflow-x: hidden;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scroll-behavior: smooth;
+  scroll-padding-top: 15vh;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-width: thick;
+  scrollbar-color: rgba(25, 19, 19, 0.7) rgba(0, 0, 0, 0);
 }
 
-html::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+/* Hide default cursor when SmoothFollower is active */
+/*
+@media (min-width: 768px) {
+  html,
+  *,
+  *::before,
+  *::after,
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role="button"],
+  [tabindex="0"] {
+    cursor: none !important;
+  }
 }
+*/
 
 /* Button hover effects class - only on md screens and above */
 @media (min-width: 768px) {
   .email-hover {
-    @apply relative transition-all duration-300 ease-out cursor-pointer;
+    @apply relative transition-all duration-300 ease-out;
   }
 
   .email-hover::after {
@@ -77,7 +100,7 @@ html::-webkit-scrollbar {
   }
 
   .register-hover {
-    @apply relative overflow-hidden cursor-pointer;
+    @apply relative overflow-hidden;
     transition: border-color 0.3s ease-out;
   }
 
@@ -88,7 +111,7 @@ html::-webkit-scrollbar {
     left: 0;
     width: 0;
     height: 0;
-    background: rgba(245, 240, 233, 0.85);
+    background: rgba(245, 240, 233, 0.75);
     border-radius: 50%;
     transform: translate(-50%, 50%);
     transition: all 0.3s ease-out;
@@ -123,6 +146,33 @@ html::-webkit-scrollbar {
   .register-hover:hover {
     background-size: 100% 100%;
     color: var(--color-dark-mode);
+  }
+
+  .register-hover-gradient {
+    @apply relative overflow-hidden;
+  }
+
+  .register-hover-gradient::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 0;
+    height: 0;
+    background: linear-gradient(
+      135deg,
+      rgb(53, 53, 126) 50%,
+      rgba(129, 61, 70) 100%
+    );
+    border-radius: 50%;
+    transform: translate(-50%, 50%);
+    transition: all 0.3s ease-out;
+    z-index: -1;
+  }
+
+  .register-hover-gradient:hover::before {
+    width: 300%;
+    height: 300%;
   }
 }
 

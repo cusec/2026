@@ -8,7 +8,7 @@ export interface UserData {
 
 export async function findOrCreateUser(userData: UserData) {
   console.log("findOrCreateUser called with:", userData);
-  
+
   await connectMongoDB();
   console.log("MongoDB connected");
 
@@ -25,6 +25,7 @@ export async function findOrCreateUser(userData: UserData) {
         name: userData.name,
         points: 0,
         history: [],
+        claim_attempts: [],
       });
       await user.save();
       console.log(`Created new user: ${userData.email}`);
@@ -34,6 +35,12 @@ export async function findOrCreateUser(userData: UserData) {
       if (userData.name && !user.name) {
         console.log("Updating user name");
         user.name = userData.name;
+        await user.save();
+      }
+
+      // Initialize claim_attempts if it doesn't exist (for existing users)
+      if (!user.claim_attempts) {
+        user.claim_attempts = [];
         await user.save();
       }
     }
