@@ -11,25 +11,72 @@ interface CreditsModalProps {
 
 const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
   const team = [
-    { name: "Shrey Bhatt", role: "Development", url: "" },
-    { name: "Angel Shinh", role: "UI/UX", url: "" },
+    {
+      name: "Shrey Bhatt",
+      role: "Development",
+      url: "https://www.linkedin.com/in/shreybhatt13",
+    },
+    {
+      name: "Angel Shinh",
+      role: "UI/UX",
+      url: "https://www.linkedin.com/in/angelshinh/",
+    },
   ];
 
   const designResources = [
     {
-      name: "Ocean Wave Animation",
-      url: "https://www.figma.com/community/file/1234567890/ocean-waves",
-      description: "Animated wave effects and ocean surface designs",
+      name: "Lighthouse",
+      url: "https://www.figma.com/community/file/1473355883713295438/lighthouse",
+      description: (
+        <>
+          Original Figma design by Alex Vlad, licensed under{" "}
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-400 transition-colors"
+          >
+            CC BY 4.0
+          </a>
+          . Modified by Shrey Bhatt.
+        </>
+      ),
     },
     {
-      name: "Glassmorphism UI Kit",
-      url: "https://www.figma.com/community/file/0987654321/glassmorphism",
-      description: "Glass card components and blur effects",
+      name: "Sea-Boat",
+      url: "https://www.figma.com/community/file/1211292687455081345/sea-boat",
+      description: (
+        <>
+          Original Figma design by Designstuff, licensed under{" "}
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-400 transition-colors"
+          >
+            CC BY 4.0
+          </a>
+          . Modified by Shrey Bhatt.
+        </>
+      ),
     },
     {
-      name: "Particle System",
-      url: "https://www.figma.com/community/file/1122334455/particle-system",
-      description: "Interactive particle animations and effects",
+      name: "Koi fish",
+      url: "https://www.figma.com/community/file/1538538996849357125/kio-fish-illustration-figma-brush-community",
+      description: (
+        <>
+          Original Figma design by Satya Ranjan Swain, licensed under{" "}
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-400 transition-colors"
+          >
+            CC BY 4.0
+          </a>
+          . Modified by Shrey Bhatt.
+        </>
+      ),
     },
   ];
 
@@ -38,7 +85,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
       isOpen={isOpen}
       onClose={onClose}
       title="Credits"
-      className="max-w-[80vw] md:max-w-lg bg-dark-mode/80 text-light-mode p-6 rounded-2xl"
+      className="max-w-[80vw] md:max-w-lg bg-dark-mode/70 text-light-mode p-6 rounded-2xl"
     >
       <div className="space-y-6 font-jost">
         {/* Team Section */}
@@ -67,7 +114,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
 
         {/* Design Resources Section */}
         <div>
-          <h3 className="text-lg font-semibold  mb-3">Design Resources</h3>
+          <h3 className="text-lg font-semibold  mb-3">External Resources</h3>
           <ul className="space-y-2 ">
             {designResources.map((resource) => (
               <li key={resource.name} className="flex items-start gap-2">
@@ -82,7 +129,7 @@ const CreditsModal: React.FC<CreditsModalProps> = ({ isOpen, onClose }) => {
                     {resource.name}
                     <ExternalLink size={14} className="opacity-60" />
                   </a>
-                  <p className="text-sm  mt-0.5">{resource.description}</p>
+                  <p className="text-xs  mt-0.5">{resource.description}</p>
                 </div>
               </li>
             ))}
