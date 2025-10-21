@@ -15,7 +15,7 @@ const VipCard: React.FC = () => {
           POPULAR
         </div>
       </div>
-      <div className="absolute top-56 xs:top-50 md:top-[358px] right-2 -z-30">
+      <div className="absolute bottom-0 right-2 -z-30">
         <Image
           src="images/vip_price.svg"
           alt="CUSEC Logo"
