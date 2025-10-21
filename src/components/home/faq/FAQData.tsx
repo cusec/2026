@@ -66,20 +66,9 @@ const faqData: FAQItem[] = [
     question: "Where should I book my hotel room? How much does it cost?",
     answer: (
       <>
-        We&apos;ve partnered with Hotel Omni Mont-Royal to provide a discounted
-        rate of{" "}
-        <strong>
-          $<u>TBD</u> CAD
-        </strong>{" "}
-        per room per night for up to two adults. Additional adults can be added
-        for{" "}
-        <strong>
-          $<u>TBD</u> per night per person
-        </strong>
-        .
-        <br />
-        <br />
-        Book soon to secure your rate. Contact us with any questions.
+        We recommend booking your stay at Hotel Omni Mont-Royal, our official
+        partner and the preferred accommodation for all attendees. Additional
+        details regarding <b>discounted rates</b> will be provided soon.
       </>
     ),
   },
@@ -89,8 +78,8 @@ const faqData: FAQItem[] = [
       <>
         Reselling a CUSEC ticket above the purchased price is prohibited.
         <br />
-        Refunds are available up to <strong>30 days after purchase</strong> or
-        until <u>TBD</u>, at 23:00 ET, whichever is earlier.
+        Additional details regarding refunds and cancellations will be provided
+        soon.
         <br />
         <br />
         If you cannot attend, please email <strong>info@cusec.net</strong> and
