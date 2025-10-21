@@ -88,7 +88,7 @@ export default async function ScavengerPage() {
                   hunt champion.{" "}
                 </p>
                 <a
-                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  href="https://www.youtube.com/watch?v=Aq5WXmQQooo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline"
