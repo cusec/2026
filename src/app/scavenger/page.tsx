@@ -16,7 +16,7 @@ export default async function ScavengerPage() {
   const user = session?.user;
 
   return (
-    <div className="bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen w-screen">
+    <div className="bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
       <Navbar />
       <main className="relative w-full min-h-[100vh] h-full flex justify-center items-center px-4 py-16">
         <Particles />
@@ -83,10 +83,18 @@ export default async function ScavengerPage() {
                 <h2 className="mb-4 text-4xl font-black text-foreground">
                   How It Works
                 </h2>
-                <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
+                <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-4">
                   Three simple steps to become the ultimate CUSEC 2026 scavenger
-                  hunt champion
+                  hunt champion.{" "}
                 </p>
+                <a
+                  href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline"
+                >
+                  Get Early Access (2026)
+                </a>
               </div>
               <div className="grid md:grid-cols-3 gap-8 mb-16">
                 <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
