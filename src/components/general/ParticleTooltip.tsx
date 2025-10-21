@@ -34,7 +34,7 @@ export default function ParticleTooltip({
             // Mark tooltip as shown
             sessionStorage.setItem("tooltipShown", "true");
           }, 500); // Match the transition duration
-        }, 9000);
+        }, 7500);
 
         return () => clearTimeout(hideTimer);
       }, 500);

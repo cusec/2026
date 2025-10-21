@@ -59,7 +59,7 @@ export default async function ScavengerPage() {
                   // href="/auth/login?returnTo=/scavenger"
                 >
                   <Trophy className="mr-3 h-6 w-6" />
-                  Start Hunting
+                  Coming Soon
                 </a>
 
                 <div className="hidden">
