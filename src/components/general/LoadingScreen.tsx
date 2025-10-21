@@ -102,7 +102,7 @@ export default function LoadingScreen() {
         }}
       >
         <h1
-          className="text-3xl sm:text-6xl md:text-8xl font-bold text-light-mode tracking-wider transition-all duration-500 ease-linear"
+          className="text-3xl sm:text-6xl lg:text-8xl font-bold text-light-mode tracking-wider transition-all duration-500 ease-linear"
           style={{
             clipPath: textVisible
               ? "inset(0% 0% 0% 0%)"
