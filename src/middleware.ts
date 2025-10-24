@@ -2,7 +2,7 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { auth0 } from "./lib/auth0";
 
-const disabledRoutes = ["/speakers", "/schedule", "/auth/login"];
+const disabledRoutes = ["/schedule", "/auth/login"];
 
 export async function middleware(request: NextRequest) {
   // Check if route is disabled
