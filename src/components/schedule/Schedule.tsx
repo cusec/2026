@@ -5,7 +5,7 @@ import DaySchedule from "./DaySchedule";
 import DayButton from "./DayButton";
 import { Day as DayType } from "../../lib/interface";
 
-const Schedule = () => {
+const Schedule = ({ adminUser }: { adminUser: boolean }) => {
   const [days, setDays] = useState<DayType[]>([]);
   const [selectedDay, setSelectedDay] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -39,7 +39,7 @@ const Schedule = () => {
   return (
     <div className="flex flex-col items-center justify-center">
       <h2 className="text-5xl md:text-7xl font-bold text-light-mode mb-2 pb-6 pt-6 text-center">
-        SCHEDULE
+        SCHEDULE {adminUser ? "(Admin)" : ""}
       </h2>
       {loading ? (
         <div className="text-lg text-gray-500">Loading...</div>
