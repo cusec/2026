@@ -56,7 +56,7 @@ export default async function ScavengerPage() {
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
                 <a
                   className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
-                  // href="/auth/login?returnTo=/scavenger"
+                  href="/auth/login?returnTo=/scavenger"
                 >
                   <Trophy className="mr-3 h-6 w-6" />
                   Coming Soon
