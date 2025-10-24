@@ -91,7 +91,7 @@ const faqData: FAQItem[] = [
     question: "Will meals be provided during our stay?",
     answer: (
       <>
-        Refreshments will be available for delegates. While meals are not
+        Coffee & Tea will be available for delegates. While meals are not
         provided, there are numerous nearby dining options to explore
         Montreal&apos;s culinary scene!
       </>
