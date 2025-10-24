@@ -71,6 +71,7 @@ export interface Day {
   _id?: string;
   day: string;
   date: string;
+  timestamp: number; // Numeric format: YYYYMMDD (e.g., 20260101 for Jan 1, 2026)
   schedule: ScheduleItem[];
 }
 

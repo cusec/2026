@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { ScheduleItem } from "../../lib/interface";
-import { Pencil } from "lucide-react";
+import { Pencil, Download } from "lucide-react";
 import EventModal from "./EventModal";
+import { downloadEventICS, downloadDayICS } from "../../lib/icsGenerator";
 
 interface ScheduleProps {
   events: ScheduleItem[];
@@ -11,6 +12,8 @@ interface ScheduleProps {
   displayEndHour: number;
   isAdmin?: boolean;
   dayId: string;
+  dayTimestamp: number;
+  dayName: string;
   onEventChanged?: () => void;
 }
 
@@ -81,6 +84,8 @@ export default function DaySchedule({
   displayEndHour,
   isAdmin = false,
   dayId,
+  dayTimestamp,
+  dayName,
   onEventChanged,
 }: ScheduleProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -125,6 +130,15 @@ export default function DaySchedule({
 
   return (
     <div className="relative w-[90vw] lg:w-[80vw] max-w-[1400px] mx-auto mt-12 bg-light-mode/90 backdrop-blur-xs px-4 lg:px-12 py-12 lg:py-16 rounded-4xl shadow-lg">
+      {/* Download entire day button - top right corner */}
+      <button
+        onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
+        className="absolute top-4 right-4 p-3 bg-white/50 hover:bg-white rounded-full shadow-md transition-all opacity-70"
+        title="Download full day schedule"
+      >
+        <Download size={20} className="text-primary" />
+      </button>
+
       {isAdmin && (
         <div className="flex justify-center mb-6">
           <button
@@ -210,10 +224,19 @@ export default function DaySchedule({
                       </p>
                     </div>
                   </div>
+                  {/* Download button - visible to everyone */}
+                  <button
+                    onClick={() => downloadEventICS(event, dayTimestamp)}
+                    className="absolute top-2 right-2 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                    title="Add to calendar"
+                  >
+                    <Download size={16} className="text-primary" />
+                  </button>
+                  {/* Edit button - visible only to admins on hover */}
                   {isAdmin && (
                     <button
                       onClick={() => handleEditEvent(event)}
-                      className="absolute top-2 right-2 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-2 right-12 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
                       title="Edit event"
                     >
                       <Pencil size={16} className="text-primary" />

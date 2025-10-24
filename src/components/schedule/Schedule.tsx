@@ -75,6 +75,8 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
               displayEndHour={DISPLAY_END_HOUR}
               isAdmin={adminUser}
               dayId={days[selectedDay]._id || ""}
+              dayTimestamp={days[selectedDay].timestamp}
+              dayName={days[selectedDay].day}
               onEventChanged={handleEventChanged}
             />
           )}

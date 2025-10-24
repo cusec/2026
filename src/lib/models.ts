@@ -129,6 +129,7 @@ const ScheduleItemSchema = new Schema({
 const DaySchema = new Schema({
   day: { type: String, required: true },
   date: { type: String, required: true },
+  timestamp: { type: Number, required: true }, // Format: YYYYMMDD (e.g., 20260101)
   schedule: { type: [ScheduleItemSchema], required: true },
 });
 
