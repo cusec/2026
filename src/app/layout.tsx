@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import connectMongoDB from "@/lib/mongodb";
 import { Jost, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -116,7 +117,10 @@ export default function RootLayout({
           href={process.env.NEXT_PUBLIC_SITE_URL || "https://cusec.net"}
         />
       </head>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
