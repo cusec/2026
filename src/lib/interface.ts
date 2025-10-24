@@ -68,19 +68,21 @@ export interface HuntItemFormData {
 }
 
 export interface Day {
+  _id?: string;
   day: string;
   date: string;
   schedule: ScheduleItem[];
 }
 
 export interface ScheduleItem {
-  itemId: string;
+  _id?: string;
   startTime: string;
   endTime: string;
   title: string;
   description?: string;
   location?: string;
-  items?: ScheduleItem[];
+  track: "A" | "B" | "C";
+  color?: "primary" | "secondary" | "accent" | "sunset" | "sea";
 }
 
 export type Sponsor = {

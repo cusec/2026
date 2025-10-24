@@ -11,29 +11,39 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchDays = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch("/api/schedule");
-        if (!res.ok) throw new Error("Failed to fetch schedule");
-        const data = await res.json();
-        setDays(data);
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("Unknown error");
-        }
-      } finally {
-        setLoading(false);
+  // Single source of truth for display times (in hours, 24-hour format)
+  const DISPLAY_START_HOUR = 8; // 8:00 AM
+  const DISPLAY_END_HOUR = 18; // 6:00 PM
+
+  const fetchDays = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/schedule");
+      if (!res.ok) throw new Error("Failed to fetch schedule");
+      const data = await res.json();
+      setDays(data);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Unknown error");
       }
-    };
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchDays();
   }, []);
 
   const handleDayButtonClick = (index: number) => {
     setSelectedDay(index);
+  };
+
+  const handleEventChanged = () => {
+    // Refresh the schedule data after adding/editing an event
+    fetchDays();
   };
 
   return (
@@ -59,7 +69,14 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
             ))}
           </div>
           {days[selectedDay] && (
-            <DaySchedule events={days[selectedDay].schedule} />
+            <DaySchedule
+              events={days[selectedDay].schedule}
+              displayStartHour={DISPLAY_START_HOUR}
+              displayEndHour={DISPLAY_END_HOUR}
+              isAdmin={adminUser}
+              dayId={days[selectedDay]._id || ""}
+              onEventChanged={handleEventChanged}
+            />
           )}
         </>
       )}
