@@ -7,17 +7,24 @@ import React, { useState } from "react";
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const navItems = {
+  // Check which features are enabled via environment variables
+  // Default to disabled if not explicitly set to "true"
+  const speakersEnabled = process.env.NEXT_PUBLIC_SPEAKERS_ENABLED === "true";
+  const scheduleEnabled = process.env.NEXT_PUBLIC_SCHEDULE_ENABLED === "true";
+
+  // Filter nav items based on enabled features
+  const navItems: Record<string, string> = {
     Home: "/#Hero",
     About: "/#About",
     Gallery: "/#Gallery",
     Sponsors: "/#Sponsors",
     Pricing: "/#Pricing",
     Faq: "/#Faq",
-    Speakers: "/speakers",
-    Schedule: "/schedule",
-    "Scavenger Hunt": "/scavenger",
   };
+
+  if (speakersEnabled) navItems.Speakers = "/speakers";
+  if (scheduleEnabled) navItems.Schedule = "/schedule";
+  navItems["Scavenger Hunt"] = "/scavenger";
 
   return (
     <>

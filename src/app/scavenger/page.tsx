@@ -14,6 +14,7 @@ import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
 export default async function ScavengerPage() {
   const session = await auth0.getSession();
   const user = session?.user;
+  const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
 
   return (
     <div className="bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
@@ -54,13 +55,20 @@ export default async function ScavengerPage() {
                 with fellow attendees, and win exclusive prizes at CUSEC 2026.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
-                <a
-                  className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
-                  href="/auth/login?returnTo=/scavenger"
-                >
-                  <Trophy className="mr-3 h-6 w-6" />
-                  Coming Soon
-                </a>
+                {scavengerEnabled ? (
+                  <a
+                    className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
+                    href="/auth/login?returnTo=/scavenger"
+                  >
+                    <Trophy className="mr-3 h-6 w-6" />
+                    Start Hunting
+                  </a>
+                ) : (
+                  <div className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover">
+                    <Trophy className="mr-3 h-6 w-6" />
+                    Coming Soon
+                  </div>
+                )}
 
                 <div className="hidden">
                   <a
@@ -72,9 +80,11 @@ export default async function ScavengerPage() {
                   </a>
                 </div>
               </div>
-              <p className="mt-6 text-md text-muted-foreground text-light-mode">
-                ⏰ The hunt will be available closer to the conference date
-              </p>
+              {!scavengerEnabled && (
+                <p className="mt-6 text-md text-muted-foreground text-light-mode">
+                  ⏰ The hunt will be available closer to the conference date
+                </p>
+              )}
             </div>
 
             {/* Features Grid */}
