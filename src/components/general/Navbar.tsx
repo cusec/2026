@@ -29,6 +29,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav
+        role="navigation"
         className={`w-full xl:h-min text-white fixed top-0 z-30 backdrop-blur-sm xl:backdrop-blur-md border-b-2 border-light-mode/30 xl:bg-white/2 xl:rounded-b-3xl transition-all duration-300 ease-in-out`}
       >
         <div className="flex items-center justify-between py-2 px-4 xl:px-8 mx-4">
