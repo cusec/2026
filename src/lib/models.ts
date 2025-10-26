@@ -71,7 +71,7 @@ const adminAuditLogSchema = new Schema(
     resourceType: {
       type: String,
       required: true,
-      enum: ["user", "huntItem", "claimAttempts"],
+      enum: ["user", "huntItem", "claimAttempts", "scheduleItem"],
       index: true,
     },
     resourceId: {
@@ -118,11 +118,18 @@ const ScheduleItemSchema = new Schema({
   title: { type: String, required: true },
   location: { type: String },
   description: { type: String },
+  track: { type: String, enum: ["A", "B", "C"], required: true },
+  color: {
+    type: String,
+    enum: ["primary", "secondary", "accent", "sunset", "sea"],
+    default: "primary",
+  },
 });
 
 const DaySchema = new Schema({
   day: { type: String, required: true },
   date: { type: String, required: true },
+  timestamp: { type: Number, required: true }, // Format: YYYYMMDD (e.g., 20260101)
   schedule: { type: [ScheduleItemSchema], required: true },
 });
 

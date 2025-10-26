@@ -36,7 +36,7 @@ export default function SecondarySpeaker({
                   src={speaker.image}
                   alt={speaker.name}
                   fill
-                  className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-105"
+                  className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-102"
                 />
               </div>
 

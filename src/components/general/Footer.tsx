@@ -32,7 +32,10 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className="bg-dark-mode/0 backdrop-blur-sm w-full py-6 relative z-40">
+      <footer
+        role="contentinfo"
+        className="bg-dark-mode/0 backdrop-blur-sm w-full py-6 relative z-40"
+      >
         <div className="w-full md:max-w-[80vw] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo Section */}
           <Link
