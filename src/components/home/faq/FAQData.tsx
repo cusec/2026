@@ -52,13 +52,13 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         <strong>Pre-sale</strong> for schools with a Head Delegate starts at 9
-        AM ET on November 3rd, 2026 and closes at 9 AM ET November 10th, 2026
+        AM ET on November 3rd, 2025 and closes at 9 AM ET November 10th, 2025
         (or until tickets are sold out). Speak with your Head Delegate about
         potential pre-purchased tickets for your school.
         <br />
         <br />
         <strong>General Admission</strong> opens at 9 AM ET on November 10th,
-        2026 and remains open until tickets are sold out.
+        2025 and remains open until tickets are sold out.
       </>
     ),
   },
