@@ -7,6 +7,7 @@ const faqData: FAQItem[] = [
       <>
         CUSEC 2026 will be held in Montreal from January 8th to 10th, 2026 at:
         <br />
+        <br />
         <strong>Hotel Omni Mont-Royal</strong>
         <br />
         1050 Sherbrooke St W, Montreal, Quebec H3A 2R6
@@ -19,8 +20,8 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         The schedule will be available on the website soon, along with our list
-        of speakers and sponsors! We are working to create the best conference
-        experience for you, we promise.
+        of speakers! We are working to create the best conference experience for
+        you, we promise.
       </>
     ),
   },
@@ -58,7 +59,17 @@ const faqData: FAQItem[] = [
         <br />
         <br />
         <strong>General Admission</strong> opens at 9 AM ET on November 10th,
-        2025 and remains open until tickets are sold out.
+        2025 and remains open until tickets are sold out. Hotel Omni Mont-Royal
+        booking link: (
+        <a
+          href="https://www.tickettailor.com/events/cusec/1914839"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          Buy Tickets
+        </a>
+        )
       </>
     ),
   },
@@ -67,8 +78,21 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         We recommend booking your stay at Hotel Omni Mont-Royal, our official
-        partner and the preferred accommodation for all attendees. Additional
-        details regarding <b>discounted rates</b> will be provided soon.
+        partner and the preferred accommodation for all attendees. We have
+        negotiated room rates with the hotel. The pricing is 179 CAD a night
+        (plus taxes and fees). For any occupant over 2 people, there is an
+        additional 20 CAD per night charge. Maximum 4 people per room.
+        <br />
+        <br />
+        Hotel Omni Mont-Royal booking link:{" "}
+        <a
+          href="https://bookings.omnihotels.com/event/montreal-mont-royal/cusec-main-block"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          Booking Link
+        </a>
       </>
     ),
   },
@@ -76,14 +100,24 @@ const faqData: FAQItem[] = [
     question: "Can I get a refund or resell my ticket?",
     answer: (
       <>
-        Reselling a CUSEC ticket above the purchased price is prohibited.
+        It is strictly forbidden to re-sell a CUSEC ticket above the purchased
+        price.
         <br />
-        Additional details regarding refunds and cancellations will be provided
-        soon.
+        Refunds are available 30 days after purchase or until December 27, 2025
+        at 11:59 PM (EST), whichever is earlier.
         <br />
         <br />
-        If you cannot attend, please email <strong>info@cusec.net</strong> and
-        CC your Head Delegate if applicable. We will do our best to assist you.
+        If you cannot attend, please email{" "}
+        <a
+          href="mailto:info@cusec.net"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline"
+        >
+          info@cusec.net
+        </a>{" "}
+        and CC your Head Delegate if applicable. We will do our best to assist
+        you.
       </>
     ),
   },

@@ -91,9 +91,11 @@ const Hero: React.FC = () => {
         </div>
         <Link
           className="font-space-grotesk! w-full max-w-96 lg:w-fit rounded-2xl p-3 text-center border-2 border-secondary/50 register-hover"
-          href="/#Pricing"
+          href="https://www.tickettailor.com/events/cusec/1914839"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          2026 Pricing
+          Buy Tickets
           <FontAwesomeIcon
             icon={faArrowUpRightFromSquare}
             size="xs"
