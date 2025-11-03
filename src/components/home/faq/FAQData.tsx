@@ -59,8 +59,7 @@ const faqData: FAQItem[] = [
         <br />
         <br />
         <strong>General Admission</strong> opens at 9 AM ET on November 10th,
-        2025 and remains open until tickets are sold out. Hotel Omni Mont-Royal
-        booking link: (
+        2025 and remains open until tickets are sold out. (
         <a
           href="https://www.tickettailor.com/events/cusec/1914839"
           target="_blank"
