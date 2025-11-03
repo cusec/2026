@@ -20,11 +20,11 @@ const BasicCard: React.FC = () => {
       <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$250 / Professional</h3>
       <a
         className="select-none w-fit mx-auto text-sm md:text-xl font-space-grotesk! border-1 border-white/50 backdrop-blur-xs rounded-4xl py-1 px-12 mb-4 md:mb-6 register-hover"
-        // href=""
-        // target="_blank"
-        // rel="noopener noreferrer"
+        href="https://www.tickettailor.com/events/cusec/1914839"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        Coming Soon
+        Get Basic
       </a>
       <div className="flex flex-col gap-6 mx-6 lg:mx-12 text-sm md:text-lg text-start">
         <div className="w-fit flex items-center gap-6">
