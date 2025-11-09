@@ -27,8 +27,8 @@ const VipCard: React.FC = () => {
       <h3 className="text-lg md:text-xl mb-4 md:mb-8 font-semibold">
         Relive an exclusive CUSEC experience
       </h3>
-      <h3 className="text-xl md:text-3xl mb-4 md:mb-8">$140 / Student</h3>
-      <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$300 / Professional</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-8">$160 / Student</h3>
+      <h3 className="text-xl md:text-3xl mb-4 md:mb-6">$320 / Professional</h3>
       <a
         className="select-none w-fit mx-auto text-sm md:text-xl font-space-grotesk! border-1 border-white/50 backdrop-blur-xs rounded-4xl py-1 px-12 mb-4 md:mb-6 register-hover-gradient"
         href="https://www.tickettailor.com/events/cusec/1914839"

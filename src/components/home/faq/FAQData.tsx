@@ -33,12 +33,13 @@ const faqData: FAQItem[] = [
         are welcome to attend.
         <ul className="list-disc pl-5 mt-2 space-y-1">
           <li>
-            <strong>Student Ticket</strong>: $95 CAD - For students still
-            registered as of January 2026.
+            <strong>Student Ticket</strong>: $115 CAD - For students still
+            registered as of January 2026. $95 CAD for Delegates (limited count)
           </li>
           <li>
-            <strong>Professional Ticket</strong>: $250 CAD - For professionals
-            or students who have graduated by January 2026.
+            <strong>Professional Ticket</strong>: $270 CAD - For professionals
+            or students who have graduated by January 2026. $250 CAD for
+            Delegates (limited count)
           </li>
         </ul>
         <p className="mt-2">
