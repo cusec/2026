@@ -97,6 +97,22 @@ const faqData: FAQItem[] = [
     ),
   },
   {
+    question: "Do I have to book a hotel room?",
+    answer: (
+      <>
+        If you are you are attending CUSEC as part of a student delegation, Yes.
+        It is required for you to stay at the official CUSEC hotel. Over the
+        years, we&apos;ve run into a number of issues when attendees aren&apos;t
+        staying at the designated conference hotel.
+        <br />
+        <br />
+        Ask your Head Delegate any questions you may have regarding
+        accommodation. For any exceptional circumstances, ask your Head Delegate
+        to discuss your situation with the rest of the organizing team.
+      </>
+    ),
+  },
+  {
     question: "Can I get a refund or resell my ticket?",
     answer: (
       <>
