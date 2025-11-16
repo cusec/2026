@@ -17,9 +17,9 @@ export default function SecondarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col items-center justify-between w-full h-[460px] xs:w-[300px] xs:h-[520px] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col justify-between items-center text-center w-full h-[480px] xs:w-[300px] xs:h-[540px] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
     >
-      <div className="w-full h-full px-4 mb-4 flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
           {!showBio ? (
             /* Basic info display with image */
@@ -29,28 +29,33 @@ export default function SecondarySpeaker({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="flex flex-col items-center w-full"
+              className="flex flex-col items-center justify-between w-full h-full"
             >
-              <div className="mb-4 w-[150px] h-[150px] xs:w-[200px] xs:h-[200px] relative overflow-hidden rounded-xl">
-                <Image
-                  src={speaker.image}
-                  alt={speaker.name}
-                  fill
-                  className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-102"
-                />
-              </div>
-
               <div className="flex flex-col items-center">
-                <h2 className="text-lg md:text-xl xl:text-2xl">
-                  {speaker.name}
-                </h2>
-                <h2 className="text-md md:text-md xl:text-lg">
-                  ({speaker.pronouns})
-                </h2>
+                <div className="mb-4 w-[150px] h-[150px] xs:w-[200px] xs:h-[200px] relative overflow-hidden rounded-xl">
+                  <Image
+                    src={speaker.image}
+                    alt={speaker.name}
+                    fill
+                    className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-102"
+                  />
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <h2 className="text-lg md:text-xl xl:text-2xl">
+                    {speaker.name}
+                  </h2>
+                  <h2 className="text-md md:text-md xl:text-lg">
+                    ({speaker.pronouns})
+                  </h2>
+                </div>
+                <p className="text-sm md:text-md xl:text- mt-2">
+                  {speaker.talkTitle}
+                </p>
+                <p className="text-sm md:text-md xl:text-md mt-1">
+                  {speaker.title}
+                </p>
               </div>
-              <p className="text-sm md:text-md xl:text-md mt-2">
-                {speaker.title}
-              </p>
               <div className="text-dark-mode mt-3">
                 <Socials speaker={speaker} variant="dark" />
               </div>

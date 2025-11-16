@@ -6,6 +6,7 @@
       "title": "CTO at Tech Innovations",
       "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
       "image": "/images/speakers/test.jpg",
+      "talkTitle": "The Future of AI",
       "socials": {
         "x": "https://twitter.com/alicejohnson",
         "linkedin": "https://linkedin.com/in/alicejohnson",
@@ -31,6 +32,7 @@
       "title": "CTO at Tech Innovations",
       "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
       "image": "/images/speakers/test.jpg",
+      "talkTitle": "The Future of AI",
       "socials": {
         "x": "https://twitter.com/alicejohnson",
         "linkedin": "https://linkedin.com/in/alicejohnson",
@@ -41,6 +43,7 @@
       "name": "Bob Smith",
       "pronouns": "he/him",
       "title": "AI Researcher at Future Labs",
+      "talkTitle": "Advancements in Machine Learning",
       "bio": "Bob specializes in artificial intelligence and machine learning, with numerous publications in top journals. He is dedicated to advancing AI ethics and responsible technology development.",
       "image": "/images/speakers/test.jpg",
       "socials": {

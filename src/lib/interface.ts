@@ -95,6 +95,7 @@ export interface Speaker {
   name: string;
   pronouns?: string;
   title?: string;
+  talkTitle?: string;
   bio: string;
   image: string;
   socials?: {

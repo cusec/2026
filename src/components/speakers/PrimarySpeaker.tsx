@@ -30,7 +30,10 @@ export default function PrimarySpeaker({
               ({speaker.pronouns})
             </h2>
           </div>
-          <p className="text-xl md:text-2xl mb-6">{speaker.title}</p>
+          <p className="text-xl md:text-2xl mb-6">
+            {speaker.talkTitle ? `${speaker.talkTitle} | ` : ""}
+            {speaker.title}
+          </p>
           <p className="text-lg md:text-xl">{speaker.bio}</p>
         </div>
         <div className="">
