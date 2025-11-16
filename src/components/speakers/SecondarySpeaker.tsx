@@ -75,7 +75,7 @@ export default function SecondarySpeaker({
 
       <motion.button
         onClick={() => setShowBio(!showBio)}
-        className="border-2 border-dark-mode rounded-full py-2 px-4 hover:bg-dark-mode hover:text-light-mode"
+        className="border-2 border-dark-mode rounded-full py-2 px-4 hover:bg-dark-mode hover:text-light-mode transition-colors duration-300"
         whileHover={{ scale: 1.0 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: "spring", stiffness: 800, damping: 17 }}
