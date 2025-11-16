@@ -4,7 +4,7 @@ import Member from "./Member";
 
 export default function TeamMembers() {
   return (
-    <div className="mx-[10vw] lg:mx-[20vw] mt-[15vh] w-[80vw] lg:w-[60vw] text-light-mode">
+    <div className="mx-[5vw] lg:mx-[10vw] mt-[15vh] w-[90vw] lg:w-[80vw] text-light-mode">
       <h1 className="text-3xl md:text-5xl pb-4 mb-[5vh] border-b-1 w-fit border-light-mode/70">
         Organizers
       </h1>
