@@ -17,9 +17,9 @@ export default function SecondarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col items-center justify-between w-full xs:min-w-[70%] xs:max-w-[70%] sm:min-w-[45%] sm:max-w-[45%] xl:min-w-[28%] xl:max-w-[28%] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col items-center justify-between w-full h-[460px] xs:w-[300px] xs:h-[520px] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
     >
-      <div className="w-full min-h-[270px] px-4 mb-4 flex flex-col items-center justify-center overflow-hidden">
+      <div className="w-full h-full px-4 mb-4 flex flex-col items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           {!showBio ? (
             /* Basic info display with image */
@@ -31,7 +31,7 @@ export default function SecondarySpeaker({
               transition={{ duration: 0.3 }}
               className="flex flex-col items-center w-full"
             >
-              <div className="mb-4 min-w-[60vw] max-w-[60vw] min-h-[60vw] max-h-[60vw] xs:min-w-[35vw] xs:max-w-[35vw] xs:min-h-[35vw] xs:max-h-[35vw] sm:min-w-[25vw] sm:max-w-[25vw] sm:min-h-[25vw] sm:max-h-[25vw] md:min-w-[9vw] md:max-w-[9vw] md:min-h-[9vw] md:max-h-[9vw] relative overflow-hidden rounded-xl">
+              <div className="mb-4 w-[150px] h-[150px] xs:w-[200px] xs:h-[200px] relative overflow-hidden rounded-xl">
                 <Image
                   src={speaker.image}
                   alt={speaker.name}

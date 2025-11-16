@@ -16,7 +16,7 @@ export default function Member({
   return (
     <div
       key={key}
-      className="flex flex-col items-center justify-between w-full xs:min-w-[70%] xs:max-w-[70%] sm:min-w-[45%] sm:max-w-[45%] xl:min-w-[28%] xl:max-w-[28%] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col items-center justify-between w-full xs:min-w-[70%] xs:max-w-[70%]  sm:min-w-[45%] sm:max-w-[45%] xl:min-w-[28%] xl:max-w-[28%] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
     >
       <div className="w-full min-h-[270px] px-4 mb-4 flex flex-col items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait">
