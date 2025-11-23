@@ -19,7 +19,7 @@ export default function Member({
       <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/30 to-secondary/30 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 z-0" />
 
       {/* Image - positioned absolutely, moves to top-right on hover */}
-      <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[180px] h-[180px] xs:w-[150px] xs:h-[150px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out group-hover:w-[120px] group-hover:h-[120px] group-hover:left-auto group-hover:right-4 group-hover:top-4 group-hover:translate-x-0 z-10">
+      <div className="absolute left-1/2 top-8 -translate-x-1/2 w-[180px] h-[180px] xs:w-[150px] xs:h-[150px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out group-hover:w-[120px] group-hover:h-[120px] group-hover:left-[calc(100%-135px)] group-hover:top-4 group-hover:-translate-x-0 z-10">
         <div className="relative w-full h-full overflow-hidden rounded-full">
           <Image
             src={member.primaryImage}
@@ -29,7 +29,7 @@ export default function Member({
           />
         </div>
         {/* School logo - positioned at top-left, outside the circular container */}
-        <div className="absolute top-2 left-2 w-10 h-10 xs:w-8 xs:h-8 sm:w-10 sm:h-10 z-20 transition-all duration-500 group-hover:scale-60 group-hover:-top-1 group-hover:-left-1">
+        <div className="absolute top-2 left-2 w-10 h-10 xs:w-8 xs:h-8 z-20 transition-all duration-500 group-hover:scale-60 group-hover:top-0 group-hover:left-0">
           <div className="relative w-full h-full">
             <Image
               src={member.education.logo}
