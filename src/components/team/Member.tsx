@@ -10,10 +10,27 @@ export default function Member({
   key: number;
   member: TeamMember;
 }) {
+  // Calculate social media icon positions around the circle
+  const socialEntries = member.socials
+    ? Object.entries(member.socials).filter(([, url]) => url)
+    : [];
+  const socialCount = socialEntries.length;
+
+  // Function to get position for social icons around the profile picture
+  const getSocialPosition = (index: number, total: number) => {
+    const angleStep = 360 / total;
+    const angle = (angleStep * index - 90) * (Math.PI / 180); // Start from top (-90 degrees)
+    const radius = 70; // Distance from center (half of image width + some padding)
+    return {
+      left: `calc(50% + ${Math.cos(angle) * radius}px)`,
+      top: `calc(50% + ${Math.sin(angle) * radius}px)`,
+    };
+  };
+
   return (
     <div
       key={key}
-      className="mb-2 relative flex flex-col items-center justify-between w-full h-[450px] xs:w-[200px] xs:h-[400px] sm:w-[300px] sm:h-[470px] pt-6 pb-12 rounded-xl border-1 border-light-mode/70 bg-light-mode/40 overflow-hidden group"
+      className="mb-2 relative flex flex-col items-center justify-between w-full h-[450px] xs:w-[200px] xs:h-[400px] sm:w-[330px] sm:h-[470px] pt-6 pb-12 rounded-xl border-1 border-light-mode/70 bg-light-mode/40 overflow-hidden group"
     >
       {/* Gradient overlay - fades in on hover */}
       <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/30 to-secondary/30 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 z-0" />
@@ -39,6 +56,30 @@ export default function Member({
             />
           </div>
         </div>
+
+        {/* Social media icons - circle around the profile picture on hover */}
+        {socialEntries.map(([key, url], index) => {
+          const position = getSocialPosition(index, socialCount);
+          return (
+            <a
+              key={key}
+              href={url || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-500 group-hover:opacity-100 z-20 bg-white rounded-full p-1.5 shadow-md hover:scale-110"
+              style={position}
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src={`/icons/${key}.svg`}
+                  alt={key}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </a>
+          );
+        })}
       </div>
 
       {/* Content container */}
@@ -52,6 +93,32 @@ export default function Member({
           <p className="text-sm md:text-md xl:text-2xl mt-2">
             {member.professionalTitle}
           </p>
+        </div>
+
+        {/* Hover content - visible only on hover */}
+        <div className="absolute inset-0 px-6 pt-10 flex flex-col text-light-mode opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 pointer-events-none z-20">
+          {/* Name and Pronouns */}
+          <h2 className="text-2xl font-semibold mb-2">{member.name}</h2>
+          <p className="text-sm text-light-mode/80 mb-2">({member.pronouns})</p>
+
+          {/* Professional Title */}
+          <p className="text-lg mb-6">{member.professionalTitle}</p>
+
+          <div className="w-full h-px bg-light-mode/70 mb-6"></div>
+
+          {/* Education Info */}
+          <div className="mb-4">
+            <p className="text-2xl">{member.education.major}</p>
+            <p className="text-xl font-semibold text-dark-mode">
+              @{member.education.institution.toLowerCase().replace(/\s+/g, "")}
+            </p>
+          </div>
+
+          {/* Info Section */}
+          <div className="border-b border-light-mode/80 w-fit mb-4">
+            <h3 className="text-2xl font-semibold">{member.infoTitle}:</h3>
+          </div>
+          <p className="text-xl leading-relaxed">{member.infoDescription}</p>
         </div>
       </div>
     </div>
