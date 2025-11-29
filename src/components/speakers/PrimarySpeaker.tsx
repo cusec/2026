@@ -133,7 +133,7 @@ export default function PrimarySpeaker({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={speaker.talkTitle}
-        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/70 text-light-mode rounded-2xl"
+        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl"
       >
         <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
           {speaker.talkDescription || "No description available."}

@@ -19,7 +19,7 @@ export default function SecondarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[300px] xs:h-[570px] py-10 text-dark-mode font-se rounded-xl border border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[300px] xs:h-[570px] py-10 text-dark-mode font-se rounded-xl border border-light-mode/70 bg-light-mode/40 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
     >
       <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
@@ -116,7 +116,7 @@ export default function SecondarySpeaker({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={speaker.talkTitle}
-        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/70 text-light-mode rounded-2xl"
+        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl"
       >
         <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
           {speaker.talkDescription || "No description available."}
