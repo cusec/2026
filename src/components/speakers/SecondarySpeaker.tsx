@@ -83,7 +83,7 @@ export default function SecondarySpeaker({
               transition={{ duration: 0.3 }}
               className="w-full h-full flex items-center justify-center text-center py-2 px-4"
             >
-              <p className="text-sm md:text-md overflow-auto h-full">
+              <p className="text-sm md:text-md overflow-auto! max-h-full">
                 {speaker.bio}
               </p>
             </motion.div>
