@@ -48,7 +48,7 @@ export default function PrimarySpeaker({
             {speaker.title}
             {speaker.talkTitle && (
               <>
-                {" | "}
+                {speaker.title && <> | </>}
                 {speaker.talkDescription ? (
                   <span
                     onClick={() => setIsModalOpen(true)}
