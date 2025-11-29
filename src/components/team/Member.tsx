@@ -106,7 +106,7 @@ export default function Member({
             ({member.pronouns})
           </h2>
           <p className="text-sm md:text-md xl:text-2xl mt-2">
-            {member.professionalTitle}
+            {member.teamRole}
           </p>
         </div>
 
