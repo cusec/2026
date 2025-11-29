@@ -19,7 +19,7 @@ export default function SecondarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[300px] xs:h-[570px] py-10 text-dark-mode font-se rounded-xl border border-light-mode/70 bg-light-mode/40 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[300px] xs:h-[570px] py-10 text-light-mode font-se rounded-xl border border-light-mode/50 bg-light-mode/15 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group"
     >
       <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
@@ -69,8 +69,8 @@ export default function SecondarySpeaker({
                   </p>
                 )}
               </div>
-              <div className="text-dark-mode mt-2">
-                <Socials speaker={speaker} variant="dark" />
+              <div className="text-light-mode mt-2">
+                <Socials speaker={speaker} />
               </div>
             </motion.div>
           ) : (
@@ -93,7 +93,7 @@ export default function SecondarySpeaker({
 
       <motion.button
         onClick={() => setShowBio(!showBio)}
-        className="border-2 border-dark-mode rounded-full py-2 px-4 hover:bg-dark-mode hover:text-light-mode transition-colors duration-300"
+        className="border-2 border-light-mode text-light-mode rounded-full py-2 px-4 hover:bg-light-mode hover:text-dark-mode transition-colors duration-300"
         whileHover={{ scale: 1.0 }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: "spring", stiffness: 800, damping: 17 }}

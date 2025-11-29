@@ -52,7 +52,7 @@ export default function PrimarySpeaker({
                 {speaker.talkDescription ? (
                   <span
                     onClick={() => setIsModalOpen(true)}
-                    className="underline hover:text-light-mode/80 transition-colors duration-200 cursor-pointer"
+                    className="underline hover:text-dark-mode transition-colors duration-200 cursor-pointer"
                   >
                     {speaker.talkTitle}
                   </span>
