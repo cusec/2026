@@ -1,6 +1,10 @@
+"use client";
+
 import { Speaker } from "@/lib/interface";
 import Socials from "./Socials";
 import Image from "next/image";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function PrimarySpeaker({
   key,
@@ -9,6 +13,14 @@ export default function PrimarySpeaker({
   key: number;
   speaker: Speaker;
 }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const MAX_LENGTH = 300; // Characters to show before truncating
+  const shouldTruncate = speaker.bio.length > MAX_LENGTH;
+  const displayBio =
+    !isExpanded && shouldTruncate
+      ? speaker.bio.slice(0, MAX_LENGTH) + "..."
+      : speaker.bio;
+
   return (
     <div
       key={key}
@@ -31,10 +43,70 @@ export default function PrimarySpeaker({
             </h2>
           </div>
           <p className="text-xl md:text-2xl mb-6">
-            {speaker.talkTitle ? `${speaker.talkTitle} | ` : ""}
             {speaker.title}
+            {speaker.talkTitle ? ` | ${speaker.talkTitle}` : ""}
           </p>
-          <p className="text-lg md:text-xl">{speaker.bio}</p>
+          <div className="text-lg md:text-xl">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={isExpanded ? "expanded" : "collapsed"}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {displayBio}
+              </motion.p>
+            </AnimatePresence>
+            {shouldTruncate && (
+              <button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="inline-flex items-center gap-1 mt-2 text-light-mode/80 hover:text-light-mode transition-colors duration-200 underline"
+              >
+                {isExpanded ? (
+                  <>
+                    Show Less
+                    <motion.svg
+                      initial={{ rotate: 0 }}
+                      animate={{ rotate: 180 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </motion.svg>
+                  </>
+                ) : (
+                  <>
+                    Read More
+                    <motion.svg
+                      initial={{ rotate: 180 }}
+                      animate={{ rotate: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </motion.svg>
+                  </>
+                )}
+              </button>
+            )}
+          </div>
         </div>
         <div className="">
           <Socials speaker={speaker} />

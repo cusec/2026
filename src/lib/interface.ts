@@ -96,13 +96,21 @@ export interface Speaker {
   pronouns?: string;
   title?: string;
   talkTitle?: string;
+  talkDescription?: string;
   bio: string;
   image: string;
   socials?: {
     linkedin?: string;
-    twitter?: string;
+    x?: string;
     github?: string;
+    instagram?: string;
+    youtube?: string;
+    twitter?: string;
+    bsky?: string;
     website?: string;
+    tiktok?: string;
+    mastodon?: string;
+    misc?: string;
   };
 }
 

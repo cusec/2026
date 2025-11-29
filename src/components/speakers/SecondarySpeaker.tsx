@@ -17,7 +17,7 @@ export default function SecondarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col justify-between items-center text-center w-full h-[480px] xs:w-[300px] xs:h-[540px] py-12 text-dark-mode rounded-xl border-1 border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
+      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[300px] xs:h-[570px] py-10 text-dark-mode font-se rounded-xl border border-light-mode/70 bg-light-mode/50 transition-all duration-300 ease-in-out hover:bg-light-mode/65 group"
     >
       <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
@@ -42,21 +42,21 @@ export default function SecondarySpeaker({
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <h2 className="text-lg md:text-xl xl:text-2xl">
+                  <h2 className="text-xl md:text-xl xl:text-2xl font-semibold">
                     {speaker.name}
                   </h2>
                   <h2 className="text-md md:text-md xl:text-lg">
                     ({speaker.pronouns})
                   </h2>
                 </div>
-                <p className="text-sm md:text-md xl:text- mt-2">
-                  {speaker.talkTitle}
-                </p>
-                <p className="text-sm md:text-md xl:text-md mt-1">
+                <p className="text-sm md:text-md xl:text-md mt-2">
                   {speaker.title}
                 </p>
+                <p className="text-sm md:text-md xl:text-md mt-3">
+                  {speaker.talkTitle}
+                </p>
               </div>
-              <div className="text-dark-mode mt-3">
+              <div className="text-dark-mode mt-2">
                 <Socials speaker={speaker} variant="dark" />
               </div>
             </motion.div>
@@ -68,9 +68,9 @@ export default function SecondarySpeaker({
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="w-full h-full flex items-center justify-center text-center p-4"
+              className="w-full h-full flex items-center justify-center text-center py-2 px-4"
             >
-              <p className="text-sm md:text-md overflow-auto max-h-[250px]">
+              <p className="text-sm md:text-md overflow-auto h-full">
                 {speaker.bio}
               </p>
             </motion.div>

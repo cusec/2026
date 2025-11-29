@@ -1,66 +1,106 @@
 {
   "primarySpeakers": [
     {
-      "name": "Alice Johnson",
+      "name": "Fatima Taj",
       "pronouns": "she/her",
-      "title": "CTO at Tech Innovations",
-      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
+      "title": "Senior Software Engineer at Yelp, LinkedIn Learning Instructor",
+      "bio": "Fatima is a Senior Software Engineer at Yelp and a LinkedIn Learning Instructor with a passion for ensuring there is no knowledge gatekeeping in tech. She believes that career growth and technical skills should be accessible to everyone, and she actively mentors professionals by sharing candid lessons and practical strategies - so others don't have to learn the hard way. On LinkedIn, she shares actionable insights with a wide community, making career development guidance approachable and practical.\n\nAn experienced international speaker, Fatima has presented at leading conferences including Harvard WeCode, Berlin Buzzwords, Developer Week, SCALE, NDC Copenhagen Developer Festival, Women of Silicon Roundabout, cdCon+GitOpsCon (as a keynote), and Momentum, as well as at more than 80 hackathons across North America. Her sessions are known for being interactive and packed with hands-on advice, leaving attendees with strategies they can apply immediately.\n\nWith a master's degree in Data Science from HEC Montreal and a bachelor's degree in Mathematics from the University of Waterloo, Fatima combines technical expertise with a commitment to building an inclusive and supportive tech community. Her mission is simple: make knowledge in tech open to all.",
       "image": "/images/speakers/test.jpg",
-      "talkTitle": "The Future of AI",
+      "talkTitle": "Winning in a Tough Tech Market",
+      "talkDescription": "The technical interview process is more competitive than ever. Having navigated it myself this year, I've seen firsthand just how intense the market has become—and how success often hinges on more than just solving coding problems. At the same time, as someone who has interviewed and coached countless candidates, I know exactly what differentiates those who walk away with offers from those who don't.\n\nThis session is the most holistic, end-to-end guide to technical interviews you'll ever attend. We'll cover the entire journey: from building your network and preparing before the first recruiter call, to standing out during behavioral, coding, and system design rounds, to handling rejections, multiple offers, and negotiations with confidence. Along the way, I'll share concrete strategies, templates, and stories—drawn from both sides of the table—that reveal the little things strong candidates do differently to stand out.\n\nYou'll leave not just with a roadmap for interview prep, but with the practical tools and confidence to navigate every stage of the process—and maximize your chances of landing the offer.",
       "socials": {
-        "x": "https://twitter.com/alicejohnson",
-        "linkedin": "https://linkedin.com/in/alicejohnson",
-        "github": "https://github.com/alicejohnson"
+        "linkedin": "https://www.linkedin.com/in/fatima-taj-37363a109/",
+        "instagram": "https://www.instagram.com/fatimatalkstech/",
+        "youtube": "https://www.youtube.com/@fatimatalkstech"
       }
     },
     {
-      "name": "Bob Smith",
+      "name": "Pirijan Keth",
       "pronouns": "he/him",
-      "title": "AI Researcher at Future Labs",
-      "bio": "Bob specializes in artificial intelligence and machine learning, with numerous publications in top journals. He is dedicated to advancing AI ethics and responsible technology development.",
+      "title": "Kinopio creator, designer, engineer, and biz person",
+      "bio": "I'm a software designer and engineer who grew up in Toronto, then moved to NYC to work at Fog Creek Software (home of Trello and Stack Overflow) – where I co-created of Glitch. About 7 years ago, I went independent to start Kinopio, a spatial note-taking and whiteboarding tool for collecting and connecting your thoughts, ideas, and feelings.",
       "image": "/images/speakers/test.jpg",
+      "talkTitle": "My Indie Journey, Building Kinopio",
       "socials": {
-        "linkedin": "https://linkedin.com/in/bobsmith",
-        "github": "https://github.com/bobsmith"
+        "x": "@pketh",
+        "github": "pketh"
+      }
+    },
+    {
+      "name": "Gail Carmichael",
+      "pronouns": "she/her",
+      "title": "Senior Staff Instructional Engineer at Splunk, a Cisco Company",
+      "bio": "Gail Carmichael has something of a unicorn skill set: she designs evidence-based learning experiences, has worked as a developer, and has both taught and published in academia. She earned her undergraduate and master's degrees in computer science from Carleton University before spending seven years at Shopify, where she led the design and launch of the Dev Degree program. Now at Splunk, she's an Instructional Engineer, helping engineers learn, grow, and do their best work. When she's not thinking about technical education, you can find her leading a Scouts group, defying gravity on the aerial hoop, or playing with adorable journaling stickers.",
+      "image": "/images/speakers/test.jpg",
+      "talkTitle": "How to Become a Computing Educator — and Why You'll Love It",
+      "talkDescription": "From outreach to teaching to enabling engineers in industry, there are countless reasons to learn the art (and science) of computing education. In this highly interactive session, you'll not only discover how to become a computing educator—you'll get to experience some of the techniques yourself. I'll also share my own journey from computer science student to technical learning expert at Splunk, showing how the most rewarding career paths are rarely straight lines.",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/gailcarmichael/"
+      }
+    },
+    {
+      "name": "Zach Holman",
+      "pronouns": "he/him",
+      "bio": "Zach Holman is a developer in San Francisco. He's currently the founder of Tifo, Signed, and Calendearing, and was the second engineering hire at GitHub, in addition to advising GitLab ahead of their IPO. He's also an active angel investor, with hundreds of investments in tech startups, as well as soccer clubs, including Oakland Roots in USL Championship and Cagliari in Serie A.",
+      "image": "/images/speakers/test.jpg",
+      "talkTitle": "Gambling With Your Life",
+      "socials": {
+        "x": "@holman",
+        "github": "holman"
       }
     }
   ],
   "secondarySpeakers": [
     {
-      "name": "Alice Johnson",
-      "pronouns": "she/her",
-      "title": "CTO at Tech Innovations",
-      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
-      "image": "/images/speakers/test.jpg",
-      "talkTitle": "The Future of AI",
-      "socials": {
-        "x": "https://twitter.com/alicejohnson",
-        "linkedin": "https://linkedin.com/in/alicejohnson",
-        "github": "https://github.com/alicejohnson"
-      }
-    },
-    {
-      "name": "Bob Smith",
+      "name": "Marcelo Ardiles",
       "pronouns": "he/him",
-      "title": "AI Researcher at Future Labs",
-      "talkTitle": "Advancements in Machine Learning",
-      "bio": "Bob specializes in artificial intelligence and machine learning, with numerous publications in top journals. He is dedicated to advancing AI ethics and responsible technology development.",
+      "title": "CEO at Mailsec.io",
+      "bio": "Marcelo Ardiles is a cybersecurity expert with more than 15 years of international experience in IT and cybersecurity. His areas of expertise include offensive security, application security, security architecture, and technical security assessments. He holds a BSc in Software Engineering and an MSc in Computer Security, and he is certified CISSP, OSCE, and OSCP. He is also the founder and CEO of Mailsec, a platform designed to strengthen email security, protect brand reputation, prevent domain spoofing attacks, and improve email deliverability.",
       "image": "/images/speakers/test.jpg",
+      "talkTitle": "Email Authentication Under Fire: Vulnerabilities and How to Mitigate Them",
+      "talkDescription": "Created more than 40 years ago, the Simple Mail Transfer Protocol (SMTP), the foundational protocol for email communication, was designed without cybersecurity considerations. It lacked mechanisms to authenticate email senders, ensure confidentiality, or protect messages in transit. As a result, it became vulnerable to threats such as spoofing, email replay attacks, unauthorized message modifications, etc. Over time, initiatives such as SPF, DKIM, DMARC, S/MIME and BIMI were introduced to address these security gaps. However, inconsistent adoption has left most internet domains vulnerable to security risks, enabling cybercriminals to exploit them for phishing, spoofing, spam campaigns, etc. With major providers like Google, Yahoo and Microsoft requiring the implementation of authentication protocols and PCI DSS making them mandatory this year, the adoption of email security protocols is no longer optional. This talk will explore vulnerabilities in the email authentication protocols, how attackers exploit them, and practical steps organizations can take to strengthen email security, enhance domain reputation, and ensure reliable email delivery and compliance.",
       "socials": {
-        "linkedin": "https://linkedin.com/in/bobsmith",
-        "github": "https://github.com/bobsmith"
+        "linkedin": "https://www.linkedin.com/in/marcelo-ardiles-cybersecurity/"
       }
     },
     {
-      "name": "Alice Johnson",
-      "pronouns": "she/her",
-      "title": "CTO at Tech Innovations",
-      "bio": "Alice has over 20 years of experience in the tech industry, leading teams to develop cutting-edge solutions. She is passionate about AI and its potential to transform the world.",
+      "name": "Cameron Alexander",
+      "pronouns": "he/him",
+      "title": "Senior Software Engineer @ Sanctuary Computer",
+      "bio": "Cameron Alexander is an artist, programmer, and scientist based in New York. He is interested in the relationship between math and nature (especially in chaos, cybernetics, and fractals), esoteric states of consciousness, and the essence of reality. Cameron primarily operates with experimental media such as interactive installations, live coded audiovisual performances, and alternative-process photography. He has been creating computer-based generative art since 2011, and his work has been exhibited, installed, and performed in galleries, theaters, clubs, and venues worldwide. Cameron is a member of the New York-based collective livecode.nyc, where he organizes shows, gives livecoding workshops, and performs live coded visuals and music at algoraves.",
       "image": "/images/speakers/test.jpg",
+      "talkTitle": "The Browser as Instrument: Creative Tools, Live Coding, and Culture",
+      "talkDescription": "Coding is more than just a way to provide shareholder value, it's a powerful skill for creative expression. The ubiquity of the browser makes it a great platform for building accessible tools to unlock that creativity. In this talk I'll give an overview of the browser-based creative tools I use in my personal art practice (including some that I've built myself), introduce the concept of writing code on-the-fly as a performance, and highlight the community that emerges when people with these shared interests find each other.",
       "socials": {
-        "x": "https://twitter.com/alicejohnson",
-        "linkedin": "https://linkedin.com/in/alicejohnson",
-        "github": "https://github.com/alicejohnson"
+        "linkedin": "https://www.linkedin.com/in/cameron-alexander/",
+        "github": "https://github.com/emptyflash",
+        "instagram": "https://www.instagram.com/emptyflash_/"
+      }
+    },
+    {
+      "name": "TJ Klint",
+      "pronouns": "he/him",
+      "title": "Software Developer @ Botpress",
+      "image": "/images/speakers/test.jpg",
+      "talkTitle": "The Myths & Insights of your (early) tech career.",
+      "talkDescription": "The Myths & Insights of your (early) tech career] is a candid, myth-busting talk for students and early-career developers navigating their first steps in tech. Drawing from experiences across startups, big tech, government, and community building, TJ breaks down the most common misconceptions about skills, projects, networking, and the job market. This talk won't tell you what to do, just what not to waste your time on, while giving you a clearer, more realistic path toward growth in your tech career.",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/timothy-klint/",
+        "github": "https://github.com/tjklint"
+      }
+    },
+    {
+      "name": "Laurence Liang",
+      "pronouns": "he/him",
+      "title": "Member of Technical Staff @ Rootly (YC S21) AI Labs",
+      "bio": "Laurence is a member of technical staff at the Rootly (YC S21) AI Labs and is a student researcher at McGill University. Laurence is passionate about the future of AI and robotics, which inspired him to pursue projects with a positive community impact. His recent work includes hosting the HackOS hackathons with a focus on ML research, benchmarking LLMs on coding tasks at Rootly, and contributing to research on safe and robust robots at McGill University.",
+      "image": "/images/speakers/test.jpg",
+      "talkTitle": "Hackathons and Startups: Breaking into CS with an Unconventional Background",
+      "talkDescription": "Navigating a career in CS with an unconventional background can be challenging. This talk explores how joining and hosting hackathons introduced me to the CS community, and how I got started in the startup ecosystem - with an unconventional path in CS.",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/laurence-liang-innovator/",
+        "x": "https://x.com/laurenceliang1",
+        "github": "https://github.com/TheFloatingString"
       }
     }
   ]
