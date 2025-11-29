@@ -5,6 +5,7 @@ import Socials from "./Socials";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Modal from "@/components/ui/modal";
 
 export default function SecondarySpeaker({
   key,
@@ -14,6 +15,7 @@ export default function SecondarySpeaker({
   speaker: Speaker;
 }) {
   const [showBio, setShowBio] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div
       key={key}
@@ -52,9 +54,20 @@ export default function SecondarySpeaker({
                 <p className="text-sm md:text-md xl:text-md mt-2">
                   {speaker.title}
                 </p>
-                <p className="text-sm md:text-md xl:text-md mt-3">
-                  {speaker.talkTitle}
-                </p>
+                {speaker.talkTitle && (
+                  <p className="text-sm md:text-md xl:text-md mt-3">
+                    {speaker.talkDescription ? (
+                      <span
+                        onClick={() => setIsModalOpen(true)}
+                        className="underline hover:text-dark-mode/80 transition-colors duration-200 cursor-pointer"
+                      >
+                        {speaker.talkTitle}
+                      </span>
+                    ) : (
+                      <span>{speaker.talkTitle}</span>
+                    )}
+                  </p>
+                )}
               </div>
               <div className="text-dark-mode mt-2">
                 <Socials speaker={speaker} variant="dark" />
@@ -98,6 +111,17 @@ export default function SecondarySpeaker({
           </motion.span>
         </AnimatePresence>
       </motion.button>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={speaker.talkTitle}
+        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/70 text-light-mode rounded-2xl"
+      >
+        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
+          {speaker.talkDescription || "No description available."}
+        </p>
+      </Modal>
     </div>
   );
 }

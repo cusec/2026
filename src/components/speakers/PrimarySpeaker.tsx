@@ -5,6 +5,7 @@ import Socials from "./Socials";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Modal from "@/components/ui/modal";
 
 export default function PrimarySpeaker({
   key,
@@ -14,6 +15,7 @@ export default function PrimarySpeaker({
   speaker: Speaker;
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const MAX_LENGTH = 300; // Characters to show before truncating
   const shouldTruncate = speaker.bio.length > MAX_LENGTH;
   const displayBio =
@@ -34,7 +36,7 @@ export default function PrimarySpeaker({
           className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-105"
         />
       </div>
-      <div className="w-full flex flex-col justify-between rounded-xl border-1 border-light-mode/50 bg-light-mode/15 p-5 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group">
+      <div className="w-full flex flex-col justify-between rounded-xl border border-light-mode/50 bg-light-mode/15 p-5 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group">
         <div>
           <div className="flex flex-col md:flex-row items-baseline">
             <h2 className="text-3xl md:text-5xl mb-2">{speaker.name}</h2>
@@ -44,7 +46,21 @@ export default function PrimarySpeaker({
           </div>
           <p className="text-xl md:text-2xl mb-6">
             {speaker.title}
-            {speaker.talkTitle ? ` | ${speaker.talkTitle}` : ""}
+            {speaker.talkTitle && (
+              <>
+                {" | "}
+                {speaker.talkDescription ? (
+                  <span
+                    onClick={() => setIsModalOpen(true)}
+                    className="underline hover:text-light-mode/80 transition-colors duration-200 cursor-pointer"
+                  >
+                    {speaker.talkTitle}
+                  </span>
+                ) : (
+                  <span>{speaker.talkTitle}</span>
+                )}
+              </>
+            )}
           </p>
           <div className="text-lg md:text-xl">
             <AnimatePresence mode="wait">
@@ -112,6 +128,17 @@ export default function PrimarySpeaker({
           <Socials speaker={speaker} />
         </div>
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={speaker.talkTitle}
+        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/70 text-light-mode rounded-2xl"
+      >
+        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
+          {speaker.talkDescription || "No description available."}
+        </p>
+      </Modal>
     </div>
   );
 }
