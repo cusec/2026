@@ -23,7 +23,9 @@ export default function ParticleTooltip({
       const tooltipTimer = setTimeout(() => {
         setShowTooltip(true);
         // Fade in
-        setTimeout(() => setOpacity(1), 4500);
+        setTimeout(() => {
+          if (!sessionStorage.getItem("tooltipShown")) setOpacity(1);
+        }, 4500);
 
         // Set timer to hide tooltip after 2 seconds
         const hideTimer = setTimeout(() => {

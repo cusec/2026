@@ -11,6 +11,7 @@ const Navbar: React.FC = () => {
   // Default to disabled if not explicitly set to "true"
   const speakersEnabled = process.env.NEXT_PUBLIC_SPEAKERS_ENABLED === "true";
   const scheduleEnabled = process.env.NEXT_PUBLIC_SCHEDULE_ENABLED === "true";
+  const teamEnabled = process.env.NEXT_PUBLIC_TEAM_ENABLED === "true";
 
   // Filter nav items based on enabled features
   const navItems: Record<string, string> = {
@@ -24,6 +25,7 @@ const Navbar: React.FC = () => {
 
   if (speakersEnabled) navItems.Speakers = "/speakers";
   if (scheduleEnabled) navItems.Schedule = "/schedule";
+  if (teamEnabled) navItems["The Team"] = "/team";
   navItems["Scavenger Hunt"] = "/scavenger";
 
   return (

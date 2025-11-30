@@ -10,9 +10,11 @@ const buildDisabledRoutes = (): string[] => {
   const speakersEnabled = process.env.SPEAKERS_ENABLED === "true";
   const scheduleEnabled = process.env.SCHEDULE_ENABLED === "true";
   const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
+  const teamEnabled = process.env.TEAM_ENABLED === "true";
 
   if (!speakersEnabled) disabled.push("/speakers");
   if (!scheduleEnabled) disabled.push("/schedule");
+  if (!teamEnabled) disabled.push("/team");
   if (!scavengerEnabled) disabled.push("/auth/login?returnTo=/scavenger");
 
   return disabled;

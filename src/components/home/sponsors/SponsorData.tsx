@@ -27,7 +27,6 @@ const sponsors: SponsorData = {
     //{ image: "/images/sponsors/fellow.webp", link: "https://fellow.app/" },
   ],
   bronze: [
-    //{ image: "/images/2025_sponsors/ciena.png", link: "https://www.ciena.com" },
     {
       image: "/images/sponsors/cse.svg",
       link: "https://www.cse-cst.gc.ca/",

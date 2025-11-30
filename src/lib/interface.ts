@@ -95,11 +95,42 @@ export interface Speaker {
   name: string;
   pronouns?: string;
   title?: string;
+  talkTitle?: string;
+  talkDescription?: string;
   bio: string;
   image: string;
   socials?: {
     linkedin?: string;
+    x?: string;
+    github?: string;
+    instagram?: string;
+    youtube?: string;
     twitter?: string;
+    bsky?: string;
+    website?: string;
+    tiktok?: string;
+    mastodon?: string;
+    misc?: string;
+  };
+}
+
+export interface TeamMember {
+  name: string;
+  pronouns: string;
+  teamRole: string;
+  professionalTitle?: string;
+  primaryImage: string;
+  secondaryImage?: string;
+  infoTitle: string;
+  infoDescription: string;
+  education: {
+    major: string;
+    institution: string;
+    logo: string;
+  };
+  socials?: {
+    linkedin?: string;
+    x?: string;
     github?: string;
     website?: string;
   };

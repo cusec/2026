@@ -280,3 +280,78 @@ export async function PUT(request: Request) {
     );
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    // Check if user is admin
+    const adminStatus = await isAdmin();
+    if (!adminStatus) {
+      return NextResponse.json(
+        { error: "Unauthorized - Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    // Get admin email
+    const session = await auth0.getSession();
+    const adminEmail = session?.user?.email || "unknown";
+
+    await connectMongoDB();
+
+    const body = await request.json();
+    const { dayId, eventId } = body;
+
+    if (!dayId || !eventId) {
+      return NextResponse.json(
+        { error: "Missing required fields: dayId and eventId" },
+        { status: 400 }
+      );
+    }
+
+    // Find the day
+    const day = await Day.findById(dayId);
+    if (!day) {
+      return NextResponse.json({ error: "Day not found" }, { status: 404 });
+    }
+
+    // Find the event index
+    const eventIndex = day.schedule.findIndex(
+      (e: { _id: { toString: () => string } }) => e._id.toString() === eventId
+    );
+    if (eventIndex === -1) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
+
+    const deletedEvent = { ...day.schedule[eventIndex] };
+
+    // Remove the event from the schedule
+    day.schedule.splice(eventIndex, 1);
+    await day.save();
+
+    // Log the admin action
+    await logAdminAction({
+      adminEmail,
+      action: "DELETE_SCHEDULE_EVENT",
+      resourceType: "scheduleItem",
+      resourceId: day._id.toString(),
+      details: {
+        eventTitle: deletedEvent.title,
+        dayDate: day.date,
+        eventId,
+      },
+      previousData: deletedEvent,
+      request,
+    });
+
+    return NextResponse.json(
+      { message: "Event deleted successfully", day },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting event:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

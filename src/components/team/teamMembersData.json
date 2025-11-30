@@ -1,0 +1,151 @@
+[
+  {
+    "name": "McCauley Armishaw",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Sponsorships",
+    "professionalTitle": "Developer Relations",
+    "primaryImage": "/images/team/mcCauley.jpg",
+    "infoTitle": "Fun Fact",
+    "infoDescription": "I was named after the famous child actor, Macaulay Culkin! (from Home Alone 1 & 2)",
+    "education": {
+      "major": "Application Development and Delivery",
+      "institution": "Red River College Polytechnic",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/mccauley-armishaw/",
+      "x": "https://x.com/mccauleycodes",
+      "github": "https://github.com/marmishaw14",
+      "instagram": "https://www.instagram.com/mccauley.27/"
+    }
+  },
+  {
+    "name": "Carson Spriggs-Audet",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Logistics",
+    "professionalTitle": "Software Developer & QA Specialist",
+    "primaryImage": "/images/team/carson.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I have a penguin shelf and I'm aiming to have at least 50 unique penguins on it by June 2026.",
+    "education": {
+      "major": "Engineering Technology and Applied Sciences",
+      "institution": "Memorial University of Newfoundland",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "website": "https://carsonspriggs.me/",
+      "linkedin": "https://www.linkedin.com/in/carsonspriggs/",
+      "github": "https://github.com/carsonSgit"
+    }
+  },
+  {
+    "name": "Denys",
+    "pronouns": "He/Him",
+    "teamRole": "Advisor",
+    "professionalTitle": "Application Developer",
+    "primaryImage": "/images/team/denys.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I'm attending my fifth CUSEC as an organizer. After finishing my studies, I transitioned into my current role as an application developer in the lottery industry.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Manitoba",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/denys--popov/"
+    }
+  },
+  {
+    "name": "Cedric Dimatulac",
+    "pronouns": "He/They",
+    "teamRole": "Head Delegate uOttawa",
+    "professionalTitle": "Full Stack Developer",
+    "primaryImage": "/images/team/cedric.jpeg",
+    "infoTitle": "Figurehead in the Super Smash Bros. Ultimate community",
+    "infoDescription": "I've hosted the biggest Smash Ultimate tournament in Ottawa, I'm also the best Kirby player in Canada",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Ottawa",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "x": "https://x.com/nerdcedric?s=21",
+      "instagram": "https://www.instagram.com/cedric_dimatulac?igsh=Ym8waTFsZTdldTFq&utm_source=qr"
+    }
+  },
+  {
+    "name": "Antonina Kosyakova",
+    "pronouns": "She/Her",
+    "teamRole": "JAC HD",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/antonina.jpg",
+    "infoTitle": "I have a chubby cat on a diet, I dance, and I code.",
+    "infoDescription": "I'm a CS student at John Abbott College, getting through it with the help of my cats",
+    "education": {
+      "major": "Computer science",
+      "institution": "John Abbott College",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "linkedin": "https://linkedin.com/in/tonya-kosyakova"
+    }
+  },
+  {
+    "name": "Janelle Tam",
+    "pronouns": "She/Her",
+    "teamRole": "Director of Events",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/janelle.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I'm passionate about community building and creating socially impactful software!",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "McGill University",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/janellewstam",
+      "x": "https://x.com/_janelletam_",
+      "github": "https://github.com/janelletam",
+      "instagram": "https://www.instagram.com/_janelletam_"
+    }
+  },
+  {
+    "name": "Angel Shinh",
+    "pronouns": "He/Him",
+    "teamRole": "UI/UX Designer",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/angel.jpg",
+    "infoTitle": "Fun Fact",
+    "infoDescription": "I meow back at cats all the time, but my \"pspsps\" never works. I also LOVE playing guitar.",
+    "education": {
+      "major": "Computer Programming and Analysis",
+      "institution": "Seneca Polytechnic",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "website": "https://www.ashinh.lol/",
+      "linkedin": "https://www.linkedin.com/in/angelshinh/",
+      "x": "https://x.com/angelshinh",
+      "github": "https://github.com/angelshinh1",
+      "instagram": "https://www.instagram.com/angelshinh/"
+    }
+  },
+  {
+    "name": "Ekamjit Singh",
+    "pronouns": "He/Him",
+    "teamRole": "Head Delegate U of M",
+    "professionalTitle": "Computer Science Student",
+    "primaryImage": "/images/team/ekamjit.jpg",
+    "infoTitle": "Important but Useless Info",
+    "infoDescription": "People keep calling me \"Jacob\" for reasons unknown and I've rewatched Peaky Blinders so often it's basically a personality trait at this point.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Manitoba",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "instagram": "_ekam05"
+    }
+  }
+]
