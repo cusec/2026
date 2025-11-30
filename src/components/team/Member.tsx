@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 // Supported social media platforms (those with icons in /public/icons/team_socials/)
-const SUPPORTED_SOCIALS = ["linkedin", "github", "website"];
+const SUPPORTED_SOCIALS = ["linkedin", "github", "website", "x", "instagram"];
 
 export default function Member({
   key,
@@ -25,9 +25,9 @@ export default function Member({
 
   // Function to get position for social icons around the profile picture
   const getSocialPosition = (index: number) => {
-    const angleStep = 50; // Spread evenly from left (270°) to bottom (270°)
+    const angleStep = 55; // Spread evenly from left (270°) to bottom (270°)
     const angle = (280 - angleStep * index) * (Math.PI / 270); // Start from left (270°), go counter-clockwise
-    const radius = 70; // Distance from center (half of image width + some padding)
+    const radius = 65; // Distance from center (half of image width + some padding)
     return {
       left: `calc(50% + ${Math.cos(angle) * radius}px)`,
       top: `calc(50% + ${Math.sin(angle) * radius}px)`,
@@ -50,7 +50,7 @@ export default function Member({
       }`}
     >
       {/* Gradient overlay - fades in on hover or active state */}
-      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/30 to-secondary/30 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-50 group-[.active]:opacity-50 z-0" />
+      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-70 group-[.active]:opacity-70 z-0" />
 
       {/* Image - positioned absolutely, moves to top-right on hover or active state */}
       <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out group-hover:w-[120px] group-hover:h-[120px] group-hover:left-[calc(100%-135px)] group-hover:top-4 group-hover:-translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:-translate-x-0 z-10">
@@ -87,7 +87,7 @@ export default function Member({
               className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 hover:scale-105"
               style={position}
             >
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-light-mode/5">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
                   alt={key}
@@ -161,12 +161,12 @@ export default function Member({
               rel="noopener noreferrer"
               className="w-8 h-8"
             >
-              <div className="relative w-full h-full">
+              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-light-mode/20">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
                   alt={key}
                   fill
-                  className="object-contain"
+                  className="object-contain p-1"
                 />
               </div>
             </a>
