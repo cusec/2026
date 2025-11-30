@@ -152,7 +152,7 @@ export default function Member({
         </div>
 
         {/* Mobile social links - displayed at bottom on sm and under */}
-        <div className="absolute bottom-4 left-0 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-30 opacity-0 transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100">
+        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-30 opacity-0 transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100">
           {socialEntries.map(([key, url]) => (
             <a
               key={key}
@@ -161,12 +161,12 @@ export default function Member({
               rel="noopener noreferrer"
               className="w-8 h-8"
             >
-              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-light-mode/20">
+              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
                   alt={key}
                   fill
-                  className="object-contain p-1"
+                  className="object-contain"
                 />
               </div>
             </a>
