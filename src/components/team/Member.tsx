@@ -152,7 +152,7 @@ export default function Member({
         </div>
 
         {/* Mobile social links - displayed at bottom on sm and under */}
-        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-30 opacity-0 transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100">
+        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-20 opacity-0 transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100">
           {socialEntries.map(([key, url]) => (
             <a
               key={key}
