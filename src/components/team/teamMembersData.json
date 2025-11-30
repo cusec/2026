@@ -1,7 +1,7 @@
 [
   {
     "name": "McCauley Armishaw",
-    "pronouns": "he/him",
+    "pronouns": "He/Him",
     "teamRole": "Director of Sponsorships",
     "professionalTitle": "Developer Relations",
     "primaryImage": "/images/team/mcCauley.jpg",
@@ -13,15 +13,15 @@
       "logo": "/images/schools/seneca.svg"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/mccauley.27/",
-      "x": "https://x.com/mccauleycodes",
       "linkedin": "https://www.linkedin.com/in/mccauley-armishaw/",
-      "github": "https://github.com/marmishaw14"
+      "x": "https://x.com/mccauleycodes",
+      "github": "https://github.com/marmishaw14",
+      "instagram": "https://www.instagram.com/mccauley.27/"
     }
   },
   {
     "name": "Carson Spriggs-Audet",
-    "pronouns": "He/him",
+    "pronouns": "He/Him",
     "teamRole": "Director of Logistics",
     "professionalTitle": "Software Developer & QA Specialist",
     "primaryImage": "/images/team/carson.jpg",
@@ -33,9 +33,9 @@
       "logo": "/images/schools/seneca.svg"
     },
     "socials": {
+      "website": "https://carsonspriggs.me/",
       "linkedin": "https://www.linkedin.com/in/carsonspriggs/",
-      "github": "https://github.com/carsonSgit",
-      "website": "https://carsonspriggs.me/"
+      "github": "https://github.com/carsonSgit"
     }
   },
   {
@@ -47,7 +47,7 @@
     "infoTitle": "About Me",
     "infoDescription": "I'm attending my fifth CUSEC as an organizer. After finishing my studies, I transitioned into my current role as an application developer in the lottery industry.",
     "education": {
-      "major": "Comp Sci",
+      "major": "Computer Science",
       "institution": "University of Manitoba",
       "logo": "/images/schools/seneca.svg"
     },
@@ -69,13 +69,13 @@
       "logo": "/images/schools/seneca.svg"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/cedric_dimatulac?igsh=Ym8waTFsZTdldTFq&utm_source=qr",
-      "x": "https://x.com/nerdcedric?s=21"
+      "x": "https://x.com/nerdcedric?s=21",
+      "instagram": "https://www.instagram.com/cedric_dimatulac?igsh=Ym8waTFsZTdldTFq&utm_source=qr"
     }
   },
   {
     "name": "Antonina Kosyakova",
-    "pronouns": "She her",
+    "pronouns": "She/Her",
     "teamRole": "JAC HD",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/antonina.jpg",
@@ -92,7 +92,7 @@
   },
   {
     "name": "Janelle Tam",
-    "pronouns": "she/her",
+    "pronouns": "She/Her",
     "teamRole": "Director of Events",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/janelle.jpg",
@@ -104,10 +104,10 @@
       "logo": "/images/schools/seneca.svg"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/_janelletam_",
-      "x": "https://x.com/_janelletam_",
       "linkedin": "https://www.linkedin.com/in/janellewstam",
-      "github": "https://github.com/janelletam"
+      "x": "https://x.com/_janelletam_",
+      "github": "https://github.com/janelletam",
+      "instagram": "https://www.instagram.com/_janelletam_"
     }
   },
   {
@@ -124,16 +124,16 @@
       "logo": "/images/schools/seneca.svg"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/angelshinh/",
-      "x": "https://x.com/angelshinh",
+      "website": "https://www.ashinh.lol/",
       "linkedin": "https://www.linkedin.com/in/angelshinh/",
+      "x": "https://x.com/angelshinh",
       "github": "https://github.com/angelshinh1",
-      "website": "https://www.ashinh.lol/"
+      "instagram": "https://www.instagram.com/angelshinh/"
     }
   },
   {
     "name": "Ekamjit Singh",
-    "pronouns": "he/him",
+    "pronouns": "He/Him",
     "teamRole": "Head Delegate U of M",
     "professionalTitle": "Computer Science Student",
     "primaryImage": "/images/team/ekamjit.jpg",

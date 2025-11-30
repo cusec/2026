@@ -4,6 +4,7 @@ import Image from "next/image";
 // List of supported social media platforms (only these will be displayed)
 // Add or remove platforms from this list as icon assets become available
 const SUPPORTED_SOCIALS = [
+  "website",
   "linkedin",
   "x",
   "github",

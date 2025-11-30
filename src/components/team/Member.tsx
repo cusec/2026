@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 // Supported social media platforms (those with icons in /public/icons/team_socials/)
-const SUPPORTED_SOCIALS = ["linkedin", "github", "website", "x", "instagram"];
+const SUPPORTED_SOCIALS = ["website", "linkedin", "x", "github", "instagram"];
 
 export default function Member({
   key,
@@ -50,7 +50,7 @@ export default function Member({
       }`}
     >
       {/* Gradient overlay - fades in on hover or active state */}
-      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-70 group-[.active]:opacity-70 z-0" />
+      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-55 group-[.active]:opacity-55 z-0" />
 
       {/* Image - positioned absolutely, moves to top-right on hover or active state */}
       <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out group-hover:w-[120px] group-hover:h-[120px] group-hover:left-[calc(100%-135px)] group-hover:top-4 group-hover:-translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:-translate-x-0 z-10">
@@ -87,7 +87,7 @@ export default function Member({
               className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 hover:scale-105"
               style={position}
             >
-              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-light-mode/5">
+              <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
                   alt={key}
@@ -104,13 +104,13 @@ export default function Member({
       <div className="w-full h-full px-4 flex flex-col items-center justify-start pt-[220px] xs:pt-[240px]">
         {/* Basic info - hidden on hover or active state */}
         <div className="flex flex-col items-center text-light-mode transition-opacity duration-300 ease-in-out group-hover:opacity-0 group-[.active]:opacity-0">
-          <h2 className="text-lg xs:text-2xl xl:text-3xl mb-1">
+          <h2 className="text-lg xs:text-2xl xl:text-[28px] mb-1">
             {member.name}
           </h2>
           <h2 className="text-md md:text-md xl:text-lg text-light-mode/80 mb-1">
             ({member.pronouns})
           </h2>
-          <p className="text-sm xs:text-lg xl:text-2xl mt-2">
+          <p className="text-sm xs:text-lg xl:text-xl mt-2">
             {member.teamRole}
           </p>
         </div>
