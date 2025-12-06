@@ -84,7 +84,7 @@
       "name": "TJ Klint",
       "pronouns": "He/Him",
       "title": "Software Developer @ Botpress",
-      "bio": "-",
+      "bio": "TJ Klint is a Software Developer at Botpress and the former Chair of CUSEC 2025. His path through tech has taken him from student organizer to developer, navigating internships, career pivots, and the unpredictable reality of breaking into the industry. TJ returns to CUSEC 2026 to present The Myths & Insights of Your (Early) Tech Career, a candid talk that breaks down the misconceptions he sees students and early-career developers run into: many of which he learned the hard way himself.",
       "image": "/images/speakers/tjKlint.png",
       "talkTitle": "The Myths & Insights of your (early) tech career.",
       "talkDescription": "The Myths & Insights of your (early) tech career is a candid, myth-busting talk for students and early-career developers navigating their first steps in tech. Drawing from experiences across startups, big tech, government, and community building, TJ breaks down the most common misconceptions about skills, projects, networking, and the job market. This talk won't tell you what to do, just what not to waste your time on, while giving you a clearer, more realistic path toward growth in your tech career.",
@@ -106,6 +106,18 @@
         "linkedin": "https://www.linkedin.com/in/laurence-liang-innovator/",
         "x": "https://x.com/laurenceliang1",
         "github": "https://github.com/TheFloatingString"
+      }
+    },
+    {
+      "name": "Vicky Desjardins",
+      "pronouns": "She/Her",
+      "title": "PhD Candidate @ University of Montreal, Cyberdefense Consultant",
+      "bio": "Vicky Desjardins is a doctoral candidate in criminology at the University of Montreal, specializing in ransomware attack methodologies. Her doctoral research focuses on innovative strategies to pre-emptively disrupt attack scripts, contributing significantly to the evolving landscape of cybersecurity. Vicky's academic pursuits include expertise in risk prioritization and criminal behavioural analysis, further enriched by her master's thesis on the prioritization of online sex solicitation cases with high potential offline contact. In addition to her academic work, she has presented the practical implications of her findings at numerous conferences across North America and Europe over the years. Vicky also works in cyber incident response, playing a crucial role in the containment and neutralization of threat actors, highlighting her practical expertise in the field.",
+      "image": "/images/speakers/vickyDesjardins.jpg",
+      "talkTitle": "Welcome to the war room: Can you survive?",
+      "talkDescription": "Long are the days that it was only a possibility that organization get attack, now the risk is never at zero. Being ready to react to cyberattack is now a requirement to survive an attack and continue business operations. Incident response is crisis management whereby emotions run high, pressures are through the roof and time is not on anyone’s side. With every decision counting, incident response is overwhelming when underprepared. In this presentation, we will discuss practice survive an incident response while containing the situation. Then, this is where the fun officially begins. In a dungeon and dragon style escape room, executive team and technical teams will work together to solve a critical incident. The question is will both teams work together or against each other to solve a critical attack. In this interactive session, we will discuss how to plan for incident and things to avoid making incident response.",
+      "socials": {
+        "linkedin": "http://www.linkedin.com/in/vicky-desjardins-208134221"
       }
     }
   ]
