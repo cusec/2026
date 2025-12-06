@@ -10,7 +10,7 @@
     "education": {
       "major": "Application Development and Delivery",
       "institution": "Red River College Polytechnic",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/rrcpoly.png"
     },
     "socials": {
       "linkedin": "https://www.linkedin.com/in/mccauley-armishaw/",
@@ -30,7 +30,7 @@
     "education": {
       "major": "Engineering Technology and Applied Sciences",
       "institution": "Memorial University of Newfoundland",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/memorialU.png"
     },
     "socials": {
       "website": "https://carsonspriggs.me/",
@@ -49,7 +49,7 @@
     "education": {
       "major": "Computer Science",
       "institution": "University of Manitoba",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/umanitoba.png"
     },
     "socials": {
       "linkedin": "https://www.linkedin.com/in/denys--popov/"
@@ -58,7 +58,7 @@
   {
     "name": "Cedric Dimatulac",
     "pronouns": "He/They",
-    "teamRole": "Head Delegate uOttawa",
+    "teamRole": "Head Delegate @ University of Ottawa",
     "professionalTitle": "Full Stack Developer",
     "primaryImage": "/images/team/cedric.jpeg",
     "infoTitle": "Figurehead in the Super Smash Bros. Ultimate community",
@@ -66,7 +66,7 @@
     "education": {
       "major": "Computer Science",
       "institution": "University of Ottawa",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/uottawa.png"
     },
     "socials": {
       "x": "https://x.com/nerdcedric?s=21",
@@ -84,7 +84,7 @@
     "education": {
       "major": "Computer science",
       "institution": "John Abbott College",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/jac.png"
     },
     "socials": {
       "linkedin": "https://linkedin.com/in/tonya-kosyakova"
@@ -101,7 +101,7 @@
     "education": {
       "major": "Software Engineering",
       "institution": "McGill University",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/mcgill.png"
     },
     "socials": {
       "linkedin": "https://www.linkedin.com/in/janellewstam",
@@ -142,10 +142,28 @@
     "education": {
       "major": "Computer Science",
       "institution": "University of Manitoba",
-      "logo": "/images/schools/seneca.svg"
+      "logo": "/images/schools/umanitoba.png"
     },
     "socials": {
-      "instagram": "_ekam05"
+      "instagram": "https://www.instagram.com/_ekam05"
+    }
+  },
+  {
+    "name": "Abdel Ait",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Events",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/abdel.jpg",
+    "infoTitle": "Fun Fact",
+    "infoDescription": "I type faster than I make life decisions.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "Concordia University",
+      "logo": "/images/schools/concordiau.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/abdessalamaithaqi/",
+      "github": "https://github.com/AbdessalamAithaqi"
     }
   }
 ]

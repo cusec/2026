@@ -103,7 +103,7 @@ export default function Member({
       {/* Content container */}
       <div className="w-full h-full px-4 flex flex-col items-center justify-start pt-[220px] xs:pt-[240px]">
         {/* Basic info - hidden on hover or active state */}
-        <div className="flex flex-col items-center text-light-mode transition-opacity duration-300 ease-in-out group-hover:opacity-0 group-[.active]:opacity-0">
+        <div className="flex flex-col items-center text-center text-light-mode transition-opacity duration-300 ease-in-out group-hover:opacity-0 group-[.active]:opacity-0">
           <h2 className="text-lg xs:text-2xl xl:text-[28px] mb-1">
             {member.name}
           </h2>
