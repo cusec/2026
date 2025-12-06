@@ -1,26 +1,21 @@
-import { Speaker } from "@/lib/interface";
-import speakers from "./speakerData.json";
-import PrimarySpeaker from "./PrimarySpeaker";
-import SecondarySpeaker from "./SecondarySpeaker";
-
 export default function Heart() {
   return (
-    <div className="mx-[10vw] lg:mx-[15vw] mt-[15vh] text-light-mode">
-      <h1 className="text-3xl md:text-5xl pb-4 mb-6 md:mb-12 w-fit border-b border-light-mode/70">
+    <div className="mx-[10vw] lg:mx-[15vw] text-light-mode">
+      <h1 className="text-3xl md:text-6xl pb-4 mb-8 md:mb-14 w-fit border-b border-light-mode/70">
         The Heart
       </h1>
-      <div className="flex flex-col gap-10 mb-[5vh]">
-        {speakers["primarySpeakers"].map((speaker: Speaker, index: number) => (
-          <PrimarySpeaker key={index} speaker={speaker} />
-        ))}
-      </div>
-      <div className="flex gap-10 flex-wrap justify-center">
-        {speakers["secondarySpeakers"].map(
-          (speaker: Speaker, index: number) => (
-            <SecondarySpeaker key={index} speaker={speaker} />
-          )
-        )}
-      </div>
+      <p className="text-md md:text-2xl">
+        Distinguished speakers are at the heart of CUSEC, igniting minds and
+        inspiring futures. These leaders, innovators, and pioneers in the
+        technology industry bring a wealth of knowledge and experience to the
+        stage. Their insightful presentations, engaging workshops, and
+        stimulating discussions elevate the conference experience, offering
+        students and professionals invaluable opportunities to dive deep into
+        the latest trends and emerging technologies. Our speakers are central to
+        fostering a vibrant, educational, and thought-provoking environment,
+        ensuring that CUSEC remains an essential event for anyone eager to shape
+        the future of technology and innovation.
+      </p>
     </div>
   );
 }
