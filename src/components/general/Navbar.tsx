@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,6 +27,22 @@ const Navbar: React.FC = () => {
   if (scheduleEnabled) navItems.Schedule = "/schedule";
   if (teamEnabled) navItems["The Team"] = "/team";
   navItems["Scavenger Hunt"] = "/scavenger";
+
+  // Prevent scrolling when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.documentElement.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
 
   return (
     <>
@@ -95,7 +111,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Navigation Menu */}
       {true && (
         <div
-          className={`fixed w-full h-[100vh] z-20 bg-dark-mode/60 backdrop-blur-sm text-light-mode/90 pb-4 py-24 space-y-3 transition-all duration-1000`}
+          className={`fixed w-full h-screen overflow-y-auto z-20 bg-dark-mode/60 backdrop-blur-sm text-light-mode/90 pb-4 py-18 space-y-3 transition-all duration-1000`}
           style={{
             clipPath: isMenuOpen
               ? "inset(0% 0% 0% 0%)"
@@ -106,7 +122,7 @@ const Navbar: React.FC = () => {
             <Link
               key={item}
               href={url}
-              className="block w-full text-center tracking-wide text-lg px-4 py-3 transition-all duration-300 ease-out hover:bg-light-mode/20"
+              className="block w-full text-center tracking-wide text-md px-4 py-3 transition-all duration-300 ease-out hover:bg-light-mode/20"
               onClick={() => setIsMenuOpen(false)}
             >
               {item}

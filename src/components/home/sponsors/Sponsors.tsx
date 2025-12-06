@@ -7,7 +7,7 @@ import BottomKoi from "./BottomKoi";
 const Sponsors = () => {
   return (
     <section
-      className="w-full relative py-12 mt-[25vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
+      className="w-full relative py-12 mt-[12vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
       id="Sponsors"
     >
       <TopKoi />
