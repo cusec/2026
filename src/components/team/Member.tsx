@@ -45,7 +45,7 @@ export default function Member({
     <div
       key={key}
       onClick={handleClick}
-      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/30 hover:bg-light-mode/15 transition-all duration-500 ease-in-out overflow-hidden group sm:cursor-default cursor-pointer ${
+      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 hover:bg-light-mode/10 transition-all duration-500 ease-in-out overflow-hidden group sm:cursor-default cursor-pointer ${
         isActive ? "active" : ""
       }`}
     >

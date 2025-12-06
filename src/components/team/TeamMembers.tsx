@@ -8,7 +8,7 @@ export default function TeamMembers() {
       <h1 className="text-3xl md:text-5xl pb-4 mb-[5vh] border-b w-fit border-light-mode/70">
         The 2026 Team
       </h1>
-      <div className="flex gap-10 flex-wrap justify-evenly">
+      <div className="flex gap-5 flex-wrap justify-evenly">
         {members.map((member: TeamMember, index: number) => (
           <Member key={index} member={member} />
         ))}
