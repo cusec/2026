@@ -76,7 +76,7 @@
   {
     "name": "Antonina Kosyakova",
     "pronouns": "She/Her",
-    "teamRole": "JAC HD",
+    "teamRole": "Head Delegate @ John Abbott College",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/antonina.jpg",
     "infoTitle": "I have a chubby cat on a diet, I dance, and I code.",
@@ -113,7 +113,7 @@
   {
     "name": "Angel Shinh",
     "pronouns": "He/Him",
-    "teamRole": "UI/UX Designer",
+    "teamRole": "Director of UI/UX",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/angel.jpg",
     "infoTitle": "Fun Fact",
@@ -134,7 +134,7 @@
   {
     "name": "Ekamjit Singh",
     "pronouns": "He/Him",
-    "teamRole": "Head Delegate U of M",
+    "teamRole": "Head Delegate @ University of Manitoba",
     "professionalTitle": "Computer Science Student",
     "primaryImage": "/images/team/ekamjit.jpg",
     "infoTitle": "Important but Useless Info",
@@ -172,8 +172,8 @@
     "teamRole": "Director of Technology",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/shrey.jpg",
-    "infoTitle": "-",
-    "infoDescription": "-",
+    "infoTitle": "Code Theme Song",
+    "infoDescription": "Cornfield Chase - the Interstellar song (becasue I'm left confused by my own code)",
     "education": {
       "major": "Computer Programming and Analysis",
       "institution": "Seneca Polytechnic",
@@ -190,13 +190,13 @@
     "pronouns": "-",
     "teamRole": "Head Delegate @ University of Guelph",
     "professionalTitle": "-",
-    "primaryImage": "/images/team/tiffany.jpg",
-    "infoTitle": "-",
-    "infoDescription": "-",
+    "primaryImage": "/images/team/tiff.jpg",
+    "infoTitle": "Weird Food Combo",
+    "infoDescription": "cream soda + vanilla soy milk = HEAVEN",
     "education": {
       "major": "Software Engineering",
       "institution": "University of Guelph",
-      "logo": "/images/schools/uoguelph.png"
+      "logo": "/images/schools/uguelph_no_bg.png"
     },
     "socials": {
       "linkedin": "https://www.linkedin.com/in/tiffany-villatoro-bb7253261/"
@@ -208,8 +208,8 @@
     "teamRole": "Head Delegate @ University of British Columbia",
     "professionalTitle": "-",
     "primaryImage": "/images/team/kelly.jpg",
-    "infoTitle": "-",
-    "infoDescription": "-",
+    "infoTitle": "Proudest Project",
+    "infoDescription": "Euodia, a Figma interactive design project that won 2cd place at SFU Surge's sparkjam that was inspired by the last of us and cyberpunk aspects ~ it was so fun to learn how to design in Figma, prototyping and looking at viability.",
     "education": {
       "major": "Honours Biotechnology",
       "institution": "University of British Columbia",
@@ -218,6 +218,171 @@
     "socials": {
       "linkedin": "https://www.linkedin.com/in/kelgi/",
       "instagram": "https://www.instagram.com/kellnguyn/"
+    }
+  },
+  {
+    "name": "Aran Saseelan",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ McMaster University",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/aran.jpeg",
+    "infoTitle": "Favorite Sport",
+    "infoDescription": "Basketball as I've been playing since I was a kid. Always try your best and there's something super satisfying about setting traps and seeing your plan actually work.",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "McMaster University",
+      "logo": "/images/schools/mcmaster_full.png"
+    },
+    "socials": {
+      "instagram": "https://instagram.com/aransaseelan",
+      "linkedin": "https://www.linkedin.com/in/aransaseelan/",
+      "github": "https://github.com/aransaseelan",
+      "website": "https://aransaseelan.com"
+    }
+  },
+  {
+    "name": "Paria Jafarian",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ Concordia University",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/paria.jpeg",
+    "infoTitle": "Ultimate Adventure",
+    "infoDescription": "Something that I would love to do is similar to the plot of Eat, Pray, Love. I'd love to go on a long solo journey of healing, self-discovery, and spirituality. I would start with somewhere where I can embrace the \"art of doing nothing\" (il dolce far niente) and then, I'd love to maybe go to an ashram in India for spiritual practices.",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "Concordia University",
+      "logo": "/images/schools/concordiau.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/paria-jafarian"
+    }
+  },
+  {
+    "name": "Rumaisa Talukder",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of Calgary",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/rumaisa.jpg",
+    "infoTitle": "Ultimate Adventure",
+    "infoDescription": "A cross-country expedition in Iceland - Land of Fire & Ice. I'd journey across the island to see it's volcanoes, waterfalls, glaciers, mountains, and rugged coastal areas.",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "University of Calgary",
+      "logo": "/images/schools/ucalgary.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/rt.blue_",
+      "linkedin": "https://www.linkedin.com/in/rumaisa-talukder/"
+    }
+  },
+  {
+    "name": "Mohammad Affan Shahid (Affan)",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of Windsor",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/affan.jpeg",
+    "infoTitle": "Proudest Project",
+    "infoDescription": "DocMate, document processing app that won three awards at a single hackathon.",
+    "education": {
+      "major": "Computer Science with Software Engineering Specialization",
+      "institution": "University of Windsor",
+      "logo": "/images/schools/uwindsor.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/m_affan0404",
+      "linkedin": "https://www.linkedin.com/in/mohammad-affan-shahid-26372a2b2/"
+    }
+  },
+  {
+    "name": "Jorrell Salazar",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of Regina",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/jorrell.jpeg",
+    "infoTitle": "Weird Food Combo",
+    "infoDescription": "I absolutely LOVE eating Ruffles chips in All-Dressing flavour with a chocolate sundae.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Regina",
+      "logo": "/images/schools/uregina.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/jeiszs",
+      "linkedin": "https://www.linkedin.com/in/jorrell-salazar"
+    }
+  },
+  {
+    "name": "Taryn Beaupre",
+    "pronouns": "-",
+    "teamRole": "Director of Promotions",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/taryn.jpg",
+    "infoTitle": "First Programming Language",
+    "infoDescription": "The first one I learned, C#!",
+    "education": {
+      "major": "Computer Science",
+      "institution": "Concordia University",
+      "logo": "/images/schools/concordiau.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/taryn.beaupre/",
+      "linkedin": "https://www.linkedin.com/in/taryn-beaupre/",
+      "github": "https://github.com/TarynBeaupre"
+    }
+  },
+  {
+    "name": "Wasay Aamir",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ Ontario Tech University",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/wasay.png",
+    "infoTitle": "Proudest Project",
+    "infoDescription": "HackHive - As the Ontario Tech Computer Science Club President me and my team organized a hackathon for student at our university and other universities. We had Microsoft, Dayforce, Amazon and many other companies as sponsors and had over 300+ students in attendance.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "Ontario Tech University",
+      "logo": "/images/schools/ontarioTech.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/wasay_aamir/",
+      "linkedin": "https://www.linkedin.com/in/wasayaamir/",
+      "github": "https://github.com/WasayAamir"
+    }
+  },
+  {
+    "name": "Franklin Ramirez",
+    "pronouns": "-",
+    "teamRole": "Director of Logistics",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/franklin.jpg",
+    "infoTitle": "Favorite Food",
+    "infoDescription": "A cinnamon roll.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Waterloo",
+      "logo": "/images/schools/uWaterloo.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/franklin_g.r/",
+      "linkedin": "https://www.linkedin.com/in/franklin611/"
+    }
+  },
+  {
+    "name": "Teja Hebbale",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ Carleton University",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/teja.jpg",
+    "infoTitle": "Favorite Sport",
+    "infoDescription": "Badminton to play.",
+    "education": {
+      "major": "MBA in Management and Change",
+      "institution": "Carleton University",
+      "logo": "/images/schools/carletonu.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/teja_hebbale_",
+      "linkedin": "https://www.linkedin.com/in/teja-hebbale-2055471a8/"
     }
   }
 ]
