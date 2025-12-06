@@ -34,18 +34,11 @@ export default function Member({
     };
   };
 
-  const handleClick = () => {
-    // Only toggle on mobile (sm and under)
-    if (window.innerWidth < 640) {
-      setIsActive(!isActive);
-    }
-  };
-
   return (
     <div
       key={key}
-      onClick={handleClick}
-      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 hover:bg-light-mode/10 transition-all duration-500 ease-in-out overflow-hidden group sm:cursor-default cursor-pointer ${
+      onClick={() => setIsActive(!isActive)}
+      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 hover:bg-light-mode/10 transition-all duration-500 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
         isActive ? "active" : ""
       }`}
     >
@@ -84,7 +77,7 @@ export default function Member({
               href={url || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 hover:scale-105"
+              className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
               style={position}
             >
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
