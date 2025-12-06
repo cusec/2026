@@ -105,15 +105,11 @@ export default function Member({
       <div className="w-full h-full px-4 flex flex-col items-center justify-start pt-[220px] xs:pt-[240px]">
         {/* Basic info - hidden on hover or active state */}
         <div className="flex flex-col items-center text-center text-light-mode transition-opacity duration-300 ease-in-out lg:group-hover:opacity-0 group-[.active]:opacity-0">
-          <h2 className="text-lg xs:text-2xl xl:text-3xl mb-1">
-            {member.name}
-          </h2>
-          <h2 className="text-md md:text-md xl:text-lg text-light-mode/80 mb-1">
+          <h2 className="text-lg xs:text-2xl xl:text-3xl">{member.name}</h2>
+          <h2 className="text-md md:text-md xl:text-lg text-light-mode/80 mb-6">
             ({member.pronouns})
           </h2>
-          <p className="text-sm xs:text-lg xl:text-xl mt-2">
-            {member.teamRole}
-          </p>
+          <p className="text-sm xs:text-lg xl:text-lg">{member.teamRole}</p>
         </div>
 
         {/* Hover content - visible only on hover (lg+) or active state (all sizes) */}
