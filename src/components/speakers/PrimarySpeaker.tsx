@@ -26,7 +26,7 @@ export default function PrimarySpeaker({
   return (
     <div
       key={key}
-      className="flex flex-col sm:flex-row w-full gap-2 md:gap-5 mb-[2vh] text-light-mode"
+      className="flex flex-col sm:flex-row w-full gap-2 md:gap-5 mb-[2vh] text-light-mode z-30 backdrop-blur-sm"
     >
       <div className="min-w-[80vw] max-w-[80vw] min-h-[80vw] max-h-[80vw] xs:min-w-[35vw] xs:max-w-[35vw] xs:min-h-[35vw] xs:max-h-[35vw] md:min-w-[18vw] md:max-w-[18vw] md:min-h-[18vw] md:max-h-[18vw] relative overflow-hidden rounded-xl group">
         <Image
