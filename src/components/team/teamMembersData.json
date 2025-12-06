@@ -165,5 +165,59 @@
       "linkedin": "https://www.linkedin.com/in/abdessalamaithaqi/",
       "github": "https://github.com/AbdessalamAithaqi"
     }
+  },
+  {
+    "name": "Shrey Bhatt",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Technology",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/shrey.jpg",
+    "infoTitle": "-",
+    "infoDescription": "-",
+    "education": {
+      "major": "Computer Programming and Analysis",
+      "institution": "Seneca Polytechnic",
+      "logo": "/images/schools/seneca.svg"
+    },
+    "socials": {
+      "website": "https://shreybhatt.dev/",
+      "linkedin": "https://www.linkedin.com/in/shreybhatt13",
+      "github": "https://github.com/KaosElegent"
+    }
+  },
+  {
+    "name": "Tiffany Villatoro (Tiff)",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of Guelph",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/tiffany.jpg",
+    "infoTitle": "-",
+    "infoDescription": "-",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "University of Guelph",
+      "logo": "/images/schools/uoguelph.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/tiffany-villatoro-bb7253261/"
+    }
+  },
+  {
+    "name": "Kelly Nguyen (Kel)",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of British Columbia",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/kelly.jpg",
+    "infoTitle": "-",
+    "infoDescription": "-",
+    "education": {
+      "major": "Honours Biotechnology",
+      "institution": "University of British Columbia",
+      "logo": "/images/schools/ubc.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/kelgi/",
+      "instagram": "https://www.instagram.com/kellnguyn/"
+    }
   }
 ]
