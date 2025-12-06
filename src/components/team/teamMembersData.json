@@ -182,7 +182,8 @@
     "socials": {
       "website": "https://shreybhatt.dev/",
       "linkedin": "https://www.linkedin.com/in/shreybhatt13",
-      "github": "https://github.com/KaosElegent"
+      "github": "https://github.com/KaosElegent",
+      "instagram": "https://www.instagram.com/shr.e_y/"
     }
   },
   {
@@ -208,8 +209,8 @@
     "teamRole": "Head Delegate @ University of British Columbia",
     "professionalTitle": "-",
     "primaryImage": "/images/team/kelly.jpg",
-    "infoTitle": "Proudest Project",
-    "infoDescription": "Euodia, a Figma interactive design project that won 2cd place at SFU Surge's sparkjam that was inspired by the last of us and cyberpunk aspects ~ it was so fun to learn how to design in Figma, prototyping and looking at viability.",
+    "infoTitle": "If I were an ice-cream flavour",
+    "infoDescription": "Pandan chocolate chip - cuz I made this flavour before and it was sooo good and comforting.",
     "education": {
       "major": "Honours Biotechnology",
       "institution": "University of British Columbia",
@@ -246,8 +247,8 @@
     "teamRole": "Head Delegate @ Concordia University",
     "professionalTitle": "-",
     "primaryImage": "/images/team/paria.jpeg",
-    "infoTitle": "Ultimate Adventure",
-    "infoDescription": "Something that I would love to do is similar to the plot of Eat, Pray, Love. I'd love to go on a long solo journey of healing, self-discovery, and spirituality. I would start with somewhere where I can embrace the \"art of doing nothing\" (il dolce far niente) and then, I'd love to maybe go to an ashram in India for spiritual practices.",
+    "infoTitle": "A superpowrer I'd love to have",
+    "infoDescription": "Teleportation! I would be able to see and experience many beautiful parts of the world without any effort.",
     "education": {
       "major": "Software Engineering",
       "institution": "Concordia University",
@@ -337,7 +338,7 @@
     "professionalTitle": "-",
     "primaryImage": "/images/team/wasay.png",
     "infoTitle": "Proudest Project",
-    "infoDescription": "HackHive - As the Ontario Tech Computer Science Club President me and my team organized a hackathon for student at our university and other universities. We had Microsoft, Dayforce, Amazon and many other companies as sponsors and had over 300+ students in attendance.",
+    "infoDescription": "As the Ontario Tech Computer Science Club President me and my team organized a hackathon and had Microsoft, Dayforce, Amazon and many other companies as sponsors and had over 300+ students in attendance.",
     "education": {
       "major": "Computer Science",
       "institution": "Ontario Tech University",
