@@ -1,5 +1,42 @@
 [
   {
+    "name": "Carson Spriggs-Audet",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Logistics",
+    "professionalTitle": "Software Developer & QA Specialist",
+    "primaryImage": "/images/team/carson.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I have a penguin shelf and I'm aiming to have at least 50 unique penguins on it by June 2026.",
+    "education": {
+      "major": "Engineering Technology and Applied Sciences",
+      "institution": "Memorial University of Newfoundland",
+      "logo": "/images/schools/memorialU.png"
+    },
+    "socials": {
+      "website": "https://carsonspriggs.me/",
+      "linkedin": "https://www.linkedin.com/in/carsonspriggs/",
+      "github": "https://github.com/carsonSgit"
+    }
+  },
+  {
+    "name": "Franklin Ramirez",
+    "pronouns": "-",
+    "teamRole": "Director of Logistics",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/franklin.jpg",
+    "infoTitle": "Favorite Food",
+    "infoDescription": "A cinnamon roll.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Waterloo",
+      "logo": "/images/schools/uWaterloo.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/franklin_g.r/",
+      "linkedin": "https://www.linkedin.com/in/franklin611/"
+    }
+  },
+  {
     "name": "McCauley Armishaw",
     "pronouns": "He/Him",
     "teamRole": "Director of Sponsorships",
@@ -20,94 +57,23 @@
     }
   },
   {
-    "name": "Carson Spriggs-Audet",
+    "name": "Shrey Bhatt",
     "pronouns": "He/Him",
-    "teamRole": "Director of Logistics",
-    "professionalTitle": "Software Developer & QA Specialist",
-    "primaryImage": "/images/team/carson.jpg",
-    "infoTitle": "About Me",
-    "infoDescription": "I have a penguin shelf and I'm aiming to have at least 50 unique penguins on it by June 2026.",
-    "education": {
-      "major": "Engineering Technology and Applied Sciences",
-      "institution": "Memorial University of Newfoundland",
-      "logo": "/images/schools/memorialU.png"
-    },
-    "socials": {
-      "website": "https://carsonspriggs.me/",
-      "linkedin": "https://www.linkedin.com/in/carsonspriggs/",
-      "github": "https://github.com/carsonSgit"
-    }
-  },
-  {
-    "name": "Denys",
-    "pronouns": "He/Him",
-    "teamRole": "Advisor",
-    "professionalTitle": "Application Developer",
-    "primaryImage": "/images/team/denys.jpg",
-    "infoTitle": "About Me",
-    "infoDescription": "I'm attending my fifth CUSEC as an organizer. After finishing my studies, I transitioned into my current role as an application developer in the lottery industry.",
-    "education": {
-      "major": "Computer Science",
-      "institution": "University of Manitoba",
-      "logo": "/images/schools/umanitoba.png"
-    },
-    "socials": {
-      "linkedin": "https://www.linkedin.com/in/denys--popov/"
-    }
-  },
-  {
-    "name": "Cedric Dimatulac",
-    "pronouns": "He/They",
-    "teamRole": "Head Delegate @ University of Ottawa",
-    "professionalTitle": "Full Stack Developer",
-    "primaryImage": "/images/team/cedric.jpeg",
-    "infoTitle": "Figurehead in the Super Smash Bros. Ultimate community",
-    "infoDescription": "I've hosted the biggest Smash Ultimate tournament in Ottawa, I'm also the best Kirby player in Canada",
-    "education": {
-      "major": "Computer Science",
-      "institution": "University of Ottawa",
-      "logo": "/images/schools/uottawa.png"
-    },
-    "socials": {
-      "x": "https://x.com/nerdcedric?s=21",
-      "instagram": "https://www.instagram.com/cedric_dimatulac?igsh=Ym8waTFsZTdldTFq&utm_source=qr"
-    }
-  },
-  {
-    "name": "Antonina Kosyakova",
-    "pronouns": "She/Her",
-    "teamRole": "Head Delegate @ John Abbott College",
+    "teamRole": "Director of Technology",
     "professionalTitle": "Software Developer",
-    "primaryImage": "/images/team/antonina.jpg",
-    "infoTitle": "I have a chubby cat on a diet, I dance, and I code.",
-    "infoDescription": "I'm a CS student at John Abbott College, getting through it with the help of my cats",
+    "primaryImage": "/images/team/shrey.jpg",
+    "infoTitle": "Code Theme Song",
+    "infoDescription": "Cornfield Chase - the Interstellar song (becasue I'm left confused by my own code)",
     "education": {
-      "major": "Computer science",
-      "institution": "John Abbott College",
-      "logo": "/images/schools/jac.png"
+      "major": "Computer Programming and Analysis",
+      "institution": "Seneca Polytechnic",
+      "logo": "/images/schools/seneca.svg"
     },
     "socials": {
-      "linkedin": "https://linkedin.com/in/tonya-kosyakova"
-    }
-  },
-  {
-    "name": "Janelle Tam",
-    "pronouns": "She/Her",
-    "teamRole": "Director of Events",
-    "professionalTitle": "Software Developer",
-    "primaryImage": "/images/team/janelle.jpg",
-    "infoTitle": "About Me",
-    "infoDescription": "I'm passionate about community building and creating socially impactful software!",
-    "education": {
-      "major": "Software Engineering",
-      "institution": "McGill University",
-      "logo": "/images/schools/mcgill.png"
-    },
-    "socials": {
-      "linkedin": "https://www.linkedin.com/in/janellewstam",
-      "x": "https://x.com/_janelletam_",
-      "github": "https://github.com/janelletam",
-      "instagram": "https://www.instagram.com/_janelletam_"
+      "website": "https://shreybhatt.dev/",
+      "linkedin": "https://www.linkedin.com/in/shreybhatt13",
+      "github": "https://github.com/KaosElegent",
+      "instagram": "https://www.instagram.com/shr.e_y/"
     }
   },
   {
@@ -132,20 +98,23 @@
     }
   },
   {
-    "name": "Ekamjit Singh",
-    "pronouns": "He/Him",
-    "teamRole": "Head Delegate @ University of Manitoba",
-    "professionalTitle": "Computer Science Student",
-    "primaryImage": "/images/team/ekamjit.jpg",
-    "infoTitle": "Important but Useless Info",
-    "infoDescription": "People keep calling me \"Jacob\" for reasons unknown and I've rewatched Peaky Blinders so often it's basically a personality trait at this point.",
+    "name": "Janelle Tam",
+    "pronouns": "She/Her",
+    "teamRole": "Director of Events",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/janelle.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I'm passionate about community building and creating socially impactful software!",
     "education": {
-      "major": "Computer Science",
-      "institution": "University of Manitoba",
-      "logo": "/images/schools/umanitoba.png"
+      "major": "Software Engineering",
+      "institution": "McGill University",
+      "logo": "/images/schools/mcgill.png"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/_ekam05"
+      "linkedin": "https://www.linkedin.com/in/janellewstam",
+      "x": "https://x.com/_janelletam_",
+      "github": "https://github.com/janelletam",
+      "instagram": "https://www.instagram.com/_janelletam_"
     }
   },
   {
@@ -167,40 +136,112 @@
     }
   },
   {
-    "name": "Shrey Bhatt",
-    "pronouns": "He/Him",
-    "teamRole": "Director of Technology",
-    "professionalTitle": "Software Developer",
-    "primaryImage": "/images/team/shrey.jpg",
-    "infoTitle": "Code Theme Song",
-    "infoDescription": "Cornfield Chase - the Interstellar song (becasue I'm left confused by my own code)",
+    "name": "Taryn Beaupre",
+    "pronouns": "-",
+    "teamRole": "Director of Promotions",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/taryn.jpg",
+    "infoTitle": "First Programming Language",
+    "infoDescription": "The first one I learned, C#!",
     "education": {
-      "major": "Computer Programming and Analysis",
-      "institution": "Seneca Polytechnic",
-      "logo": "/images/schools/seneca.svg"
+      "major": "Computer Science",
+      "institution": "Concordia University",
+      "logo": "/images/schools/concordiau.png"
     },
     "socials": {
-      "website": "https://shreybhatt.dev/",
-      "linkedin": "https://www.linkedin.com/in/shreybhatt13",
-      "github": "https://github.com/KaosElegent",
-      "instagram": "https://www.instagram.com/shr.e_y/"
+      "instagram": "https://www.instagram.com/taryn.beaupre/",
+      "linkedin": "https://www.linkedin.com/in/taryn-beaupre/",
+      "github": "https://github.com/TarynBeaupre"
     }
   },
   {
-    "name": "Tiffany Villatoro (Tiff)",
-    "pronouns": "-",
-    "teamRole": "Head Delegate @ University of Guelph",
-    "professionalTitle": "-",
-    "primaryImage": "/images/team/tiff.jpg",
-    "infoTitle": "Weird Food Combo",
-    "infoDescription": "cream soda + vanilla soy milk = HEAVEN",
+    "name": "Antonina Kosyakova",
+    "pronouns": "She/Her",
+    "teamRole": "Head Delegate @ John Abbott College",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/antonina.jpg",
+    "infoTitle": "I have a chubby cat on a diet, I dance, and I code.",
+    "infoDescription": "I'm a CS student at John Abbott College, getting through it with the help of my cats",
     "education": {
-      "major": "Software Engineering",
-      "institution": "University of Guelph",
-      "logo": "/images/schools/uguelph_no_bg.png"
+      "major": "Computer science",
+      "institution": "John Abbott College",
+      "logo": "/images/schools/jac.png"
     },
     "socials": {
-      "linkedin": "https://www.linkedin.com/in/tiffany-villatoro-bb7253261/"
+      "linkedin": "https://linkedin.com/in/tonya-kosyakova"
+    }
+  },
+  {
+    "name": "Aran Saseelan",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ McMaster University",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/aran.jpeg",
+    "infoTitle": "Favorite Sport",
+    "infoDescription": "Basketball as I've been playing since I was a kid. Always try your best and there's something super satisfying about setting traps and seeing your plan actually work.",
+    "education": {
+      "major": "Software Engineering",
+      "institution": "McMaster University",
+      "logo": "/images/schools/mcmaster_full.png"
+    },
+    "socials": {
+      "instagram": "https://instagram.com/aransaseelan",
+      "linkedin": "https://www.linkedin.com/in/aransaseelan/",
+      "github": "https://github.com/aransaseelan",
+      "website": "https://aransaseelan.com"
+    }
+  },
+  {
+    "name": "Cedric Dimatulac",
+    "pronouns": "He/They",
+    "teamRole": "Head Delegate @ University of Ottawa",
+    "professionalTitle": "Full Stack Developer",
+    "primaryImage": "/images/team/cedric.jpeg",
+    "infoTitle": "Figurehead in the Super Smash Bros. Ultimate community",
+    "infoDescription": "I've hosted the biggest Smash Ultimate tournament in Ottawa, I'm also the best Kirby player in Canada",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Ottawa",
+      "logo": "/images/schools/uottawa.png"
+    },
+    "socials": {
+      "x": "https://x.com/nerdcedric?s=21",
+      "instagram": "https://www.instagram.com/cedric_dimatulac?igsh=Ym8waTFsZTdldTFq&utm_source=qr"
+    }
+  },
+  {
+    "name": "Ekamjit Singh",
+    "pronouns": "He/Him",
+    "teamRole": "Head Delegate @ University of Manitoba",
+    "professionalTitle": "Computer Science Student",
+    "primaryImage": "/images/team/ekamjit.jpg",
+    "infoTitle": "Important but Useless Info",
+    "infoDescription": "People keep calling me \"Jacob\" for reasons unknown and I've rewatched Peaky Blinders so often it's basically a personality trait at this point.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Manitoba",
+      "logo": "/images/schools/umanitoba.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/_ekam05"
+    }
+  },
+  {
+    "name": "Jorrell Salazar",
+    "pronouns": "-",
+    "teamRole": "Head Delegate @ University of Regina",
+    "professionalTitle": "-",
+    "primaryImage": "/images/team/jorrell.jpeg",
+    "infoTitle": "Weird Food Combo",
+    "infoDescription": "I absolutely LOVE eating Ruffles chips in All-Dressing flavour with a chocolate sundae.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Regina",
+      "logo": "/images/schools/uregina.png"
+    },
+    "socials": {
+      "instagram": "https://www.instagram.com/jeiszs",
+      "linkedin": "https://www.linkedin.com/in/jorrell-salazar"
     }
   },
   {
@@ -222,23 +263,21 @@
     }
   },
   {
-    "name": "Aran Saseelan",
+    "name": "Mohammad Affan Shahid (Affan)",
     "pronouns": "-",
-    "teamRole": "Head Delegate @ McMaster University",
+    "teamRole": "Head Delegate @ University of Windsor",
     "professionalTitle": "-",
-    "primaryImage": "/images/team/aran.jpeg",
-    "infoTitle": "Favorite Sport",
-    "infoDescription": "Basketball as I've been playing since I was a kid. Always try your best and there's something super satisfying about setting traps and seeing your plan actually work.",
+    "primaryImage": "/images/team/affan.jpeg",
+    "infoTitle": "Proudest Project",
+    "infoDescription": "DocMate, document processing app that won three awards at a single hackathon.",
     "education": {
-      "major": "Software Engineering",
-      "institution": "McMaster University",
-      "logo": "/images/schools/mcmaster_full.png"
+      "major": "Computer Science with Software Engineering Specialization",
+      "institution": "University of Windsor",
+      "logo": "/images/schools/uwindsor.png"
     },
     "socials": {
-      "instagram": "https://instagram.com/aransaseelan",
-      "linkedin": "https://www.linkedin.com/in/aransaseelan/",
-      "github": "https://github.com/aransaseelan",
-      "website": "https://aransaseelan.com"
+      "instagram": "https://www.instagram.com/m_affan0404",
+      "linkedin": "https://www.linkedin.com/in/mohammad-affan-shahid-26372a2b2/"
     }
   },
   {
@@ -277,58 +316,38 @@
     }
   },
   {
-    "name": "Mohammad Affan Shahid (Affan)",
+    "name": "Teja Hebbale",
     "pronouns": "-",
-    "teamRole": "Head Delegate @ University of Windsor",
+    "teamRole": "Head Delegate @ Carleton University",
     "professionalTitle": "-",
-    "primaryImage": "/images/team/affan.jpeg",
-    "infoTitle": "Proudest Project",
-    "infoDescription": "DocMate, document processing app that won three awards at a single hackathon.",
+    "primaryImage": "/images/team/teja.jpg",
+    "infoTitle": "Favorite Sport",
+    "infoDescription": "Badminton to play.",
     "education": {
-      "major": "Computer Science with Software Engineering Specialization",
-      "institution": "University of Windsor",
-      "logo": "/images/schools/uwindsor.png"
+      "major": "MBA in Management and Change",
+      "institution": "Carleton University",
+      "logo": "/images/schools/carletonu.png"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/m_affan0404",
-      "linkedin": "https://www.linkedin.com/in/mohammad-affan-shahid-26372a2b2/"
+      "instagram": "https://www.instagram.com/teja_hebbale_",
+      "linkedin": "https://www.linkedin.com/in/teja-hebbale-2055471a8/"
     }
   },
   {
-    "name": "Jorrell Salazar",
+    "name": "Tiffany Villatoro (Tiff)",
     "pronouns": "-",
-    "teamRole": "Head Delegate @ University of Regina",
+    "teamRole": "Head Delegate @ University of Guelph",
     "professionalTitle": "-",
-    "primaryImage": "/images/team/jorrell.jpeg",
+    "primaryImage": "/images/team/tiff.jpg",
     "infoTitle": "Weird Food Combo",
-    "infoDescription": "I absolutely LOVE eating Ruffles chips in All-Dressing flavour with a chocolate sundae.",
+    "infoDescription": "cream soda + vanilla soy milk = HEAVEN",
     "education": {
-      "major": "Computer Science",
-      "institution": "University of Regina",
-      "logo": "/images/schools/uregina.png"
+      "major": "Software Engineering",
+      "institution": "University of Guelph",
+      "logo": "/images/schools/uguelph_no_bg.png"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/jeiszs",
-      "linkedin": "https://www.linkedin.com/in/jorrell-salazar"
-    }
-  },
-  {
-    "name": "Taryn Beaupre",
-    "pronouns": "-",
-    "teamRole": "Director of Promotions",
-    "professionalTitle": "-",
-    "primaryImage": "/images/team/taryn.jpg",
-    "infoTitle": "First Programming Language",
-    "infoDescription": "The first one I learned, C#!",
-    "education": {
-      "major": "Computer Science",
-      "institution": "Concordia University",
-      "logo": "/images/schools/concordiau.png"
-    },
-    "socials": {
-      "instagram": "https://www.instagram.com/taryn.beaupre/",
-      "linkedin": "https://www.linkedin.com/in/taryn-beaupre/",
-      "github": "https://github.com/TarynBeaupre"
+      "linkedin": "https://www.linkedin.com/in/tiffany-villatoro-bb7253261/"
     }
   },
   {
@@ -351,39 +370,20 @@
     }
   },
   {
-    "name": "Franklin Ramirez",
-    "pronouns": "-",
-    "teamRole": "Director of Logistics",
-    "professionalTitle": "-",
-    "primaryImage": "/images/team/franklin.jpg",
-    "infoTitle": "Favorite Food",
-    "infoDescription": "A cinnamon roll.",
+    "name": "Denys",
+    "pronouns": "He/Him",
+    "teamRole": "Advisor",
+    "professionalTitle": "Application Developer",
+    "primaryImage": "/images/team/denys.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I'm attending my fifth CUSEC as an organizer. After finishing my studies, I transitioned into my current role as an application developer in the lottery industry.",
     "education": {
       "major": "Computer Science",
-      "institution": "University of Waterloo",
-      "logo": "/images/schools/uWaterloo.png"
+      "institution": "University of Manitoba",
+      "logo": "/images/schools/umanitoba.png"
     },
     "socials": {
-      "instagram": "https://www.instagram.com/franklin_g.r/",
-      "linkedin": "https://www.linkedin.com/in/franklin611/"
-    }
-  },
-  {
-    "name": "Teja Hebbale",
-    "pronouns": "-",
-    "teamRole": "Head Delegate @ Carleton University",
-    "professionalTitle": "-",
-    "primaryImage": "/images/team/teja.jpg",
-    "infoTitle": "Favorite Sport",
-    "infoDescription": "Badminton to play.",
-    "education": {
-      "major": "MBA in Management and Change",
-      "institution": "Carleton University",
-      "logo": "/images/schools/carletonu.png"
-    },
-    "socials": {
-      "instagram": "https://www.instagram.com/teja_hebbale_",
-      "linkedin": "https://www.linkedin.com/in/teja-hebbale-2055471a8/"
+      "linkedin": "https://www.linkedin.com/in/denys--popov/"
     }
   }
 ]
