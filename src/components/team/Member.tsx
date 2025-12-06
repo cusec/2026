@@ -48,7 +48,7 @@ export default function Member({
       onMouseLeave={() => onHoverChange(false)}
       className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-200 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
         isActive ? "active" : ""
-      } ${hasAnyHover && !isHovered ? "opacity-50" : ""}`}
+      } ${hasAnyHover && !isHovered ? "opacity-70" : ""}`}
     >
       {/* Gradient overlay - fades in on hover or active state */}
       <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out lg:group-hover:opacity-55 group-[.active]:opacity-55 z-0" />
