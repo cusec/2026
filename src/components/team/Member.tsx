@@ -38,15 +38,15 @@ export default function Member({
     <div
       key={key}
       onClick={() => setIsActive(!isActive)}
-      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 hover:bg-light-mode/10 transition-all duration-500 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
+      className={`mb-2 relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-500 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
         isActive ? "active" : ""
       }`}
     >
       {/* Gradient overlay - fades in on hover or active state */}
-      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-55 group-[.active]:opacity-55 z-0" />
+      <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out lg:group-hover:opacity-55 group-[.active]:opacity-55 z-0" />
 
       {/* Image - positioned absolutely, moves to top-right on hover or active state */}
-      <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out group-hover:w-[120px] group-hover:h-[120px] group-hover:left-[calc(100%-135px)] group-hover:top-4 group-hover:-translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:-translate-x-0 z-10">
+      <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out lg:group-hover:w-[120px] lg:group-hover:h-[120px] lg:group-hover:left-[calc(100%-135px)] lg:group-hover:top-4 lg:group-hover:translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:translate-x-0 z-10">
         <div className="relative w-full h-full overflow-hidden rounded-full">
           <Image
             src={member.primaryImage}
@@ -56,7 +56,7 @@ export default function Member({
           />
         </div>
         {/* School logo - positioned at top-left, outside the circular container */}
-        <div className="absolute top-2 left-2 w-10 h-10 xs:w-8 xs:h-8 z-20 transition-all duration-500 group-hover:scale-60 group-hover:top-0 group-hover:left-0 group-[.active]:scale-60 group-[.active]:-top-1 group-[.active]:-left-1 sm:group-[.active]:top-0 sm:group-[.active]:left-0">
+        <div className="absolute top-2 left-2 w-10 h-10 xs:w-8 xs:h-8 z-20 transition-all duration-500 lg:group-hover:scale-60 lg:group-hover:top-0 lg:group-hover:left-0 group-[.active]:scale-60 group-[.active]:-top-1 group-[.active]:-left-1 sm:group-[.active]:top-0 sm:group-[.active]:left-0">
           <div className="relative w-full h-full">
             <Image
               src={member.education.logo}
@@ -77,7 +77,7 @@ export default function Member({
               href={url || "#"}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
+              className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
               style={position}
             >
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
@@ -96,7 +96,7 @@ export default function Member({
       {/* Content container */}
       <div className="w-full h-full px-4 flex flex-col items-center justify-start pt-[220px] xs:pt-[240px]">
         {/* Basic info - hidden on hover or active state */}
-        <div className="flex flex-col items-center text-center text-light-mode transition-opacity duration-300 ease-in-out group-hover:opacity-0 group-[.active]:opacity-0">
+        <div className="flex flex-col items-center text-center text-light-mode transition-opacity duration-300 ease-in-out lg:group-hover:opacity-0 group-[.active]:opacity-0">
           <h2 className="text-lg xs:text-2xl xl:text-3xl mb-1">
             {member.name}
           </h2>
@@ -108,8 +108,8 @@ export default function Member({
           </p>
         </div>
 
-        {/* Hover content - visible only on hover or active state */}
-        <div className="absolute inset-0 px-6 pt-10 flex flex-col text-light-mode opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 group-[.active]:opacity-100 pointer-events-none z-20">
+        {/* Hover content - visible only on hover (lg+) or active state (all sizes) */}
+        <div className="absolute inset-0 px-6 pt-10 flex flex-col text-light-mode opacity-0 transition-opacity duration-300 ease-in-out lg:group-hover:opacity-100 group-[.active]:opacity-100 pointer-events-none z-20">
           {/* Name and Pronouns */}
           <h2 className="text-md sm:text-2xl font-semibold mb-2 max-w-[170px]">
             {member.name}
@@ -145,7 +145,7 @@ export default function Member({
         </div>
 
         {/* Mobile social links - displayed at bottom on sm and under */}
-        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-20 opacity-0 transition-all duration-300 group-hover:opacity-100 group-[.active]:opacity-100">
+        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-20 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 group-[.active]:opacity-100">
           {socialEntries.map(([key, url]) => (
             <a
               key={key}
