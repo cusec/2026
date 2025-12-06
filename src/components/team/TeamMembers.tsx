@@ -4,11 +4,11 @@ import Member from "./Member";
 
 export default function TeamMembers() {
   return (
-    <div className="mx-[5vw] lg:mx-[10vw] mt-[15vh] w-[90vw] lg:w-[80vw] text-light-mode">
+    <div className="mx-[10vw] lg:mx-[12vw] mt-[15vh] text-light-mode">
       <h1 className="text-3xl md:text-5xl pb-4 mb-[5vh] border-b w-fit border-light-mode/70">
         The 2026 Team
       </h1>
-      <div className="flex gap-5 flex-wrap justify-evenly">
+      <div className="flex gap-4 flex-wrap justify-evenly">
         {members.map((member: TeamMember, index: number) => (
           <Member key={index} member={member} />
         ))}

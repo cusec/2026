@@ -5,7 +5,7 @@ import SecondarySpeaker from "./SecondarySpeaker";
 
 export default function Speakers() {
   return (
-    <div className="mx-[10vw] lg:mx-[15vw] mt-[15vh] text-light-mode">
+    <div className="mx-[10vw] lg:mx-[12vw] mt-[15vh] text-light-mode">
       <h1 className="text-3xl md:text-5xl pb-4 mb-6 md:mb-12 w-fit border-b border-light-mode/70">
         The 2026 Speakers
       </h1>

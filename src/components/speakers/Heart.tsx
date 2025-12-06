@@ -1,6 +1,6 @@
 export default function Heart() {
   return (
-    <div className="mx-[10vw] lg:mx-[15vw] text-light-mode">
+    <div className="mx-[10vw] lg:mx-[12vw] text-light-mode">
       <h1 className="text-3xl md:text-6xl pb-4 mb-8 md:mb-14 w-fit border-b border-light-mode/70">
         The Heart
       </h1>
