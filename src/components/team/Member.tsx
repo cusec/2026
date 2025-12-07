@@ -64,7 +64,7 @@ export default function Member({
           />
         </div>
         {/* School logo - positioned at top-left, outside the circular container */}
-        <div className="absolute top-2 left-2 w-10 h-10 xs:w-8 xs:h-8 z-20 transition-all duration-500 lg:group-hover:scale-60 lg:group-hover:top-0 lg:group-hover:left-0 group-[.active]:scale-60 group-[.active]:-top-1 group-[.active]:-left-1 sm:group-[.active]:top-0 sm:group-[.active]:left-0">
+        <div className="absolute top-2 left-2 w-10 h-10 z-20 transition-all duration-500 lg:group-hover:scale-60 lg:group-hover:top-0 lg:group-hover:left-0 group-[.active]:scale-60 group-[.active]:-top-1 group-[.active]:-left-1 sm:group-[.active]:top-0 sm:group-[.active]:left-0">
           <div className="relative w-full h-full">
             <Image
               src={member.education.logo}
