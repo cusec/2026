@@ -368,22 +368,5 @@
       "linkedin": "https://www.linkedin.com/in/wasayaamir/",
       "github": "https://github.com/WasayAamir"
     }
-  },
-  {
-    "name": "Denys",
-    "pronouns": "He/Him",
-    "teamRole": "Advisor",
-    "professionalTitle": "Application Developer",
-    "primaryImage": "/images/team/denys.jpg",
-    "infoTitle": "About Me",
-    "infoDescription": "I'm attending my fifth CUSEC as an organizer. After finishing my studies, I transitioned into my current role as an application developer in the lottery industry.",
-    "education": {
-      "major": "Computer Science",
-      "institution": "University of Manitoba",
-      "logo": "/images/schools/umanitoba.png"
-    },
-    "socials": {
-      "linkedin": "https://www.linkedin.com/in/denys--popov/"
-    }
   }
 ]
