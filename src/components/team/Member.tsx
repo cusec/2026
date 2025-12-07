@@ -55,7 +55,7 @@ export default function Member({
 
       {/* Image - positioned absolutely, moves to top-right on hover or active state */}
       <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out lg:group-hover:w-[120px] lg:group-hover:h-[120px] lg:group-hover:left-[calc(100%-135px)] lg:group-hover:top-4 lg:group-hover:translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:translate-x-0 z-10">
-        <div className="relative w-full h-full overflow-hidden rounded-full">
+        <div className="relative w-full h-full overflow-hidden rounded-full transition-shadow duration-300 ease-in-out group-[.active]:ring-1 group-[.active]:ring-light-mode/20 group-[.active]:ring-offset-2">
           <Image
             src={member.primaryImage}
             alt={member.name}
@@ -85,6 +85,7 @@ export default function Member({
               href={url || "#"}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
               style={position}
             >
@@ -156,6 +157,7 @@ export default function Member({
               href={url || "#"}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
               className="w-8 h-8"
             >
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
