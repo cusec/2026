@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import DaySchedule from "./DaySchedule";
 import DayButton from "./DayButton";
 import { Day as DayType } from "../../lib/interface";
+import LeftPath from "./graphics/leftPath";
+import RightPath from "./graphics/rightPath";
 
 const Schedule = ({ adminUser }: { adminUser: boolean }) => {
   const [days, setDays] = useState<DayType[]>([]);
@@ -48,7 +50,7 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <h2 className="text-5xl md:text-7xl font-bold text-light-mode mb-2 pb-6 pt-6 text-center">
+      <h2 className="text-5xl md:text-7xl font-bold text-light-mode mb-8 pb-6 pt-6 text-center">
         SCHEDULE {adminUser ? "(Admin)" : ""}
       </h2>
       {loading ? (
@@ -57,7 +59,9 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
         <div className="text-red-500">{error}</div>
       ) : (
         <>
-          <div className="flex justify-center mb-4">
+          <LeftPath />
+          <RightPath />
+          <div className="flex justify-center gap-42 mb-6">
             {days.map((day, index) => (
               <DayButton
                 key={index}

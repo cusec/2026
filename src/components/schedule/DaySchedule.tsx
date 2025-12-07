@@ -6,6 +6,8 @@ import { Pencil, Download, Trash2 } from "lucide-react";
 import EventModal from "./EventModal";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { downloadEventICS, downloadDayICS } from "../../lib/icsGenerator";
+import Sun from "./graphics/sun";
+import Moon from "./graphics/moon";
 
 interface ScheduleProps {
   events: ScheduleItem[];
@@ -180,25 +182,27 @@ export default function DaySchedule({
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
     if (numberOfTracks === 1) {
-      return "w-[70vw] lg:w-[50vw] max-w-[900px]";
+      return "w-[70vw] max-w-[1100px]";
     } else if (numberOfTracks === 2) {
-      return "w-[85vw] lg:w-[65vw] max-w-[1100px]";
+      return "w-[85vw] max-w-[1400px]";
     } else {
-      return "w-[90vw] lg:w-[80vw] max-w-[1400px]";
+      return "w-[90vw] max-w-[1600px]";
     }
   };
 
   return (
     <div
-      className={`relative ${getContainerWidthClass()} mx-auto mt-12 bg-dark-mode/80 backdrop-blur-xs px-4 lg:px-12 py-12 lg:py-16 rounded-4xl shadow-lg`}
+      className={`group/full ${getContainerWidthClass()} mx-auto mt-12 backdrop-blur-lg px-4 lg:px-12 py-12 lg:py-16`}
     >
+      <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-4xl shadow-lg backdrop-blur-md"></div>
+
       {/* Download entire day button - top right corner */}
       <button
         onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
-        className="absolute top-4 right-4 p-3 bg-white/50 hover:bg-white rounded-full shadow-md transition-all opacity-70"
+        className="absolute top-4 right-4 p-3 hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md transition-all"
         title="Download full day schedule"
       >
-        <Download size={20} className="text-light-mode/30" />
+        <Download size={15} className="text-dark-mode" />
       </button>
 
       {isAdmin && (
@@ -211,10 +215,10 @@ export default function DaySchedule({
           </button>
         </div>
       )}
-
+      <Sun />
       <div className="relative">
         {/* Time axis with absolute positioning */}
-        <div className="absolute left-0 -top-4 w-16 text-light-mode/80">
+        <div className="absolute left-0 -top-4 w-16 text-light-mode">
           {hours.map((hourMinutes, index) => (
             <div
               key={hourMinutes}
@@ -236,7 +240,7 @@ export default function DaySchedule({
           {hours.map((hourMinutes, index) => (
             <div
               key={`line-${hourMinutes}`}
-              className="absolute w-full border-t border-border text-light-mode/10"
+              className="absolute w-full border-t border-border text-light-mode/15"
               style={{ top: `${index * 60 * pixelsPerMinute}px` }}
             />
           ))}
@@ -262,7 +266,7 @@ export default function DaySchedule({
                   key={event._id}
                   className={`absolute items-center mx-10 flex border-l-6 ${getBorderColorClass(
                     event.color
-                  )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/90 hover:shadow-xl/20 text-light-mode/90 transition-shadow min-h-16 bg-card group`}
+                  )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/75 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
                   style={{
                     top: `${top}px`,
                     height: `${height}px`,
@@ -289,29 +293,29 @@ export default function DaySchedule({
                   {/* Download button - visible to everyone */}
                   <button
                     onClick={() => downloadEventICS(event, dayTimestamp)}
-                    className="absolute top-2 right-2 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="absolute top-2 right-2 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
                     title="Add to calendar"
                   >
-                    <Download size={16} className="text-primary" />
+                    <Download size={16} className="text-dark-mode" />
                   </button>
                   {/* Delete button - visible only to admins on hover */}
                   {isAdmin && (
                     <button
                       onClick={() => handleDeleteEvent(event)}
-                      className="absolute top-2 right-24 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-2 right-24 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
                       title="Delete event"
                     >
-                      <Trash2 size={16} className="text-red-600" />
+                      <Trash2 size={16} className="text-dark-mode" />
                     </button>
                   )}
                   {/* Edit button - visible only to admins on hover */}
                   {isAdmin && (
                     <button
                       onClick={() => handleEditEvent(event)}
-                      className="absolute top-2 right-12 p-2 bg-white/50 hover:bg-white rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-opacity"
+                      className="absolute top-2 right-12 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
                       title="Edit event"
                     >
-                      <Pencil size={16} className="text-primary" />
+                      <Pencil size={16} className="text-dark-mode" />
                     </button>
                   )}
                 </div>
@@ -319,7 +323,7 @@ export default function DaySchedule({
             })}
         </div>
       </div>
-
+      <Moon />
       {isAdmin && (
         <EventModal
           isOpen={isModalOpen}
