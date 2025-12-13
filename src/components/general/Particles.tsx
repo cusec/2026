@@ -321,7 +321,7 @@ export default function Particles({
         }}
         style={{
           position: "fixed",
-          left: "50%",
+          left: "50vw",
           bottom: "20px",
           transform: "translateX(-50%)",
           zIndex: 30,
