@@ -301,18 +301,22 @@ export default function DaySchedule({
                         </h2>
                       </div>
                       <div className="hidden xs:block p-3 pt-0">
-                        <p
-                          className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer hover:underline"
-                          onClick={() => handleOpenDetails(event)}
-                          title="View details"
-                        >
-                          {event.description || "Details"}
-                          {event.detailedDescription ? (
+                        {event.detailedDescription ? (
+                          <p
+                            className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer hover:underline"
+                            onClick={() => handleOpenDetails(event)}
+                            title="View details"
+                          >
+                            {event.description || "Details"}
                             <span className="ml-2 inline-flex items-center text-xs text-primary">
                               <Info size={12} />
                             </span>
-                          ) : null}
-                        </p>
+                          </p>
+                        ) : (
+                          <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
+                            {event.description || ""}
+                          </p>
+                        )}
                       </div>
                     </div>
                     {/* Download button - visible to everyone */}

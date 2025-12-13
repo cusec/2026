@@ -18,17 +18,12 @@ export default function EventDetailModal({
   if (!event) return null;
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={event.title}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={event.description || "Event Details"}
+    >
       <div className="space-y-4">
-        <div className="text-sm text-muted-foreground font-mono">
-          {event.startTime} - {event.endTime}
-          {event.location ? ` | ${event.location}` : ""}
-        </div>
-
-        {event.description && (
-          <div className="text-lg font-medium">{event.description}</div>
-        )}
-
         {event.detailedDescription ? (
           <div
             className="prose max-w-none"
