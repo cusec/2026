@@ -1,5 +1,23 @@
 [
   {
+    "name": "Arfah Huda",
+    "pronouns": "She/Her",
+    "teamRole": "Co - Chair",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/arfah.jpg",
+    "infoTitle": "Favourite Food",
+    "infoDescription": "TIRAMISU",
+    "education": {
+      "major": "Computer Science w/ Math Minor",
+      "institution": "University of Windsor",
+      "logo": "/images/schools/uwindsor.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/arfahhuda/",
+      "instagram": "https://www.instagram.com/creationsbyarfah/"
+    }
+  },
+  {
     "name": "Carson Spriggs-Audet",
     "pronouns": "He/Him",
     "teamRole": "Director of Logistics",
