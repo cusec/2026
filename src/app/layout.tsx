@@ -3,6 +3,7 @@ import "./globals.css";
 import connectMongoDB from "@/lib/mongodb";
 import { Jost, Space_Grotesk } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const jost = Jost({
   subsets: ["latin"],
@@ -120,6 +121,7 @@ export default function RootLayout({
       <body className={`antialiased`}>
         {children}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
