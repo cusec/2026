@@ -57,6 +57,7 @@ export default function Member({
             src={member.primaryImage}
             alt={member.name}
             fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
           />
         </div>
@@ -67,6 +68,7 @@ export default function Member({
               src={member.education.logo}
               alt={member.education.institution}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
             />
           </div>
