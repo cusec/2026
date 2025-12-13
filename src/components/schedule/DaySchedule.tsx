@@ -197,7 +197,7 @@ export default function DaySchedule({
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
     if (numberOfTracks === 1) {
-      return "w-[70vw] max-w-[1100px]";
+      return "w-[90vw] sm:w-[70vw] max-w-[1100px]";
     } else if (numberOfTracks === 2) {
       return "w-[85vw] max-w-[1400px]";
     } else {
@@ -234,11 +234,11 @@ export default function DaySchedule({
         <Sun />
         <div className="relative">
           {/* Time axis with absolute positioning */}
-          <div className="absolute left-0 -top-4 w-16 text-light-mode">
+          <div className="absolute left-0 -top-4 w-8 lg:w-16 text-light-mode">
             {hours.map((hourMinutes, index) => (
               <div
                 key={hourMinutes}
-                className="absolute text-sm md:text-lg text-muted-foreground font-mono"
+                className="absolute text-xs md:text-lg text-muted-foreground font-mono"
                 style={{ top: `${index * 60 * pixelsPerMinute}px` }}
               >
                 <div className="flex items-center h-8">
@@ -250,7 +250,7 @@ export default function DaySchedule({
 
           {/* Grid lines */}
           <div
-            className="ml-16 relative "
+            className="ml-10 lg:ml-16 relative "
             style={{ height: `${totalMinutes * pixelsPerMinute}px` }}
           >
             {hours.map((hourMinutes, index) => (
@@ -272,7 +272,11 @@ export default function DaySchedule({
 
                 const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
                 const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
-                const width = `${90 / layout.totalColumns - 2}%`;
+                let width = `${90 / layout.totalColumns - 2}%`;
+                // if viewport width is less than 640px, width should be full
+                if (typeof window !== "undefined" && window.innerWidth < 640) {
+                  width = "100%";
+                }
                 const left = `${
                   (layout.column * 100) / layout.totalColumns + 1
                 }%`;
@@ -280,7 +284,7 @@ export default function DaySchedule({
                 return (
                   <div
                     key={event._id}
-                    className={`absolute items-center mx-10 flex rounded-lg border-l-6 ${getBorderColorClass(
+                    className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg border-l-6 ${getBorderColorClass(
                       event.color
                     )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/75 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
                     style={{
@@ -300,7 +304,7 @@ export default function DaySchedule({
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
                       </div>
-                      <div className="hidden xs:block p-3 pt-0">
+                      <div className="p-3 pt-0">
                         {event.detailedDescription ? (
                           <p
                             className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer hover:underline"

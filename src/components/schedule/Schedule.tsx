@@ -61,7 +61,7 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
         <>
           <LeftPath />
           <RightPath />
-          <div className="flex justify-center gap-42 mb-6">
+          <div className="flex flex-wrap md:flex-nowrap justify-center gap-2 md:gap-42 sm:mb-6">
             {days.map((day, index) => (
               <DayButton
                 key={index}
