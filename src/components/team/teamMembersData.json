@@ -57,6 +57,45 @@
     }
   },
   {
+    "name": "Tyrell Haywood",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Speakers",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/tyrell.jpg",
+    "infoTitle": "About Me",
+    "infoDescription": "I'm currently exited about growing communities and building creative software!",
+    "education": {
+      "major": "Computer Science",
+      "institution": "Carleton University",
+      "logo": "/images/schools/carletonu.png"
+    },
+    "socials": {
+      "website": "https://www.tyrellhaywood.me/",
+      "linkedin": "https://www.linkedin.com/in/tyrell-haywood/",
+      "x": "https://x.com/tyrellchaywood",
+      "github": "https://github.com/TyrellHaywood",
+      "instagram": "https://www.instagram.com/tyrell.haywood/"
+    }
+  },
+  {
+    "name": "Sirine Tarhouni",
+    "pronouns": "She/Her",
+    "teamRole": "Speakers Organizer",
+    "professionalTitle": "Computer Engineering Student",
+    "primaryImage": "/images/team/sirine.jpg",
+    "infoTitle": "Fun Fact",
+    "infoDescription": "I collect books faster than I can read them, but I refuse to admit it.",
+    "education": {
+      "major": "Computer Engineering",
+      "institution": "McGill University",
+      "logo": "/images/schools/mcgill.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/sirine-tarhouni-31b974274/",
+      "instagram": "https://www.instagram.com/sirine_thz/"
+    }
+  },
+  {
     "name": "Shrey Bhatt",
     "pronouns": "He/Him",
     "teamRole": "Director of Technology",
@@ -120,7 +159,7 @@
   {
     "name": "Abdel Ait",
     "pronouns": "He/Him",
-    "teamRole": "Director of Events",
+    "teamRole": "Events Organizer",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/abdel.jpg",
     "infoTitle": "Fun Fact",
@@ -136,9 +175,27 @@
     }
   },
   {
+    "name": "Mohammad Akib Hossain",
+    "pronouns": "He/Him",
+    "teamRole": "Director of Promotions",
+    "professionalTitle": "Computer Science",
+    "primaryImage": "/images/team/akib.jpeg",
+    "infoTitle": "I love to yap, and my laugh is very contagious.",
+    "infoDescription": "Networking is my favourite thing—I thrive on meeting people and learning daily. I'm also a youth advocate and student leader outside of CS.",
+    "education": {
+      "major": "Computer Science",
+      "institution": "University of Regina",
+      "logo": "/images/schools/uregina.png"
+    },
+    "socials": {
+      "linkedin": "https://www.linkedin.com/in/mohammad-akib-hossain-bb638422b",
+      "instagram": "https://www.instagram.com/akib_360"
+    }
+  },
+  {
     "name": "Taryn Beaupre",
     "pronouns": "She/Her",
-    "teamRole": "Director of Design",
+    "teamRole": "Graphics Designer",
     "professionalTitle": "Software Developer",
     "primaryImage": "/images/team/taryn.jpg",
     "infoTitle": "First Programming Language",
