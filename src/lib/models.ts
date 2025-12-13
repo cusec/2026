@@ -118,6 +118,7 @@ const ScheduleItemSchema = new Schema({
   title: { type: String, required: true },
   location: { type: String },
   description: { type: String },
+  detailedDescription: { type: String },
   track: { type: String, enum: ["A", "B", "C"], required: true },
   color: {
     type: String,

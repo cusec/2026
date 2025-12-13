@@ -246,6 +246,7 @@ export async function PUT(request: Request) {
       title: event.title,
       location: event.location,
       description: event.description,
+      detailedDescription: event.detailedDescription,
       track: event.track,
       color: event.color,
     };

@@ -38,6 +38,7 @@ export default function EventModal({
     title: "",
     location: "",
     description: "",
+    detailedDescription: "",
     track: "A" as "A" | "B" | "C",
     color: "primary" as "primary" | "secondary" | "accent" | "sunset" | "sea",
   });
@@ -53,6 +54,7 @@ export default function EventModal({
         title: editEvent.title,
         location: editEvent.location || "",
         description: editEvent.description || "",
+        detailedDescription: editEvent.detailedDescription || "",
         track: editEvent.track,
         color: editEvent.color || "primary",
       });
@@ -63,6 +65,7 @@ export default function EventModal({
         title: "",
         location: "",
         description: "",
+        detailedDescription: "",
         track: "A",
         color: "primary",
       });
@@ -119,6 +122,7 @@ export default function EventModal({
         title: "",
         location: "",
         description: "",
+        detailedDescription: "",
         track: "A",
         color: "primary",
       });
@@ -142,6 +146,7 @@ export default function EventModal({
       title: "",
       location: "",
       description: "",
+      detailedDescription: "",
       track: "A",
       color: "primary",
     });
@@ -328,6 +333,24 @@ export default function EventModal({
             rows={3}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary resize-none"
             placeholder="Event description..."
+          />
+        </div>
+
+        <div>
+          <label
+            htmlFor="detailedDescription"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
+            Detailed Description (optional)
+          </label>
+          <textarea
+            id="detailedDescription"
+            name="detailedDescription"
+            value={formData.detailedDescription}
+            onChange={handleChange}
+            rows={8}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+            placeholder="You can include longer HTML/markup here. It will be rendered on the event detail view."
           />
         </div>
 

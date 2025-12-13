@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { ScheduleItem } from "../../lib/interface";
-import { Pencil, Download, Trash2 } from "lucide-react";
+import { Pencil, Download, Trash2, Info } from "lucide-react";
 import EventModal from "./EventModal";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import EventDetailModal from "./EventDetailModal";
 import { downloadEventICS, downloadDayICS } from "../../lib/icsGenerator";
 import Sun from "./graphics/sun";
 import Moon from "./graphics/moon";
@@ -96,6 +97,8 @@ export default function DaySchedule({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [eventToDelete, setEventToDelete] = useState<ScheduleItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [detailEvent, setDetailEvent] = useState<ScheduleItem | null>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   const handleEditEvent = (event: ScheduleItem) => {
     setEditingEvent(event);
@@ -162,6 +165,18 @@ export default function DaySchedule({
     setEventToDelete(null);
   };
 
+  const handleOpenDetails = (event: ScheduleItem) => {
+    console.log("Opening details for event:", event);
+    setDetailEvent(event);
+    setIsDetailOpen(true);
+  };
+
+  const handleCloseDetails = () => {
+    console.log("Closing details modal");
+    setIsDetailOpen(false);
+    setDetailEvent(null);
+  };
+
   const layoutResult = calculateEventLayout(events);
   const eventLayout = layoutResult.eventLayout;
   const numberOfTracks = layoutResult.activeTracksList.length;
@@ -191,160 +206,176 @@ export default function DaySchedule({
   };
 
   return (
-    <div
-      className={`group/full ${getContainerWidthClass()} mx-auto mt-12 backdrop-blur-lg px-4 lg:px-12 py-12 lg:py-16`}
-    >
-      <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-4xl shadow-lg backdrop-blur-md"></div>
-
-      {/* Download entire day button - top right corner */}
-      <button
-        onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
-        className="absolute top-4 right-4 p-3 hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md transition-all"
-        title="Download full day schedule"
+    <>
+      <div
+        className={`group/full ${getContainerWidthClass()} mx-auto mt-12 backdrop-blur-lg px-4 lg:px-12 py-12 lg:py-16`}
       >
-        <Download size={15} className="text-dark-mode" />
-      </button>
+        <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-4xl shadow-lg backdrop-blur-md"></div>
 
-      {isAdmin && (
-        <div className="flex justify-center mb-6">
-          <button
-            onClick={handleAddEvent}
-            className="px-6 py-3 bg-light-mode/30 text-light-mode font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
-          >
-            + Add Event
-          </button>
-        </div>
-      )}
-      <Sun />
-      <div className="relative">
-        {/* Time axis with absolute positioning */}
-        <div className="absolute left-0 -top-4 w-16 text-light-mode">
-          {hours.map((hourMinutes, index) => (
-            <div
-              key={hourMinutes}
-              className="absolute text-sm md:text-lg text-muted-foreground font-mono"
-              style={{ top: `${index * 60 * pixelsPerMinute}px` }}
-            >
-              <div className="flex items-center h-8">
-                {minutesToTime(hourMinutes)}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Grid lines */}
-        <div
-          className="ml-16 relative "
-          style={{ height: `${totalMinutes * pixelsPerMinute}px` }}
+        {/* Download entire day button - top right corner */}
+        <button
+          onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
+          className="absolute top-4 right-4 p-3 hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md transition-all"
+          title="Download full day schedule"
         >
-          {hours.map((hourMinutes, index) => (
-            <div
-              key={`line-${hourMinutes}`}
-              className="absolute w-full border-t border-border text-light-mode/15"
-              style={{ top: `${index * 60 * pixelsPerMinute}px` }}
-            />
-          ))}
+          <Download size={15} className="text-dark-mode" />
+        </button>
 
-          {/* Events container */}
-          {events[0] &&
-            events.map((event) => {
-              const layout = eventLayout.get(event._id!)!;
-              const startMinutes =
-                timeToMinutes(event.startTime) - displayStart;
-              const duration =
-                timeToMinutes(event.endTime) - timeToMinutes(event.startTime);
-
-              const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
-              const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
-              const width = `${90 / layout.totalColumns - 2}%`;
-              const left = `${
-                (layout.column * 100) / layout.totalColumns + 1
-              }%`;
-
-              return (
-                <div
-                  key={event._id}
-                  className={`absolute items-center mx-10 flex border-l-6 ${getBorderColorClass(
-                    event.color
-                  )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/75 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
-                  style={{
-                    top: `${top}px`,
-                    height: `${height}px`,
-                    width,
-                    left,
-                  }}
-                >
-                  <div className="flex-1">
-                    <div className="p-3 pb-0">
-                      <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
-                        {event.title}
-                      </h1>
-                      <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
-                        {event.startTime} - {event.endTime}
-                        {event.location ? ` | ${event.location}` : ""}
-                      </h2>
-                    </div>
-                    <div className="hidden xs:block p-3 pt-0">
-                      <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
-                        {event.description}
-                      </p>
-                    </div>
-                  </div>
-                  {/* Download button - visible to everyone */}
-                  <button
-                    onClick={() => downloadEventICS(event, dayTimestamp)}
-                    className="absolute top-2 right-2 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                    title="Add to calendar"
-                  >
-                    <Download size={16} className="text-dark-mode" />
-                  </button>
-                  {/* Delete button - visible only to admins on hover */}
-                  {isAdmin && (
-                    <button
-                      onClick={() => handleDeleteEvent(event)}
-                      className="absolute top-2 right-24 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                      title="Delete event"
-                    >
-                      <Trash2 size={16} className="text-dark-mode" />
-                    </button>
-                  )}
-                  {/* Edit button - visible only to admins on hover */}
-                  {isAdmin && (
-                    <button
-                      onClick={() => handleEditEvent(event)}
-                      className="absolute top-2 right-12 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                      title="Edit event"
-                    >
-                      <Pencil size={16} className="text-dark-mode" />
-                    </button>
-                  )}
+        {isAdmin && (
+          <div className="flex justify-center mb-6">
+            <button
+              onClick={handleAddEvent}
+              className="px-6 py-3 bg-light-mode/30 text-light-mode font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
+            >
+              + Add Event
+            </button>
+          </div>
+        )}
+        <Sun />
+        <div className="relative">
+          {/* Time axis with absolute positioning */}
+          <div className="absolute left-0 -top-4 w-16 text-light-mode">
+            {hours.map((hourMinutes, index) => (
+              <div
+                key={hourMinutes}
+                className="absolute text-sm md:text-lg text-muted-foreground font-mono"
+                style={{ top: `${index * 60 * pixelsPerMinute}px` }}
+              >
+                <div className="flex items-center h-8">
+                  {minutesToTime(hourMinutes)}
                 </div>
-              );
-            })}
-        </div>
-      </div>
-      <Moon />
-      {isAdmin && (
-        <EventModal
-          isOpen={isModalOpen}
-          onClose={handleCloseModal}
-          dayId={dayId}
-          onEventSaved={handleEventSaved}
-          displayStartHour={displayStartHour}
-          displayEndHour={displayEndHour}
-          editEvent={editingEvent}
-        />
-      )}
+              </div>
+            ))}
+          </div>
 
-      {isAdmin && (
-        <ConfirmDeleteModal
-          isOpen={isDeleteModalOpen}
-          onClose={handleCloseDeleteModal}
-          onConfirm={handleConfirmDelete}
-          eventTitle={eventToDelete?.title || ""}
-          isDeleting={isDeleting}
-        />
-      )}
-    </div>
+          {/* Grid lines */}
+          <div
+            className="ml-16 relative "
+            style={{ height: `${totalMinutes * pixelsPerMinute}px` }}
+          >
+            {hours.map((hourMinutes, index) => (
+              <div
+                key={`line-${hourMinutes}`}
+                className="absolute w-full border-t border-border text-light-mode/15"
+                style={{ top: `${index * 60 * pixelsPerMinute}px` }}
+              />
+            ))}
+
+            {/* Events container */}
+            {events[0] &&
+              events.map((event) => {
+                const layout = eventLayout.get(event._id!)!;
+                const startMinutes =
+                  timeToMinutes(event.startTime) - displayStart;
+                const duration =
+                  timeToMinutes(event.endTime) - timeToMinutes(event.startTime);
+
+                const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
+                const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
+                const width = `${90 / layout.totalColumns - 2}%`;
+                const left = `${
+                  (layout.column * 100) / layout.totalColumns + 1
+                }%`;
+
+                return (
+                  <div
+                    key={event._id}
+                    className={`absolute items-center mx-10 flex rounded-lg border-l-6 ${getBorderColorClass(
+                      event.color
+                    )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/75 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
+                    style={{
+                      top: `${top}px`,
+                      height: `${height}px`,
+                      width,
+                      left,
+                    }}
+                  >
+                    <div className="flex-1">
+                      <div className="p-3 pb-0">
+                        <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                          {event.title}
+                        </h1>
+                        <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
+                          {event.startTime} - {event.endTime}
+                          {event.location ? ` | ${event.location}` : ""}
+                        </h2>
+                      </div>
+                      <div className="hidden xs:block p-3 pt-0">
+                        <p
+                          className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer hover:underline"
+                          onClick={() => handleOpenDetails(event)}
+                          title="View details"
+                        >
+                          {event.description || "Details"}
+                          {event.detailedDescription ? (
+                            <span className="ml-2 inline-flex items-center text-xs text-primary">
+                              <Info size={12} />
+                            </span>
+                          ) : null}
+                        </p>
+                      </div>
+                    </div>
+                    {/* Download button - visible to everyone */}
+                    <button
+                      onClick={() => downloadEventICS(event, dayTimestamp)}
+                      className="absolute top-2 right-2 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
+                      title="Add to calendar"
+                    >
+                      <Download size={16} className="text-dark-mode" />
+                    </button>
+                    {/* Delete button - visible only to admins on hover */}
+                    {isAdmin && (
+                      <button
+                        onClick={() => handleDeleteEvent(event)}
+                        className="absolute top-2 right-24 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
+                        title="Delete event"
+                      >
+                        <Trash2 size={16} className="text-dark-mode" />
+                      </button>
+                    )}
+                    {/* Edit button - visible only to admins on hover */}
+                    {isAdmin && (
+                      <button
+                        onClick={() => handleEditEvent(event)}
+                        className="absolute top-2 right-12 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
+                        title="Edit event"
+                      >
+                        <Pencil size={16} className="text-dark-mode" />
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+        <Moon />
+        {isAdmin && (
+          <EventModal
+            isOpen={isModalOpen}
+            onClose={handleCloseModal}
+            dayId={dayId}
+            onEventSaved={handleEventSaved}
+            displayStartHour={displayStartHour}
+            displayEndHour={displayEndHour}
+            editEvent={editingEvent}
+          />
+        )}
+
+        {isAdmin && (
+          <ConfirmDeleteModal
+            isOpen={isDeleteModalOpen}
+            onClose={handleCloseDeleteModal}
+            onConfirm={handleConfirmDelete}
+            eventTitle={eventToDelete?.title || ""}
+            isDeleting={isDeleting}
+          />
+        )}
+      </div>
+      <EventDetailModal
+        isOpen={isDetailOpen}
+        onClose={handleCloseDetails}
+        event={detailEvent}
+      />
+    </>
   );
 }

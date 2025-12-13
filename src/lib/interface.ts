@@ -81,6 +81,7 @@ export interface ScheduleItem {
   endTime: string;
   title: string;
   description?: string;
+  detailedDescription?: string;
   location?: string;
   track: "A" | "B" | "C";
   color?: "primary" | "secondary" | "accent" | "sunset" | "sea";
