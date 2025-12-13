@@ -109,7 +109,7 @@ export default function LoadingScreen() {
   if (showSplash) {
     return (
       <div
-        className={`fixed inset-0 z-50 items-center justify-center transition-all duration-1000 ease-out bg-linear-[35deg] from-secondary from-0% via-primary via-35% to-accent to-140% ${
+        className={`fixed inset-0 z-60 items-center justify-center transition-all duration-1000 ease-out bg-linear-[35deg] from-secondary from-0% via-primary via-35% to-accent to-140% ${
           showSplash ? "flex" : "hidden"
         }`}
         style={{
@@ -145,7 +145,7 @@ export default function LoadingScreen() {
       <div
         className={`${
           TemporaryContent
-            ? "fixed inset-0 z-50 flex bg-linear-[35deg] from-secondary from-0% via-primary/100 via-35% to-accent to-140% min-h-[100vh]"
+            ? "fixed inset-0 z-60 flex bg-linear-[35deg] from-secondary from-0% via-primary/100 via-35% to-accent to-140% min-h-[100vh]"
             : "hidden"
         }`}
       ></div>
