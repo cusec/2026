@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
     <>
       <nav
         role="navigation"
-        className={`w-full xl:h-min text-white fixed top-0 z-40 backdrop-blur-sm xl:backdrop-blur-md border-b-2 border-light-mode/30 xl:bg-white/2 xl:rounded-b-3xl transition-all duration-300 ease-in-out`}
+        className={`w-full xl:h-min text-white fixed top-0 z-50 backdrop-blur-sm xl:backdrop-blur-md border-b-2 border-light-mode/30 xl:bg-white/2 xl:rounded-b-3xl transition-all duration-300 ease-in-out`}
       >
         <div className="flex items-center justify-between py-2 px-4 xl:px-8 mx-4">
           <Link
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
       {/* Mobile Navigation Menu */}
       {true && (
         <div
-          className={`fixed w-full h-screen overflow-y-auto z-20 bg-dark-mode/60 backdrop-blur-sm text-light-mode/90 pb-4 py-18 space-y-3 transition-all duration-1000`}
+          className={`fixed w-full h-screen overflow-y-auto z-40 bg-dark-mode/60 backdrop-blur-sm text-light-mode/90 pb-4 py-18 space-y-3 transition-all duration-1000`}
           style={{
             clipPath: isMenuOpen
               ? "inset(0% 0% 0% 0%)"
