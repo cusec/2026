@@ -8,13 +8,11 @@ import { useState } from "react";
 const SUPPORTED_SOCIALS = ["website", "linkedin", "x", "github", "instagram"];
 
 export default function Member({
-  key,
   member,
   isHovered,
   hasAnyHover,
   onHoverChange,
 }: {
-  key: number;
   member: TeamMember;
   isHovered: boolean;
   hasAnyHover: boolean;
@@ -42,7 +40,6 @@ export default function Member({
 
   return (
     <div
-      key={key}
       onClick={() => setIsActive(!isActive)}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
