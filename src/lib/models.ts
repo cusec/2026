@@ -122,7 +122,7 @@ const ScheduleItemSchema = new Schema({
   track: { type: String, enum: ["A", "B", "C"], required: true },
   color: {
     type: String,
-    enum: ["primary", "secondary", "accent", "sunset", "sea"],
+    enum: ["primary", "secondary", "accent", "sunset", "sea", "white"],
     default: "primary",
   },
 });

@@ -40,7 +40,13 @@ export default function AddEventModal({
     description: "",
     detailedDescription: "",
     track: "A" as "A" | "B" | "C",
-    color: "primary" as "primary" | "secondary" | "accent" | "sunset" | "sea",
+    color: "primary" as
+      | "primary"
+      | "secondary"
+      | "accent"
+      | "sunset"
+      | "sea"
+      | "white",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -274,6 +280,7 @@ export default function AddEventModal({
                 <option value="accent">Accent (Red)</option>
                 <option value="sunset">Sunset (Burgundy)</option>
                 <option value="sea">Sea (Navy)</option>
+                <option value="white">White (Light mode)</option>
               </select>
               {/* Color preview indicator */}
               <div
@@ -290,6 +297,8 @@ export default function AddEventModal({
                       ? "#802b36"
                       : formData.color === "sea"
                       ? "#1e2371"
+                      : formData.color === "white"
+                      ? "#ffffff"
                       : "rgb(0, 0, 114)",
                 }}
               />

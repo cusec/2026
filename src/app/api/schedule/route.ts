@@ -63,7 +63,7 @@ export async function POST(request: Request) {
     // Validate color value if provided
     if (
       event.color &&
-      !["primary", "secondary", "accent", "sunset", "sea"].includes(event.color)
+      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(event.color)
     ) {
       return NextResponse.json(
         { error: "Color must be primary, secondary, accent, sunset, or sea" },
@@ -183,10 +183,10 @@ export async function PUT(request: Request) {
     // Validate color value if provided
     if (
       event.color &&
-      !["primary", "secondary", "accent", "sunset", "sea"].includes(event.color)
+      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(event.color)
     ) {
       return NextResponse.json(
-        { error: "Color must be primary, secondary, accent, sunset, or sea" },
+      { error: "Color must be primary, secondary, accent, sunset, sea, or white" },
         { status: 400 }
       );
     }

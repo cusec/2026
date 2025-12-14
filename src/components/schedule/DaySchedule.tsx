@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ScheduleItem } from "../../lib/interface";
-import { Pencil, Download, Trash2, Info } from "lucide-react";
+import { Pencil, Download, Trash2 } from "lucide-react";
 import AddEventModal from "./AddEventModal";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import EventDetailModal from "./EventDetailModal";
@@ -44,6 +44,7 @@ function getBorderColorClass(color?: string): string {
     accent: "border-l-accent",
     sunset: "border-l-sunset",
     sea: "border-l-sea",
+    white: "border-l-light-mode",
   };
   return colorMap[color || "primary"] || "border-l-primary";
 }

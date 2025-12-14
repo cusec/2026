@@ -84,7 +84,7 @@ export interface ScheduleItem {
   detailedDescription?: string;
   location?: string;
   track: "A" | "B" | "C";
-  color?: "primary" | "secondary" | "accent" | "sunset" | "sea";
+  color?: "primary" | "secondary" | "accent" | "sunset" | "sea" | "white";
 }
 
 export type Sponsor = {
