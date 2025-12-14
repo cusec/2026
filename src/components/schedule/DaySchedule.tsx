@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ScheduleItem } from "../../lib/interface";
 import { Pencil, Download, Trash2 } from "lucide-react";
 import AddEventModal from "./AddEventModal";
@@ -199,28 +199,32 @@ export default function DaySchedule({
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
     if (numberOfTracks === 1) {
-      return "w-[92vw] sm:w-[70vw] max-w-[1100px]";
+      return "w-[100vw] sm:w-[70vw] max-w-[1100px]";
     } else if (numberOfTracks === 2) {
-      return "w-[85vw] max-w-[1400px]";
+      return "w-[100vw] sm:w-[85vw] max-w-[1400px]";
     } else {
-      return "w-[90vw] max-w-[1600px]";
+      return "w-[100vw] sm:w-[90vw] max-w-[1600px]";
     }
   };
 
   return (
     <>
       <div
-        className={`group/full ${getContainerWidthClass()} mx-auto mt-12 backdrop-blur-lg px-4 lg:px-12 py-12 lg:py-16`}
+        className={`group/full ${getContainerWidthClass()} mt-12 backdrop-blur-lg px-4 md:px-8 lg:px-12 py-12 lg:py-16`}
       >
-        <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-3xl shadow-lg backdrop-blur-md"></div>
+        <div className="absolute w-full h-full top-0 left-0 sm:bg-dark-mode/40 sm:rounded-3xl sm:shadow-lg backdrop-blur-md"></div>
 
         {/* Download entire day button - top right corner */}
         <button
           onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
-          className="absolute top-4 right-4 p-1 md:p-2 md:hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-2xl shadow-md transition-all"
+          className="absolute flex items-center gap-1 top-0 sm:top-2 lg:top-4 right-4 px-2 py-1 md:invisible group-hover/full:visible bg-light-mode/80 hover:bg-light-mode/90 rounded-xl shadow-md transition-all"
           title="Download full day schedule"
         >
-          <Download size={isMobile ? 12 : 15} className="text-dark-mode" />
+          <Download
+            size={isMobile ? 15 : 15}
+            className="text-dark-mode inline"
+          />
+          Schedule
         </button>
 
         {isAdmin && (
@@ -274,9 +278,13 @@ export default function DaySchedule({
 
                 const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
                 const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
-                let width = `${90 / layout.totalColumns - 2}%`;
+                let width = `${95 / layout.totalColumns - 2}%`;
                 // if viewport width is less than 640px, width should be full
-                if (typeof window !== "undefined" && window.innerWidth < 640) {
+                if (
+                  typeof window !== "undefined" &&
+                  window.innerWidth < 640 &&
+                  layout.totalColumns == 1
+                ) {
                   width = "100%";
                 }
                 const left = `${
@@ -288,7 +296,7 @@ export default function DaySchedule({
                     key={event._id}
                     className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg border-l-6 ${getBorderColorClass(
                       event.color
-                    )} bg-dark-mode/70 shadow-lg/20 hover:bg-dark-mode/75 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
+                    )} bg-dark-mode/60 shadow-lg/20 hover:bg-dark-mode/65 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
                     style={{
                       top: `${top}px`,
                       height: `${height}px`,
@@ -308,17 +316,19 @@ export default function DaySchedule({
                       </div>
                       <div className="p-3 pt-0">
                         {event.detailedDescription ? (
-                          <p
+                          <TruncatedText
+                            text={event.description}
+                            // estimate available height for description area
+                            maxHeight={Math.max(height - 56, 24)}
                             className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline md:no-underline md:group-hover/event:underline"
                             onClick={() => handleOpenDetails(event)}
-                            title="View details"
-                          >
-                            {event.description}
-                          </p>
+                          />
                         ) : (
-                          <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
-                            {event.description}
-                          </p>
+                          <TruncatedText
+                            text={event.description}
+                            maxHeight={Math.max(height - 56, 24)}
+                            className="text-xs md:text-lg text-muted-foreground leading-relaxed"
+                          />
                         )}
                       </div>
                     </div>
@@ -390,5 +400,121 @@ export default function DaySchedule({
         </>
       )}
     </>
+  );
+}
+
+// TruncatedText: truncates `text` with ellipsis so it fits within `maxHeight` (px).
+function TruncatedText({
+  text,
+  maxHeight,
+  className,
+  onClick,
+}: {
+  text?: string | null;
+  maxHeight: number;
+  className?: string;
+  onClick?: () => void;
+}) {
+  const [displayText, setDisplayText] = useState<string>(text || "");
+  const [measuring, setMeasuring] = useState(true);
+  const pRef = useRef<HTMLParagraphElement | null>(null);
+
+  useEffect(() => {
+    setDisplayText(text || "");
+    setMeasuring(true);
+  }, [text]);
+
+  useEffect(() => {
+    const el = pRef.current;
+    if (!el) {
+      setMeasuring(false);
+      return;
+    }
+
+    const original = text || "";
+
+    let rafId = 0 as number;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    let ro: ResizeObserver | null = null;
+
+    const measure = () => {
+      if (!el) return;
+      setMeasuring(true);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const fits = (candidate: string) => {
+          el.innerText = candidate;
+          return el.scrollHeight <= maxHeight - 40; // small padding for safety
+        };
+
+        if (fits(original)) {
+          setDisplayText(original);
+          setMeasuring(false);
+          return;
+        }
+
+        let low = 0;
+        let high = original.length;
+        let best = 0;
+
+        while (low <= high) {
+          const mid = Math.floor((low + high) / 2);
+          const candidate = original.slice(0, mid) + "...";
+          if (fits(candidate)) {
+            best = mid;
+            low = mid + 1;
+          } else {
+            high = mid - 1;
+          }
+        }
+
+        const finalText = original.slice(0, best) + "...";
+        setDisplayText(finalText);
+        setMeasuring(false);
+      });
+    };
+
+    // Initial measure
+    measure();
+
+    const scheduleMeasure = () => {
+      if (timeoutId) window.clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => measure(), 60);
+    };
+
+    if (typeof ResizeObserver !== "undefined") {
+      try {
+        ro = new ResizeObserver(scheduleMeasure);
+        ro.observe(el);
+      } catch (e) {
+        // fall through to window events
+      }
+    }
+
+    if (!ro) {
+      window.addEventListener("resize", scheduleMeasure);
+      window.addEventListener("orientationchange", scheduleMeasure);
+    }
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      if (ro) ro.disconnect();
+      if (timeoutId) window.clearTimeout(timeoutId);
+      if (!ro) {
+        window.removeEventListener("resize", scheduleMeasure);
+        window.removeEventListener("orientationchange", scheduleMeasure);
+      }
+    };
+  }, [text, maxHeight]);
+
+  return (
+    <p
+      ref={pRef}
+      onClick={onClick}
+      className={className}
+      style={{ visibility: measuring ? "hidden" : "visible" }}
+    >
+      {displayText}
+    </p>
   );
 }
