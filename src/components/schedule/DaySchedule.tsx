@@ -488,6 +488,7 @@ function TruncatedText({
         ro.observe(el);
       } catch (e) {
         // fall through to window events
+        console.info("ResizeObserver failed, falling back to window events", e);
       }
     }
 
