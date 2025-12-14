@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { ScheduleItem } from "../../lib/interface";
 import { Pencil, Download, Trash2, Info } from "lucide-react";
-import EventModal from "./EventModal";
+import AddEventModal from "./AddEventModal";
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import EventDetailModal from "./EventDetailModal";
 import { downloadEventICS, downloadDayICS } from "../../lib/icsGenerator";
@@ -180,6 +180,7 @@ export default function DaySchedule({
   const layoutResult = calculateEventLayout(events);
   const eventLayout = layoutResult.eventLayout;
   const numberOfTracks = layoutResult.activeTracksList.length;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   // Convert hours to minutes from midnight
   const displayStart = displayStartHour * 60;
@@ -197,7 +198,7 @@ export default function DaySchedule({
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
     if (numberOfTracks === 1) {
-      return "w-[90vw] sm:w-[70vw] max-w-[1100px]";
+      return "w-[92vw] sm:w-[70vw] max-w-[1100px]";
     } else if (numberOfTracks === 2) {
       return "w-[85vw] max-w-[1400px]";
     } else {
@@ -210,22 +211,22 @@ export default function DaySchedule({
       <div
         className={`group/full ${getContainerWidthClass()} mx-auto mt-12 backdrop-blur-lg px-4 lg:px-12 py-12 lg:py-16`}
       >
-        <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-4xl shadow-lg backdrop-blur-md"></div>
+        <div className="absolute w-full h-full top-0 left-0 bg-dark-mode/60 rounded-3xl shadow-lg backdrop-blur-md"></div>
 
         {/* Download entire day button - top right corner */}
         <button
           onClick={() => downloadDayICS(events, dayTimestamp, dayName)}
-          className="absolute top-4 right-4 p-3 hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md transition-all"
+          className="absolute top-4 right-4 p-1 md:p-2 md:hidden group-hover/full:block bg-light-mode/80 hover:bg-light-mode/90 rounded-2xl shadow-md transition-all"
           title="Download full day schedule"
         >
-          <Download size={15} className="text-dark-mode" />
+          <Download size={isMobile ? 12 : 15} className="text-dark-mode" />
         </button>
 
         {isAdmin && (
           <div className="flex justify-center mb-6">
             <button
               onClick={handleAddEvent}
-              className="px-6 py-3 bg-light-mode/30 text-light-mode font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-md"
+              className="absolute top-4 px-3 py-1 md:px-6 md:py-3 bg-dark-mode/90 border border-light-mode/90 text-light-mode font-semibold rounded-lg transition-colors shadow-md"
             >
               + Add Event
             </button>
@@ -307,18 +308,15 @@ export default function DaySchedule({
                       <div className="p-3 pt-0">
                         {event.detailedDescription ? (
                           <p
-                            className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer hover:underline"
+                            className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline md:no-underline md:group-hover/event:underline"
                             onClick={() => handleOpenDetails(event)}
                             title="View details"
                           >
-                            {event.description || "Details"}
-                            <span className="ml-2 inline-flex items-center text-xs text-primary">
-                              <Info size={12} />
-                            </span>
+                            {event.description}
                           </p>
                         ) : (
                           <p className="text-xs md:text-lg text-muted-foreground leading-relaxed">
-                            {event.description || ""}
+                            {event.description}
                           </p>
                         )}
                       </div>
@@ -326,30 +324,37 @@ export default function DaySchedule({
                     {/* Download button - visible to everyone */}
                     <button
                       onClick={() => downloadEventICS(event, dayTimestamp)}
-                      className="absolute top-2 right-2 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                      title="Add to calendar"
+                      className="absolute top-2 right-2 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                      title="Download ICS File"
                     >
-                      <Download size={16} className="text-dark-mode" />
+                      <Download
+                        size={isMobile ? 12 : 15}
+                        className="text-dark-mode"
+                      />
                     </button>
-                    {/* Delete button - visible only to admins on hover */}
                     {isAdmin && (
-                      <button
-                        onClick={() => handleDeleteEvent(event)}
-                        className="absolute top-2 right-24 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                        title="Delete event"
-                      >
-                        <Trash2 size={16} className="text-dark-mode" />
-                      </button>
-                    )}
-                    {/* Edit button - visible only to admins on hover */}
-                    {isAdmin && (
-                      <button
-                        onClick={() => handleEditEvent(event)}
-                        className="absolute top-2 right-12 p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-full shadow-md opacity-0 group-hover/event:opacity-100 transition-opacity"
-                        title="Edit event"
-                      >
-                        <Pencil size={16} className="text-dark-mode" />
-                      </button>
+                      <>
+                        <button
+                          onClick={() => handleEditEvent(event)}
+                          className="absolute top-2 right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          title="Edit event"
+                        >
+                          <Pencil
+                            size={isMobile ? 12 : 15}
+                            className="text-dark-mode"
+                          />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteEvent(event)}
+                          className="absolute top-2 right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          title="Delete event"
+                        >
+                          <Trash2
+                            size={isMobile ? 12 : 15}
+                            className="text-dark-mode"
+                          />
+                        </button>
+                      </>
                     )}
                   </div>
                 );
@@ -357,8 +362,15 @@ export default function DaySchedule({
           </div>
         </div>
         <Moon />
-        {isAdmin && (
-          <EventModal
+      </div>
+      <EventDetailModal
+        isOpen={isDetailOpen}
+        onClose={handleCloseDetails}
+        event={detailEvent}
+      />
+      {isAdmin && (
+        <>
+          <AddEventModal
             isOpen={isModalOpen}
             onClose={handleCloseModal}
             dayId={dayId}
@@ -367,9 +379,6 @@ export default function DaySchedule({
             displayEndHour={displayEndHour}
             editEvent={editingEvent}
           />
-        )}
-
-        {isAdmin && (
           <ConfirmDeleteModal
             isOpen={isDeleteModalOpen}
             onClose={handleCloseDeleteModal}
@@ -377,13 +386,8 @@ export default function DaySchedule({
             eventTitle={eventToDelete?.title || ""}
             isDeleting={isDeleting}
           />
-        )}
-      </div>
-      <EventDetailModal
-        isOpen={isDetailOpen}
-        onClose={handleCloseDetails}
-        event={detailEvent}
-      />
+        </>
+      )}
     </>
   );
 }

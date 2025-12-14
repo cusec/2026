@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Modal from "../ui/modal";
 import { ScheduleItem } from "../../lib/interface";
 
-interface EventModalProps {
+interface AddEventModalProps {
   isOpen: boolean;
   onClose: () => void;
   dayId: string;
@@ -19,7 +19,7 @@ function hourToTimeString(hour: number): string {
   return `${hour.toString().padStart(2, "0")}:00`;
 }
 
-export default function EventModal({
+export default function AddEventModal({
   isOpen,
   onClose,
   dayId,
@@ -27,7 +27,7 @@ export default function EventModal({
   displayStartHour,
   displayEndHour,
   editEvent = null,
-}: EventModalProps) {
+}: AddEventModalProps) {
   const minTime = hourToTimeString(displayStartHour);
   const maxTime = hourToTimeString(displayEndHour);
   const isEditMode = editEvent ? true : false;

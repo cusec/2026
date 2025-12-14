@@ -22,6 +22,7 @@ export default function EventDetailModal({
       isOpen={isOpen}
       onClose={onClose}
       title={event.description || "Event Details"}
+      className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl"
     >
       <div className="space-y-4">
         {event.detailedDescription ? (

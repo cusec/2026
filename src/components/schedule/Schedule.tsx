@@ -54,14 +54,14 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
         SCHEDULE {adminUser ? "(Admin)" : ""}
       </h2>
       {loading ? (
-        <div className="text-lg text-gray-500">Loading...</div>
+        <div className="text-lg text-light-mode">Scheduling CUSEC 2026...</div>
       ) : error ? (
         <div className="text-red-500">{error}</div>
       ) : (
         <>
           <LeftPath />
           <RightPath />
-          <div className="flex flex-wrap md:flex-nowrap justify-center gap-2 md:gap-42 sm:mb-6">
+          <div className="flex flex-wrap md:flex-nowrap justify-center gap-4 md:gap-42 sm:mb-6">
             {days.map((day, index) => (
               <DayButton
                 key={index}
