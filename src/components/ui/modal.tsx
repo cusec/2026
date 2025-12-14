@@ -20,7 +20,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 200); // Match the animation duration
+    }, 150); // Match the animation duration
   }, [onClose]);
 
   React.useEffect(() => {
@@ -75,8 +75,8 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
       >
         {/* Header */}
         {title && (
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h2 className="text-xl font-semibold ">{title}</h2>
+          <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
+            <h2 className="text-lg md:text-xl font-semibold ">{title}</h2>
             <button
               onClick={handleClose}
               className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors cursor-pointer"
