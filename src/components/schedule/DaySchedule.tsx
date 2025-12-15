@@ -276,10 +276,23 @@ export default function DaySchedule({
                 const duration =
                   timeToMinutes(event.endTime) - timeToMinutes(event.startTime);
 
+                // Check if this event is the only one in its time slot
+                const isOnlyEventInSlot = !events.some((otherEvent) => {
+                  if (otherEvent._id === event._id) return false; // Skip self
+
+                  const eventStart = timeToMinutes(event.startTime);
+                  const eventEnd = timeToMinutes(event.endTime);
+                  const otherStart = timeToMinutes(otherEvent.startTime);
+                  const otherEnd = timeToMinutes(otherEvent.endTime);
+
+                  // Check for overlap
+                  return eventStart < otherEnd && eventEnd > otherStart;
+                });
+
                 const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
                 const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
                 let width = `${95 / layout.totalColumns - 2}%`;
-                // if viewport width is less than 640px, width should be full
+                // if viewport width is less than 640px and event is only in its time slot or only 1 column, make it full width
                 if (
                   typeof window !== "undefined" &&
                   window.innerWidth < 640 &&
@@ -287,8 +300,15 @@ export default function DaySchedule({
                 ) {
                   width = "100%";
                 }
+
+                if (isOnlyEventInSlot) {
+                  width = "95.5%";
+                }
+
                 const left = `${
-                  (layout.column * 100) / layout.totalColumns + 1
+                  layout.column
+                    ? (layout.column * 95) / layout.totalColumns + 1
+                    : -1.5
                 }%`;
 
                 return (
@@ -315,21 +335,13 @@ export default function DaySchedule({
                         </h2>
                       </div>
                       <div className="p-1 xxs:p-3 pt-0">
-                        {event.detailedDescription ? (
-                          <TruncatedText
-                            text={event.description}
-                            // estimate available height for description area
-                            maxHeight={Math.max(height - 56, 24)}
-                            className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline md:no-underline md:group-hover/event:underline"
-                            onClick={() => handleOpenDetails(event)}
-                          />
-                        ) : (
-                          <TruncatedText
-                            text={event.description}
-                            maxHeight={Math.max(height - 56, 24)}
-                            className="text-xs md:text-lg text-muted-foreground leading-relaxed"
-                          />
-                        )}
+                        <TruncatedText
+                          text={event.description}
+                          // estimate available height for description area
+                          maxHeight={Math.max(height - 56, 24)}
+                          className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline"
+                          onClick={() => handleOpenDetails(event)}
+                        />
                       </div>
                     </div>
                     {/* Download button - visible to everyone */}
