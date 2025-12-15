@@ -210,7 +210,7 @@ export default function DaySchedule({
   return (
     <>
       <div
-        className={`group/full overflow-x-hidden ${getContainerWidthClass()} mt-12 backdrop-blur-lg px-4 md:px-8 lg:px-12 py-12 lg:py-16`}
+        className={`group/full ${getContainerWidthClass()} mt-12 backdrop-blur-lg px-4 md:px-8 lg:px-12 py-12 lg:py-16`}
       >
         <div className="absolute w-full h-full top-0 left-0 sm:bg-dark-mode/40 sm:rounded-3xl sm:shadow-lg backdrop-blur-md"></div>
 
@@ -224,7 +224,7 @@ export default function DaySchedule({
             size={isMobile ? 15 : 15}
             className="text-dark-mode inline"
           />
-          Schedule
+          .ics
         </button>
 
         {isAdmin && (
@@ -305,7 +305,7 @@ export default function DaySchedule({
                     }}
                   >
                     <div className="flex-1">
-                      <div className="p-3 pb-0">
+                      <div className="p-1 xxs:p-3 pb-0">
                         <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
                           {event.title}
                         </h1>
@@ -314,7 +314,7 @@ export default function DaySchedule({
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
                       </div>
-                      <div className="p-3 pt-0">
+                      <div className="p-1 xxs:p-3 pt-0">
                         {event.detailedDescription ? (
                           <TruncatedText
                             text={event.description}
