@@ -12,12 +12,6 @@ export default function LoadingScreen() {
   const [showSplash, setShowSplash] = useState(false);
   const [TemporaryContent, setTemporaryContent] = useState(true);
 
-  const preventWheel = (e: WheelEvent) => {
-    e.preventDefault();
-  };
-  const preventTouch = (e: TouchEvent) => {
-    e.preventDefault();
-  };
   const preventWheelRef = useRef<(e: WheelEvent) => void>(() => {});
   const preventTouchRef = useRef<(e: TouchEvent) => void>(() => {});
   const lockScroll = () => {
