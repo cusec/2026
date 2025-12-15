@@ -364,7 +364,7 @@ export default function DaySchedule({
                       <>
                         <button
                           onClick={() => handleEditEvent(event)}
-                          className="absolute top-2 right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          className="absolute top-2 right-9 md:right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Edit event"
                         >
                           <Pencil
@@ -374,7 +374,7 @@ export default function DaySchedule({
                         </button>
                         <button
                           onClick={() => handleDeleteEvent(event)}
-                          className="absolute top-2 right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          className="absolute top-2 right-16 md:right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Delete event"
                         >
                           <Trash2

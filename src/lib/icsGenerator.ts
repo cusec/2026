@@ -102,7 +102,7 @@ export function downloadEventICS(
 
   // Generate filename from event title (sanitized)
   const sanitizedTitle = event.title
-    .replace(/[^a-z0-9]/gi, "_")
+    .replace(/[^A-Za-z0-9]/gi, "_")
     .toLowerCase()
     .substring(0, 50);
   link.download = `cusec_2026_${sanitizedTitle}.ics`;
@@ -232,7 +232,7 @@ export function downloadDayICS(
   link.href = URL.createObjectURL(blob);
 
   // Generate filename from day name (sanitized)
-  const sanitizedDayName = dayName.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+  const sanitizedDayName = dayName.replace(/[^A-Za-z0-9]/gi, "_").toLowerCase();
   link.download = `cusec_2026_${sanitizedDayName}_schedule.ics`;
 
   // Trigger download
