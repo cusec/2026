@@ -302,14 +302,19 @@ export default function DaySchedule({
                 }
 
                 if (isOnlyEventInSlot) {
-                  width = "95.5%";
+                  width = "94.5%";
                 }
 
-                const left = `${
-                  layout.column
-                    ? (layout.column * 95) / layout.totalColumns + 1
-                    : -1.5
-                }%`;
+                let left;
+                if (typeof window !== "undefined" && window.innerWidth < 640) {
+                  left = `${(layout.column * 95) / layout.totalColumns + 4}%`;
+                } else {
+                  left = `${
+                    layout.column
+                      ? (layout.column * 95) / layout.totalColumns + 1
+                      : -0.5
+                  }%`;
+                }
 
                 return (
                   <div
