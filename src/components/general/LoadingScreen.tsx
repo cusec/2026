@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function LoadingScreen() {
   const [displayedText, setDisplayedText] = useState("");
@@ -12,39 +12,59 @@ export default function LoadingScreen() {
   const [showSplash, setShowSplash] = useState(false);
   const [TemporaryContent, setTemporaryContent] = useState(true);
 
+  const preventWheel = (e: WheelEvent) => {
+    e.preventDefault();
+  };
+  const preventTouch = (e: TouchEvent) => {
+    e.preventDefault();
+  };
+  const preventWheelRef = useRef<(e: WheelEvent) => void>(() => {});
+  const preventTouchRef = useRef<(e: TouchEvent) => void>(() => {});
+  const lockScroll = () => {
+    if (typeof document !== "undefined") {
+      document.addEventListener("wheel", preventWheelRef.current, {
+        passive: false,
+      });
+      document.addEventListener("touchmove", preventTouchRef.current, {
+        passive: false,
+      });
+    }
+  };
+  const unlockScroll = () => {
+    if (typeof document !== "undefined") {
+      document.removeEventListener("wheel", preventWheelRef.current);
+      document.removeEventListener("touchmove", preventTouchRef.current);
+    }
+  };
+
   const handleSkip = () => {
     setTextVisible(false);
     setScreenVisible(false);
+
+    setTimeout(() => {
+      setShowSplash(false);
+      setTemporaryContent(false);
+      unlockScroll();
+    }, 500); // short delay to allow screen to disappear smoothly
 
     // Mark tooltip as already shown to prevent it from appearing
     if (typeof window !== "undefined") {
       sessionStorage.setItem("tooltipShown", "true");
     }
-
-    // Re-enable scrolling immediately
-    if (typeof document !== "undefined") {
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
-      document.body.style.touchAction = "";
-    }
   };
 
   useEffect(() => {
+    // initialize listener refs once
+    preventWheelRef.current = (e: WheelEvent) => e.preventDefault();
+    preventTouchRef.current = (e: TouchEvent) => e.preventDefault();
+
     // checks if we need to show splashpage (only shows on intial load)
     if (typeof window !== "undefined") {
       const splashShown = sessionStorage.getItem("splashShown");
       if (!splashShown) {
         setShowSplash(true);
         sessionStorage.setItem("splashShown", "true");
-
-        // Prevent scrolling while loading animation is active
-        if (typeof document !== "undefined") {
-          // Apply overflow hidden to both body and html to ensure no scrolling
-          document.body.style.overflow = "hidden";
-          document.documentElement.style.overflow = "hidden";
-
-          document.body.style.touchAction = "none";
-        }
+        lockScroll();
       } else {
         setTemporaryContent(false);
       }
@@ -71,45 +91,24 @@ export default function LoadingScreen() {
       setScreenVisible(false);
     }, 4000);
 
-    // Create a reference to the function that can be used in the cleanup
-    const preventScroll = (e: TouchEvent) => {
-      e.preventDefault();
-    };
-    if (typeof document !== "undefined") {
-      document.addEventListener("touchmove", preventScroll, { passive: false });
-    }
-
     // Re-enable scrolling after animation completes
     const enableScrollingTimer = setTimeout(() => {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "auto";
-        document.documentElement.style.overflow = "auto";
-        document.body.style.touchAction = "";
-
-        document.removeEventListener("touchmove", preventScroll);
-      }
-    }, 4200); // slightly after the screen animation completes
+      unlockScroll();
+    }, 4400); // slightly after the screen animation completes
 
     return () => {
       clearInterval(typewriterTimer);
       clearTimeout(textTimer);
       clearTimeout(screenTimer);
       clearTimeout(enableScrollingTimer);
-      // Reset overflow if component unmounts
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "auto";
-        document.documentElement.style.overflow = "auto";
-        document.body.style.touchAction = "";
-
-        document.removeEventListener("touchmove", preventScroll);
-      }
+      unlockScroll();
     };
   }, []);
 
   if (showSplash) {
     return (
       <div
-        className={`fixed inset-0 z-60 items-center justify-center transition-all duration-1000 ease-out bg-linear-[35deg] from-secondary from-0% via-primary via-35% to-accent to-140% ${
+        className={`fixed inset-0 z-60 items-center justify-center transition-all duration-600 ease-out bg-linear-[35deg] from-secondary from-0% via-primary via-35% to-accent to-140% ${
           showSplash ? "flex" : "hidden"
         }`}
         style={{
