@@ -3,10 +3,11 @@
 import {
   Particles,
   Navbar,
-  ScavengerOptions,
-  Leaderboard,
+  // ScavengerOptions,
+  // Leaderboard,
   Footer,
   SmoothFollower,
+  Dashboard,
 } from "@/components";
 import { auth0 } from "@/lib/auth0";
 import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
@@ -17,14 +18,15 @@ export default async function ScavengerPage() {
   const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
 
   return (
-    <div className="bg-linear-[35deg] from-secondary from-0% via-primary/100 via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
+    <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
       <Navbar />
-      <main className="relative w-full min-h-[100vh] h-full flex justify-center items-center px-4 py-16">
+      <main className="relative w-full min-h-screen h-full flex justify-center items-center px-4 py-16">
         <Particles />
         <SmoothFollower />
         {user ? (
-          <div className="z-10 flex flex-col md:flex-row items-center justify-center gap-4">
-            <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <div className="relative z-10">
+            <Dashboard />
+            {/* <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
               <span>Welcome, {user.name}!</span>
               <span>[Roles: {user["cusec/roles"].join(", ")}]</span>
               <a
@@ -35,8 +37,8 @@ export default async function ScavengerPage() {
                 </button>
               </a>
               <ScavengerOptions user={user} />
-            </div>
-            <Leaderboard />
+              <Leaderboard />
+            </div> */}
           </div>
         ) : (
           <div className="max-w-6xl mx-auto text-center z-10">
