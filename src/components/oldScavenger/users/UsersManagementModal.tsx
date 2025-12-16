@@ -19,6 +19,7 @@ interface User {
   _id: string;
   email: string;
   name?: string;
+  linked_email?: string | null;
   points: number;
   historyCount: number;
   claimAttemptsCount: number;
@@ -40,7 +41,11 @@ const UsersManagementModal = ({
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [editingUser, setEditingUser] = useState<string | null>(null);
-  const [editForm, setEditForm] = useState({ name: "", points: 0 });
+  const [editForm, setEditForm] = useState({
+    name: "",
+    points: 0,
+    linked_email: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // History modal state
@@ -96,12 +101,13 @@ const UsersManagementModal = ({
     setEditForm({
       name: user.name || "",
       points: user.points,
+      linked_email: user.linked_email || "",
     });
   };
 
   const cancelEdit = () => {
     setEditingUser(null);
-    setEditForm({ name: "", points: 0 });
+    setEditForm({ name: "", points: 0, linked_email: "" });
   };
 
   const saveUser = async (userId: string) => {
@@ -118,6 +124,7 @@ const UsersManagementModal = ({
           updates: {
             name: editForm.name,
             points: editForm.points,
+            linked_email: editForm.linked_email || null,
           },
         }),
       });
@@ -129,7 +136,12 @@ const UsersManagementModal = ({
         setUsers(
           users.map((user) =>
             user._id === userId
-              ? { ...user, name: editForm.name, points: editForm.points }
+              ? {
+                  ...user,
+                  name: editForm.name,
+                  points: editForm.points,
+                  linked_email: editForm.linked_email || null,
+                }
               : user
           )
         );
@@ -351,6 +363,23 @@ const UsersManagementModal = ({
                               min="0"
                             />
                           </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                              Linked Email
+                            </label>
+                            <input
+                              type="email"
+                              value={editForm.linked_email}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  linked_email: e.target.value,
+                                })
+                              }
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                              placeholder="Enter linked email (optional)"
+                            />
+                          </div>
                         </div>
                         <div className="flex gap-2">
                           <button
@@ -393,6 +422,10 @@ const UsersManagementModal = ({
                             <span>
                               Attempts:{" "}
                               <strong>{user.claimAttemptsCount}</strong>
+                            </span>
+                            <span>
+                              Linked:{" "}
+                              <strong>{user.linked_email || "None"}</strong>
                             </span>
                             <span>
                               Joined:{" "}

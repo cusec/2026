@@ -4,6 +4,7 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: String,
+    linked_email: { type: String, default: null },
     points: { type: Number, default: 0 },
     history: {
       type: [

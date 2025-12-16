@@ -10,6 +10,7 @@ import {
   Dashboard,
 } from "@/components";
 import { auth0 } from "@/lib/auth0";
+import { getUserByEmail } from "@/lib/userService";
 import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
 
 export default async function ScavengerPage() {
@@ -17,15 +18,35 @@ export default async function ScavengerPage() {
   const user = session?.user;
   const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
 
+  // Fetch MongoDB user if logged in
+  let dbUser = null;
+  if (user?.email) {
+    const mongoUser = await getUserByEmail(user.email);
+    if (mongoUser) {
+      dbUser = {
+        _id: mongoUser._id.toString(),
+        email: mongoUser.email,
+        name: mongoUser.name,
+        linked_email: mongoUser.linked_email || null,
+        points: mongoUser.points,
+        history:
+          mongoUser.history?.map((h: { toString: () => string }) =>
+            h.toString()
+          ) || [],
+        claim_attempts: mongoUser.claim_attempts || [],
+      };
+    }
+  }
+
   return (
     <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
       <Navbar />
-      <main className="relative w-full min-h-screen h-full flex justify-center items-center px-4 py-16">
+      <main className="relative h-screen w-full flex justify-center items-center">
         <Particles />
         <SmoothFollower />
         {user ? (
           <div className="relative z-10">
-            <Dashboard />
+            <Dashboard user={user} dbUser={dbUser} />
             {/* <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
               <span>Welcome, {user.name}!</span>
               <span>[Roles: {user["cusec/roles"].join(", ")}]</span>

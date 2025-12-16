@@ -41,7 +41,7 @@ export async function GET(request: Request) {
     }
 
     const users = await User.find(query)
-      .select("email name points history claim_attempts createdAt updatedAt")
+      .select("email name linked_email points history claim_attempts createdAt updatedAt")
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);
@@ -54,6 +54,7 @@ export async function GET(request: Request) {
         _id: user._id,
         email: user.email,
         name: user.name,
+        linked_email: user.linked_email || null,
         points: user.points,
         historyCount: user.history.length,
         claimAttemptsCount: user.claim_attempts?.length || 0,
@@ -112,6 +113,7 @@ export async function PUT(request: Request) {
     // Store previous data for audit logging
     const previousData = sanitizeDataForLogging({
       name: user.name,
+      linked_email: user.linked_email,
       points: user.points,
       historyLength: user.history.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
@@ -120,6 +122,7 @@ export async function PUT(request: Request) {
     // Apply updates
     if (updates.name !== undefined) user.name = updates.name;
     if (updates.points !== undefined) user.points = updates.points;
+    if (updates.linked_email !== undefined) user.linked_email = updates.linked_email;
 
     // Handle dangerous operations
     if (updates.clearHistory === true) {
@@ -136,6 +139,7 @@ export async function PUT(request: Request) {
     // Store new data for audit logging
     const newData = sanitizeDataForLogging({
       name: user.name,
+      linked_email: user.linked_email,
       points: user.points,
       historyLength: user.history.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
@@ -177,6 +181,7 @@ export async function PUT(request: Request) {
         _id: user._id,
         email: user.email,
         name: user.name,
+        linked_email: user.linked_email || null,
         points: user.points,
         historyCount: user.history.length,
         claimAttemptsCount: user.claim_attempts?.length || 0,
