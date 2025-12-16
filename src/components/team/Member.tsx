@@ -43,7 +43,7 @@ export default function Member({
       onClick={() => setIsActive(!isActive)}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
-      className={`mb-2 z-30 backdrop-blur-sm relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-200 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
+      className={`mb-2 z-30 backdrop-blur-sm relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[520px] lg:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-200 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
         isActive ? "active" : ""
       } ${hasAnyHover && !isHovered ? "opacity-70" : ""}`}
     >
@@ -51,7 +51,7 @@ export default function Member({
       <div className="absolute inset-0 rounded-xl bg-linear-[215deg] from-sunset/40 to-secondary/40 opacity-0 transition-opacity duration-500 ease-in-out lg:group-hover:opacity-55 group-[.active]:opacity-55 z-0" />
 
       {/* Image - positioned absolutely, moves to top-right on hover or active state */}
-      <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out lg:group-hover:w-[120px] lg:group-hover:h-[120px] lg:group-hover:left-[calc(100%-135px)] lg:group-hover:top-4 lg:group-hover:translate-x-0 group-[.active]:w-[110px] group-[.active]:h-[110px] group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:translate-x-0 z-10">
+      <div className="absolute left-1/2 top-12 sm:top-8 -translate-x-1/2 w-[170px] h-[170px] xs:w-[185px] xs:h-[185px] sm:w-[200px] sm:h-[200px] transition-all duration-500 ease-out lg:group-hover:w-[120px] lg:group-hover:h-[120px] lg:group-hover:left-[calc(100%-135px)] lg:group-hover:top-4 lg:group-hover:translate-x-0 group-[.active]:w-[80px] group-[.active]:h-[80px] lg:group-[.active]:w-[110px] lg:group-[.active]:h-[110px] group-[.active]:left-[calc(100%-90px)] lg:group-[.active]:left-[calc(100%-135px)] group-[.active]:top-4 group-[.active]:translate-x-0 z-10">
         <div className="relative w-full h-full overflow-hidden rounded-full transition-shadow duration-300 ease-in-out group-[.active]:ring-1 group-[.active]:ring-light-mode/20 group-[.active]:ring-offset-2">
           <Image
             src={member.primaryImage}
@@ -85,7 +85,7 @@ export default function Member({
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="hidden sm:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
+              className="hidden lg:block absolute w-8 h-8 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 z-20 hover:scale-105 group-[.active]:opacity-100"
               style={position}
             >
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
@@ -115,7 +115,7 @@ export default function Member({
         {/* Hover content - visible only on hover (lg+) or active state (all sizes) */}
         <div className="absolute inset-0 px-6 pt-10 flex flex-col text-light-mode opacity-0 transition-opacity duration-300 ease-in-out lg:group-hover:opacity-100 group-[.active]:opacity-100 pointer-events-none z-20">
           {/* Name and Pronouns */}
-          <h2 className="text-md sm:text-2xl font-semibold mb-2 max-w-[170px]">
+          <h2 className="text-md sm:text-[22px] font-semibold mb-2 max-w-[150px] xxs:max-w-[170px] sm:max-w-[180px] lg:max-w-[175px]">
             {member.name}
           </h2>
           <p className="text-sm text-light-mode/80 mb-2">({member.pronouns})</p>
@@ -149,7 +149,7 @@ export default function Member({
         </div>
 
         {/* Mobile social links - displayed at bottom on sm and under */}
-        <div className="absolute bottom-4 left-2 right-0 flex sm:hidden items-center justify-start gap-3 px-4 z-20 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 group-[.active]:opacity-100">
+        <div className="absolute bottom-4 left-2 right-0 flex lg:hidden items-center justify-start gap-3 px-4 z-20 opacity-0 transition-all duration-300 lg:group-hover:opacity-100 group-[.active]:opacity-100">
           {socialEntries.map(([key, url]) => (
             <a
               key={key}

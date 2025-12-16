@@ -18,6 +18,23 @@
     }
   },
   {
+    "name": "Jaelyn Wickramarachchi",
+    "pronouns": "She/Her",
+    "teamRole": "Co - Chair",
+    "professionalTitle": "Software Developer",
+    "primaryImage": "/images/team/jaelyn.jpg",
+    "infoTitle": "Fun Fact",
+    "infoDescription": "i know the entire one direction discography",
+    "education": {
+      "major": "Economics w/ Computer Science",
+      "institution": "University of Manitoba",
+      "logo": "/images/schools/umanitoba.png"
+    },
+    "socials": {
+      "linkedin": "https://ca.linkedin.com/in/jaelyn-wickramarachchi"
+    }
+  },
+  {
     "name": "Carson Spriggs-Audet",
     "pronouns": "He/Him",
     "teamRole": "Director of Logistics",
