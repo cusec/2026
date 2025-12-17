@@ -74,7 +74,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
 
   return (
     <div className="w-full overflow-x-hidden text-dark-mode bg-light-mode/40 p-3 rounded-lg border border-light-mode">
-      <div className="flex flex-wrap w-fit gap-2 items-center justify-center text-center font-semibold">
+      <div className="flex flex-wrap gap-2 items-center justify-center text-center font-semibold">
         {linkedEmail ? (
           <>{linkedEmail} (Linked) </>
         ) : (
@@ -113,7 +113,8 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
         <p className=" mb-4">
           Are you sure you want to link email &quot;{email}&quot; (Must be
           associated with your ticket) to your current account email &quot;
-          {user.email}&quot;?
+          {user.email}&quot;? Your display name will be {dbUser.name} (This can
+          be changed by contacting the Tech team).
         </p>
         <p className=" text-sm mb-6">
           This action cannot be undone. You will need to contact the Tech team

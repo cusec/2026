@@ -23,25 +23,14 @@ export default async function ScavengerPage() {
   if (user?.email) {
     const mongoUser = await getUserByEmail(user.email);
     if (mongoUser) {
-      dbUser = {
-        _id: mongoUser._id.toString(),
-        email: mongoUser.email,
-        name: mongoUser.name,
-        linked_email: mongoUser.linked_email || null,
-        points: mongoUser.points,
-        history:
-          mongoUser.history?.map((h: { toString: () => string }) =>
-            h.toString()
-          ) || [],
-        claim_attempts: mongoUser.claim_attempts || [],
-      };
+      dbUser = mongoUser;
     }
   }
 
   return (
     <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
       <Navbar />
-      <main className="relative h-screen w-full flex justify-center items-center">
+      <main className="relative min-h-screen h-full w-full overflow-x-hidden flex justify-center items-center pt-[15vh]">
         <Particles />
         <SmoothFollower />
         {user ? (
