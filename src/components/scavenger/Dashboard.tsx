@@ -1,6 +1,7 @@
 import { Auth0User, DbUser } from "@/lib/interface";
 import EmailLink from "./EmailLink";
 import Leaderboard from "./Leaderboard";
+import Shop from "./Shop";
 
 interface DashboardProps {
   user: Auth0User;
@@ -12,6 +13,7 @@ const Dashboard = ({ user, dbUser }: DashboardProps) => {
     <div className="w-full">
       {dbUser && <EmailLink user={user} dbUser={dbUser} />}
       <Leaderboard />
+      <Shop />
     </div>
   );
 };

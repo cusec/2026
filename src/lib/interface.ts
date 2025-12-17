@@ -69,6 +69,29 @@ export interface HuntItemFormData {
   points: number;
 }
 
+export interface ShopItem {
+  _id: string;
+  name: string;
+  description: string;
+  cost: number;
+  limited: boolean;
+  remaining: number;
+  moderated: boolean;
+  imageSlug: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface ShopItemFormData {
+  name: string;
+  description: string;
+  cost: number;
+  limited: boolean;
+  remaining: number;
+  moderated: boolean;
+  imageSlug: string;
+}
+
 export interface Day {
   _id?: string;
   day: string;

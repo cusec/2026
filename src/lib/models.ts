@@ -72,7 +72,7 @@ const adminAuditLogSchema = new Schema(
     resourceType: {
       type: String,
       required: true,
-      enum: ["user", "huntItem", "claimAttempts", "scheduleItem"],
+      enum: ["user", "huntItem", "claimAttempts", "scheduleItem", "shopItem"],
       index: true,
     },
     resourceId: {
@@ -135,6 +135,21 @@ const DaySchema = new Schema({
   schedule: { type: [ScheduleItemSchema], required: true },
 });
 
+const shopItemSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    cost: { type: Number, required: true, default: 0 },
+    limited: { type: Boolean, default: false },
+    remaining: { type: Number, default: 0 },
+    moderated: { type: Boolean, default: false },
+    imageSlug: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
@@ -143,5 +158,7 @@ const HuntItem =
 const AdminAuditLog =
   mongoose.models.AdminAuditLog ||
   mongoose.model("AdminAuditLog", adminAuditLogSchema);
+const ShopItem =
+  mongoose.models.ShopItem || mongoose.model("ShopItem", shopItemSchema);
 
-export { User, HuntItem, AdminAuditLog, Day };
+export { User, HuntItem, AdminAuditLog, Day, ShopItem };

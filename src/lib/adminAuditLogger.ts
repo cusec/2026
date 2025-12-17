@@ -6,7 +6,12 @@ type LoggableData = Record<string, unknown> | null | undefined;
 interface LogAdminActionParams {
   adminEmail: string;
   action: string;
-  resourceType: "user" | "huntItem" | "claimAttempts" | "scheduleItem";
+  resourceType:
+    | "user"
+    | "huntItem"
+    | "claimAttempts"
+    | "scheduleItem"
+    | "shopItem";
   targetUserEmail?: string;
   resourceId?: string;
   details?: LoggableData;
