@@ -23,7 +23,8 @@ export default async function ScavengerPage() {
   if (user?.email) {
     const mongoUser = await getUserByEmail(user.email);
     if (mongoUser) {
-      dbUser = mongoUser;
+      // Convert Mongoose document to plain object to avoid serialization issues
+      dbUser = JSON.parse(JSON.stringify(mongoUser.toObject()));
     }
   }
 
