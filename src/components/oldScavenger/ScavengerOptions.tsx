@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import HuntItemsModal from "./HuntItemsModal";
 import ClaimHuntItemModal from "./ClaimHuntItemModal";
-import UsersManagementModal from "./users/UsersManagementModal";
-import ClaimAttemptsModal from "./claimAttempts/ClaimAttemptsModal";
-import AuditLogsModal from "./admin/AuditLogsModal";
 import RedeemPointsModal from "./RedeemPointsModal";
 import { Auth0User, DbUser } from "@/lib/interface";
 
@@ -21,12 +17,8 @@ const ScavengerOptions = ({
   const [dbUser, setDbUser] = useState(initialDbUser);
   const [loading, setLoading] = useState(!initialDbUser);
   const [error, setError] = useState<string | null>(null);
-  const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
-  const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
-  const [isClaimAttemptsModalOpen, setIsClaimAttemptsModalOpen] =
-    useState(false);
-  const [isAuditLogsModalOpen, setIsAuditLogsModalOpen] = useState(false);
+
   const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);
 
   useEffect(() => {
@@ -143,34 +135,6 @@ const ScavengerOptions = ({
           </p>
         </div>
       )}
-      {user?.["cusec/roles"]?.includes("Admin") ? (
-        <>
-          <button
-            onClick={() => setIsHuntItemsModalOpen(true)}
-            className="px-4 py-2 rounded-lg bg-primary text-white font-semibold shadow hover:bg-primary/80 transition"
-          >
-            Hunt Items (Admin)
-          </button>
-          <button
-            onClick={() => setIsUsersModalOpen(true)}
-            className="px-4 py-2 rounded-lg bg-purple-600 text-white font-semibold shadow hover:bg-purple-700 transition"
-          >
-            Users (Admin)
-          </button>
-          <button
-            onClick={() => setIsClaimAttemptsModalOpen(true)}
-            className="px-4 py-2 rounded-lg bg-orange-600 text-white font-semibold shadow hover:bg-orange-700 transition"
-          >
-            Claim Attempts (Admin)
-          </button>
-          <button
-            onClick={() => setIsAuditLogsModalOpen(true)}
-            className="px-4 py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700 transition"
-          >
-            Audit Logs (Admin)
-          </button>
-        </>
-      ) : null}
 
       {(user?.["cusec/roles"]?.includes("Admin") ||
         user?.["cusec/roles"]?.includes("Volunteer")) && (
@@ -189,31 +153,11 @@ const ScavengerOptions = ({
         Claim Hunt Item
       </button>
 
-      <HuntItemsModal
-        isOpen={isHuntItemsModalOpen}
-        onClose={() => setIsHuntItemsModalOpen(false)}
-      />
-
       <ClaimHuntItemModal
         isOpen={isClaimModalOpen}
         onClose={() => setIsClaimModalOpen(false)}
         onClaimSuccess={handleClaimSuccess}
         userId={dbUser?._id}
-      />
-
-      <UsersManagementModal
-        isOpen={isUsersModalOpen}
-        onClose={() => setIsUsersModalOpen(false)}
-      />
-
-      <ClaimAttemptsModal
-        isOpen={isClaimAttemptsModalOpen}
-        onClose={() => setIsClaimAttemptsModalOpen(false)}
-      />
-
-      <AuditLogsModal
-        isOpen={isAuditLogsModalOpen}
-        onClose={() => setIsAuditLogsModalOpen(false)}
       />
 
       <RedeemPointsModal

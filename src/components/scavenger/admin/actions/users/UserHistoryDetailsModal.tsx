@@ -162,50 +162,46 @@ const UserHistoryDetailsModal = ({
     >
       <div className="space-y-6">
         {error && (
-          <div className="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-            <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+          <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+            <p className="text-red-800 text-sm">{error}</p>
           </div>
         )}
 
         {loading ? (
           <div className="text-center py-8">
-            <p className="text-gray-600 dark:text-gray-400">
-              Loading history...
-            </p>
+            <p className="text-gray-600">Loading history...</p>
           </div>
         ) : (
           <>
             {/* Claimed Items Section */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
                 <Trophy className="w-5 h-5 text-yellow-600" />
                 Claimed Items ({userHistory.length})
               </h3>
 
               {userHistory.length === 0 ? (
-                <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    No items claimed yet
-                  </p>
+                <div className="text-center py-6 bg-gray-50 rounded-lg">
+                  <p className="text-gray-600">No items claimed yet</p>
                 </div>
               ) : (
                 <div className="space-y-3 max-h-64 overflow-y-auto">
                   {userHistory.map((item) => (
                     <div
                       key={item._id}
-                      className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                      className="p-4 border border-gray-200 rounded-lg bg-white"
                     >
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h4 className="font-semibold text-gray-900 dark:text-white">
+                          <h4 className="font-semibold text-gray-900">
                             {item.name}
                           </h4>
                           {item.description && (
-                            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                            <p className="text-sm text-gray-600 mt-1">
                               {item.description}
                             </p>
                           )}
-                          <div className="flex items-center gap-4 mt-2 text-xs text-gray-500 dark:text-gray-400">
+                          <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
                             <div className="flex items-center gap-1">
                               <Hash className="w-3 h-3" />
                               {item.identifier}
@@ -217,7 +213,7 @@ const UserHistoryDetailsModal = ({
                           </div>
                         </div>
                         <div className="text-right">
-                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 rounded text-sm font-medium">
+                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 rounded text-sm font-medium">
                             <Trophy className="w-3 h-3" />+{item.points}
                           </span>
                         </div>
@@ -231,7 +227,7 @@ const UserHistoryDetailsModal = ({
             {/* Claim Attempts Section */}
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-blue-600" />
                   Recent Claim Attempts ({
                     claimAttempts.slice(-10).length
@@ -271,17 +267,17 @@ const UserHistoryDetailsModal = ({
                     <div
                       className={`mb-4 p-3 rounded-lg border ${
                         rateLimitInfo.isRateLimited
-                          ? "border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20"
+                          ? "border-red-200 bg-red-50"
                           : rateLimitInfo.recentFailedAttempts > 5
-                          ? "border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20"
-                          : "border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20"
+                          ? "border-yellow-200 bg-yellow-50"
+                          : "border-green-200 bg-green-50"
                       }`}
                     >
                       <div className="flex items-center gap-2 text-sm">
                         {rateLimitInfo.isRateLimited ? (
                           <>
                             <AlertTriangle className="w-4 h-4 text-red-600" />
-                            <span className="font-medium text-red-800 dark:text-red-200">
+                            <span className="font-medium text-red-800">
                               Rate Limited: {rateLimitInfo.recentFailedAttempts}
                               /10 failed attempts in last 15 minutes
                             </span>
@@ -289,7 +285,7 @@ const UserHistoryDetailsModal = ({
                         ) : (
                           <>
                             <CheckCircle className="w-4 h-4 text-green-600" />
-                            <span className="font-medium text-green-800 dark:text-green-200">
+                            <span className="font-medium text-green-800">
                               {rateLimitInfo.remainingAttempts} attempts
                               remaining ({rateLimitInfo.recentFailedAttempts}/10
                               failed in last 15 minutes)
@@ -302,10 +298,8 @@ const UserHistoryDetailsModal = ({
                 })()}
 
               {claimAttempts.length === 0 ? (
-                <div className="text-center py-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                  <p className="text-gray-600 dark:text-gray-400">
-                    No claim attempts recorded
-                  </p>
+                <div className="text-center py-6 bg-gray-50 rounded-lg">
+                  <p className="text-gray-600">No claim attempts recorded</p>
                 </div>
               ) : (
                 <div className="space-y-2 max-h-64 overflow-y-auto">
@@ -317,8 +311,8 @@ const UserHistoryDetailsModal = ({
                         key={index}
                         className={`p-3 rounded-lg border ${
                           attempt.success
-                            ? "border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20"
-                            : "border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20"
+                            ? "border-green-200 bg-green-50"
+                            : "border-red-200 bg-red-50"
                         }`}
                       >
                         <div className="flex justify-between items-center">
@@ -328,20 +322,20 @@ const UserHistoryDetailsModal = ({
                             ) : (
                               <XCircle className="w-4 h-4 text-red-600" />
                             )}
-                            <code className="text-sm bg-gray-100 dark:bg-gray-800 px-1 rounded">
+                            <code className="text-sm bg-gray-100 px-1 rounded">
                               {attempt.identifier}
                             </code>
                             <span
                               className={`text-xs px-2 py-1 rounded ${
                                 attempt.success
-                                  ? "bg-green-200 dark:bg-green-800 text-green-800 dark:text-green-200"
-                                  : "bg-red-200 dark:bg-red-800 text-red-800 dark:text-red-200"
+                                  ? "bg-green-200 text-green-800"
+                                  : "bg-red-200 text-red-800"
                               }`}
                             >
                               {attempt.success ? "Success" : "Failed"}
                             </span>
                           </div>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                          <span className="text-xs text-gray-500">
                             {new Date(attempt.timestamp).toLocaleString()}
                           </span>
                         </div>

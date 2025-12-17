@@ -30,9 +30,7 @@ const HuntItemsList = ({
   if (loading) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600 dark:text-gray-400">
-          Loading hunt items...
-        </p>
+        <p className="text-gray-600">Loading hunt items...</p>
       </div>
     );
   }
@@ -40,7 +38,7 @@ const HuntItemsList = ({
   if (items.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600 dark:text-gray-400">No hunt items found.</p>
+        <p className="text-gray-600">No hunt items found.</p>
       </div>
     );
   }
@@ -50,7 +48,7 @@ const HuntItemsList = ({
       {items.map((item) => (
         <div
           key={item._id}
-          className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+          className="p-4 border border-gray-200 rounded-lg bg-white"
         >
           {editingItem?._id === item._id ? (
             <HuntItemEditForm

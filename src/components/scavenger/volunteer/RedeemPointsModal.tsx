@@ -137,7 +137,7 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
       <div className="space-y-6">
         {/* Search Users */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Search Users
           </label>
           <input
@@ -145,7 +145,7 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Enter email or name..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900"
           />
           {searchLoading && (
             <p className="text-sm text-gray-500 mt-1">Searching...</p>
@@ -155,15 +155,15 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
         {/* User List */}
         {users.length > 0 && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Select User
             </label>
-            <div className="max-h-48 overflow-y-auto border border-gray-300 rounded-md dark:border-gray-600">
+            <div className="max-h-48 overflow-y-auto border border-gray-300 rounded-md">
               {users.map((user) => (
                 <button
                   key={user._id}
                   onClick={() => setSelectedUser(user)}
-                  className={`w-full text-left px-3 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-600 last:border-b-0 ${
+                  className={`w-full text-left px-3 py-2 hover:bg-gray-50 border-b border-gray-200 last:border-b-0 ${
                     selectedUser?._id === user._id
                       ? "bg-primary/10 border-primary"
                       : ""
@@ -182,11 +182,9 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
 
         {/* Selected User Info */}
         {selectedUser && (
-          <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-md">
-            <h4 className="font-medium text-gray-900 dark:text-white">
-              Selected User
-            </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="bg-gray-50 p-4 rounded-md">
+            <h4 className="font-medium text-gray-900">Selected User</h4>
+            <p className="text-sm text-gray-600">
               {selectedUser.name} ({selectedUser.email})
             </p>
             <p className="text-sm font-semibold text-primary">
@@ -198,7 +196,7 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
         {/* Points to Redeem */}
         {selectedUser && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
               Points to Redeem
             </label>
             <input
@@ -208,7 +206,7 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
               min="1"
               max={selectedUser.points}
               placeholder="Enter points to redeem..."
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary bg-white text-gray-900"
             />
             <p className="text-xs text-gray-500 mt-1">
               Maximum: {selectedUser.points} points
@@ -241,7 +239,7 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
           </button>
           <button
             onClick={handleClose}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:bg-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
           >
             Cancel
           </button>

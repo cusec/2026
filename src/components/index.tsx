@@ -15,7 +15,6 @@ export { default as Gallery } from "./home/gallery/Gallery";
 export { default as FAQ } from "./home/faq/FAQ";
 export { default as CodeOfConduct } from "./code-of-conduct/CodeOfConduct";
 export { default as PrivacyPolicy } from "./privacy-policy/PrivacyPolicy";
-export { default as Leaderboard } from "./oldScavenger/leaderboard/Leaderboard";
 export { default as Schedule } from "./schedule/Schedule";
 export { default as Speakers } from "./speakers/Speakers";
 export { default as Heart } from "./speakers/Heart";

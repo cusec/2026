@@ -62,11 +62,11 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
       >
         <div className="space-y-6">
           {error && (
-            <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-red-800 dark:text-red-200">{error}</p>
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800">{error}</p>
               <button
                 onClick={() => setError(null)}
-                className="mt-2 text-sm text-red-600 dark:text-red-400 hover:underline"
+                className="mt-2 text-sm text-red-600 hover:underline"
               >
                 Dismiss
               </button>
@@ -75,7 +75,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
 
           {/* Add New Item Button */}
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-medium text-gray-900 dark:text-white">
+            <h3 className="text-lg font-medium text-gray-900">
               Hunt Items ({huntItems.length})
             </h3>
             <button

@@ -91,33 +91,27 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
       {/* Stats */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg">
-            <div className="text-sm text-blue-600 dark:text-blue-400">
-              Total
-            </div>
-            <div className="text-lg font-semibold text-blue-800 dark:text-blue-200">
+          <div className="bg-blue-50 p-3 rounded-lg">
+            <div className="text-sm text-blue-600">Total</div>
+            <div className="text-lg font-semibold text-blue-800">
               {stats.totalAttempts}
             </div>
           </div>
-          <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg">
-            <div className="text-sm text-red-600 dark:text-red-400">Failed</div>
-            <div className="text-lg font-semibold text-red-800 dark:text-red-200">
+          <div className="bg-red-50 p-3 rounded-lg">
+            <div className="text-sm text-red-600">Failed</div>
+            <div className="text-lg font-semibold text-red-800">
               {stats.failedAttempts}
             </div>
           </div>
-          <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg">
-            <div className="text-sm text-green-600 dark:text-green-400">
-              Success
-            </div>
-            <div className="text-lg font-semibold text-green-800 dark:text-green-200">
+          <div className="bg-green-50 p-3 rounded-lg">
+            <div className="text-sm text-green-600">Success</div>
+            <div className="text-lg font-semibold text-green-800">
               {stats.successfulAttempts}
             </div>
           </div>
-          <div className="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg">
-            <div className="text-sm text-purple-600 dark:text-purple-400">
-              Users
-            </div>
-            <div className="text-lg font-semibold text-purple-800 dark:text-purple-200">
+          <div className="bg-purple-50 p-3 rounded-lg">
+            <div className="text-sm text-purple-600">Users</div>
+            <div className="text-lg font-semibold text-purple-800">
               {stats.uniqueUsers}
             </div>
           </div>
@@ -125,24 +119,21 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
       )}
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-          <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-800 text-sm">{error}</p>
         </div>
       )}
 
       {/* Attempts List */}
-      <div className="max-h-64 overflow-y-auto border border-gray-200 dark:border-gray-700 rounded-lg">
+      <div className="max-h-64 overflow-y-auto border border-gray-200 rounded-lg">
         {claimAttempts.length === 0 && !loading ? (
-          <div className="p-4 text-center text-gray-500 dark:text-gray-400">
+          <div className="p-4 text-center text-gray-500">
             No claim attempts found
           </div>
         ) : (
-          <div className="divide-y divide-gray-200 dark:divide-gray-700">
+          <div className="divide-y divide-gray-200">
             {claimAttempts.map((attempt, index) => (
-              <div
-                key={index}
-                className="p-3 hover:bg-gray-50 dark:hover:bg-gray-800"
-              >
+              <div key={index} className="p-3 hover:bg-gray-50">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     {attempt.success ? (
@@ -150,24 +141,24 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
                     ) : (
                       <XCircle className="w-4 h-4 text-red-600" />
                     )}
-                    <span className="font-medium text-sm text-gray-900 dark:text-white">
+                    <span className="font-medium text-sm text-gray-900">
                       {attempt.userName || attempt.userEmail}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
                     <Clock className="w-3 h-3" />
                     {new Date(attempt.timestamp).toLocaleString()}
                   </div>
                 </div>
-                <div className="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                <div className="mt-1 text-sm text-gray-600">
                   Identifier:{" "}
-                  <code className="bg-gray-100 dark:bg-gray-800 px-1 rounded">
+                  <code className="bg-gray-100 px-1 rounded">
                     {attempt.identifier}
                   </code>
                 </div>
                 {attempt.userEmail !==
                   (attempt.userName || attempt.userEmail) && (
-                  <div className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <div className="mt-1 text-xs text-gray-500">
                     {attempt.userEmail}
                   </div>
                 )}
@@ -177,7 +168,7 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
         )}
       </div>
 
-      <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+      <div className="mt-2 text-xs text-gray-500">
         💡 Monitor for potential brute force attempts or suspicious patterns
       </div>
     </div>

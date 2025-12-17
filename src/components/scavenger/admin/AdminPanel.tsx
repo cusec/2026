@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { X, Users, FileSearch, History, ClipboardList } from "lucide-react";
+import {
+  X,
+  Users,
+  FileSearch,
+  History,
+  ClipboardList,
+  ShoppingBag,
+} from "lucide-react";
 import Modal from "@/components/ui/modal";
 import HuntItemsModal from "./actions/huntItems/HuntItemsModal";
-import UsersManagementModal from "@/components/oldScavenger/users/UsersManagementModal";
-import ClaimAttemptsModal from "@/components/oldScavenger/claimAttempts/ClaimAttemptsModal";
-import AuditLogsModal from "@/components/oldScavenger/admin/AuditLogsModal";
+import ShopItemsModal from "./actions/shopItems/ShopItemsModal";
+import UsersManagementModal from "./actions/users/UsersManagementModal";
+import ClaimAttemptsModal from "./actions/claimAttempts/ClaimAttemptsModal";
+import AuditLogsModal from "./actions/AuditLogsModal";
 
 interface AdminPanelProps {
   isOpen: boolean;
@@ -15,6 +23,7 @@ interface AdminPanelProps {
 
 const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
   const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
+  const [isShopItemsModalOpen, setIsShopItemsModalOpen] = useState(false);
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
   const [isClaimAttemptsModalOpen, setIsClaimAttemptsModalOpen] =
     useState(false);
@@ -55,6 +64,14 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
               </button>
 
               <button
+                onClick={() => setIsShopItemsModalOpen(true)}
+                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+              >
+                <ShoppingBag className="mr-3 h-6 w-6" />
+                Manage Shop Items
+              </button>
+
+              <button
                 onClick={() => setIsUsersModalOpen(true)}
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
               >
@@ -86,6 +103,11 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       <HuntItemsModal
         isOpen={isHuntItemsModalOpen}
         onClose={() => setIsHuntItemsModalOpen(false)}
+      />
+
+      <ShopItemsModal
+        isOpen={isShopItemsModalOpen}
+        onClose={() => setIsShopItemsModalOpen(false)}
       />
 
       <UsersManagementModal

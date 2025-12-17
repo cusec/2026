@@ -270,7 +270,7 @@ const UsersManagementModal = ({
                 placeholder="Search by name or email..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
               />
             </div>
             <button
@@ -286,11 +286,11 @@ const UsersManagementModal = ({
           </div>
 
           {error && (
-            <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-              <p className="text-red-800 dark:text-red-200">{error}</p>
+            <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+              <p className="text-red-800">{error}</p>
               <button
                 onClick={() => setError(null)}
-                className="mt-2 text-sm text-red-600 dark:text-red-400 hover:underline"
+                className="mt-2 text-sm text-red-600 hover:underline"
               >
                 Dismiss
               </button>
@@ -300,37 +300,33 @@ const UsersManagementModal = ({
           {/* Users list */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 mb-4">
-              <UsersIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              <UsersIcon className="w-5 h-5 text-gray-600" />
+              <h3 className="text-lg font-semibold text-gray-900">
                 Users ({users.length})
               </h3>
             </div>
 
             {loading ? (
               <div className="text-center py-8">
-                <p className="text-gray-600 dark:text-gray-400">
-                  Loading users...
-                </p>
+                <p className="text-gray-600">Loading users...</p>
               </div>
             ) : users.length === 0 ? (
-              <div className="text-center py-8 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <p className="text-gray-600 dark:text-gray-400">
-                  No users found
-                </p>
+              <div className="text-center py-8 bg-gray-50 rounded-lg">
+                <p className="text-gray-600">No users found</p>
               </div>
             ) : (
               <div className="space-y-2 max-h-96 overflow-y-auto">
                 {users.map((user) => (
                   <div
                     key={user._id}
-                    className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+                    className="p-4 border border-gray-200 rounded-lg bg-white"
                   >
                     {editingUser === user._id ? (
                       // Edit mode
                       <div className="space-y-3">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
                               Name
                             </label>
                             <input
@@ -342,12 +338,12 @@ const UsersManagementModal = ({
                                   name: e.target.value,
                                 })
                               }
-                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter name"
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
                               Points
                             </label>
                             <input
@@ -359,12 +355,12 @@ const UsersManagementModal = ({
                                   points: parseInt(e.target.value) || 0,
                                 })
                               }
-                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               min="0"
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
                               Linked Email
                             </label>
                             <input
@@ -376,7 +372,7 @@ const UsersManagementModal = ({
                                   linked_email: e.target.value,
                                 })
                               }
-                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter linked email (optional)"
                             />
                           </div>
@@ -405,14 +401,14 @@ const UsersManagementModal = ({
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-3">
-                            <h4 className="font-semibold text-gray-900 dark:text-white">
+                            <h4 className="font-semibold text-gray-900">
                               {user.name || "No name"}
                             </h4>
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
+                            <span className="text-sm text-gray-600">
                               {user.email}
                             </span>
                           </div>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 dark:text-gray-400">
+                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
                             <span>
                               Points: <strong>{user.points}</strong>
                             </span>
@@ -477,6 +473,7 @@ const UsersManagementModal = ({
                             title="Clear History & Points (DANGEROUS)"
                           >
                             <Trash2 className="w-3 h-3" />
+                            Clear History
                             <AlertTriangle className="w-3 h-3" />
                           </button>
                         </div>
@@ -488,7 +485,7 @@ const UsersManagementModal = ({
             )}
           </div>
 
-          <div className="text-xs text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 pt-4">
+          <div className="text-xs text-gray-500 border-t border-gray-200 pt-4">
             <div className="flex items-center gap-2 mb-2">
               <AlertTriangle className="w-4 h-4 text-yellow-600" />
               <strong>Admin Controls Warning</strong>

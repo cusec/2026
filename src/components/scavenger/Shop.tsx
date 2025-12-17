@@ -277,9 +277,7 @@ const Shop = () => {
             </div>
 
             {/* Description */}
-            <p className="text-gray-700 dark:text-gray-300">
-              {selectedItem.description}
-            </p>
+            <p className="text-gray-700">{selectedItem.description}</p>
 
             {/* Details */}
             <div className="space-y-2 text-sm">

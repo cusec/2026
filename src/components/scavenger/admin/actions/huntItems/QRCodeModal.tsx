@@ -41,7 +41,7 @@ const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
             className="border rounded-lg"
           />
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400">
+        <p className="text-sm text-gray-600">
           <strong>Identifier:</strong> {item.identifier}
         </p>
         <button

@@ -1,22 +1,21 @@
 "use client";
 
-import { HuntItem } from "@/lib/interface";
-import HuntItemDisplay from "./HuntItemDisplay";
-import HuntItemEditForm from "./HuntItemEditForm";
+import { ShopItem } from "@/lib/interface";
+import ShopItemDisplay from "./ShopItemDisplay";
+import ShopItemEditForm from "./ShopItemEditForm";
 
-interface HuntItemsListProps {
-  items: HuntItem[];
+interface ShopItemsListProps {
+  items: ShopItem[];
   loading: boolean;
-  editingItem: HuntItem | null;
-  onEdit: (item: HuntItem) => void;
-  onSave: (item: HuntItem) => void;
+  editingItem: ShopItem | null;
+  onEdit: (item: ShopItem) => void;
+  onSave: (item: ShopItem) => void;
   onCancelEdit: () => void;
   onDelete: (id: string) => void;
-  onShowQR: (item: HuntItem) => void;
-  onEditingItemChange: (item: HuntItem) => void;
+  onEditingItemChange: (item: ShopItem) => void;
 }
 
-const HuntItemsList = ({
+const ShopItemsList = ({
   items,
   loading,
   editingItem,
@@ -24,15 +23,12 @@ const HuntItemsList = ({
   onSave,
   onCancelEdit,
   onDelete,
-  onShowQR,
   onEditingItemChange,
-}: HuntItemsListProps) => {
+}: ShopItemsListProps) => {
   if (loading) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600 dark:text-gray-400">
-          Loading hunt items...
-        </p>
+        <p className="text-gray-600">Loading shop items...</p>
       </div>
     );
   }
@@ -40,7 +36,7 @@ const HuntItemsList = ({
   if (items.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600 dark:text-gray-400">No hunt items found.</p>
+        <p className="text-gray-600">No shop items found.</p>
       </div>
     );
   }
@@ -50,21 +46,20 @@ const HuntItemsList = ({
       {items.map((item) => (
         <div
           key={item._id}
-          className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800"
+          className="p-4 border border-gray-200 rounded-lg bg-white"
         >
           {editingItem?._id === item._id ? (
-            <HuntItemEditForm
+            <ShopItemEditForm
               item={editingItem}
               onSave={onSave}
               onCancel={onCancelEdit}
               onChange={onEditingItemChange}
             />
           ) : (
-            <HuntItemDisplay
+            <ShopItemDisplay
               item={item}
               onEdit={() => onEdit(item)}
               onDelete={() => onDelete(item._id)}
-              onShowQR={() => onShowQR(item)}
             />
           )}
         </div>
@@ -73,4 +68,4 @@ const HuntItemsList = ({
   );
 };
 
-export default HuntItemsList;
+export default ShopItemsList;

@@ -19,29 +19,29 @@ const HuntItemEditForm = ({
   return (
     <div className="space-y-3">
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
           Name
         </label>
         <input
           type="text"
           value={item.name}
           onChange={(e) => onChange({ ...item, name: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
           Description
         </label>
         <textarea
           value={item.description}
           onChange={(e) => onChange({ ...item, description: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
           rows={3}
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
           Points
         </label>
         <input
@@ -50,10 +50,10 @@ const HuntItemEditForm = ({
           onChange={(e) =>
             onChange({ ...item, points: parseInt(e.target.value) || 0 })
           }
-          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
         />
       </div>
-      <p className="text-xs text-gray-500 dark:text-gray-500">
+      <p className="text-xs text-gray-500">
         Identifier: {item.identifier} (cannot be changed)
       </p>
       <div className="flex gap-2">

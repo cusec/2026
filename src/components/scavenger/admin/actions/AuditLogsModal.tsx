@@ -118,25 +118,25 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white dark:bg-gray-800 rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
+      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <div className="flex items-center justify-between p-6 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-900">
             Admin Audit Logs
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            className="text-gray-500 hover:text-gray-700"
           >
             ✕
           </button>
         </div>
 
         {/* Filters */}
-        <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+        <div className="p-6 border-b border-gray-200 bg-gray-50">
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Admin Email
               </label>
               <input
@@ -145,13 +145,13 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 onChange={(e) =>
                   handleFilterChange("adminEmail", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
                 placeholder="Filter by admin email"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Target User Email
               </label>
               <input
@@ -160,19 +160,19 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 onChange={(e) =>
                   handleFilterChange("targetUserEmail", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
                 placeholder="Filter by target user"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Action
               </label>
               <select
                 value={filters.action}
                 onChange={(e) => handleFilterChange("action", e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               >
                 <option value="">All Actions</option>
                 <option value="UPDATE_USER">Update User</option>
@@ -187,7 +187,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              <label className="block text-sm font-medium text-gray-700 mb-1">
                 Resource Type
               </label>
               <select
@@ -195,7 +195,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 onChange={(e) =>
                   handleFilterChange("resourceType", e.target.value)
                 }
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               >
                 <option value="">All Types</option>
                 <option value="user">User</option>
@@ -219,7 +219,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
         {/* Content */}
         <div className="flex-1 overflow-hidden">
           {error && (
-            <div className="p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 text-red-700 dark:text-red-300">
+            <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
               {error}
             </div>
           )}
@@ -234,7 +234,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 {auditLogs.map((log) => (
                   <div
                     key={log._id}
-                    className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -245,17 +245,17 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                         >
                           {log.action.replace(/_/g, " ")}
                         </span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <span className="text-sm text-gray-600">
                           {log.resourceType}
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-500 dark:text-gray-400">
+                        <span className="text-sm text-gray-500">
                           {formatDate(log.createdAt)}
                         </span>
                         <button
                           onClick={() => setSelectedLog(log)}
-                          className="p-1 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+                          className="p-1 text-gray-500 hover:text-gray-700"
                         >
                           <Eye size={16} />
                         </button>
@@ -263,11 +263,11 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                     </div>
 
                     <div className="mt-2 text-sm">
-                      <div className="text-gray-900 dark:text-white">
+                      <div className="text-gray-900">
                         <strong>Admin:</strong> {log.adminEmail}
                       </div>
                       {log.targetUserEmail && (
-                        <div className="text-gray-600 dark:text-gray-400">
+                        <div className="text-gray-600">
                           <strong>Target:</strong> {log.targetUserEmail}
                         </div>
                       )}
@@ -294,9 +294,11 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
         {/* Detail Modal */}
         {selectedLog && (
           <div className="fixed inset-0 bg-black bg-opacity-50 z-60 flex items-center justify-center p-4">
-            <div className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden">
-              <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-                <h3 className="text-lg font-semibold">Audit Log Details</h3>
+            <div className="bg-white rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden">
+              <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Audit Log Details
+                </h3>
                 <button
                   onClick={() => setSelectedLog(null)}
                   className="text-gray-500 hover:text-gray-700"
@@ -305,7 +307,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 </button>
               </div>
               <div className="p-4 overflow-y-auto max-h-96">
-                <pre className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg text-sm overflow-x-auto">
+                <pre className="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto text-gray-900">
                   {JSON.stringify(selectedLog, null, 2)}
                 </pre>
               </div>
