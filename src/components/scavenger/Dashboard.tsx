@@ -15,11 +15,11 @@ const Dashboard = ({ user, dbUser }: DashboardProps) => {
       {dbUser && (
         <>
           <EmailLink user={user} dbUser={dbUser} />
-          <UserHunt dbUser={dbUser} />
+          <UserHunt user={user} dbUser={dbUser} />
         </>
       )}
-      <Leaderboard />
       <Shop />
+      <Leaderboard />
     </div>
   );
 };
