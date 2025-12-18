@@ -76,9 +76,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
         {/* Header */}
         {title && (
           <div className="flex items-center justify-between p-4 md:p-6 border-b border-gray-200">
-            <h2 className="text-lg md:text-xl font-semibold text-gray-900">
-              {title}
-            </h2>
+            <h2 className="text-lg md:text-xl font-semibold">{title}</h2>
             <button
               onClick={handleClose}
               className="p-2 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"

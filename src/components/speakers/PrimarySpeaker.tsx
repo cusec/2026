@@ -5,17 +5,15 @@ import Socials from "./Socials";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Modal from "@/components/ui/modal";
 
 export default function PrimarySpeaker({
-  key,
   speaker,
+  onTalkClick,
 }: {
-  key: number;
   speaker: Speaker;
+  onTalkClick: (title: string, description: string) => void;
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const MAX_LENGTH = 300; // Characters to show before truncating
   const shouldTruncate = speaker.bio.length > MAX_LENGTH;
   const displayBio =
@@ -24,10 +22,7 @@ export default function PrimarySpeaker({
       : speaker.bio;
 
   return (
-    <div
-      key={key}
-      className="flex flex-col sm:flex-row w-full gap-2 md:gap-5 mb-[2vh] text-light-mode z-30 backdrop-blur-sm"
-    >
+    <div className="flex flex-col sm:flex-row w-full gap-2 md:gap-5 mb-[2vh] text-light-mode z-30 backdrop-blur-sm">
       <div className="min-w-[80vw] max-w-[80vw] min-h-[80vw] max-h-[80vw] xs:min-w-[35vw] xs:max-w-[35vw] xs:min-h-[35vw] xs:max-h-[35vw] md:min-w-[18vw] md:max-w-[18vw] md:min-h-[18vw] md:max-h-[18vw] relative overflow-hidden rounded-xl group">
         <Image
           src={speaker.image}
@@ -51,7 +46,12 @@ export default function PrimarySpeaker({
                 {speaker.title && <> | </>}
                 {speaker.talkDescription ? (
                   <span
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={() =>
+                      onTalkClick(
+                        speaker.talkTitle || "",
+                        speaker.talkDescription || ""
+                      )
+                    }
                     className="underline hover:text-dark-mode transition-colors duration-200 cursor-pointer"
                   >
                     {speaker.talkTitle}
@@ -128,17 +128,6 @@ export default function PrimarySpeaker({
           <Socials speaker={speaker} />
         </div>
       </div>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title={speaker.talkTitle}
-        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl"
-      >
-        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
-          {speaker.talkDescription || "No description available."}
-        </p>
-      </Modal>
     </div>
   );
 }

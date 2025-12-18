@@ -5,22 +5,18 @@ import Socials from "./Socials";
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Modal from "@/components/ui/modal";
 
 export default function SecondarySpeaker({
-  key,
   speaker,
+  onTalkClick,
 }: {
   key: number;
   speaker: Speaker;
+  onTalkClick: (title: string, description: string) => void;
 }) {
   const [showBio, setShowBio] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div
-      key={key}
-      className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[330px] xs:h-[570px] py-10 text-light-mode font-se rounded-xl border border-light-mode/50 bg-light-mode/15 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group z-30 backdrop-blur-sm"
-    >
+    <div className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[330px] xs:h-[570px] py-10 text-light-mode font-se rounded-xl border border-light-mode/50 bg-light-mode/15 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group z-30 backdrop-blur-sm">
       <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
           {!showBio ? (
@@ -58,7 +54,12 @@ export default function SecondarySpeaker({
                   <p className="text-sm md:text-md xl:text-md mt-3">
                     {speaker.talkDescription ? (
                       <span
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() =>
+                          onTalkClick(
+                            speaker.talkTitle || "",
+                            speaker.talkDescription || ""
+                          )
+                        }
                         className="underline hover:text-dark-mode/80 transition-colors duration-200 cursor-pointer"
                       >
                         {speaker.talkTitle}
@@ -111,17 +112,6 @@ export default function SecondarySpeaker({
           </motion.span>
         </AnimatePresence>
       </motion.button>
-
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        title={speaker.talkTitle}
-        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl"
-      >
-        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed">
-          {speaker.talkDescription || "No description available."}
-        </p>
-      </Modal>
     </div>
   );
 }
