@@ -47,7 +47,16 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, description, identifier, points, active, activationStart, activationEnd } = await request.json();
+    const {
+      name,
+      description,
+      identifier,
+      points,
+      maxClaims,
+      active,
+      activationStart,
+      activationEnd,
+    } = await request.json();
 
     if (!name || !identifier) {
       return NextResponse.json(
@@ -57,9 +66,15 @@ export async function POST(request: Request) {
     }
 
     // Validate activation dates if provided
-    if ((activationStart && !activationEnd) || (!activationStart && activationEnd)) {
+    if (
+      (activationStart && !activationEnd) ||
+      (!activationStart && activationEnd)
+    ) {
       return NextResponse.json(
-        { error: "Both activation start and end dates must be provided, or neither" },
+        {
+          error:
+            "Both activation start and end dates must be provided, or neither",
+        },
         { status: 400 }
       );
     }
@@ -91,6 +106,8 @@ export async function POST(request: Request) {
       description,
       identifier,
       points: points || 0,
+      maxClaims: maxClaims !== undefined ? maxClaims : null,
+      claimCount: 0,
       active: active !== undefined ? active : true,
       activationStart: activationStart ? new Date(activationStart) : null,
       activationEnd: activationEnd ? new Date(activationEnd) : null,
@@ -106,6 +123,8 @@ export async function POST(request: Request) {
         description: huntItem.description,
         identifier: huntItem.identifier,
         points: huntItem.points,
+        maxClaims: huntItem.maxClaims,
+        claimCount: huntItem.claimCount,
         active: huntItem.active,
         activationStart: huntItem.activationStart,
         activationEnd: huntItem.activationEnd,

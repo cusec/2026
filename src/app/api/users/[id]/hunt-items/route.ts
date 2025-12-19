@@ -235,12 +235,48 @@ export async function POST(
       );
     }
 
+    // Check if hunt item has reached max claims limit
+    if (
+      huntItem.maxClaims !== null &&
+      huntItem.maxClaims !== undefined &&
+      huntItem.claimCount >= huntItem.maxClaims
+    ) {
+      // Log failed attempt (max claims reached)
+      user.claim_attempts.push(claimAttempt);
+      await user.save();
+
+      // Check how many attempts remaining after this failed attempt
+      const updatedRateLimitCheck = checkRateLimit(user.claim_attempts);
+      const remainingAttempts = updatedRateLimitCheck.remainingAttempts;
+
+      const errorMessage =
+        remainingAttempts > 0
+          ? `This hunt item has reached its maximum number of claims. You have ${remainingAttempts} more attempts remaining in the next ${RATE_LIMIT_WINDOW_MINUTES} minutes.`
+          : `This hunt item has reached its maximum number of claims. Note: You can make up to ${RATE_LIMIT_MAX_ATTEMPTS} failed attempts every ${RATE_LIMIT_WINDOW_MINUTES} minutes.`;
+
+      return NextResponse.json(
+        {
+          error: errorMessage,
+          remainingAttempts,
+          rateLimitInfo: {
+            maxAttempts: RATE_LIMIT_MAX_ATTEMPTS,
+            windowMinutes: RATE_LIMIT_WINDOW_MINUTES,
+          },
+        },
+        { status: 400 }
+      );
+    }
+
     // Successful claim - update claim attempt and user data
     claimAttempt.success = true;
     user.claim_attempts.push(claimAttempt);
     user.history.push(huntItem._id);
     user.points += huntItem.points;
     await user.save();
+
+    // Increment claimCount on the hunt item
+    huntItem.claimCount = (huntItem.claimCount || 0) + 1;
+    await huntItem.save();
 
     return NextResponse.json({
       success: true,

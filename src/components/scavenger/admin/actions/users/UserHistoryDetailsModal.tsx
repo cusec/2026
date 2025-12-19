@@ -10,6 +10,7 @@ import {
   AlertTriangle,
   CheckCircle,
   XCircle,
+  Trash2,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
@@ -49,6 +50,7 @@ const UserHistoryDetailsModal = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isClearing, setIsClearing] = useState(false);
+  const [removingItemId, setRemovingItemId] = useState<string | null>(null);
 
   // Rate limit calculation
   const calculateRateLimit = () => {
@@ -112,6 +114,49 @@ const UserHistoryDetailsModal = ({
       console.error("Error clearing claim attempts:", err);
     } finally {
       setIsClearing(false);
+    }
+  };
+
+  const removeClaimedItem = async (huntItemId: string, itemName: string) => {
+    if (!userEmail) return;
+
+    const confirmed = window.confirm(
+      `⚠️ Remove "${itemName}" from ${userName || userEmail}'s history?\n\n` +
+        `This will:\n` +
+        `• Permanently remove this item from their claimed history\n` +
+        `• Deduct the points associated with this item\n` +
+        `• Decrease the claim count on this hunt item\n\n` +
+        `This action cannot be undone.`
+    );
+    if (!confirmed) return;
+
+    try {
+      setRemovingItemId(huntItemId);
+
+      const response = await fetch("/api/admin/claim-attempts", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userEmail,
+          huntItemId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Refresh the data
+        await fetchUserHistory();
+      } else {
+        setError(data.error || "Failed to remove claimed item");
+      }
+    } catch (err) {
+      setError("Failed to remove claimed item");
+      console.error("Error removing claimed item:", err);
+    } finally {
+      setRemovingItemId(null);
     }
   };
 
@@ -212,10 +257,22 @@ const UserHistoryDetailsModal = ({
                             </div>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="flex items-center gap-2">
                           <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 rounded text-sm font-medium">
                             <Trophy className="w-3 h-3" />+{item.points}
                           </span>
+                          <button
+                            onClick={() => removeClaimedItem(item._id, item.name)}
+                            disabled={removingItemId === item._id}
+                            className="p-1.5 text-red-600 hover:bg-red-100 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Remove this claimed item"
+                          >
+                            {removingItemId === item._id ? (
+                              <RefreshCw className="w-4 h-4 animate-spin" />
+                            ) : (
+                              <Trash2 className="w-4 h-4" />
+                            )}
+                          </button>
                         </div>
                       </div>
                     </div>

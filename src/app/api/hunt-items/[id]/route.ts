@@ -29,6 +29,7 @@ export async function PUT(
       name,
       description,
       points,
+      maxClaims,
       active,
       activationStart,
       activationEnd,
@@ -79,6 +80,7 @@ export async function PUT(
       name: huntItem.name,
       description: huntItem.description,
       points: huntItem.points,
+      maxClaims: huntItem.maxClaims,
       active: huntItem.active,
       activationStart: huntItem.activationStart,
       activationEnd: huntItem.activationEnd,
@@ -88,6 +90,7 @@ export async function PUT(
     huntItem.name = name;
     huntItem.description = description;
     huntItem.points = points || 0;
+    huntItem.maxClaims = maxClaims !== undefined ? maxClaims : null;
     huntItem.active = active !== undefined ? active : true;
     huntItem.activationStart = activationStart
       ? new Date(activationStart)
@@ -101,6 +104,7 @@ export async function PUT(
       name: huntItem.name,
       description: huntItem.description,
       points: huntItem.points,
+      maxClaims: huntItem.maxClaims,
       active: huntItem.active,
       activationStart: huntItem.activationStart,
       activationEnd: huntItem.activationEnd,

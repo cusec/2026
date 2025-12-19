@@ -89,6 +89,32 @@ const HuntItemEditForm = ({
           className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-dark-mode"
         />
       </div>
+      <div>
+        <label className="block text-sm font-medium text-dark-mode mb-1">
+          Max. Claims
+        </label>
+        <input
+          type="number"
+          value={item.maxClaims ?? ""}
+          onChange={(e) =>
+            onChange({
+              ...item,
+              maxClaims: e.target.value ? parseInt(e.target.value) : null,
+            })
+          }
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-dark-mode"
+          placeholder="Leave empty for unlimited"
+          min={1}
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          Maximum number of times this item can be claimed. Leave empty for
+          unlimited.
+        </p>
+        <p className="text-xs text-gray-600 mt-1">
+          Current Claim Count:{" "}
+          <span className="font-semibold">{item.claimCount ?? 0}</span>
+        </p>
+      </div>
 
       {/* Active Toggle */}
       <div className="flex items-center gap-3">

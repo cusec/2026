@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { User } from "@/lib/models";
+import { User, HuntItem } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
@@ -230,6 +230,129 @@ export async function POST(request: Request) {
     });
   } catch (error) {
     console.error("Error clearing claim attempts:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE - Remove a claimed item from a user's history (Admin only)
+export async function DELETE(request: Request) {
+  try {
+    const session = await auth0.getSession();
+
+    if (!session?.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    if (!(await isAdmin())) {
+      return NextResponse.json(
+        { error: "Forbidden: Admin access required" },
+        { status: 403 }
+      );
+    }
+
+    const { userEmail, huntItemId } = await request.json();
+
+    if (!userEmail || !huntItemId) {
+      return NextResponse.json(
+        { error: "User email and hunt item ID are required" },
+        { status: 400 }
+      );
+    }
+
+    await connectMongoDB();
+
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const huntItem = await HuntItem.findById(huntItemId);
+    if (!huntItem) {
+      return NextResponse.json(
+        { error: "Hunt item not found" },
+        { status: 404 }
+      );
+    }
+
+    // Check if the item is in the user's history
+    const itemIndex = user.history.findIndex(
+      (id: { toString: () => string }) => id.toString() === huntItemId
+    );
+
+    if (itemIndex === -1) {
+      return NextResponse.json(
+        { error: "Hunt item not found in user's history" },
+        { status: 400 }
+      );
+    }
+
+    // Store previous data for audit logging
+    const previousData = sanitizeDataForLogging({
+      userPoints: user.points,
+      historyCount: user.history.length,
+      huntItemClaimCount: huntItem.claimCount,
+    });
+
+    // Remove the item from user's history
+    user.history.splice(itemIndex, 1);
+
+    // Subtract the points from the user
+    user.points = Math.max(0, user.points - huntItem.points);
+
+    // Also remove the successful claim attempt for this item if it exists
+    if (user.claim_attempts) {
+      user.claim_attempts = user.claim_attempts.filter(
+        (attempt: { item_id?: { toString: () => string }; success: boolean }) =>
+          !(
+            attempt.item_id?.toString() === huntItemId && attempt.success
+          )
+      );
+    }
+
+    await user.save();
+
+    // Decrement the claimCount on the hunt item
+    huntItem.claimCount = Math.max(0, (huntItem.claimCount || 0) - 1);
+    await huntItem.save();
+
+    // Store new data for audit logging
+    const newData = sanitizeDataForLogging({
+      userPoints: user.points,
+      historyCount: user.history.length,
+      huntItemClaimCount: huntItem.claimCount,
+    });
+
+    // Log the admin action
+    const adminEmail = session.user.email;
+    if (adminEmail) {
+      await logAdminAction({
+        adminEmail,
+        action: "REMOVE_CLAIMED_ITEM",
+        resourceType: "claimAttempts",
+        targetUserEmail: userEmail,
+        resourceId: huntItemId,
+        details: {
+          huntItemName: huntItem.name,
+          huntItemIdentifier: huntItem.identifier,
+          pointsRemoved: huntItem.points,
+        },
+        previousData,
+        newData,
+        request,
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: `Removed "${huntItem.name}" from ${userEmail}'s history and deducted ${huntItem.points} points`,
+      newPoints: user.points,
+    });
+  } catch (error) {
+    console.error("Error removing claimed item:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

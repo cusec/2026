@@ -9,7 +9,7 @@ import {
   AlertTriangle,
   Users as UsersIcon,
   History,
-  Trash2,
+  // Trash2,
   RefreshCw,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
@@ -157,87 +157,87 @@ const UsersManagementModal = ({
     }
   };
 
-  const clearUserHistory = async (userId: string, userName: string) => {
-    const confirmed = window.confirm(
-      `⚠️ DANGEROUS ACTION ⚠️\n\nThis will permanently clear ALL history and reset points to 0 for user: ${userName}\n\nThis action cannot be undone. Are you sure?`
-    );
+  // const clearUserHistory = async (userId: string, userName: string) => {
+  //   const confirmed = window.confirm(
+  //     `⚠️ DANGEROUS ACTION ⚠️\n\nThis will permanently clear ALL history and reset points to 0 for user: ${userName}\n\nThis action cannot be undone. Are you sure?`
+  //   );
 
-    if (!confirmed) return;
+  //   if (!confirmed) return;
 
-    try {
-      setIsSubmitting(true);
+  //   try {
+  //     setIsSubmitting(true);
 
-      const response = await fetch("/api/admin/users", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          updates: { clearHistory: true },
-        }),
-      });
+  //     const response = await fetch("/api/admin/users", {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         updates: { clearHistory: true },
+  //       }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (data.success) {
-        // Update local state
-        setUsers(
-          users.map((user) =>
-            user._id === userId ? { ...user, points: 0, historyCount: 0 } : user
-          )
-        );
-      } else {
-        setError(data.error || "Failed to clear user history");
-      }
-    } catch (err) {
-      setError("Failed to clear user history");
-      console.error("Error clearing user history:", err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (data.success) {
+  //       // Update local state
+  //       setUsers(
+  //         users.map((user) =>
+  //           user._id === userId ? { ...user, points: 0, historyCount: 0 } : user
+  //         )
+  //       );
+  //     } else {
+  //       setError(data.error || "Failed to clear user history");
+  //     }
+  //   } catch (err) {
+  //     setError("Failed to clear user history");
+  //     console.error("Error clearing user history:", err);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
-  const clearClaimAttempts = async (userId: string, userName: string) => {
-    const confirmed = window.confirm(
-      `Clear all claim attempts for user: ${userName}?\n\nThis will remove the audit trail of their claim attempts. Not recommended unless necessary.`
-    );
+  // const clearClaimAttempts = async (userId: string, userName: string) => {
+  //   const confirmed = window.confirm(
+  //     `Clear all claim attempts for user: ${userName}?\n\nThis will remove the audit trail of their claim attempts. Not recommended unless necessary.`
+  //   );
 
-    if (!confirmed) return;
+  //   if (!confirmed) return;
 
-    try {
-      setIsSubmitting(true);
+  //   try {
+  //     setIsSubmitting(true);
 
-      const response = await fetch("/api/admin/users", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId,
-          updates: { clearClaimAttempts: true },
-        }),
-      });
+  //     const response = await fetch("/api/admin/users", {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         userId,
+  //         updates: { clearClaimAttempts: true },
+  //       }),
+  //     });
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (data.success) {
-        // Update local state
-        setUsers(
-          users.map((user) =>
-            user._id === userId ? { ...user, claimAttemptsCount: 0 } : user
-          )
-        );
-      } else {
-        setError(data.error || "Failed to clear claim attempts");
-      }
-    } catch (err) {
-      setError("Failed to clear claim attempts");
-      console.error("Error clearing claim attempts:", err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  //     if (data.success) {
+  //       // Update local state
+  //       setUsers(
+  //         users.map((user) =>
+  //           user._id === userId ? { ...user, claimAttemptsCount: 0 } : user
+  //         )
+  //       );
+  //     } else {
+  //       setError(data.error || "Failed to clear claim attempts");
+  //     }
+  //   } catch (err) {
+  //     setError("Failed to clear claim attempts");
+  //     console.error("Error clearing claim attempts:", err);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   const showUserHistory = (user: User) => {
     setSelectedUser(user);

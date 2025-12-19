@@ -49,7 +49,15 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
   // Handle form cancellation
   const handleCancelAdd = () => {
     setShowAddForm(false);
-    setFormData({ name: "", description: "", identifier: "", points: 0 });
+    setFormData({
+      name: "",
+      description: "",
+      identifier: "",
+      points: 0,
+      active: false,
+      activationStart: "",
+      activationEnd: "",
+    });
   };
 
   return (

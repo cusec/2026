@@ -58,6 +58,8 @@ export interface HuntItem {
   description: string;
   identifier: string;
   points: number;
+  maxClaims: number | null;
+  claimCount: number;
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
@@ -70,6 +72,7 @@ export interface HuntItemFormData {
   description: string;
   identifier: string;
   points: number;
+  maxClaims: number | null;
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
