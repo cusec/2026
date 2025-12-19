@@ -4,8 +4,6 @@ export { default as Footer } from "./general/Footer";
 export { default as Hero } from "./home/Hero";
 export { default as Particles } from "./general/Particles";
 export { default as OceanSurface } from "./home/OceanSurface";
-export { default as ScavengerOptions } from "./oldScavenger/ScavengerOptions";
-export { default as ScannerPage } from "./oldScavenger/ScannerPage";
 export { default as About } from "./home/about/About";
 export { default as Sponsors } from "./home/sponsors/Sponsors";
 export { default as Pricing } from "./home/pricing/Pricing";

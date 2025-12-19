@@ -105,11 +105,13 @@ const RedeemPointsModal = ({ isOpen, onClose }: RedeemPointsModalProps) => {
       setSelectedUser({ ...selectedUser, points: data.newPoints });
 
       // Update user in the list
-      setUsers(users.map(user => 
-        user._id === selectedUser._id 
-          ? { ...user, points: data.newPoints }
-          : user
-      ));
+      setUsers(
+        users.map((user) =>
+          user._id === selectedUser._id
+            ? { ...user, points: data.newPoints }
+            : user
+        )
+      );
 
       setPointsToRedeem(0);
     } catch (err) {
