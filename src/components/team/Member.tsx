@@ -43,7 +43,7 @@ export default function Member({
       onClick={() => setIsActive(!isActive)}
       onMouseEnter={() => onHoverChange(true)}
       onMouseLeave={() => onHoverChange(false)}
-      className={`mb-2 z-30 backdrop-blur-sm relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[520px] lg:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-200 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
+      className={`mb-2 z-20 backdrop-blur-sm relative flex flex-col items-center justify-between w-full h-[470px] xs:w-[325px] xs:h-[470px] sm:w-[350px] sm:h-[520px] lg:h-[470px] pt-6 pb-12 rounded-xl border border-light-mode/70 bg-light-mode/20 lg:hover:bg-light-mode/10 transition-all duration-200 ease-in-out overflow-hidden group lg:cursor-default cursor-pointer ${
         isActive ? "active" : ""
       } ${hasAnyHover && !isHovered ? "opacity-70" : ""}`}
     >

@@ -55,8 +55,9 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
       identifier: "",
       points: 0,
       active: false,
-      activationStart: "",
-      activationEnd: "",
+      activationStart: null,
+      activationEnd: null,
+      maxClaims: null,
     });
   };
 

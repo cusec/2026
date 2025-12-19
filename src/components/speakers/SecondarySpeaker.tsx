@@ -16,7 +16,7 @@ export default function SecondarySpeaker({
 }) {
   const [showBio, setShowBio] = useState(false);
   return (
-    <div className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[330px] xs:h-[570px] py-10 text-light-mode font-se rounded-xl border border-light-mode/50 bg-light-mode/15 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group z-30 backdrop-blur-sm">
+    <div className="flex flex-col justify-between items-center text-center w-full h-[520px] xs:w-[330px] xs:h-[570px] py-10 text-light-mode font-se rounded-xl border border-light-mode/50 bg-light-mode/15 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group z-20 backdrop-blur-sm">
       <div className="w-full h-full px-4 mb-4 overflow-hidden flex flex-col">
         <AnimatePresence mode="wait">
           {!showBio ? (
