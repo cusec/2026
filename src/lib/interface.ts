@@ -40,7 +40,7 @@ export interface DbUser {
   email: string;
   name?: string;
   linked_email?: string | null;
-  points?: number; // Calculated dynamically from claimedItems minus redeemedPoints
+  points: number;
   claimedItems: string[];
   claim_attempts?: ClaimAttempt[];
 }

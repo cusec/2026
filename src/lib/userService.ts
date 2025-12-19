@@ -23,6 +23,7 @@ export async function findOrCreateUser(userData: UserData) {
       user = new User({
         email: userData.email,
         name: userData.name,
+        points: 0,
         claimedItems: [],
         claim_attempts: [],
       });

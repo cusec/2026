@@ -294,10 +294,14 @@ export async function DELETE(request: Request) {
     const previousData = sanitizeDataForLogging({
       claimedItemsCount: user.claimedItems.length,
       huntItemClaimCount: huntItem.claimCount,
+      userPoints: user.points || 0,
     });
 
     // Remove the item from user's claimedItems
     user.claimedItems.splice(itemIndex, 1);
+
+    // Subtract the hunt item's points from the user's total
+    user.points = Math.max(0, (user.points || 0) - (huntItem.points || 0));
 
     // Note: We intentionally keep the claim attempt record for audit/history purposes
 
@@ -311,6 +315,7 @@ export async function DELETE(request: Request) {
     const newData = sanitizeDataForLogging({
       claimedItemsCount: user.claimedItems.length,
       huntItemClaimCount: huntItem.claimCount,
+      userPoints: user.points,
     });
 
     // Log the admin action
@@ -333,21 +338,10 @@ export async function DELETE(request: Request) {
       });
     }
 
-    // Calculate new points from remaining claimed items minus redeemed points
-    const populatedUser = await User.findById(user._id).populate(
-      "claimedItems",
-      "points"
-    );
-    const earnedPoints = (populatedUser.claimedItems || []).reduce(
-      (sum: number, item: { points?: number }) => sum + (item.points || 0),
-      0
-    );
-    const newPoints = earnedPoints - (populatedUser.redeemedPoints || 0);
-
     return NextResponse.json({
       success: true,
       message: `Removed "${huntItem.name}" from ${userEmail}'s claimed items`,
-      newPoints,
+      newPoints: user.points,
     });
   } catch (error) {
     console.error("Error removing claimed item:", error);

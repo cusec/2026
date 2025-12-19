@@ -26,17 +26,10 @@ export default async function ScavengerPage() {
       // Convert Mongoose document to plain object to avoid serialization issues
       const plainUser = mongoUser.toObject();
 
-      // Calculate points from claimed items minus redeemed points
-      const earnedPoints = (plainUser.claimedItems || []).reduce(
-        (sum: number, item: { points?: number }) => sum + (item.points || 0),
-        0
-      );
-      const points = earnedPoints - (plainUser.redeemedPoints || 0);
-
       dbUser = JSON.parse(
         JSON.stringify({
           ...plainUser,
-          points,
+          points: plainUser.points || 0,
         })
       );
     }

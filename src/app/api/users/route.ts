@@ -26,13 +26,6 @@ export async function GET() {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Calculate points from claimed items minus redeemed points
-    const earnedPoints = (user.claimedItems || []).reduce(
-      (sum: number, item: { points?: number }) => sum + (item.points || 0),
-      0
-    );
-    const points = earnedPoints - (user.redeemedPoints || 0);
-
     return NextResponse.json({
       success: true,
       user: {
@@ -40,7 +33,7 @@ export async function GET() {
         email: user.email,
         name: user.name,
         linked_email: user.linked_email || null,
-        points,
+        points: user.points || 0,
         claimedItems: user.claimedItems,
         claimAttemptsCount: user.claim_attempts?.length || 0,
       },
@@ -85,13 +78,6 @@ export async function POST() {
     });
     console.log("User found/created:", user ? "Success" : "Failed");
 
-    // Calculate points from claimed items minus redeemed points
-    const earnedPoints = (user.claimedItems || []).reduce(
-      (sum: number, item: { points?: number }) => sum + (item.points || 0),
-      0
-    );
-    const points = earnedPoints - (user.redeemedPoints || 0);
-
     return NextResponse.json({
       success: true,
       user: {
@@ -99,7 +85,7 @@ export async function POST() {
         email: user.email,
         name: user.name,
         linked_email: user.linked_email || null,
-        points,
+        points: user.points || 0,
         claimedItems: user.claimedItems,
         claimAttemptsCount: user.claim_attempts?.length || 0,
       },

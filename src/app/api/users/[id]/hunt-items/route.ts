@@ -271,21 +271,13 @@ export async function POST(
     claimAttempt.success = true;
     user.claim_attempts.push(claimAttempt);
     user.claimedItems.push(huntItem._id);
+    // Add the hunt item's points to the user's total
+    user.points = (user.points || 0) + (huntItem.points || 0);
     await user.save();
 
     // Increment claimCount on the hunt item
     huntItem.claimCount = (huntItem.claimCount || 0) + 1;
     await huntItem.save();
-
-    // Calculate total points from all claimed items minus redeemed points
-    const populatedUser = await User.findById(user._id).populate(
-      "claimedItems"
-    );
-    const earnedPoints = populatedUser.claimedItems.reduce(
-      (sum: number, item: { points: number }) => sum + (item.points || 0),
-      0
-    );
-    const totalPoints = earnedPoints - (populatedUser.redeemedPoints || 0);
 
     return NextResponse.json({
       success: true,
@@ -295,7 +287,7 @@ export async function POST(
         description: huntItem.description,
         points: huntItem.points,
       },
-      newPoints: totalPoints,
+      newPoints: user.points,
       totalItemsClaimed: user.claimedItems.length,
     });
   } catch (error) {

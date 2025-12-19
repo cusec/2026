@@ -44,20 +44,15 @@ export async function POST(request: Request) {
 
     await connectMongoDB();
 
-    const user = await User.findById(userId).populate("claimedItems", "points");
+    const user = await User.findById(userId);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Calculate current available points (claimed items total - already redeemed)
-    const totalEarnedPoints = (user.claimedItems || []).reduce(
-      (sum: number, item: { points?: number }) => sum + (item.points || 0),
-      0
-    );
-    const availablePoints = totalEarnedPoints - (user.redeemedPoints || 0);
+    const currentPoints = user.points || 0;
 
     // Check if user has enough points
-    if (availablePoints < pointsToRedeem) {
+    if (currentPoints < pointsToRedeem) {
       return NextResponse.json(
         { error: "User does not have enough points" },
         { status: 400 }
@@ -66,20 +61,16 @@ export async function POST(request: Request) {
 
     // Store previous data for audit logging
     const previousData = sanitizeDataForLogging({
-      redeemedPoints: user.redeemedPoints || 0,
-      availablePoints,
+      points: currentPoints,
     });
 
-    // Add to redeemed points
-    user.redeemedPoints = (user.redeemedPoints || 0) + pointsToRedeem;
-    const newAvailablePoints = totalEarnedPoints - user.redeemedPoints;
-
+    // Subtract points from user
+    user.points = currentPoints - pointsToRedeem;
     await user.save();
 
     // Store new data for audit logging
     const newData = sanitizeDataForLogging({
-      redeemedPoints: user.redeemedPoints,
-      availablePoints: newAvailablePoints,
+      points: user.points,
     });
 
     // Log the action
@@ -96,8 +87,8 @@ export async function POST(request: Request) {
         details: {
           pointsRedeemed: pointsToRedeem,
           userRole,
-          previousPoints: availablePoints,
-          newPoints: newAvailablePoints,
+          previousPoints: currentPoints,
+          newPoints: user.points,
         },
         previousData,
         newData,
@@ -108,7 +99,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       success: true,
       message: `Successfully redeemed ${pointsToRedeem} points`,
-      newPoints: newAvailablePoints,
+      newPoints: user.points,
       pointsRedeemed: pointsToRedeem,
     });
   } catch (error) {

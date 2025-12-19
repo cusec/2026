@@ -40,13 +40,6 @@ export async function GET(
       );
     }
 
-    // Calculate points from claimed items minus redeemed points
-    const earnedPoints = (user.claimedItems || []).reduce(
-      (sum: number, item: { points?: number }) => sum + (item.points || 0),
-      0
-    );
-    const points = earnedPoints - (user.redeemedPoints || 0);
-
     // Return full details for owner or admin
     return NextResponse.json({
       success: true,
@@ -54,7 +47,7 @@ export async function GET(
         _id: user._id,
         email: user.email,
         name: user.name,
-        points,
+        points: user.points || 0,
         claimedItems: user.claimedItems,
         claim_attempts: user.claim_attempts || [],
         createdAt: user.createdAt,
