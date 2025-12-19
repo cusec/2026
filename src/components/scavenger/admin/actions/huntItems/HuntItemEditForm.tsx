@@ -1,7 +1,9 @@
 "use client";
 
-import { Save, X } from "lucide-react";
+import { useState } from "react";
+import { Save, X, Users } from "lucide-react";
 import { HuntItem } from "@/lib/interface";
+import ClaimedUsersModal from "./ClaimedUsersModal";
 
 interface HuntItemEditFormProps {
   item: HuntItem;
@@ -41,6 +43,7 @@ const HuntItemEditForm = ({
   onCancel,
   onChange,
 }: HuntItemEditFormProps) => {
+  const [showClaimedUsersModal, setShowClaimedUsersModal] = useState(false);
   const dateError = validateDates(item.activationStart, item.activationEnd);
   const isFormValid = item.name && !dateError;
 
@@ -212,7 +215,7 @@ const HuntItemEditForm = ({
       <p className="text-xs text-gray-500">
         Identifier: {item.identifier} (cannot be changed)
       </p>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <button
           onClick={() => onSave(item)}
           disabled={!isFormValid}
@@ -228,7 +231,23 @@ const HuntItemEditForm = ({
           <X size={16} />
           Cancel
         </button>
+        <button
+          onClick={() => setShowClaimedUsersModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Users size={16} />
+          Claimed by Users ({item.claimCount ?? 0})
+        </button>
       </div>
+
+      {/* Claimed Users Modal */}
+      <ClaimedUsersModal
+        isOpen={showClaimedUsersModal}
+        onClose={() => setShowClaimedUsersModal(false)}
+        huntItemId={item._id}
+        huntItemName={item.name}
+        huntItemPoints={item.points}
+      />
     </div>
   );
 };
