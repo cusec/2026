@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Trophy, Medal, Award, RefreshCw } from "lucide-react";
+import { Trophy, Medal, Award } from "lucide-react";
 
 interface LeaderboardEntry {
   rank: number;
@@ -84,12 +84,6 @@ const Leaderboard = () => {
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Trophy className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Leaderboard</h2>
-            <button
-              disabled
-              className="p-1 rounded-full hover:text-light-mode transition-colors disabled:opacity-50"
-            >
-              <RefreshCw className="w-5 h-5 animate-spin" />
-            </button>
           </div>
           <div className="space-y-3">
             {[...Array(5)].map((_, i) => (
@@ -111,12 +105,6 @@ const Leaderboard = () => {
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Trophy className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Leaderboard</h2>
-            <button
-              onClick={fetchLeaderboard}
-              className="p-1 rounded-full hover:text-light-mode transition-colors"
-            >
-              <RefreshCw className="w-5 h-5" />
-            </button>
           </div>
           <div className="text-center py-8">
             <p className="text-red-400 mb-4">{error}</p>
@@ -134,15 +122,6 @@ const Leaderboard = () => {
           <div className="flex items-center justify-center space-x-2">
             <Trophy className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Leaderboard</h2>
-            <button
-              onClick={fetchLeaderboard}
-              disabled={loading}
-              className="p-1 rounded-full hover:text-light-mode transition-colors disabled:opacity-50"
-            >
-              <RefreshCw
-                className={`w-5 h-5 ${loading ? "animate-spin" : ""}`}
-              />
-            </button>
           </div>
           {leaderboard.length > 0 && (
             <div className="mt-2 text-center text-sm">

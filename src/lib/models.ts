@@ -155,6 +155,16 @@ const shopItemSchema = new Schema(
   }
 );
 
+const noticeSchema = new Schema(
+  {
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
@@ -165,5 +175,6 @@ const AdminAuditLog =
   mongoose.model("AdminAuditLog", adminAuditLogSchema);
 const ShopItem =
   mongoose.models.ShopItem || mongoose.model("ShopItem", shopItemSchema);
+const Notice = mongoose.models.Notice || mongoose.model("Notice", noticeSchema);
 
-export { User, HuntItem, AdminAuditLog, Day, ShopItem };
+export { User, HuntItem, AdminAuditLog, Day, ShopItem, Notice };

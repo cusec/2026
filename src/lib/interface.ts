@@ -101,6 +101,19 @@ export interface ShopItemFormData {
   imageSlug: string;
 }
 
+export interface Notice {
+  _id: string;
+  title: string;
+  description: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface NoticeFormData {
+  title: string;
+  description: string;
+}
+
 export interface Day {
   _id?: string;
   day: string;

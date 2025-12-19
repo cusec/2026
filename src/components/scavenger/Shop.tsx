@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ShoppingBag, RefreshCw } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { ShopItem } from "@/lib/interface";
 import Modal from "@/components/ui/modal";
 import Image from "next/image";
@@ -71,12 +71,6 @@ const Shop = () => {
             <div className="flex items-center justify-center space-x-2">
               <ShoppingBag className="w-8 h-8" />
               <h2 className="text-2xl font-bold">Shop</h2>
-              <button
-                disabled
-                className="p-1 rounded-full hover:text-light-mode transition-colors disabled:opacity-50"
-              >
-                <RefreshCw className="w-5 h-5 animate-spin" />
-              </button>
             </div>
           </div>
           <div className="flex flex-col md:flex-row gap-4">
@@ -110,12 +104,6 @@ const Shop = () => {
             <div className="flex items-center justify-center space-x-2">
               <ShoppingBag className="w-8 h-8" />
               <h2 className="text-2xl font-bold">Shop</h2>
-              <button
-                onClick={fetchShopItems}
-                className="p-1 rounded-full hover:text-light-mode transition-colors"
-              >
-                <RefreshCw className="w-5 h-5" />
-              </button>
             </div>
           </div>
           <div className="text-center py-8">
@@ -137,15 +125,6 @@ const Shop = () => {
           <div className="flex items-center justify-center space-x-2">
             <ShoppingBag className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Shop</h2>
-            <button
-              onClick={fetchShopItems}
-              disabled={loading}
-              className="p-1 rounded-full hover:text-light-mode transition-colors disabled:opacity-50"
-            >
-              <RefreshCw
-                className={`w-5 h-5 ${loading ? "animate-spin" : ""}`}
-              />
-            </button>
           </div>
           {shopItems.length > 0 && (
             <div className="mt-2 text-center text-sm">
