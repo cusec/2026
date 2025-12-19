@@ -158,7 +158,7 @@ const UserHistoryDetailsModal = ({
       isOpen={isOpen}
       onClose={handleClose}
       title={`History: ${userName || userEmail}`}
-      className="max-w-2xl"
+      className="max-w-2xl text-dark-mode"
     >
       <div className="space-y-6">
         {error && (
@@ -247,7 +247,7 @@ const UserHistoryDetailsModal = ({
                     />
                     Reset Rate Limit
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => clearClaimAttempts("failed")}
                     disabled={isClearing}
                     className="flex items-center gap-1 px-3 py-1 bg-orange-600 text-white rounded hover:bg-orange-700 disabled:bg-gray-400 text-sm"
@@ -255,7 +255,7 @@ const UserHistoryDetailsModal = ({
                   >
                     <XCircle className="w-3 h-3" />
                     Clear Failed
-                  </button>
+                  </button> */}
                 </div>
               </div>
 

@@ -25,11 +25,43 @@ export async function PUT(
       );
     }
 
-    const { name, description, points } = await request.json();
+    const {
+      name,
+      description,
+      points,
+      active,
+      activationStart,
+      activationEnd,
+    } = await request.json();
     const { id } = await params;
 
     if (!name) {
       return NextResponse.json({ error: "Name is required" }, { status: 400 });
+    }
+
+    // Validate activation dates if provided
+    if (
+      (activationStart && !activationEnd) ||
+      (!activationStart && activationEnd)
+    ) {
+      return NextResponse.json(
+        {
+          error:
+            "Both activation start and end dates must be provided, or neither",
+        },
+        { status: 400 }
+      );
+    }
+
+    if (activationStart && activationEnd) {
+      const startDate = new Date(activationStart);
+      const endDate = new Date(activationEnd);
+      if (endDate <= startDate) {
+        return NextResponse.json(
+          { error: "Activation end date must be after start date" },
+          { status: 400 }
+        );
+      }
     }
 
     await connectMongoDB();
@@ -47,12 +79,20 @@ export async function PUT(
       name: huntItem.name,
       description: huntItem.description,
       points: huntItem.points,
+      active: huntItem.active,
+      activationStart: huntItem.activationStart,
+      activationEnd: huntItem.activationEnd,
     });
 
     // Update only allowed fields (not identifier)
     huntItem.name = name;
     huntItem.description = description;
     huntItem.points = points || 0;
+    huntItem.active = active !== undefined ? active : true;
+    huntItem.activationStart = activationStart
+      ? new Date(activationStart)
+      : null;
+    huntItem.activationEnd = activationEnd ? new Date(activationEnd) : null;
 
     await huntItem.save();
 
@@ -61,6 +101,9 @@ export async function PUT(
       name: huntItem.name,
       description: huntItem.description,
       points: huntItem.points,
+      active: huntItem.active,
+      activationStart: huntItem.activationStart,
+      activationEnd: huntItem.activationEnd,
     });
 
     // Log the admin action

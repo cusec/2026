@@ -58,7 +58,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
         isOpen={isOpen}
         onClose={onClose}
         title="Manage Hunt Items"
-        className="max-w-4xl max-h-[70vh]"
+        className="max-w-4xl max-h-[70vh] text-dark-mode"
       >
         <div className="space-y-6">
           {error && (
@@ -75,7 +75,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
 
           {/* Add New Item Button */}
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-medium text-gray-900">
+            <h3 className="text-lg font-medium text-dark-mode">
               Hunt Items ({huntItems.length})
             </h3>
             <button

@@ -58,6 +58,9 @@ export interface HuntItem {
   description: string;
   identifier: string;
   points: number;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -67,6 +70,9 @@ export interface HuntItemFormData {
   description: string;
   identifier: string;
   points: number;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
 }
 
 export interface ShopItem {

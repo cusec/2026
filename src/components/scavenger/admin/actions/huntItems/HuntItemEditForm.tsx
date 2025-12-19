@@ -10,16 +10,52 @@ interface HuntItemEditFormProps {
   onChange: (item: HuntItem) => void;
 }
 
+// Helper to format date for datetime-local input
+const formatDateForInput = (dateStr: string | null): string => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  return date.toISOString().slice(0, 16);
+};
+
+// Validation helper
+const validateDates = (
+  start: string | null,
+  end: string | null
+): string | null => {
+  if ((start && !end) || (!start && end)) {
+    return "Both activation start and end dates must be provided, or neither";
+  }
+  if (start && end) {
+    const startDate = new Date(start);
+    const endDate = new Date(end);
+    if (endDate <= startDate) {
+      return "Activation end date must be after start date";
+    }
+  }
+  return null;
+};
+
 const HuntItemEditForm = ({
   item,
   onSave,
   onCancel,
   onChange,
 }: HuntItemEditFormProps) => {
+  const dateError = validateDates(item.activationStart, item.activationEnd);
+  const isFormValid = item.name && !dateError;
+
+  const handleClearDates = () => {
+    onChange({
+      ...item,
+      activationStart: null,
+      activationEnd: null,
+    });
+  };
+
   return (
     <div className="space-y-3">
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-dark-mode mb-1">
           Name
         </label>
         <input
@@ -30,7 +66,7 @@ const HuntItemEditForm = ({
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-dark-mode mb-1">
           Description
         </label>
         <textarea
@@ -41,7 +77,7 @@ const HuntItemEditForm = ({
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-dark-mode mb-1">
           Points
         </label>
         <input
@@ -50,16 +86,105 @@ const HuntItemEditForm = ({
           onChange={(e) =>
             onChange({ ...item, points: parseInt(e.target.value) || 0 })
           }
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-dark-mode"
         />
       </div>
+
+      {/* Active Toggle */}
+      <div className="flex items-center gap-3">
+        <label className="block text-sm font-medium text-dark-mode">
+          Active
+        </label>
+        <button
+          type="button"
+          onClick={() => onChange({ ...item, active: !item.active })}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+            item.active ? "bg-green-600" : "bg-gray-300"
+          }`}
+        >
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+              item.active ? "translate-x-6" : "translate-x-1"
+            }`}
+          />
+        </button>
+        <span
+          className={`text-sm ${
+            item.active ? "text-green-600" : "text-gray-500"
+          }`}
+        >
+          {item.active ? "Enabled" : "Disabled"}
+        </span>
+      </div>
+
+      {/* Activation Time Window */}
+      <div className="border-t pt-3">
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-sm font-medium text-dark-mode">
+            Activation Time Window (Optional)
+          </label>
+          {(item.activationStart || item.activationEnd) && (
+            <button
+              type="button"
+              onClick={handleClearDates}
+              className="text-xs text-red-600 hover:text-red-800"
+            >
+              Clear Dates
+            </button>
+          )}
+        </div>
+        <p className="text-xs text-gray-500 mb-3">
+          If set, the item will only be claimable during this time window.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-xs font-medium text-gray-600 mb-1">
+              Start Date/Time
+            </label>
+            <input
+              type="datetime-local"
+              value={formatDateForInput(item.activationStart)}
+              onChange={(e) =>
+                onChange({
+                  ...item,
+                  activationStart: e.target.value
+                    ? new Date(e.target.value).toISOString()
+                    : null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-dark-mode text-sm"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-dark-mode mb-1">
+              End Date/Time
+            </label>
+            <input
+              type="datetime-local"
+              value={formatDateForInput(item.activationEnd)}
+              onChange={(e) =>
+                onChange({
+                  ...item,
+                  activationEnd: e.target.value
+                    ? new Date(e.target.value).toISOString()
+                    : null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-dark-mode text-sm"
+            />
+          </div>
+        </div>
+        {dateError && <p className="text-xs text-red-600 mt-2">{dateError}</p>}
+      </div>
+
       <p className="text-xs text-gray-500">
         Identifier: {item.identifier} (cannot be changed)
       </p>
       <div className="flex gap-2">
         <button
           onClick={() => onSave(item)}
-          className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+          disabled={!isFormValid}
+          className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
         >
           <Save size={16} />
           Save

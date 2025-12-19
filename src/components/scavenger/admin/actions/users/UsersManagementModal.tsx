@@ -258,7 +258,7 @@ const UsersManagementModal = ({
         isOpen={isOpen}
         onClose={handleClose}
         title="Users Management"
-        className="max-w-6xl"
+        className="max-w-6xl text-dark-mode"
       >
         <div className="space-y-6">
           {/* Header with search */}
@@ -447,7 +447,7 @@ const UsersManagementModal = ({
                             <Edit2 className="w-3 h-3" />
                             Edit
                           </button>
-                          <button
+                          {/* <button
                             onClick={() =>
                               clearClaimAttempts(
                                 user._id,
@@ -475,7 +475,7 @@ const UsersManagementModal = ({
                             <Trash2 className="w-3 h-3" />
                             Clear History
                             <AlertTriangle className="w-3 h-3" />
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     )}

@@ -155,6 +155,58 @@ export async function POST(
       );
     }
 
+    // Check if hunt item is active and within activation window
+    const isItemActive = huntItem.active == true; // Default to false if not set
+    let isWithinActivationWindow = true;
+
+    if (huntItem.activationStart && huntItem.activationEnd) {
+      const now = new Date();
+      const startDate = new Date(huntItem.activationStart);
+      const endDate = new Date(huntItem.activationEnd);
+      isWithinActivationWindow = now >= startDate && now <= endDate;
+    }
+
+    if (!isItemActive || !isWithinActivationWindow) {
+      // Log failed attempt (item not active)
+      user.claim_attempts.push(claimAttempt);
+      await user.save();
+
+      // Check how many attempts remaining after this failed attempt
+      const updatedRateLimitCheck = checkRateLimit(user.claim_attempts);
+      const remainingAttempts = updatedRateLimitCheck.remainingAttempts;
+
+      let reason = "This hunt item is currently not available.";
+      if (!isItemActive) {
+        reason = "This hunt item is currently disabled.";
+      } else if (!isWithinActivationWindow) {
+        const now = new Date();
+        const startDate = new Date(huntItem.activationStart);
+        const endDate = new Date(huntItem.activationEnd);
+        if (now < startDate) {
+          reason = "This hunt item is not yet available.";
+        } else if (now > endDate) {
+          reason = "This hunt item is no longer available.";
+        }
+      }
+
+      const errorMessage =
+        remainingAttempts > 0
+          ? `${reason} You have ${remainingAttempts} more attempts remaining in the next ${RATE_LIMIT_WINDOW_MINUTES} minutes.`
+          : `${reason} Note: You can make up to ${RATE_LIMIT_MAX_ATTEMPTS} failed attempts every ${RATE_LIMIT_WINDOW_MINUTES} minutes.`;
+
+      return NextResponse.json(
+        {
+          error: errorMessage,
+          remainingAttempts,
+          rateLimitInfo: {
+            maxAttempts: RATE_LIMIT_MAX_ATTEMPTS,
+            windowMinutes: RATE_LIMIT_WINDOW_MINUTES,
+          },
+        },
+        { status: 403 }
+      );
+    }
+
     // Check if user has already claimed this item
     if (user.history.includes(huntItem._id)) {
       // Log failed attempt (duplicate claim)

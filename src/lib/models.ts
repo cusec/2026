@@ -42,6 +42,9 @@ const huntItemSchema = new Schema(
     description: String,
     identifier: String,
     points: { type: Number, default: 0 },
+    active: { type: Boolean, default: true },
+    activationStart: { type: Date, default: null },
+    activationEnd: { type: Date, default: null },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",

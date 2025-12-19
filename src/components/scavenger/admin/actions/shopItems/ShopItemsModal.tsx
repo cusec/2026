@@ -53,7 +53,7 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
       isOpen={isOpen}
       onClose={onClose}
       title="Manage Shop Items"
-      className="max-w-4xl max-h-[70vh]"
+      className="max-w-4xl max-h-[70vh] text-dark-mode"
     >
       <div className="space-y-6">
         {error && (

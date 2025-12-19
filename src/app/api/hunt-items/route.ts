@@ -47,13 +47,32 @@ export async function POST(request: Request) {
       );
     }
 
-    const { name, description, identifier, points } = await request.json();
+    const { name, description, identifier, points, active, activationStart, activationEnd } = await request.json();
 
     if (!name || !identifier) {
       return NextResponse.json(
         { error: "Name and identifier are required" },
         { status: 400 }
       );
+    }
+
+    // Validate activation dates if provided
+    if ((activationStart && !activationEnd) || (!activationStart && activationEnd)) {
+      return NextResponse.json(
+        { error: "Both activation start and end dates must be provided, or neither" },
+        { status: 400 }
+      );
+    }
+
+    if (activationStart && activationEnd) {
+      const startDate = new Date(activationStart);
+      const endDate = new Date(activationEnd);
+      if (endDate <= startDate) {
+        return NextResponse.json(
+          { error: "Activation end date must be after start date" },
+          { status: 400 }
+        );
+      }
     }
 
     await connectMongoDB();
@@ -72,6 +91,9 @@ export async function POST(request: Request) {
       description,
       identifier,
       points: points || 0,
+      active: active !== undefined ? active : true,
+      activationStart: activationStart ? new Date(activationStart) : null,
+      activationEnd: activationEnd ? new Date(activationEnd) : null,
     });
 
     await huntItem.save();
@@ -84,6 +106,9 @@ export async function POST(request: Request) {
         description: huntItem.description,
         identifier: huntItem.identifier,
         points: huntItem.points,
+        active: huntItem.active,
+        activationStart: huntItem.activationStart,
+        activationEnd: huntItem.activationEnd,
       });
 
       await logAdminAction({

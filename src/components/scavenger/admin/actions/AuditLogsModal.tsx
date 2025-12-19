@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Search, Eye } from "lucide-react";
+import { Search, Eye, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface AuditLog {
   _id: string;
@@ -24,10 +24,13 @@ interface AuditLogsModalProps {
   onClose: () => void;
 }
 
+const ITEMS_PER_PAGE = 20;
+
 const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     adminEmail: "",
     targetUserEmail: "",
@@ -35,41 +38,34 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
     resourceType: "",
     startDate: "",
     endDate: "",
-    limit: 50,
-    offset: 0,
   });
   const [selectedLog, setSelectedLog] = useState<AuditLog | null>(null);
-  const [pagination, setPagination] = useState({
-    total: 0,
-    hasMore: false,
-  });
+  const [totalCount, setTotalCount] = useState(0);
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
   const fetchAuditLogs = useCallback(
-    async (resetOffset = false) => {
+    async (page: number) => {
       try {
         setLoading(true);
         setError(null);
 
         const searchParams = new URLSearchParams();
         Object.entries(filters).forEach(([key, value]) => {
-          if (value && key !== "offset") {
+          if (value) {
             searchParams.set(key, value.toString());
           }
         });
 
-        const currentOffset = resetOffset ? 0 : filters.offset;
-        searchParams.set("offset", currentOffset.toString());
+        searchParams.set("limit", ITEMS_PER_PAGE.toString());
+        searchParams.set("offset", ((page - 1) * ITEMS_PER_PAGE).toString());
 
         const response = await fetch(`/api/admin/audit-logs?${searchParams}`);
         const data = await response.json();
 
         if (data.success) {
-          if (resetOffset) {
-            setAuditLogs(data.auditLogs);
-          } else {
-            setAuditLogs((prev) => [...prev, ...data.auditLogs]);
-          }
-          setPagination(data.pagination);
+          setAuditLogs(data.auditLogs);
+          setTotalCount(data.pagination?.total || 0);
         } else {
           setError(data.error || "Failed to fetch audit logs");
         }
@@ -85,21 +81,23 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
 
   useEffect(() => {
     if (isOpen) {
-      fetchAuditLogs(true);
+      fetchAuditLogs(currentPage);
     }
-  }, [isOpen, fetchAuditLogs]);
+  }, [isOpen, currentPage, fetchAuditLogs]);
 
   const handleFilterChange = (key: string, value: string) => {
-    setFilters((prev) => ({ ...prev, [key]: value, offset: 0 }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSearch = () => {
-    fetchAuditLogs(true);
+    setCurrentPage(1);
+    fetchAuditLogs(1);
   };
 
-  const loadMore = () => {
-    setFilters((prev) => ({ ...prev, offset: prev.offset + prev.limit }));
-    fetchAuditLogs(false);
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -117,7 +115,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 bg-black text-dark-mode bg-opacity-50 z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
@@ -175,14 +173,10 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               >
                 <option value="">All Actions</option>
-                <option value="UPDATE_USER">Update User</option>
-                <option value="DELETE_USER">Delete User</option>
-                <option value="CREATE_HUNT_ITEM">Create Hunt Item</option>
-                <option value="UPDATE_HUNT_ITEM">Update Hunt Item</option>
-                <option value="DELETE_HUNT_ITEM">Delete Hunt Item</option>
-                <option value="CLEAR_CLAIM_ATTEMPTS">
-                  Clear Claim Attempts
-                </option>
+                <option value="CREATE">Create</option>
+                <option value="UPDATE">Update</option>
+                <option value="DELETE">Delete</option>
+                <option value="CLEAR">Clear</option>
               </select>
             </div>
 
@@ -201,6 +195,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 <option value="user">User</option>
                 <option value="huntItem">Hunt Item</option>
                 <option value="claimAttempts">Claim Attempts</option>
+                <option value="scheduleItem">Schedule Item</option>
               </select>
             </div>
           </div>
@@ -275,20 +270,69 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                   </div>
                 ))}
 
-                {pagination.hasMore && (
-                  <div className="flex justify-center mt-4">
-                    <button
-                      onClick={loadMore}
-                      disabled={loading}
-                      className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors disabled:opacity-50"
-                    >
-                      {loading ? "Loading..." : "Load More"}
-                    </button>
+                {auditLogs.length === 0 && !loading && (
+                  <div className="text-center py-8 text-gray-500">
+                    No audit logs found.
                   </div>
                 )}
               </div>
             )}
           </div>
+
+          {/* Pagination Controls */}
+          {totalPages > 0 && (
+            <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
+              <div className="text-sm text-gray-700">
+                Showing {auditLogs.length > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0} to{" "}
+                {Math.min(currentPage * ITEMS_PER_PAGE, totalCount)} of {totalCount} results
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1 || loading}
+                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <div className="flex items-center gap-1">
+                  {/* Show page numbers */}
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    let pageNum: number;
+                    if (totalPages <= 5) {
+                      pageNum = i + 1;
+                    } else if (currentPage <= 3) {
+                      pageNum = i + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      pageNum = totalPages - 4 + i;
+                    } else {
+                      pageNum = currentPage - 2 + i;
+                    }
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => goToPage(pageNum)}
+                        disabled={loading}
+                        className={`px-3 py-1 rounded-lg text-sm ${
+                          currentPage === pageNum
+                            ? "bg-blue-600 text-white"
+                            : "border border-gray-300 hover:bg-gray-100"
+                        } disabled:opacity-50`}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages || loading}
+                  className="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <ChevronRight size={16} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Detail Modal */}

@@ -14,7 +14,7 @@ const ClaimAttemptsModal = ({ isOpen, onClose }: ClaimAttemptsModalProps) => {
       isOpen={isOpen}
       onClose={onClose}
       title="Claim Attempts Monitor"
-      className="max-w-4xl"
+      className="max-w-4xl text-dark-mode"
     >
       <ClaimAttemptsMonitor isVisible={isOpen} />
     </Modal>

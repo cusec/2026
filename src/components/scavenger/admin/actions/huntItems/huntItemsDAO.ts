@@ -8,6 +8,9 @@ const emptyFormData: HuntItemFormData = {
   description: "",
   identifier: "",
   points: 0,
+  active: true,
+  activationStart: null,
+  activationEnd: null,
 };
 
 export const useHuntItems = (isOpen: boolean) => {
@@ -90,6 +93,9 @@ export const useHuntItems = (isOpen: boolean) => {
           name: item.name,
           description: item.description,
           points: item.points,
+          active: item.active,
+          activationStart: item.activationStart,
+          activationEnd: item.activationEnd,
         }),
       });
 

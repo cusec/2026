@@ -67,7 +67,7 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 text-dark-mode">
       {/* Controls */}
       <div className="flex gap-4">
         <button
