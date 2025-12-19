@@ -4,12 +4,19 @@ import { useState, useEffect } from "react";
 import { ShoppingBag } from "lucide-react";
 import { ShopItem } from "@/lib/interface";
 import Modal from "@/components/ui/modal";
-import Image from "next/image";
 
 interface ShopResponse {
   success: boolean;
   shopItems: ShopItem[];
 }
+
+// Helper function to get image source from shop item
+const getImageSrc = (item: ShopItem): string | null => {
+  if (item.imageData && item.imageContentType) {
+    return `data:${item.imageContentType};base64,${item.imageData}`;
+  }
+  return null;
+};
 
 const Shop = () => {
   const [shopItems, setShopItems] = useState<ShopItem[]>([]);
@@ -150,13 +157,18 @@ const Shop = () => {
                 >
                   <div className="flex items-center space-x-4">
                     <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                      <Image
-                        src={`/images/shop/${item.imageSlug}`}
-                        alt={item.name}
-                        width={40}
-                        height={40}
-                        className="w-full h-full object-cover"
-                      />
+                      {getImageSrc(item) ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={getImageSrc(item)!}
+                          alt={item.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+                          ?
+                        </div>
+                      )}
                     </div>
                     <div>
                       <p className="font-semibold">{item.name}</p>
@@ -194,13 +206,18 @@ const Shop = () => {
                   >
                     <div className="flex items-center space-x-4">
                       <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                        <Image
-                          src={`/images/shop/${item.imageSlug}`}
-                          alt={item.name}
-                          width={40}
-                          height={40}
-                          className="w-full h-full object-cover"
-                        />
+                        {getImageSrc(item) ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={getImageSrc(item)!}
+                            alt={item.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+                            ?
+                          </div>
+                        )}
                       </div>
                       <div>
                         <p className="font-semibold">{item.name}</p>
@@ -240,19 +257,24 @@ const Shop = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         title={selectedItem?.name || "Item Details"}
-        className="max-w-md"
+        className="max-w-md text-dark-mode"
       >
         {selectedItem && (
           <div className="space-y-4">
             {/* Large Image */}
             <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-200">
-              <Image
-                src={`/images/shop/${selectedItem.imageSlug}`}
-                alt={selectedItem.name}
-                width={400}
-                height={192}
-                className="w-full h-full object-cover"
-              />
+              {getImageSrc(selectedItem) ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={getImageSrc(selectedItem)!}
+                  alt={selectedItem.name}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                  No image available
+                </div>
+              )}
             </div>
 
             {/* Description */}

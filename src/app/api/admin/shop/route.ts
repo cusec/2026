@@ -29,14 +29,37 @@ export async function POST(request: Request) {
       limited,
       remaining,
       moderated,
-      imageSlug,
+      imageData,
+      imageContentType,
     } = body;
 
-    if (!name || !description || cost === undefined || !imageSlug) {
+    if (
+      !name ||
+      !description ||
+      cost === undefined ||
+      !imageData ||
+      !imageContentType
+    ) {
       return NextResponse.json(
         {
-          error: "Missing required fields: name, description, cost, imageSlug",
+          error:
+            "Missing required fields: name, description, cost, imageData, imageContentType",
         },
+        { status: 400 }
+      );
+    }
+
+    // Validate image content type
+    const allowedTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/gif",
+      "image/webp",
+    ];
+    if (!allowedTypes.includes(imageContentType)) {
+      return NextResponse.json(
+        { error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP" },
         { status: 400 }
       );
     }
@@ -48,7 +71,8 @@ export async function POST(request: Request) {
       limited: limited || false,
       remaining: remaining || 0,
       moderated: moderated || false,
-      imageSlug,
+      imageData,
+      imageContentType,
     });
 
     await shopItem.save();
@@ -66,7 +90,9 @@ export async function POST(request: Request) {
         limited,
         remaining,
         moderated,
-        imageSlug,
+        imageContentType,
+        // Don't log the full image data, just note it exists
+        hasImage: true,
       }),
       request,
     });
@@ -82,7 +108,8 @@ export async function POST(request: Request) {
         limited: shopItem.limited,
         remaining: shopItem.remaining,
         moderated: shopItem.moderated,
-        imageSlug: shopItem.imageSlug,
+        imageData: shopItem.imageData,
+        imageContentType: shopItem.imageContentType,
       },
     });
   } catch (error) {
@@ -135,7 +162,8 @@ export async function PUT(request: Request) {
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       moderated: shopItem.moderated,
-      imageSlug: shopItem.imageSlug,
+      imageContentType: shopItem.imageContentType,
+      hasImage: !!shopItem.imageData,
     });
 
     // Apply updates
@@ -146,7 +174,27 @@ export async function PUT(request: Request) {
     if (updates.limited !== undefined) shopItem.limited = updates.limited;
     if (updates.remaining !== undefined) shopItem.remaining = updates.remaining;
     if (updates.moderated !== undefined) shopItem.moderated = updates.moderated;
-    if (updates.imageSlug !== undefined) shopItem.imageSlug = updates.imageSlug;
+    if (
+      updates.imageData !== undefined &&
+      updates.imageContentType !== undefined
+    ) {
+      // Validate image content type
+      const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/jpg",
+        "image/gif",
+        "image/webp",
+      ];
+      if (!allowedTypes.includes(updates.imageContentType)) {
+        return NextResponse.json(
+          { error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP" },
+          { status: 400 }
+        );
+      }
+      shopItem.imageData = updates.imageData;
+      shopItem.imageContentType = updates.imageContentType;
+    }
 
     await shopItem.save();
 
@@ -157,7 +205,8 @@ export async function PUT(request: Request) {
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       moderated: shopItem.moderated,
-      imageSlug: shopItem.imageSlug,
+      imageContentType: shopItem.imageContentType,
+      hasImage: !!shopItem.imageData,
     });
 
     // Log admin action
@@ -182,7 +231,8 @@ export async function PUT(request: Request) {
         limited: shopItem.limited,
         remaining: shopItem.remaining,
         moderated: shopItem.moderated,
-        imageSlug: shopItem.imageSlug,
+        imageData: shopItem.imageData,
+        imageContentType: shopItem.imageContentType,
       },
     });
   } catch (error) {
@@ -235,7 +285,8 @@ export async function DELETE(request: Request) {
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       moderated: shopItem.moderated,
-      imageSlug: shopItem.imageSlug,
+      imageContentType: shopItem.imageContentType,
+      hasImage: !!shopItem.imageData,
     });
 
     await ShopItem.findByIdAndDelete(itemId);

@@ -7,8 +7,7 @@ export async function GET() {
   try {
     await connectMongoDB();
 
-    const shopItems = await ShopItem.find({})
-      .sort({ createdAt: -1 });
+    const shopItems = await ShopItem.find({}).sort({ createdAt: -1 });
 
     return NextResponse.json({
       success: true,
@@ -20,7 +19,8 @@ export async function GET() {
         limited: item.limited,
         remaining: item.remaining,
         moderated: item.moderated,
-        imageSlug: item.imageSlug,
+        imageData: item.imageData,
+        imageContentType: item.imageContentType,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       })),

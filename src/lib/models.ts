@@ -148,7 +148,8 @@ const shopItemSchema = new Schema(
     limited: { type: Boolean, default: false },
     remaining: { type: Number, default: 0 },
     moderated: { type: Boolean, default: false },
-    imageSlug: { type: String, required: true },
+    imageData: { type: String, required: true }, // Base64 encoded image data
+    imageContentType: { type: String, required: true }, // MIME type (e.g., image/png, image/jpeg)
   },
   {
     timestamps: true,

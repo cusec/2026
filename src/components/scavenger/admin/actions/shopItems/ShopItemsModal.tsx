@@ -44,7 +44,8 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
       limited: false,
       remaining: 0,
       moderated: false,
-      imageSlug: "",
+      imageData: "",
+      imageContentType: "",
     });
   };
 

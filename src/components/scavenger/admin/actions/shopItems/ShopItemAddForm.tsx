@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+import { Upload, X } from "lucide-react";
 import { ShopItemFormData } from "@/lib/interface";
 
 interface ShopItemAddFormProps {
@@ -17,6 +19,59 @@ const ShopItemAddForm = ({
   onCancel,
   isSubmitting = false,
 }: ShopItemAddFormProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/gif",
+      "image/webp",
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Invalid file type. Please upload PNG, JPEG, GIF, or WebP images.");
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File too large. Maximum size is 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64 = event.target?.result as string;
+      // Remove the data URL prefix to store just the base64 data
+      const base64Data = base64.split(",")[1];
+      setFormData({
+        ...formData,
+        imageData: base64Data,
+        imageContentType: file.type,
+      });
+      setImagePreview(base64);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearImage = () => {
+    setFormData({
+      ...formData,
+      imageData: "",
+      imageContentType: "",
+    });
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
   return (
     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
       <h4 className="text-md font-medium mb-4 text-gray-900">
@@ -78,21 +133,47 @@ const ShopItemAddForm = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Image Slug *
+            Image *
           </label>
+          {imagePreview ? (
+            <div className="relative inline-block">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-lg border border-gray-300"
+              />
+              <button
+                type="button"
+                onClick={clearImage}
+                disabled={isSubmitting}
+                className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+              >
+                <X size={14} />
+              </button>
+            </div>
+          ) : (
+            <div
+              onClick={() => !isSubmitting && fileInputRef.current?.click()}
+              className={`w-full h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-blue-400 transition-colors ${
+                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              <Upload className="w-8 h-8 text-gray-400 mb-2" />
+              <p className="text-sm text-gray-500">Click to upload image</p>
+              <p className="text-xs text-gray-400 mt-1">
+                PNG, JPEG, GIF, WebP (max 5MB)
+              </p>
+            </div>
+          )}
           <input
-            type="text"
-            value={formData.imageSlug}
-            onChange={(e) =>
-              setFormData({ ...formData, imageSlug: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="e.g., item-image.png"
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+            onChange={handleFileChange}
+            className="hidden"
             disabled={isSubmitting}
           />
-          <p className="text-xs text-gray-500 mt-1">
-            Image should be in /public/images/shop/
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -163,7 +244,7 @@ const ShopItemAddForm = ({
             disabled={
               !formData.name ||
               !formData.description ||
-              !formData.imageSlug ||
+              !formData.imageData ||
               isSubmitting
             }
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"

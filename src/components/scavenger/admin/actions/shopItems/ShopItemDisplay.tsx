@@ -2,7 +2,6 @@
 
 import { Edit, Trash2 } from "lucide-react";
 import { ShopItem } from "@/lib/interface";
-import Image from "next/image";
 
 interface ShopItemDisplayProps {
   item: ShopItem;
@@ -11,18 +10,28 @@ interface ShopItemDisplayProps {
 }
 
 const ShopItemDisplay = ({ item, onEdit, onDelete }: ShopItemDisplayProps) => {
+  const imageSrc =
+    item.imageData && item.imageContentType
+      ? `data:${item.imageContentType};base64,${item.imageData}`
+      : null;
+
   return (
     <div className="flex items-start justify-between">
       <div className="flex items-start space-x-4 flex-1">
         {/* Image */}
         <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 shrink-0">
-          <Image
-            src={`/images/shop/${item.imageSlug}`}
-            alt={item.name}
-            width={64}
-            height={64}
-            className="w-full h-full object-cover"
-          />
+          {imageSrc ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={imageSrc}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
+              No image
+            </div>
+          )}
         </div>
 
         {/* Details */}

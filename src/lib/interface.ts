@@ -86,7 +86,8 @@ export interface ShopItem {
   limited: boolean;
   remaining: number;
   moderated: boolean;
-  imageSlug: string;
+  imageData: string; // Base64 encoded image data
+  imageContentType: string; // MIME type
   createdAt?: string;
   updatedAt?: string;
 }
@@ -98,7 +99,8 @@ export interface ShopItemFormData {
   limited: boolean;
   remaining: number;
   moderated: boolean;
-  imageSlug: string;
+  imageData: string; // Base64 encoded image data
+  imageContentType: string; // MIME type
 }
 
 export interface Notice {

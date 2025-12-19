@@ -1,7 +1,8 @@
 "use client";
 
+import { useRef, useState, useEffect } from "react";
+import { Upload } from "lucide-react";
 import { ShopItem } from "@/lib/interface";
-import Image from "next/image";
 
 interface ShopItemEditFormProps {
   item: ShopItem;
@@ -16,17 +17,103 @@ const ShopItemEditForm = ({
   onCancel,
   onChange,
 }: ShopItemEditFormProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  // Initialize image preview from existing data
+  useEffect(() => {
+    if (item.imageData && item.imageContentType) {
+      setImagePreview(`data:${item.imageContentType};base64,${item.imageData}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item._id]); // Only run when item changes (based on _id)
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/gif",
+      "image/webp",
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      alert("Invalid file type. Please upload PNG, JPEG, GIF, or WebP images.");
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      alert("File too large. Maximum size is 5MB.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const base64 = event.target?.result as string;
+      // Remove the data URL prefix to store just the base64 data
+      const base64Data = base64.split(",")[1];
+      onChange({
+        ...item,
+        imageData: base64Data,
+        imageContentType: file.type,
+      });
+      setImagePreview(base64);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const getImageSrc = () => {
+    if (imagePreview) {
+      return imagePreview;
+    }
+    if (item.imageData && item.imageContentType) {
+      return `data:${item.imageContentType};base64,${item.imageData}`;
+    }
+    return null;
+  };
+
+  const imageSrc = getImageSrc();
+
   return (
     <div className="space-y-4">
       <div className="flex items-start space-x-4">
-        {/* Image Preview */}
-        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 shrink-0">
-          <Image
-            src={`/images/shop/${item.imageSlug}`}
-            alt={item.name}
-            width={64}
-            height={64}
-            className="w-full h-full object-cover"
+        {/* Image Preview and Upload */}
+        <div className="relative">
+          {imageSrc ? (
+            <div className="relative">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imageSrc}
+                alt={item.name}
+                className="w-16 h-16 rounded-lg object-cover border border-gray-200"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="absolute -bottom-1 -right-1 p-1 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+                title="Change image"
+              >
+                <Upload size={10} />
+              </button>
+            </div>
+          ) : (
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="w-16 h-16 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer hover:border-blue-400 transition-colors"
+            >
+              <Upload className="w-6 h-6 text-gray-400" />
+            </div>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/jpg,image/gif,image/webp"
+            onChange={handleFileChange}
+            className="hidden"
           />
         </div>
 
@@ -70,18 +157,6 @@ const ShopItemEditForm = ({
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               rows={2}
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Image Slug
-            </label>
-            <input
-              type="text"
-              value={item.imageSlug}
-              onChange={(e) => onChange({ ...item, imageSlug: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
             />
           </div>
 

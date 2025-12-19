@@ -10,7 +10,8 @@ const emptyFormData: ShopItemFormData = {
   limited: false,
   remaining: 0,
   moderated: false,
-  imageSlug: "",
+  imageData: "",
+  imageContentType: "",
 };
 
 export const useShopItems = (isOpen: boolean) => {
@@ -98,7 +99,8 @@ export const useShopItems = (isOpen: boolean) => {
             limited: item.limited,
             remaining: item.remaining,
             moderated: item.moderated,
-            imageSlug: item.imageSlug,
+            imageData: item.imageData,
+            imageContentType: item.imageContentType,
           },
         }),
       });
