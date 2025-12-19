@@ -5,7 +5,7 @@ import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
-// PUT - Update a hunt item (Admin only - name, description, and settings. Points cannot be changed after creation)
+// PUT - Update a hunt item (Admin only - name, description, points, and settings)
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -28,6 +28,7 @@ export async function PUT(
     const {
       name,
       description,
+      points,
       maxClaims,
       active,
       activationStart,
@@ -85,10 +86,10 @@ export async function PUT(
       activationEnd: huntItem.activationEnd,
     });
 
-    // Update only allowed fields (not identifier or points - points are immutable after creation)
+    // Update allowed fields (not identifier - that remains immutable)
     huntItem.name = name;
     huntItem.description = description;
-    // Note: points are NOT updated - they are immutable after creation
+    huntItem.points = points !== undefined ? points : huntItem.points;
     huntItem.maxClaims = maxClaims !== undefined ? maxClaims : null;
     huntItem.active = active !== undefined ? active : true;
     huntItem.activationStart = activationStart

@@ -86,17 +86,23 @@ const HuntItemEditForm = ({
         <input
           type="number"
           value={item.points}
-          disabled
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed"
+          onChange={(e) =>
+            onChange({ ...item, points: parseInt(e.target.value) || 0 })
+          }
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 text-gray-900"
+          min={0}
         />
-        <p className="text-xs text-grey-600 mt-1 flex items-start gap-1">
-          <span>
-            Points cannot be edited after creation. Changing point values could
-            cause discrepancies for players who have already claimed this item
-            and create inequality for future claimers. Use Max Claims, Active
-            toggle, or Activation Time to manage item availability instead.
-          </span>
-        </p>
+        <div className="mt-2 p-2 bg-red-50 border border-red-300 rounded-lg">
+          <p className="text-xs text-red-700 flex items-start gap-1">
+            <span>
+              Editing points is <strong>highly not recommended</strong>.
+              Changing point values could cause discrepancies for players who
+              have already claimed this item and create inequality for future
+              claimers. Consider using Max Claims, Active toggle, or Activation
+              Time to manage item availability instead.
+            </span>
+          </p>
+        </div>
       </div>
       <div>
         <label className="block text-sm font-medium text-dark-mode mb-1">

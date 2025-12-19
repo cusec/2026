@@ -80,7 +80,7 @@ export const useHuntItems = (isOpen: boolean) => {
     }
   };
 
-  // Update hunt item (note: points are not updated - they are immutable after creation)
+  // Update hunt item
   const updateHuntItem = async (item: HuntItem) => {
     try {
       setError(null);
@@ -93,7 +93,7 @@ export const useHuntItems = (isOpen: boolean) => {
         body: JSON.stringify({
           name: item.name,
           description: item.description,
-          // Note: points are not sent - they cannot be changed after creation
+          points: item.points,
           maxClaims: item.maxClaims,
           active: item.active,
           activationStart: item.activationStart,
