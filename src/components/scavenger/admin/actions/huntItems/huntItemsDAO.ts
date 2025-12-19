@@ -12,6 +12,7 @@ const emptyFormData: HuntItemFormData = {
   active: true,
   activationStart: null,
   activationEnd: null,
+  collectibles: [],
 };
 
 export const useHuntItems = (isOpen: boolean) => {
@@ -98,6 +99,7 @@ export const useHuntItems = (isOpen: boolean) => {
           active: item.active,
           activationStart: item.activationStart,
           activationEnd: item.activationEnd,
+          collectibles: item.collectibles,
         }),
       });
 

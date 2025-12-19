@@ -42,6 +42,7 @@ export interface DbUser {
   linked_email?: string | null;
   points: number;
   claimedItems: string[];
+  collectibles: string[];
   claim_attempts?: ClaimAttempt[];
 }
 
@@ -63,6 +64,7 @@ export interface HuntItem {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
+  collectibles: string[];
   createdAt: string;
   updatedAt: string;
 }
@@ -76,6 +78,7 @@ export interface HuntItemFormData {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
+  collectibles: string[];
 }
 
 export interface ShopItem {
@@ -114,6 +117,31 @@ export interface Notice {
 export interface NoticeFormData {
   title: string;
   description: string;
+}
+
+export interface Collectible {
+  _id: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  slug: string;
+  points: number;
+  purchasable: boolean;
+  imageData: string;
+  imageContentType: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CollectibleFormData {
+  name: string;
+  subtitle: string;
+  description: string;
+  slug: string;
+  points: number;
+  purchasable: boolean;
+  imageData: string;
+  imageContentType: string;
 }
 
 export interface Day {

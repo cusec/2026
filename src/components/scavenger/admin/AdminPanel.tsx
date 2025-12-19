@@ -9,6 +9,7 @@ import {
   ClipboardList,
   ShoppingBag,
   Megaphone,
+  Gem,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import HuntItemsModal from "./actions/huntItems/HuntItemsModal";
@@ -17,6 +18,7 @@ import UsersManagementModal from "./actions/users/UsersManagementModal";
 import ClaimAttemptsModal from "./actions/claimAttempts/ClaimAttemptsModal";
 import AuditLogsModal from "./actions/AuditLogsModal";
 import NoticesModal from "./actions/notices/NoticesModal";
+import CollectiblesModal from "./actions/collectibles/CollectiblesModal";
 
 interface AdminPanelProps {
   isOpen: boolean;
@@ -31,6 +33,7 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
     useState(false);
   const [isAuditLogsModalOpen, setIsAuditLogsModalOpen] = useState(false);
   const [isNoticesModalOpen, setIsNoticesModalOpen] = useState(false);
+  const [isCollectiblesModalOpen, setIsCollectiblesModalOpen] = useState(false);
 
   const handleClose = () => {
     onClose();
@@ -83,6 +86,22 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
               </button>
 
               <button
+                onClick={() => setIsNoticesModalOpen(true)}
+                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+              >
+                <Megaphone className="mr-3 h-6 w-6" />
+                Manage Notices
+              </button>
+
+              <button
+                onClick={() => setIsCollectiblesModalOpen(true)}
+                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+              >
+                <Gem className="mr-3 h-6 w-6" />
+                Manage Collectibles
+              </button>
+
+              <button
                 onClick={() => setIsClaimAttemptsModalOpen(true)}
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
               >
@@ -96,14 +115,6 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
               >
                 <History className="mr-3 h-6 w-6" />
                 View Admin Logs
-              </button>
-
-              <button
-                onClick={() => setIsNoticesModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <Megaphone className="mr-3 h-6 w-6" />
-                Manage Notices
               </button>
             </div>
           </div>
@@ -139,6 +150,11 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       <NoticesModal
         isOpen={isNoticesModalOpen}
         onClose={() => setIsNoticesModalOpen(false)}
+      />
+
+      <CollectiblesModal
+        isOpen={isCollectiblesModalOpen}
+        onClose={() => setIsCollectiblesModalOpen(false)}
       />
     </>
   );

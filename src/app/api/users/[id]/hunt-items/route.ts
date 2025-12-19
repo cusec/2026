@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { HuntItem, User } from "@/lib/models";
+import { HuntItem, User, Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 
 // Rate limiting configuration
@@ -273,6 +273,35 @@ export async function POST(
     user.claimedItems.push(huntItem._id);
     // Add the hunt item's points to the user's total
     user.points = (user.points || 0) + (huntItem.points || 0);
+
+    // Award collectibles linked to this hunt item
+    const awardedCollectibles: { _id: string; name: string }[] = [];
+    if (huntItem.collectibles && huntItem.collectibles.length > 0) {
+      // Fetch the collectible details
+      const collectibleDocs = await Collectible.find({
+        _id: { $in: huntItem.collectibles },
+      });
+
+      // Add collectibles to user's collection (avoid duplicates)
+      for (const collectible of collectibleDocs) {
+        if (!user.collectibles) {
+          user.collectibles = [];
+        }
+        // Check if user already has this collectible
+        const alreadyHas = user.collectibles.some(
+          (c: { toString: () => string }) =>
+            c.toString() === collectible._id.toString()
+        );
+        if (!alreadyHas) {
+          user.collectibles.push(collectible._id);
+          awardedCollectibles.push({
+            _id: collectible._id.toString(),
+            name: collectible.name,
+          });
+        }
+      }
+    }
+
     await user.save();
 
     // Increment claimCount on the hunt item
@@ -287,6 +316,7 @@ export async function POST(
         description: huntItem.description,
         points: huntItem.points,
       },
+      collectibles: awardedCollectibles,
       newPoints: user.points,
       totalItemsClaimed: user.claimedItems.length,
     });

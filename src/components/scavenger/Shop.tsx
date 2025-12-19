@@ -2,12 +2,17 @@
 
 import { useState, useEffect } from "react";
 import { ShoppingBag } from "lucide-react";
-import { ShopItem } from "@/lib/interface";
+import { ShopItem, Collectible } from "@/lib/interface";
 import Modal from "@/components/ui/modal";
 
 interface ShopResponse {
   success: boolean;
   shopItems: ShopItem[];
+}
+
+interface CollectiblesResponse {
+  success: boolean;
+  collectibles: Collectible[];
 }
 
 // Helper function to get image source from shop item
@@ -18,12 +23,24 @@ const getImageSrc = (item: ShopItem): string | null => {
   return null;
 };
 
+// Helper function to get image source from collectible
+const getCollectibleImageSrc = (item: Collectible): string | null => {
+  if (item.imageData && item.imageContentType) {
+    return `data:${item.imageContentType};base64,${item.imageData}`;
+  }
+  return null;
+};
+
 const Shop = () => {
   const [shopItems, setShopItems] = useState<ShopItem[]>([]);
+  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedItem, setSelectedItem] = useState<ShopItem | null>(null);
+  const [selectedCollectible, setSelectedCollectible] =
+    useState<Collectible | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCollectibleModalOpen, setIsCollectibleModalOpen] = useState(false);
 
   useEffect(() => {
     fetchShopItems();
@@ -34,18 +51,30 @@ const Shop = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("/api/shop");
+      const [shopResponse, collectiblesResponse] = await Promise.all([
+        fetch("/api/shop"),
+        fetch("/api/collectibles"),
+      ]);
 
-      if (!response.ok) {
+      if (!shopResponse.ok) {
         throw new Error("Failed to fetch shop items");
       }
 
-      const data: ShopResponse = await response.json();
+      const shopData: ShopResponse = await shopResponse.json();
+      const collectiblesData: CollectiblesResponse =
+        await collectiblesResponse.json();
 
-      if (data.success) {
-        setShopItems(data.shopItems);
+      if (shopData.success) {
+        setShopItems(shopData.shopItems);
       } else {
         throw new Error("Failed to load shop data");
+      }
+
+      if (collectiblesData.success) {
+        // Only show purchasable collectibles in the shop
+        setCollectibles(
+          collectiblesData.collectibles.filter((c) => c.purchasable)
+        );
       }
     } catch (err) {
       console.error("Error fetching shop items:", err);
@@ -65,9 +94,24 @@ const Shop = () => {
     setSelectedItem(null);
   };
 
+  const openCollectibleModal = (collectible: Collectible) => {
+    setSelectedCollectible(collectible);
+    setIsCollectibleModalOpen(true);
+  };
+
+  const closeCollectibleModal = () => {
+    setIsCollectibleModalOpen(false);
+    setSelectedCollectible(null);
+  };
+
   const handleRedeem = () => {
     // Placeholder for future redeem functionality
     console.log("Redeem clicked for:", selectedItem?.name);
+  };
+
+  const handleRedeemCollectible = () => {
+    // Placeholder for future redeem functionality
+    console.log("Redeem collectible clicked for:", selectedCollectible?.name);
   };
 
   if (loading) {
@@ -133,15 +177,15 @@ const Shop = () => {
             <ShoppingBag className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Shop</h2>
           </div>
-          {shopItems.length > 0 && (
+          {(shopItems.length > 0 || collectibles.length > 0) && (
             <div className="mt-2 text-center text-sm">
-              {shopItems.length} items available
+              {shopItems.length + collectibles.length} items available
             </div>
           )}
         </div>
 
         {/* Shop Items List */}
-        {shopItems.length === 0 ? (
+        {shopItems.length === 0 && collectibles.length === 0 ? (
           <div className="text-center py-8">
             <ShoppingBag className="w-16 h-16 mx-auto mb-4" />
             <p>No items available yet. Check back soon!</p>
@@ -250,6 +294,51 @@ const Shop = () => {
             )}
           </div>
         )}
+
+        {/* Collectibles Section */}
+        {collectibles.length > 0 && (
+          <div>
+            <div className="flex flex-col md:flex-row gap-4">
+              {/* Collectibles list */}
+              <div className="flex-1 space-y-3">
+                {collectibles.map((collectible) => (
+                  <div
+                    key={collectible._id}
+                    className="flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode"
+                  >
+                    <div className="flex items-center space-x-4">
+                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={getCollectibleImageSrc(collectible) || ""}
+                          alt={collectible.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{collectible.name}</p>
+                        {collectible.subtitle && (
+                          <p className="text-xs text-gray-500">
+                            {collectible.subtitle}
+                          </p>
+                        )}
+                        <p className="text-sm">{collectible.points} points</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <button
+                        onClick={() => openCollectibleModal(collectible)}
+                        className="px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors text-sm"
+                      >
+                        More Info
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Item Detail Modal */}
@@ -321,6 +410,58 @@ const Shop = () => {
               {selectedItem.limited && selectedItem.remaining === 0
                 ? "Sold Out"
                 : "Redeem"}
+            </button>
+          </div>
+        )}
+      </Modal>
+
+      {/* Collectible Detail Modal */}
+      <Modal
+        isOpen={isCollectibleModalOpen}
+        onClose={closeCollectibleModal}
+        title={selectedCollectible?.name || "Collectible Details"}
+        className="max-w-md text-dark-mode"
+      >
+        {selectedCollectible && (
+          <div className="space-y-4">
+            {/* Collectible Image */}
+            <div className="w-full h-32 rounded-lg overflow-hidden">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getCollectibleImageSrc(selectedCollectible) || ""}
+                alt={selectedCollectible.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Subtitle */}
+            {selectedCollectible.subtitle && (
+              <p className="text-gray-600 text-sm italic">
+                {selectedCollectible.subtitle}
+              </p>
+            )}
+
+            {/* Description */}
+            {selectedCollectible.description && (
+              <p className="text-gray-700">{selectedCollectible.description}</p>
+            )}
+
+            {/* Details */}
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="font-medium">Cost:</span>
+                <span className="text-primary font-bold">
+                  {selectedCollectible.points} points
+                </span>
+              </div>
+            </div>
+
+            {/* Redeem Button */}
+            <button
+              onClick={handleRedeemCollectible}
+              className="w-full py-2 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors"
+            >
+              Redeem
             </button>
           </div>
         )}

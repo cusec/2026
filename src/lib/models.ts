@@ -15,6 +15,15 @@ const userSchema = new Schema(
       ],
       default: [],
     },
+    collectibles: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Collectible",
+        },
+      ],
+      default: [],
+    },
     claim_attempts: {
       type: [
         {
@@ -47,6 +56,15 @@ const huntItemSchema = new Schema(
     active: { type: Boolean, default: true },
     activationStart: { type: Date, default: null },
     activationEnd: { type: Date, default: null },
+    collectibles: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "Collectible",
+        },
+      ],
+      default: [],
+    },
     createdBy: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -77,7 +95,14 @@ const adminAuditLogSchema = new Schema(
     resourceType: {
       type: String,
       required: true,
-      enum: ["user", "huntItem", "claimAttempts", "scheduleItem", "shopItem"],
+      enum: [
+        "user",
+        "huntItem",
+        "claimAttempts",
+        "scheduleItem",
+        "shopItem",
+        "collectible",
+      ],
       index: true,
     },
     resourceId: {
@@ -166,6 +191,22 @@ const noticeSchema = new Schema(
   }
 );
 
+const collectibleSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    subtitle: { type: String, default: "" },
+    description: { type: String, default: "" },
+    slug: { type: String, required: true, unique: true },
+    points: { type: Number, default: 0 },
+    purchasable: { type: Boolean, default: false },
+    imageData: { type: String, required: true },
+    imageContentType: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
@@ -177,5 +218,8 @@ const AdminAuditLog =
 const ShopItem =
   mongoose.models.ShopItem || mongoose.model("ShopItem", shopItemSchema);
 const Notice = mongoose.models.Notice || mongoose.model("Notice", noticeSchema);
+const Collectible =
+  mongoose.models.Collectible ||
+  mongoose.model("Collectible", collectibleSchema);
 
-export { User, HuntItem, AdminAuditLog, Day, ShopItem, Notice };
+export { User, HuntItem, AdminAuditLog, Day, ShopItem, Notice, Collectible };

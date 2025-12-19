@@ -1,11 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { QrCode, Shield, LogOut, Gift, AlertCircle } from "lucide-react";
+import {
+  QrCode,
+  Shield,
+  LogOut,
+  // Gift,
+  AlertCircle,
+  Package,
+} from "lucide-react";
 import { Auth0User, DbUser } from "@/lib/interface";
 import ItemClaim from "./user/ItemClaim";
 import AdminPanel from "./admin/AdminPanel";
 import RedeemPointsModal from "./volunteer/RedeemPointsModal";
+import InventoryModal from "./user/InventoryModal";
 import Modal from "@/components/ui/modal";
 
 interface UserHuntProps {
@@ -25,6 +33,7 @@ const UserHunt = ({
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);
+  const [isInventoryModalOpen, setIsInventoryModalOpen] = useState(false);
   const [showLinkEmailWarning, setShowLinkEmailWarning] = useState(false);
 
   const isAdmin = user?.["cusec/roles"]?.includes("Admin") ?? false;
@@ -74,6 +83,14 @@ const UserHunt = ({
               Scan Item
             </button>
 
+            <button
+              onClick={() => setIsInventoryModalOpen(true)}
+              className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50 register-hover"
+            >
+              <Package className="mr-3 h-6 w-6" />
+              Inventory
+            </button>
+
             <a
               href={`/auth/logout?returnTo=${process.env.APP_BASE_URL}/scavenger`}
             >
@@ -97,7 +114,7 @@ const UserHunt = ({
             )}
 
             {/* Redeem Points Button - Visible to admins and volunteers */}
-            {(isAdmin || isVolunteer) && (
+            {/* {(isAdmin || isVolunteer) && (
               <button
                 onClick={() => setIsRedeemPointsModalOpen(true)}
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50 register-hover"
@@ -105,7 +122,7 @@ const UserHunt = ({
                 <Gift className="mr-3 h-6 w-6" />
                 Redeem Points
               </button>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -133,6 +150,13 @@ const UserHunt = ({
           onClose={() => setIsRedeemPointsModalOpen(false)}
         />
       )}
+
+      {/* Inventory Modal */}
+      <InventoryModal
+        userId={dbUser._id}
+        isOpen={isInventoryModalOpen}
+        onClose={() => setIsInventoryModalOpen(false)}
+      />
 
       {/* Link Email Warning Modal */}
       <Modal

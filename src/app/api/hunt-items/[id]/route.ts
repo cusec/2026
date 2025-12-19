@@ -33,6 +33,7 @@ export async function PUT(
       active,
       activationStart,
       activationEnd,
+      collectibles,
     } = await request.json();
     const { id } = await params;
 
@@ -84,6 +85,7 @@ export async function PUT(
       active: huntItem.active,
       activationStart: huntItem.activationStart,
       activationEnd: huntItem.activationEnd,
+      collectibles: huntItem.collectibles,
     });
 
     // Update allowed fields (not identifier - that remains immutable)
@@ -96,6 +98,9 @@ export async function PUT(
       ? new Date(activationStart)
       : null;
     huntItem.activationEnd = activationEnd ? new Date(activationEnd) : null;
+    if (collectibles !== undefined) {
+      huntItem.collectibles = collectibles;
+    }
 
     await huntItem.save();
 
@@ -108,6 +113,7 @@ export async function PUT(
       active: huntItem.active,
       activationStart: huntItem.activationStart,
       activationEnd: huntItem.activationEnd,
+      collectibles: huntItem.collectibles,
     });
 
     // Log the admin action

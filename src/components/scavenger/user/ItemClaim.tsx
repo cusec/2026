@@ -13,6 +13,10 @@ interface ClaimResult {
     description: string;
     points: number;
   };
+  collectibles?: {
+    _id: string;
+    name: string;
+  }[];
   newPoints?: number;
   totalItemsClaimed?: number;
   remainingAttempts?: number;
@@ -66,6 +70,7 @@ const ItemClaim = ({
           success: true,
           message: data.message,
           item: data.item,
+          collectibles: data.collectibles,
           newPoints: data.newPoints,
           totalItemsClaimed: data.totalItemsClaimed,
         });
@@ -253,7 +258,25 @@ const ItemClaim = ({
                     </p>
                   </div>
                 )}
-                <p className="text-sm text-light-mode/80">
+                {claimResult.collectibles &&
+                  claimResult.collectibles.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-green-500/30">
+                      <p className="text-green-300 font-semibold mb-2">
+                        🎁 Collectibles Earned!
+                      </p>
+                      <div className="flex flex-wrap justify-center gap-2">
+                        {claimResult.collectibles.map((c) => (
+                          <span
+                            key={c._id}
+                            className="px-3 py-1 bg-purple-500/30 text-purple-200 rounded-full text-sm"
+                          >
+                            {c.name}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                <p className="text-sm text-light-mode/80 mt-3">
                   Total Points:{" "}
                   <span className="font-bold text-accent">
                     {claimResult.newPoints}

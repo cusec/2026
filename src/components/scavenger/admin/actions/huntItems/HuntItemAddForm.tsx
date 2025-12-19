@@ -1,6 +1,7 @@
 "use client";
 
-import { HuntItemFormData } from "@/lib/interface";
+import { useState, useEffect } from "react";
+import { HuntItemFormData, Collectible } from "@/lib/interface";
 
 interface HuntItemAddFormProps {
   formData: HuntItemFormData;
@@ -42,6 +43,27 @@ const HuntItemAddForm = ({
   onCancel,
   isSubmitting = false,
 }: HuntItemAddFormProps) => {
+  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+  const [loadingCollectibles, setLoadingCollectibles] = useState(false);
+
+  useEffect(() => {
+    const fetchCollectibles = async () => {
+      try {
+        setLoadingCollectibles(true);
+        const response = await fetch("/api/collectibles");
+        const data = await response.json();
+        if (data.success) {
+          setCollectibles(data.collectibles);
+        }
+      } catch (error) {
+        console.error("Error fetching collectibles:", error);
+      } finally {
+        setLoadingCollectibles(false);
+      }
+    };
+    fetchCollectibles();
+  }, []);
+
   const dateError = validateDates(
     formData.activationStart,
     formData.activationEnd
@@ -54,6 +76,21 @@ const HuntItemAddForm = ({
       activationStart: null,
       activationEnd: null,
     });
+  };
+
+  const handleCollectibleToggle = (collectibleId: string) => {
+    const currentCollectibles = formData.collectibles || [];
+    if (currentCollectibles.includes(collectibleId)) {
+      setFormData({
+        ...formData,
+        collectibles: currentCollectibles.filter((id) => id !== collectibleId),
+      });
+    } else {
+      setFormData({
+        ...formData,
+        collectibles: [...currentCollectibles, collectibleId],
+      });
+    }
   };
 
   return (
@@ -240,6 +277,59 @@ const HuntItemAddForm = ({
           </div>
           {dateError && (
             <p className="text-xs text-red-600 mt-2">{dateError}</p>
+          )}
+        </div>
+
+        {/* Collectibles Section */}
+        <div className="border-t pt-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Linked Collectibles (Optional)
+          </label>
+          <p className="text-xs text-gray-500 mb-3">
+            Select collectibles that users will receive when they claim this
+            hunt item.
+          </p>
+          {loadingCollectibles ? (
+            <div className="text-sm text-gray-500">Loading collectibles...</div>
+          ) : collectibles.length === 0 ? (
+            <div className="text-sm text-gray-500">
+              No collectibles available. Create some in the Manage Collectibles
+              section.
+            </div>
+          ) : (
+            <div className="max-h-40 overflow-y-auto border border-gray-200 rounded-lg p-2 space-y-2">
+              {collectibles.map((collectible) => (
+                <label
+                  key={collectible._id}
+                  className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    checked={(formData.collectibles || []).includes(
+                      collectible._id
+                    )}
+                    onChange={() => handleCollectibleToggle(collectible._id)}
+                    disabled={isSubmitting}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm font-medium text-gray-900">
+                      {collectible.name}
+                    </span>
+                    {collectible.subtitle && (
+                      <span className="text-xs text-gray-500 ml-2">
+                        ({collectible.subtitle})
+                      </span>
+                    )}
+                  </div>
+                </label>
+              ))}
+            </div>
+          )}
+          {(formData.collectibles || []).length > 0 && (
+            <p className="text-xs text-blue-600 mt-2">
+              {formData.collectibles.length} collectible(s) selected
+            </p>
           )}
         </div>
 

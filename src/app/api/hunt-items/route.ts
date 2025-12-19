@@ -56,6 +56,7 @@ export async function POST(request: Request) {
       active,
       activationStart,
       activationEnd,
+      collectibles,
     } = await request.json();
 
     if (!name || !identifier) {
@@ -111,6 +112,7 @@ export async function POST(request: Request) {
       active: active !== undefined ? active : true,
       activationStart: activationStart ? new Date(activationStart) : null,
       activationEnd: activationEnd ? new Date(activationEnd) : null,
+      collectibles: collectibles || [],
     });
 
     await huntItem.save();
@@ -128,6 +130,7 @@ export async function POST(request: Request) {
         active: huntItem.active,
         activationStart: huntItem.activationStart,
         activationEnd: huntItem.activationEnd,
+        collectibles: huntItem.collectibles,
       });
 
       await logAdminAction({

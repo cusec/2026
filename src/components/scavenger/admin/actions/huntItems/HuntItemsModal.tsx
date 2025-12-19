@@ -58,6 +58,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
       activationStart: null,
       activationEnd: null,
       maxClaims: null,
+      collectibles: [],
     });
   };
 
