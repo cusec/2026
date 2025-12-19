@@ -44,6 +44,8 @@ const CollectiblesModal = ({ isOpen, onClose }: CollectiblesModalProps) => {
       slug: "",
       points: 0,
       purchasable: false,
+      imageData: "",
+      imageContentType: "",
     });
   };
 
