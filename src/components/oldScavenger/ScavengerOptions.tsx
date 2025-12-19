@@ -51,8 +51,7 @@ const ScavengerOptions = ({
             _id: data.user.id,
             email: data.user.email,
             name: data.user.name,
-            points: data.user.points,
-            history: data.user.history || [],
+            claimedItems: data.user.claimedItems || [],
             claim_attempts: [],
           });
         } else {
@@ -69,21 +68,20 @@ const ScavengerOptions = ({
     initializeUser();
   }, [dbUser]);
 
-  // Handle successful claim - update user points and history
+  // Handle successful claim - update user claimedItems
   const handleClaimSuccess = (newPoints: number, totalItems: number) => {
     if (dbUser) {
-      // Create a new history array with the updated count
+      // Create a new claimedItems array with the updated count
       // Note: The actual item ID would be added by the API, but for UI purposes
       // we just need to update the count to reflect the new total
-      const updatedHistory = [...dbUser.history];
-      while (updatedHistory.length < totalItems) {
-        updatedHistory.push("claimed"); // Placeholder - actual IDs managed by API
+      const updatedClaimedItems = [...dbUser.claimedItems];
+      while (updatedClaimedItems.length < totalItems) {
+        updatedClaimedItems.push("claimed"); // Placeholder - actual IDs managed by API
       }
 
       setDbUser({
         ...dbUser,
-        points: newPoints,
-        history: updatedHistory,
+        claimedItems: updatedClaimedItems,
       });
     }
   };
@@ -126,12 +124,8 @@ const ScavengerOptions = ({
     <div className="flex flex-col gap-4 w-full">
       {dbUser && (
         <div className="text-center mb-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400">
-            Points:{" "}
-            <span className="font-semibold text-primary">{dbUser.points}</span>
-          </p>
           <p className="text-xs text-gray-500 dark:text-gray-500">
-            Items Found: {dbUser.history.length}
+            Items Found: {dbUser.claimedItems.length}
           </p>
         </div>
       )}

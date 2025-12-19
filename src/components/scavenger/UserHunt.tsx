@@ -14,7 +14,7 @@ interface UserHuntProps {
 }
 
 const UserHunt = ({ user, dbUser, onPointsUpdate }: UserHuntProps) => {
-  const [points, setPoints] = useState(dbUser.points);
+  const [points, setPoints] = useState(dbUser.points || 0);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);

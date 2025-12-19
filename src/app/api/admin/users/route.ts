@@ -41,7 +41,10 @@ export async function GET(request: Request) {
     }
 
     const users = await User.find(query)
-      .select("email name linked_email points history claim_attempts createdAt updatedAt")
+      .select(
+        "email name linked_email claimedItems claim_attempts redeemedPoints createdAt updatedAt"
+      )
+      .populate("claimedItems", "points")
       .sort({ createdAt: -1 })
       .skip(offset)
       .limit(limit);
@@ -50,17 +53,25 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       success: true,
-      users: users.map((user) => ({
-        _id: user._id,
-        email: user.email,
-        name: user.name,
-        linked_email: user.linked_email || null,
-        points: user.points,
-        historyCount: user.history.length,
-        claimAttemptsCount: user.claim_attempts?.length || 0,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-      })),
+      users: users.map((user) => {
+        // Calculate points from claimed items minus redeemed points
+        const earnedPoints = (user.claimedItems || []).reduce(
+          (sum: number, item: { points?: number }) => sum + (item.points || 0),
+          0
+        );
+        const points = earnedPoints - (user.redeemedPoints || 0);
+        return {
+          _id: user._id,
+          email: user.email,
+          name: user.name,
+          linked_email: user.linked_email || null,
+          points,
+          claimedItemsCount: user.claimedItems.length,
+          claimAttemptsCount: user.claim_attempts?.length || 0,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        };
+      }),
       pagination: {
         total: totalUsers,
         offset,
@@ -114,20 +125,18 @@ export async function PUT(request: Request) {
     const previousData = sanitizeDataForLogging({
       name: user.name,
       linked_email: user.linked_email,
-      points: user.points,
-      historyLength: user.history.length,
+      claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
 
     // Apply updates
     if (updates.name !== undefined) user.name = updates.name;
-    if (updates.points !== undefined) user.points = updates.points;
-    if (updates.linked_email !== undefined) user.linked_email = updates.linked_email;
+    if (updates.linked_email !== undefined)
+      user.linked_email = updates.linked_email;
 
     // Handle dangerous operations
-    if (updates.clearHistory === true) {
-      user.history = [];
-      user.points = 0; // Reset points when clearing history
+    if (updates.clearClaimedItems === true) {
+      user.claimedItems = [];
     }
 
     if (updates.clearClaimAttempts === true) {
@@ -136,12 +145,22 @@ export async function PUT(request: Request) {
 
     await user.save();
 
+    // Calculate points from claimed items minus redeemed points for response
+    const populatedUser = await User.findById(userId).populate(
+      "claimedItems",
+      "points"
+    );
+    const earnedPoints = (populatedUser.claimedItems || []).reduce(
+      (sum: number, item: { points?: number }) => sum + (item.points || 0),
+      0
+    );
+    const points = earnedPoints - (populatedUser.redeemedPoints || 0);
+
     // Store new data for audit logging
     const newData = sanitizeDataForLogging({
       name: user.name,
       linked_email: user.linked_email,
-      points: user.points,
-      historyLength: user.history.length,
+      claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
 
@@ -151,12 +170,12 @@ export async function PUT(request: Request) {
       let action = "UPDATE_USER";
 
       if (
-        updates.clearHistory === true &&
+        updates.clearClaimedItems === true &&
         updates.clearClaimAttempts === true
       ) {
-        action = "CLEAR_USER_HISTORY_AND_ATTEMPTS";
-      } else if (updates.clearHistory === true) {
-        action = "CLEAR_USER_HISTORY";
+        action = "CLEAR_USER_CLAIMED_ITEMS_AND_ATTEMPTS";
+      } else if (updates.clearClaimedItems === true) {
+        action = "CLEAR_USER_CLAIMED_ITEMS";
       } else if (updates.clearClaimAttempts === true) {
         action = "CLEAR_USER_CLAIM_ATTEMPTS";
       }
@@ -182,8 +201,8 @@ export async function PUT(request: Request) {
         email: user.email,
         name: user.name,
         linked_email: user.linked_email || null,
-        points: user.points,
-        historyCount: user.history.length,
+        points,
+        claimedItemsCount: user.claimedItems.length,
         claimAttemptsCount: user.claim_attempts?.length || 0,
       },
     });

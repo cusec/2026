@@ -121,10 +121,12 @@ const UserHistoryDetailsModal = ({
     if (!userEmail) return;
 
     const confirmed = window.confirm(
-      `⚠️ Remove "${itemName}" from ${userName || userEmail}'s history?\n\n` +
+      `⚠️ Remove "${itemName}" from ${
+        userName || userEmail
+      }'s claimed items?\n\n` +
         `This will:\n` +
-        `• Permanently remove this item from their claimed history\n` +
-        `• Deduct the points associated with this item\n` +
+        `• Permanently remove this item from their claimed items\n` +
+        `• Their points will be recalculated automatically\n` +
         `• Decrease the claim count on this hunt item\n\n` +
         `This action cannot be undone.`
     );
@@ -171,14 +173,14 @@ const UserHistoryDetailsModal = ({
       const data = await response.json();
 
       if (data.success) {
-        setUserHistory(data.user.history || []);
+        setUserHistory(data.user.claimedItems || data.user.history || []);
         setClaimAttempts(data.user.claim_attempts || []);
       } else {
-        setError(data.error || "Failed to fetch user history");
+        setError(data.error || "Failed to fetch user claimed items");
       }
     } catch (err) {
-      setError("Failed to fetch user history");
-      console.error("Error fetching user history:", err);
+      setError("Failed to fetch user claimed items");
+      console.error("Error fetching user claimed items:", err);
     } finally {
       setLoading(false);
     }
@@ -202,7 +204,7 @@ const UserHistoryDetailsModal = ({
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
-      title={`History: ${userName || userEmail}`}
+      title={`Claimed Items: ${userName || userEmail}`}
       className="max-w-2xl text-dark-mode"
     >
       <div className="space-y-6">
@@ -214,7 +216,7 @@ const UserHistoryDetailsModal = ({
 
         {loading ? (
           <div className="text-center py-8">
-            <p className="text-gray-600">Loading history...</p>
+            <p className="text-gray-600">Loading claimed items...</p>
           </div>
         ) : (
           <>
@@ -262,7 +264,9 @@ const UserHistoryDetailsModal = ({
                             <Trophy className="w-3 h-3" />+{item.points}
                           </span>
                           <button
-                            onClick={() => removeClaimedItem(item._id, item.name)}
+                            onClick={() =>
+                              removeClaimedItem(item._id, item.name)
+                            }
                             disabled={removingItemId === item._id}
                             className="p-1.5 text-red-600 hover:bg-red-100 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             title="Remove this claimed item"

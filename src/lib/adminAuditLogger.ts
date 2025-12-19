@@ -81,14 +81,14 @@ export function createActionDescription(
       const updateFields = Object.keys(updates).join(", ");
       return `Updated user fields: ${updateFields}`;
 
-    case "CLEAR_USER_HISTORY":
-      return "Cleared user history and reset points to 0";
+    case "CLEAR_USER_CLAIMED_ITEMS":
+      return "Cleared user claimed items";
 
     case "CLEAR_USER_CLAIM_ATTEMPTS":
       return "Cleared user claim attempts";
 
-    case "CLEAR_USER_HISTORY_AND_ATTEMPTS":
-      return "Cleared user history, claim attempts, and reset points to 0";
+    case "CLEAR_USER_CLAIMED_ITEMS_AND_ATTEMPTS":
+      return "Cleared user claimed items and claim attempts";
 
     case "CREATE_HUNT_ITEM":
       const itemName = (details as { name?: string })?.name || "Unknown";

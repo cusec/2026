@@ -208,7 +208,7 @@ export async function POST(
     }
 
     // Check if user has already claimed this item
-    if (user.history.includes(huntItem._id)) {
+    if (user.claimedItems.includes(huntItem._id)) {
       // Log failed attempt (duplicate claim)
       user.claim_attempts.push(claimAttempt);
       await user.save();
@@ -270,13 +270,22 @@ export async function POST(
     // Successful claim - update claim attempt and user data
     claimAttempt.success = true;
     user.claim_attempts.push(claimAttempt);
-    user.history.push(huntItem._id);
-    user.points += huntItem.points;
+    user.claimedItems.push(huntItem._id);
     await user.save();
 
     // Increment claimCount on the hunt item
     huntItem.claimCount = (huntItem.claimCount || 0) + 1;
     await huntItem.save();
+
+    // Calculate total points from all claimed items minus redeemed points
+    const populatedUser = await User.findById(user._id).populate(
+      "claimedItems"
+    );
+    const earnedPoints = populatedUser.claimedItems.reduce(
+      (sum: number, item: { points: number }) => sum + (item.points || 0),
+      0
+    );
+    const totalPoints = earnedPoints - (populatedUser.redeemedPoints || 0);
 
     return NextResponse.json({
       success: true,
@@ -286,8 +295,8 @@ export async function POST(
         description: huntItem.description,
         points: huntItem.points,
       },
-      newPoints: user.points,
-      totalItemsClaimed: user.history.length,
+      newPoints: totalPoints,
+      totalItemsClaimed: user.claimedItems.length,
     });
   } catch (error) {
     console.error("Error claiming hunt item:", error);

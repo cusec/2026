@@ -278,40 +278,28 @@ export async function DELETE(request: Request) {
       );
     }
 
-    // Check if the item is in the user's history
-    const itemIndex = user.history.findIndex(
+    // Check if the item is in the user's claimedItems
+    const itemIndex = user.claimedItems.findIndex(
       (id: { toString: () => string }) => id.toString() === huntItemId
     );
 
     if (itemIndex === -1) {
       return NextResponse.json(
-        { error: "Hunt item not found in user's history" },
+        { error: "Hunt item not found in user's claimed items" },
         { status: 400 }
       );
     }
 
     // Store previous data for audit logging
     const previousData = sanitizeDataForLogging({
-      userPoints: user.points,
-      historyCount: user.history.length,
+      claimedItemsCount: user.claimedItems.length,
       huntItemClaimCount: huntItem.claimCount,
     });
 
-    // Remove the item from user's history
-    user.history.splice(itemIndex, 1);
+    // Remove the item from user's claimedItems
+    user.claimedItems.splice(itemIndex, 1);
 
-    // Subtract the points from the user
-    user.points = Math.max(0, user.points - huntItem.points);
-
-    // Also remove the successful claim attempt for this item if it exists
-    if (user.claim_attempts) {
-      user.claim_attempts = user.claim_attempts.filter(
-        (attempt: { item_id?: { toString: () => string }; success: boolean }) =>
-          !(
-            attempt.item_id?.toString() === huntItemId && attempt.success
-          )
-      );
-    }
+    // Note: We intentionally keep the claim attempt record for audit/history purposes
 
     await user.save();
 
@@ -321,8 +309,7 @@ export async function DELETE(request: Request) {
 
     // Store new data for audit logging
     const newData = sanitizeDataForLogging({
-      userPoints: user.points,
-      historyCount: user.history.length,
+      claimedItemsCount: user.claimedItems.length,
       huntItemClaimCount: huntItem.claimCount,
     });
 
@@ -346,10 +333,21 @@ export async function DELETE(request: Request) {
       });
     }
 
+    // Calculate new points from remaining claimed items minus redeemed points
+    const populatedUser = await User.findById(user._id).populate(
+      "claimedItems",
+      "points"
+    );
+    const earnedPoints = (populatedUser.claimedItems || []).reduce(
+      (sum: number, item: { points?: number }) => sum + (item.points || 0),
+      0
+    );
+    const newPoints = earnedPoints - (populatedUser.redeemedPoints || 0);
+
     return NextResponse.json({
       success: true,
-      message: `Removed "${huntItem.name}" from ${userEmail}'s history and deducted ${huntItem.points} points`,
-      newPoints: user.points,
+      message: `Removed "${huntItem.name}" from ${userEmail}'s claimed items`,
+      newPoints,
     });
   } catch (error) {
     console.error("Error removing claimed item:", error);

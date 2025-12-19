@@ -21,7 +21,7 @@ interface User {
   name?: string;
   linked_email?: string | null;
   points: number;
-  historyCount: number;
+  claimedItemsCount: number;
   claimAttemptsCount: number;
   createdAt: string;
   updatedAt: string;
@@ -43,7 +43,6 @@ const UsersManagementModal = ({
   const [editingUser, setEditingUser] = useState<string | null>(null);
   const [editForm, setEditForm] = useState({
     name: "",
-    points: 0,
     linked_email: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -100,14 +99,13 @@ const UsersManagementModal = ({
     setEditingUser(user._id);
     setEditForm({
       name: user.name || "",
-      points: user.points,
       linked_email: user.linked_email || "",
     });
   };
 
   const cancelEdit = () => {
     setEditingUser(null);
-    setEditForm({ name: "", points: 0, linked_email: "" });
+    setEditForm({ name: "", linked_email: "" });
   };
 
   const saveUser = async (userId: string) => {
@@ -123,7 +121,6 @@ const UsersManagementModal = ({
           userId,
           updates: {
             name: editForm.name,
-            points: editForm.points,
             linked_email: editForm.linked_email || null,
           },
         }),
@@ -139,7 +136,6 @@ const UsersManagementModal = ({
               ? {
                   ...user,
                   name: editForm.name,
-                  points: editForm.points,
                   linked_email: editForm.linked_email || null,
                 }
               : user
@@ -344,23 +340,6 @@ const UsersManagementModal = ({
                           </div>
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Points
-                            </label>
-                            <input
-                              type="number"
-                              value={editForm.points}
-                              onChange={(e) =>
-                                setEditForm({
-                                  ...editForm,
-                                  points: parseInt(e.target.value) || 0,
-                                })
-                              }
-                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
-                              min="0"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
                               Linked Email
                             </label>
                             <input
@@ -413,7 +392,7 @@ const UsersManagementModal = ({
                               Points: <strong>{user.points}</strong>
                             </span>
                             <span>
-                              Items: <strong>{user.historyCount}</strong>
+                              Items: <strong>{user.claimedItemsCount}</strong>
                             </span>
                             <span>
                               Attempts:{" "}
@@ -433,10 +412,10 @@ const UsersManagementModal = ({
                           <button
                             onClick={() => showUserHistory(user)}
                             className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                            title="View History"
+                            title="View Claimed Items"
                           >
                             <History className="w-3 h-3" />
-                            History & Claim Attempts
+                            Claimed Items & Attempts
                           </button>
                           <button
                             onClick={() => startEdit(user)}
@@ -492,8 +471,8 @@ const UsersManagementModal = ({
             </div>
             <ul className="space-y-1 ml-6">
               <li>
-                • <strong>Clear History</strong>: Permanently removes all
-                claimed items and resets points to 0
+                • <strong>Clear Claimed Items</strong>: Permanently removes all
+                claimed items (points are calculated dynamically)
               </li>
               <li>
                 • <strong>Clear Attempts</strong>: Removes audit trail of claim

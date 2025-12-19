@@ -23,8 +23,7 @@ export async function findOrCreateUser(userData: UserData) {
       user = new User({
         email: userData.email,
         name: userData.name,
-        points: 0,
-        history: [],
+        claimedItems: [],
         claim_attempts: [],
       });
       await user.save();
@@ -56,7 +55,7 @@ export async function getUserByEmail(email: string) {
   await connectMongoDB();
 
   try {
-    const user = await User.findOne({ email }).populate("history");
+    const user = await User.findOne({ email }).populate("claimedItems");
     return user;
   } catch (error) {
     console.error("Error in getUserByEmail:", error);

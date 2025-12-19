@@ -2,25 +2,39 @@ import { NextResponse } from "next/server";
 import connectMongoDB from "@/lib/mongodb";
 import { User } from "@/lib/models";
 
-// GET - Get top 10 users for leaderboard
+// GET - Get top 10 users for leaderboard (with dynamically calculated points)
 export async function GET() {
   try {
     await connectMongoDB();
 
-    // Find top 10 users with highest points, only return name and points
-    const topUsers = await User.find({}, { name: 1, points: 1, _id: 0 })
-      .sort({ points: -1 })
-      .limit(10)
+    // Find all users and populate their claimed items to calculate points
+    const users = await User.find({ name: { $exists: true, $ne: null } })
+      .populate("claimedItems", "points")
       .lean();
 
-    // Filter out users without names and ensure they have points > 0
-    const leaderboard = topUsers
-      .filter((user) => user.name && user.points > 0)
-      .map((user, index) => ({
-        rank: index + 1,
-        name: user.name,
-        score: user.points,
-      }));
+    // Calculate points for each user from their claimed items minus redeemed points
+    const usersWithPoints = users
+      .map((user) => {
+        const earnedPoints = (user.claimedItems || []).reduce(
+          (sum: number, item: { points?: number }) => sum + (item.points || 0),
+          0
+        );
+        // Subtract redeemed points from earned points
+        const availablePoints = earnedPoints - (user.redeemedPoints || 0);
+        return {
+          name: user.name,
+          points: availablePoints,
+        };
+      })
+      .filter((user) => user.points > 0)
+      .sort((a, b) => b.points - a.points)
+      .slice(0, 10);
+
+    const leaderboard = usersWithPoints.map((user, index) => ({
+      rank: index + 1,
+      name: user.name,
+      score: user.points,
+    }));
 
     return NextResponse.json({
       success: true,

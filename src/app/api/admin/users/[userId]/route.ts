@@ -4,7 +4,7 @@ import { User } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 
-// GET - Fetch detailed user information including history (Admin only)
+// GET - Fetch detailed user information including claimed items (Admin only)
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ userId: string }> }
@@ -29,7 +29,7 @@ export async function GET(
     await connectMongoDB();
 
     const user = await User.findById(userId).populate({
-      path: "history",
+      path: "claimedItems",
       select: "name description identifier points createdAt",
     });
 
@@ -37,19 +37,26 @@ export async function GET(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
+    // Calculate points from claimed items minus redeemed points
+    const earnedPoints = (user.claimedItems || []).reduce(
+      (sum: number, item: { points?: number }) => sum + (item.points || 0),
+      0
+    );
+    const points = earnedPoints - (user.redeemedPoints || 0);
+
     return NextResponse.json({
       success: true,
       user: {
         _id: user._id,
         email: user.email,
         name: user.name,
-        points: user.points,
-        history: user.history,
+        points,
+        claimedItems: user.claimedItems,
         claim_attempts: user.claim_attempts || [],
       },
     });
   } catch (error) {
-    console.error("Error fetching user history:", error);
+    console.error("Error fetching user claimed items:", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

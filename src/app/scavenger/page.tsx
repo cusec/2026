@@ -24,7 +24,21 @@ export default async function ScavengerPage() {
     const mongoUser = await getUserByEmail(user.email);
     if (mongoUser) {
       // Convert Mongoose document to plain object to avoid serialization issues
-      dbUser = JSON.parse(JSON.stringify(mongoUser.toObject()));
+      const plainUser = mongoUser.toObject();
+
+      // Calculate points from claimed items minus redeemed points
+      const earnedPoints = (plainUser.claimedItems || []).reduce(
+        (sum: number, item: { points?: number }) => sum + (item.points || 0),
+        0
+      );
+      const points = earnedPoints - (plainUser.redeemedPoints || 0);
+
+      dbUser = JSON.parse(
+        JSON.stringify({
+          ...plainUser,
+          points,
+        })
+      );
     }
   }
 
