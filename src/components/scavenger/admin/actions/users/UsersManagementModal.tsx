@@ -419,7 +419,7 @@ const UsersManagementModal = ({
                           </button>
                           <button
                             onClick={() => startEdit(user)}
-                            disabled={editingUser !== null || isSubmitting}
+                            disabled={editingUser === user._id || isSubmitting}
                             className="flex items-center gap-1 px-3 py-1 bg-yellow-600 text-white rounded hover:bg-yellow-700 disabled:bg-gray-400 text-sm"
                             title="Edit User"
                           >

@@ -40,6 +40,7 @@ export interface DbUser {
   email: string;
   name?: string;
   linked_email?: string | null;
+  discord_handle?: string | null;
   points: number;
   claimedItems: string[];
   collectibles: string[];

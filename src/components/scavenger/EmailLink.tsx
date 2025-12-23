@@ -12,6 +12,10 @@ interface EmailLinkProps {
 
 const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
   const [email, setEmail] = useState("");
+  const [displayName, setDisplayName] = useState(dbUser.name || "");
+  const [discordHandle, setDiscordHandle] = useState(
+    dbUser.discord_handle || ""
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [linkedEmail, setLinkedEmail] = useState<string | null>(
@@ -46,7 +50,11 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ linked_email: email }),
+        body: JSON.stringify({
+          linked_email: email,
+          name: displayName.trim(),
+          discord_handle: discordHandle.trim(),
+        }),
       });
 
       const data = await response.json();
@@ -72,53 +80,97 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
     setShowConfirmation(false);
   };
 
+  if (linkedEmail) {
+    return null;
+  }
+
   return (
-    <div className="w-full overflow-x-hidden text-dark-mode bg-light-mode/40 p-3 rounded-lg border border-light-mode">
-      <div className="flex flex-wrap gap-2 items-center justify-center text-center font-semibold">
-        {linkedEmail ? (
-          <>{linkedEmail} (Linked) </>
-        ) : (
-          <>
-            Linked Email:{" "}
+    <div className="w-full overflow-x-hidden text-light-mode">
+      <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-wrap gap-1 items-center justify-center md:justify-between text-center font-semibold">
+          <div>
+            <label htmlFor="linkedEmail">Ticket Email:</label>{" "}
             <input
+              id="linkedEmail"
               type="email"
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
                 setError(null);
               }}
-              placeholder="Enter your email"
-              className="border-b w-fit border-light-mode bg-transparent outline-none"
+              placeholder="Email Linked to Ticket"
+              className="text-light-mode! bg-transparent outline-none"
+              style={{ width: `16ch` }}
               disabled={isSubmitting}
             />
-            <button
-              onClick={handleSubmitClick}
-              disabled={isSubmitting}
-              className="p-2 bg-sunset rounded-lg border border-accent disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Submitting..." : "Submit"}
-            </button>
-          </>
-        )}
+          </div>
+          <button
+            onClick={handleSubmitClick}
+            disabled={isSubmitting}
+            className="border-b border-light-mode disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </button>
+        </div>
+        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
       </div>
-      {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
 
       {/* Confirmation Dialog */}
       <Modal
         isOpen={showConfirmation}
         onClose={handleCancel}
         title="Confirm Email Link"
-        className="max-w-md text-light-mode bg-dark-mode/70"
+        className="max-w-md text-light-mode bg-dark-mode"
       >
-        <p className=" mb-4">
-          Are you sure you want to link email &quot;{email}&quot; (Must be
-          associated with your ticket) to your current account email &quot;
-          {user.email}&quot;? Your display name will be {dbUser.name} (This can
-          be changed by contacting the Tech team).
+        <p className="mb-4">
+          Are you sure you want to link email{" "}
+          <span className="text-red-400 font-semibold">
+            &quot;{email}&quot;
+          </span>{" "}
+          (Must be associated with your ticket) to your current account email{" "}
+          <span className="text-red-400 font-semibold">
+            &quot;{user.email}&quot;
+          </span>
+          ?
         </p>
-        <p className=" text-sm mb-6">
-          This action cannot be undone. You will need to contact the Tech team
-          to change your linked email.
+        <div className="mb-4">
+          <label htmlFor="discordHandle" className="block mb-2">
+            Discord Handle:{" "}
+            <span className="text-light-mode/50 text-sm">(optional)</span>
+          </label>
+          <input
+            id="discordHandle"
+            type="text"
+            value={discordHandle}
+            onChange={(e) => setDiscordHandle(e.target.value)}
+            placeholder="@discordHandle"
+            className="w-full px-3 py-2 bg-light-mode/10 border border-light-mode/30 rounded-lg text-light-mode outline-none focus:border-accent"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="displayName" className="block mb-2">
+            Display Name:
+          </label>
+          <input
+            id="displayName"
+            type="text"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+            placeholder="Enter your display name"
+            className="w-full px-3 py-2 bg-light-mode/10 border border-light-mode/30 rounded-lg text-light-mode outline-none focus:border-accent"
+          />
+        </div>
+        <p className="text-sm mb-2 text-light-mode/80">
+          Please select something appropriate, complying with the CUSEC Code of
+          Conduct, or it will be redacted by the Tech team.
+        </p>
+        <p className="text-sm mb-2 text-light-mode/80">
+          If you wish to update this after this moment, you will have to contact
+          the Tech team.
+        </p>
+        <p className="text-sm mb-6 text-light-mode/80">
+          We recommend selecting something short and simple that can be
+          displayed on a leaderboard.
         </p>
         <div className="flex gap-3 justify-end">
           <button onClick={handleCancel} className="px-4 py-2 rounded-lg">
@@ -126,7 +178,8 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
           </button>
           <button
             onClick={handleConfirm}
-            className="px-4 py-2 bg-sunset rounded-lg border border-accent hover:opacity-90"
+            disabled={!displayName.trim()}
+            className="px-4 py-2 bg-sunset rounded-lg border border-accent hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Confirm
           </button>

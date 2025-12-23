@@ -8,12 +8,14 @@ import {
   // Gift,
   AlertCircle,
   Package,
+  Pencil,
 } from "lucide-react";
 import { Auth0User, DbUser } from "@/lib/interface";
 import ItemClaim from "./user/ItemClaim";
 import AdminPanel from "./admin/AdminPanel";
 import RedeemPointsModal from "./volunteer/RedeemPointsModal";
 import InventoryModal from "./user/InventoryModal";
+import EditDiscordModal from "./user/EditDiscordModal";
 import Modal from "@/components/ui/modal";
 
 interface UserHuntProps {
@@ -32,10 +34,14 @@ const UserHunt = ({
   baseURL,
 }: UserHuntProps) => {
   const [points, setPoints] = useState(dbUser.points || 0);
+  const [discordHandle, setDiscordHandle] = useState(
+    dbUser.discord_handle || null
+  );
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);
   const [isInventoryModalOpen, setIsInventoryModalOpen] = useState(false);
+  const [isEditDiscordModalOpen, setIsEditDiscordModalOpen] = useState(false);
   const [showLinkEmailWarning, setShowLinkEmailWarning] = useState(false);
 
   const isAdmin = user?.["cusec/roles"]?.includes("Admin") ?? false;
@@ -68,6 +74,17 @@ const UserHunt = ({
               </span>
             )}
           </h2>
+          <div className="flex items-center justify-center gap-1 text-sm text-light-mode/70 mb-2">
+            <span>Discord Handle:</span>
+            <span>{discordHandle || "Not set"}</span>
+            <button
+              onClick={() => setIsEditDiscordModalOpen(true)}
+              className="p-2 hover:bg-light-mode/10 rounded-full transition"
+              title="Edit Discord handle"
+            >
+              <Pencil className="w-3 h-3" />
+            </button>
+          </div>
           <p className="text-lg">
             You have <span className="font-bold text-accent">{points}</span>{" "}
             points
@@ -179,6 +196,15 @@ const UserHunt = ({
           </button>
         </div>
       </Modal>
+
+      {/* Edit Discord Modal */}
+      <EditDiscordModal
+        userId={dbUser._id}
+        currentHandle={discordHandle}
+        isOpen={isEditDiscordModalOpen}
+        onClose={() => setIsEditDiscordModalOpen(false)}
+        onSave={(newHandle) => setDiscordHandle(newHandle)}
+      />
     </div>
   );
 };

@@ -21,11 +21,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const { linked_email } = await request.json();
+    const { linked_email, name, discord_handle } = await request.json();
 
     if (!linked_email) {
       return NextResponse.json(
         { error: "Email address is required" },
+        { status: 400 }
+      );
+    }
+
+    if (!name || !name.trim()) {
+      return NextResponse.json(
+        { error: "Display name is required" },
         { status: 400 }
       );
     }
@@ -60,14 +67,18 @@ export async function POST(request: Request) {
       );
     }
 
-    // Update the user with the linked email
+    // Update the user with the linked email, display name, and discord handle
     user.linked_email = linked_email;
+    user.name = name.trim();
+    user.discord_handle = discord_handle?.trim() || null;
     await user.save();
 
     return NextResponse.json({
       success: true,
       message: "Email linked successfully",
       linked_email: user.linked_email,
+      name: user.name,
+      discord_handle: user.discord_handle,
     });
   } catch (error) {
     console.error("Error linking email:", error);
