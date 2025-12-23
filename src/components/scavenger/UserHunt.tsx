@@ -65,7 +65,7 @@ const UserHunt = ({
       <div className="p-8">
         {/* Welcome Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold mb-2">
+          <h2 className="text-2xl font-bold">
             Welcome {dbUser.name || "Hunter"}!
             {linkedEmail && (
               <span className="text-lg font-normal text-light-mode/70">
@@ -75,7 +75,7 @@ const UserHunt = ({
             )}
           </h2>
           <div className="flex items-center justify-center gap-1 text-sm text-light-mode/70 mb-2">
-            <span>Discord Handle:</span>
+            <span>Discord:</span>
             <span>{discordHandle || "Not set"}</span>
             <button
               onClick={() => setIsEditDiscordModalOpen(true)}

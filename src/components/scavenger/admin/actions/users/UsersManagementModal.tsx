@@ -20,6 +20,7 @@ interface User {
   email: string;
   name?: string;
   linked_email?: string | null;
+  discord_handle?: string | null;
   points: number;
   claimedItemsCount: number;
   claimAttemptsCount: number;
@@ -44,6 +45,8 @@ const UsersManagementModal = ({
   const [editForm, setEditForm] = useState({
     name: "",
     linked_email: "",
+    discord_handle: "",
+    points: 0,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -100,12 +103,14 @@ const UsersManagementModal = ({
     setEditForm({
       name: user.name || "",
       linked_email: user.linked_email || "",
+      discord_handle: user.discord_handle || "",
+      points: user.points || 0,
     });
   };
 
   const cancelEdit = () => {
     setEditingUser(null);
-    setEditForm({ name: "", linked_email: "" });
+    setEditForm({ name: "", linked_email: "", discord_handle: "", points: 0 });
   };
 
   const saveUser = async (userId: string) => {
@@ -122,6 +127,8 @@ const UsersManagementModal = ({
           updates: {
             name: editForm.name,
             linked_email: editForm.linked_email || null,
+            discord_handle: editForm.discord_handle || null,
+            points: editForm.points,
           },
         }),
       });
@@ -137,6 +144,8 @@ const UsersManagementModal = ({
                   ...user,
                   name: editForm.name,
                   linked_email: editForm.linked_email || null,
+                  discord_handle: editForm.discord_handle || null,
+                  points: editForm.points,
                 }
               : user
           )
@@ -263,7 +272,7 @@ const UsersManagementModal = ({
               <Search className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search by name or email..."
+                placeholder="Search by name, email, linked email, or discord..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
@@ -355,6 +364,41 @@ const UsersManagementModal = ({
                               placeholder="Enter linked email (optional)"
                             />
                           </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Discord Handle
+                            </label>
+                            <input
+                              type="text"
+                              value={editForm.discord_handle}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  discord_handle: e.target.value,
+                                })
+                              }
+                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
+                              placeholder="Enter discord handle (optional)"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Points
+                            </label>
+                            <input
+                              type="number"
+                              value={editForm.points}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  points: parseInt(e.target.value) || 0,
+                                })
+                              }
+                              className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
+                              placeholder="Enter points"
+                              min="0"
+                            />
+                          </div>
                         </div>
                         <div className="flex gap-2">
                           <button
@@ -387,7 +431,7 @@ const UsersManagementModal = ({
                               {user.email}
                             </span>
                           </div>
-                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                          <div className="flex items-center gap-4 mt-1 text-sm text-gray-600 flex-wrap">
                             <span>
                               Points: <strong>{user.points}</strong>
                             </span>
@@ -401,6 +445,10 @@ const UsersManagementModal = ({
                             <span>
                               Linked:{" "}
                               <strong>{user.linked_email || "None"}</strong>
+                            </span>
+                            <span>
+                              Discord:{" "}
+                              <strong>{user.discord_handle || "None"}</strong>
                             </span>
                             <span>
                               Joined:{" "}

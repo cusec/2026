@@ -36,13 +36,15 @@ export async function GET(request: Request) {
         $or: [
           { email: { $regex: search, $options: "i" } },
           { name: { $regex: search, $options: "i" } },
+          { linked_email: { $regex: search, $options: "i" } },
+          { discord_handle: { $regex: search, $options: "i" } },
         ],
       };
     }
 
     const users = await User.find(query)
       .select(
-        "email name linked_email points claimedItems claim_attempts createdAt updatedAt"
+        "email name linked_email discord_handle points claimedItems claim_attempts createdAt updatedAt"
       )
       .sort({ createdAt: -1 })
       .skip(offset)
@@ -58,6 +60,7 @@ export async function GET(request: Request) {
           email: user.email,
           name: user.name,
           linked_email: user.linked_email || null,
+          discord_handle: user.discord_handle || null,
           points: user.points || 0,
           claimedItemsCount: user.claimedItems.length,
           claimAttemptsCount: user.claim_attempts?.length || 0,
@@ -118,6 +121,8 @@ export async function PUT(request: Request) {
     const previousData = sanitizeDataForLogging({
       name: user.name,
       linked_email: user.linked_email,
+      discord_handle: user.discord_handle,
+      points: user.points,
       claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
@@ -126,6 +131,9 @@ export async function PUT(request: Request) {
     if (updates.name !== undefined) user.name = updates.name;
     if (updates.linked_email !== undefined)
       user.linked_email = updates.linked_email;
+    if (updates.discord_handle !== undefined)
+      user.discord_handle = updates.discord_handle;
+    if (updates.points !== undefined) user.points = updates.points;
 
     // Handle dangerous operations
     if (updates.clearClaimedItems === true) {
@@ -142,6 +150,8 @@ export async function PUT(request: Request) {
     const newData = sanitizeDataForLogging({
       name: user.name,
       linked_email: user.linked_email,
+      discord_handle: user.discord_handle,
+      points: user.points,
       claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
@@ -183,6 +193,7 @@ export async function PUT(request: Request) {
         email: user.email,
         name: user.name,
         linked_email: user.linked_email || null,
+        discord_handle: user.discord_handle || null,
         points: user.points || 0,
         claimedItemsCount: user.claimedItems.length,
         claimAttemptsCount: user.claim_attempts?.length || 0,
