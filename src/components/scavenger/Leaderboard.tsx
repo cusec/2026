@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Trophy, Medal, Award } from "lucide-react";
+import { Trophy } from "lucide-react";
+import Image from "next/image";
 
 interface LeaderboardEntry {
   rank: number;
@@ -46,34 +47,6 @@ const Leaderboard = () => {
       setError("Failed to load leaderboard");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const getRankIcon = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return <Trophy className="w-6 h-6 text-yellow-500" />;
-      case 2:
-        return <Medal className="w-6 h-6 text-gray-400" />;
-      case 3:
-        return <Award className="w-6 h-6 text-orange-800" />;
-      default:
-        return (
-          <div className="w-6 h-6 rounded-full bg-gray-600 flex items-center justify-center text-white text-sm font-bold">
-            {rank}
-          </div>
-        );
-    }
-  };
-
-  const getRankStyle = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return "bg-gradient-to-r from-yellow-50/50 to-yellow-100/50 border-yellow-200";
-      case 2:
-        return "bg-gradient-to-r from-gray-50/50 to-gray-100/50 border-gray-200";
-      case 3:
-        return "bg-gradient-to-r from-orange-100/50 to-orange-200/50 border-orange-300";
     }
   };
 
@@ -137,59 +110,83 @@ const Leaderboard = () => {
             <p>No scores yet. Be the first to earn points!</p>
           </div>
         ) : (
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* First column - entries 1-5 */}
-            <div className="flex-1 space-y-3">
-              {leaderboard.slice(0, 5).map((entry) => (
-                <div
-                  key={`${entry.rank}-${entry.name}`}
-                  className={`flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode ${getRankStyle(
-                    entry.rank
-                  )}`}
-                >
-                  <div className="flex items-center space-x-4">
-                    {getRankIcon(entry.rank)}
-                    <div>
-                      <p className="font-semibold">{entry.name}</p>
-                      <p className="text-sm">Rank #{entry.rank}</p>
-                    </div>
+          <div>
+            {/* The Top 3 */}
+            {leaderboard.length >= 3 && (
+              <div className="flex min-h-[250px] md:min-h-[350px] text-xs md:text-body">
+                {/* Rank 2 */}
+                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[30px]">
+                  <div className="relative min-h-10 min-w-10 lg:min-h-15 lg:min-w-15">
+                    <Image
+                      alt="Second Place Icon"
+                      src="/images/leaderboard_second.svg"
+                      fill
+                    />
                   </div>
-                  <div className="text-right">
-                    <p className="text-2xl font-bold text-primary">
-                      {entry.score}
-                    </p>
-                    <p className="text-sm">points</p>
+                  {leaderboard[1].name}
+                  <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
+                    {leaderboard[1].score}
+                  </div>
+                  <div className="absolute pt-25 text-5xl text-light-mode/50 font-space-grotesk!">
+                    2
+                  </div>
+                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
+                </div>
+                {/* Rank 1 */}
+                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%]">
+                  <div className="relative min-h-10 min-w-10 lg:min-h-15 lg:min-w-15">
+                    <Image
+                      alt="First Place Icon"
+                      src="/images/leaderboard_first.svg"
+                      fill
+                    />
+                  </div>
+                  {leaderboard[0].name}
+                  <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
+                    {leaderboard[0].score}
+                  </div>
+                  <div className="absolute pt-10 text-5xl text-light-mode/50 font-space-grotesk!">
+                    1
+                  </div>
+                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
+                </div>
+                {/* Rank 3 */}
+                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[60px]">
+                  <div className="relative min-h-10 min-w-10 lg:min-h-15 lg:min-w-15">
+                    <Image
+                      alt="Third Place Icon"
+                      src="/images/leaderboard_third.svg"
+                      fill
+                    />
+                  </div>
+                  {leaderboard[2].name}
+                  <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
+                    {leaderboard[2].score}
+                  </div>
+                  <div className="absolute pt-25 text-5xl text-light-mode/50 font-space-grotesk!">
+                    3
+                  </div>
+                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
+                </div>
+              </div>
+            )}
+            {/* Ranks 4 and below */}
+            <div className="mt-8 space-y-4">
+              {leaderboard.slice(3).map((entry) => (
+                <div
+                  key={entry.rank}
+                  className="flex justify-between items-center text-center px-5 py-4 border border-light-mode/30 rounded-2xl bg-dark-mode/60 text-sm md:text-lg"
+                >
+                  <div className="flex gap-3">
+                    <div>{entry.rank}</div>
+                    <div>{entry.name}</div>
+                  </div>
+                  <div className="flex items-center justify-center px-4 rounded-full bg-light-mode/20 py-1 text-xs md:text-sm">
+                    {entry.score}
                   </div>
                 </div>
               ))}
             </div>
-            {/* Second column - entries 6-10 */}
-            {leaderboard.length > 5 && (
-              <div className="flex-1 space-y-3">
-                {leaderboard.slice(5, 10).map((entry) => (
-                  <div
-                    key={`${entry.rank}-${entry.name}`}
-                    className={`flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode ${getRankStyle(
-                      entry.rank
-                    )}`}
-                  >
-                    <div className="flex items-center space-x-4">
-                      {getRankIcon(entry.rank)}
-                      <div>
-                        <p className="font-semibold">{entry.name}</p>
-                        <p className="text-sm">Rank #{entry.rank}</p>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-primary">
-                        {entry.score}
-                      </p>
-                      <p className="text-sm">points</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
           </div>
         )}
       </div>

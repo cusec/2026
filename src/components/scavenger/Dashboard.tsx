@@ -5,7 +5,7 @@ import { Auth0User, DbUser } from "@/lib/interface";
 import EmailLink from "./EmailLink";
 import NoticeBoard from "./NoticeBoard";
 import UserHunt from "./UserHunt";
-import NewLeaderboard from "./NewLeaderboard";
+import Leaderboard from "./Leaderboard";
 import Shop from "./Shop";
 
 interface DashboardProps {
@@ -44,7 +44,7 @@ const Dashboard = ({ user, dbUser, baseURL }: DashboardProps) => {
         </>
       )}
       <Shop />
-      <NewLeaderboard />
+      <Leaderboard />
     </div>
   );
 };
