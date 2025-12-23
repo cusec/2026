@@ -5,15 +5,16 @@ import { Auth0User, DbUser } from "@/lib/interface";
 import EmailLink from "./EmailLink";
 import NoticeBoard from "./NoticeBoard";
 import UserHunt from "./UserHunt";
-import Leaderboard from "./Leaderboard";
+import NewLeaderboard from "./NewLeaderboard";
 import Shop from "./Shop";
 
 interface DashboardProps {
   user: Auth0User;
   dbUser: DbUser | null;
+  baseURL: string;
 }
 
-const Dashboard = ({ user, dbUser }: DashboardProps) => {
+const Dashboard = ({ user, dbUser, baseURL }: DashboardProps) => {
   const [linkedEmail, setLinkedEmail] = useState<string | null>(
     dbUser?.linked_email || null
   );
@@ -34,11 +35,16 @@ const Dashboard = ({ user, dbUser }: DashboardProps) => {
               onEmailLinked={handleEmailLinked}
             />
           )}
-          <UserHunt user={user} dbUser={dbUser} linkedEmail={linkedEmail} />
+          <UserHunt
+            user={user}
+            dbUser={dbUser}
+            linkedEmail={linkedEmail}
+            baseURL={baseURL}
+          />
         </>
       )}
       <Shop />
-      <Leaderboard />
+      <NewLeaderboard />
     </div>
   );
 };

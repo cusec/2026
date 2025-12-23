@@ -43,7 +43,11 @@ export default async function ScavengerPage() {
         <SmoothFollower />
         {user ? (
           <div className="relative z-10">
-            <Dashboard user={user} dbUser={dbUser} />
+            <Dashboard
+              user={user}
+              dbUser={dbUser}
+              baseURL={process.env.APP_BASE_URL || ""}
+            />
             {/* <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
               <span>Welcome, {user.name}!</span>
               <span>[Roles: {user["cusec/roles"].join(", ")}]</span>

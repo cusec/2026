@@ -21,6 +21,7 @@ interface UserHuntProps {
   dbUser: DbUser;
   linkedEmail?: string | null;
   onPointsUpdate?: (newPoints: number) => void;
+  baseURL: string;
 }
 
 const UserHunt = ({
@@ -28,6 +29,7 @@ const UserHunt = ({
   dbUser,
   linkedEmail,
   onPointsUpdate,
+  baseURL,
 }: UserHuntProps) => {
   const [points, setPoints] = useState(dbUser.points || 0);
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
@@ -91,9 +93,7 @@ const UserHunt = ({
               Inventory
             </button>
 
-            <a
-              href={`/auth/logout?returnTo=${process.env.APP_BASE_URL}/scavenger`}
-            >
+            <a href={`/auth/logout?returnTo=${baseURL}/scavenger`}>
               <button className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50 register-hover">
                 <LogOut className="mr-3 h-6 w-6" />
                 Log Out
