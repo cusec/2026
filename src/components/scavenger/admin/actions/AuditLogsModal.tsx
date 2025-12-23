@@ -283,8 +283,12 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
           {totalPages > 0 && (
             <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
               <div className="text-sm text-gray-700">
-                Showing {auditLogs.length > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0} to{" "}
-                {Math.min(currentPage * ITEMS_PER_PAGE, totalCount)} of {totalCount} results
+                Showing{" "}
+                {auditLogs.length > 0
+                  ? (currentPage - 1) * ITEMS_PER_PAGE + 1
+                  : 0}{" "}
+                to {Math.min(currentPage * ITEMS_PER_PAGE, totalCount)} of{" "}
+                {totalCount} results
               </div>
               <div className="flex items-center gap-2">
                 <button
