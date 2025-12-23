@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import connectMongoDB from "@/lib/mongodb";
 import { User, HuntItem } from "@/lib/models";
+import { Types } from "mongoose";
 
 // GET - Get top 10 users for leaderboard (calculated from claimed items)
 export async function GET() {
@@ -18,7 +19,8 @@ export async function GET() {
 
     const huntItemPointsMap = new Map<string, number>();
     for (const item of huntItems) {
-      huntItemPointsMap.set(item._id.toString(), item.points || 0);
+      const itemId = item._id as Types.ObjectId;
+      huntItemPointsMap.set(itemId.toString(), item.points || 0);
     }
 
     // Step 2: Get all users with claimed items
@@ -32,8 +34,8 @@ export async function GET() {
     // Step 3: Calculate points for each user from their claimed items
     const usersWithCalculatedPoints = users.map((user) => {
       const calculatedPoints = (user.claimedItems || []).reduce(
-        (sum: number, itemId: unknown) => {
-          const points = huntItemPointsMap.get(itemId?.toString() || "") || 0;
+        (sum: number, itemId: Types.ObjectId) => {
+          const points = huntItemPointsMap.get(itemId.toString()) || 0;
           return sum + points;
         },
         0
