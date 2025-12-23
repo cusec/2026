@@ -9,11 +9,13 @@ import {
   AlertTriangle,
   Users as UsersIcon,
   History,
+  Gem,
   // Trash2,
   RefreshCw,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import UserHistoryDetailsModal from "./UserHistoryDetailsModal";
+import UserCollectiblesModal from "./UserCollectiblesModal";
 
 interface User {
   _id: string;
@@ -53,6 +55,9 @@ const UsersManagementModal = ({
   // History modal state
   const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  // Collectibles modal state
+  const [collectiblesModalOpen, setCollectiblesModalOpen] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -249,6 +254,11 @@ const UsersManagementModal = ({
     setHistoryModalOpen(true);
   };
 
+  const showUserCollectibles = (user: User) => {
+    setSelectedUser(user);
+    setCollectiblesModalOpen(true);
+  };
+
   const handleClose = () => {
     setUsers([]);
     setSearchTerm("");
@@ -400,7 +410,7 @@ const UsersManagementModal = ({
                             />
                           </div>
                         </div>
-                        <div className="flex gap-2">
+                        <div className="flex flex-wrap gap-2">
                           <button
                             onClick={() => saveUser(user._id)}
                             disabled={isSubmitting}
@@ -416,6 +426,23 @@ const UsersManagementModal = ({
                           >
                             <X className="w-3 h-3" />
                             Cancel
+                          </button>
+                          <div className="border-l border-gray-300 mx-1"></div>
+                          <button
+                            onClick={() => showUserHistory(user)}
+                            className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                            title="View Claimed Items & Attempts"
+                          >
+                            <History className="w-3 h-3" />
+                            Claimed Items
+                          </button>
+                          <button
+                            onClick={() => showUserCollectibles(user)}
+                            className="flex items-center gap-1 px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
+                            title="View & Manage Collectibles"
+                          >
+                            <Gem className="w-3 h-3" />
+                            Collectibles
                           </button>
                         </div>
                       </div>
@@ -457,14 +484,6 @@ const UsersManagementModal = ({
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => showUserHistory(user)}
-                            className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                            title="View Claimed Items"
-                          >
-                            <History className="w-3 h-3" />
-                            Claimed Items & Attempts
-                          </button>
                           <button
                             onClick={() => startEdit(user)}
                             disabled={editingUser === user._id || isSubmitting}
@@ -536,6 +555,15 @@ const UsersManagementModal = ({
       <UserHistoryDetailsModal
         isOpen={historyModalOpen}
         onClose={() => setHistoryModalOpen(false)}
+        userId={selectedUser?._id || null}
+        userName={selectedUser?.name || ""}
+        userEmail={selectedUser?.email || ""}
+      />
+
+      {/* User Collectibles Modal */}
+      <UserCollectiblesModal
+        isOpen={collectiblesModalOpen}
+        onClose={() => setCollectiblesModalOpen(false)}
         userId={selectedUser?._id || null}
         userName={selectedUser?.name || ""}
         userEmail={selectedUser?.email || ""}

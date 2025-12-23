@@ -282,23 +282,21 @@ export async function POST(
         _id: { $in: huntItem.collectibles },
       });
 
-      // Add collectibles to user's collection (avoid duplicates)
+      // Add collectibles to user's collection (duplicates are allowed)
       for (const collectible of collectibleDocs) {
         if (!user.collectibles) {
           user.collectibles = [];
         }
-        // Check if user already has this collectible
-        const alreadyHas = user.collectibles.some(
-          (c: { toString: () => string }) =>
-            c.toString() === collectible._id.toString()
-        );
-        if (!alreadyHas) {
-          user.collectibles.push(collectible._id);
-          awardedCollectibles.push({
-            _id: collectible._id.toString(),
-            name: collectible.name,
-          });
-        }
+        // Always add the collectible (duplicates allowed with new structure)
+        user.collectibles.push({
+          collectibleId: collectible._id,
+          used: false,
+          addedAt: new Date(),
+        });
+        awardedCollectibles.push({
+          _id: collectible._id.toString(),
+          name: collectible.name,
+        });
       }
     }
 

@@ -3,7 +3,22 @@
 import { useState, useEffect } from "react";
 import { Package, Gem, X } from "lucide-react";
 import Modal from "@/components/ui/modal";
-import { HuntItem, Collectible } from "@/lib/interface";
+import { HuntItem } from "@/lib/interface";
+
+// Extended collectible interface for inventory (includes instance-specific fields)
+interface InventoryCollectible {
+  _id: string;
+  collectibleId: string;
+  used: boolean;
+  addedAt: string;
+  name: string;
+  subtitle: string;
+  description: string;
+  slug: string;
+  points: number;
+  imageData: string;
+  imageContentType: string;
+}
 
 interface InventoryModalProps {
   userId: string;
@@ -15,35 +30,21 @@ interface InventoryResponse {
   success: boolean;
   inventory: {
     claimedItems: HuntItem[];
-    collectibles: Collectible[];
+    collectibles: InventoryCollectible[];
   };
 }
 
 // Helper function to get image source from collectible
-const getCollectibleImageSrc = (item: Collectible): string | null => {
+const getCollectibleImageSrc = (item: InventoryCollectible): string | null => {
   if (item.imageData && item.imageContentType) {
     return `data:${item.imageContentType};base64,${item.imageData}`;
   }
   return null;
 };
 
-interface InventoryModalProps {
-  userId: string;
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-interface InventoryResponse {
-  success: boolean;
-  inventory: {
-    claimedItems: HuntItem[];
-    collectibles: Collectible[];
-  };
-}
-
 const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
   const [claimedItems, setClaimedItems] = useState<HuntItem[]>([]);
-  const [collectibles, setCollectibles] = useState<Collectible[]>([]);
+  const [collectibles, setCollectibles] = useState<InventoryCollectible[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -199,9 +200,16 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate">
-                          {collectible.name}
-                        </p>
+                        <div className="flex items-center gap-2">
+                          <p className="font-semibold truncate">
+                            {collectible.name}
+                          </p>
+                          {collectible.used && (
+                            <span className="text-xs px-1.5 py-0.5 bg-light-mode/20 text-light-mode/70 rounded">
+                              Used
+                            </span>
+                          )}
+                        </div>
                         {collectible.subtitle && (
                           <p className="text-sm text-light-mode/60 truncate">
                             {collectible.subtitle}

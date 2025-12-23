@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { User } from "@/lib/models";
+import { User, Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 
 // GET - Fetch user's inventory (claimed hunt items and collectibles)
@@ -19,12 +19,10 @@ export async function GET(
 
     await connectMongoDB();
 
-    // Find the user and populate their claimed items and collectibles
+    // Find the user and populate their claimed items
     const user = await User.findOne({
       $and: [{ email: session.user.email }, { _id: userId }],
-    })
-      .populate("claimedItems")
-      .populate("collectibles");
+    }).populate("claimedItems");
 
     if (!user) {
       return NextResponse.json(
@@ -33,11 +31,54 @@ export async function GET(
       );
     }
 
+    // Get collectible IDs from the user's collectibles array
+    const collectibleIds = (user.collectibles || []).map(
+      (c: { collectibleId: string }) => c.collectibleId
+    );
+
+    // Fetch all collectibles that the user owns
+    const collectibleDocs = await Collectible.find({
+      _id: { $in: collectibleIds },
+    });
+
+    // Create a map for quick lookup
+    const collectibleMap = new Map(
+      collectibleDocs.map((doc) => [doc._id.toString(), doc])
+    );
+
+    // Build the collectibles array with full data including used status
+    const collectiblesWithDetails = (user.collectibles || []).map(
+      (userCollectible: {
+        collectibleId: { toString: () => string };
+        used: boolean;
+        addedAt: Date;
+        _id: string;
+      }) => {
+        const collectibleDoc = collectibleMap.get(
+          userCollectible.collectibleId.toString()
+        );
+        return {
+          _id: userCollectible._id, // The unique ID for this specific instance
+          collectibleId: userCollectible.collectibleId,
+          used: userCollectible.used,
+          addedAt: userCollectible.addedAt,
+          // Include collectible details
+          name: collectibleDoc?.name || "Unknown",
+          subtitle: collectibleDoc?.subtitle || "",
+          description: collectibleDoc?.description || "",
+          slug: collectibleDoc?.slug || "",
+          points: collectibleDoc?.points || 0,
+          imageData: collectibleDoc?.imageData || "",
+          imageContentType: collectibleDoc?.imageContentType || "",
+        };
+      }
+    );
+
     return NextResponse.json({
       success: true,
       inventory: {
         claimedItems: user.claimedItems || [],
-        collectibles: user.collectibles || [],
+        collectibles: collectiblesWithDetails,
       },
     });
   } catch (error) {

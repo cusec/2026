@@ -19,8 +19,18 @@ const userSchema = new Schema(
     collectibles: {
       type: [
         {
-          type: Schema.Types.ObjectId,
-          ref: "Collectible",
+          collectibleId: {
+            type: Schema.Types.ObjectId,
+            ref: "Collectible",
+          },
+          used: {
+            type: Boolean,
+            default: false,
+          },
+          addedAt: {
+            type: Date,
+            default: Date.now,
+          },
         },
       ],
       default: [],

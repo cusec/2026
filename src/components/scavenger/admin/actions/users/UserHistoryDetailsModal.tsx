@@ -11,6 +11,8 @@ import {
   CheckCircle,
   XCircle,
   Trash2,
+  Plus,
+  Info,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
@@ -21,6 +23,15 @@ interface HuntItem {
   identifier: string;
   points: number;
   createdAt: string;
+}
+
+interface AvailableHuntItem {
+  _id: string;
+  name: string;
+  description: string;
+  identifier: string;
+  points: number;
+  active: boolean;
 }
 
 interface ClaimAttempt {
@@ -47,10 +58,13 @@ const UserHistoryDetailsModal = ({
 }: UserHistoryDetailsModalProps) => {
   const [userHistory, setUserHistory] = useState<HuntItem[]>([]);
   const [claimAttempts, setClaimAttempts] = useState<ClaimAttempt[]>([]);
+  const [availableHuntItems, setAvailableHuntItems] = useState<AvailableHuntItem[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isClearing, setIsClearing] = useState(false);
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
+  const [showAddPanel, setShowAddPanel] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
 
   // Rate limit calculation
   const calculateRateLimit = () => {
@@ -126,8 +140,8 @@ const UserHistoryDetailsModal = ({
       }'s claimed items?\n\n` +
         `This will:\n` +
         `• Permanently remove this item from their claimed items\n` +
-        `• Their points will be recalculated automatically\n` +
         `• Decrease the claim count on this hunt item\n\n` +
+        `⚠️ Note: The user's points will NOT be changed. To adjust points, manually edit them in the user settings.\n\n` +
         `This action cannot be undone.`
     );
     if (!confirmed) return;
@@ -186,9 +200,53 @@ const UserHistoryDetailsModal = ({
     }
   };
 
+  const fetchAvailableHuntItems = async () => {
+    try {
+      const response = await fetch("/api/hunt-items");
+      const data = await response.json();
+
+      if (data.success) {
+        setAvailableHuntItems(data.huntItems || []);
+      }
+    } catch (err) {
+      console.error("Error fetching available hunt items:", err);
+    }
+  };
+
+  const addHuntItem = async (huntItemId: string) => {
+    if (!userId) return;
+
+    try {
+      setIsAdding(true);
+
+      const response = await fetch(`/api/admin/users/${userId}/hunt-items`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ huntItemId }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        // Refresh the data
+        await fetchUserHistory();
+      } else {
+        setError(data.error || "Failed to add hunt item");
+      }
+    } catch (err) {
+      setError("Failed to add hunt item");
+      console.error("Error adding hunt item:", err);
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
   useEffect(() => {
     if (isOpen && userId) {
       fetchUserHistory();
+      fetchAvailableHuntItems();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, userId]);
@@ -196,9 +254,15 @@ const UserHistoryDetailsModal = ({
   const handleClose = () => {
     setUserHistory([]);
     setClaimAttempts([]);
+    setShowAddPanel(false);
     setError(null);
     onClose();
   };
+
+  // Get hunt items the user doesn't have yet
+  const unclaimedhuntItems = availableHuntItems.filter(
+    (item) => !userHistory.some((claimed) => claimed._id === item._id)
+  );
 
   return (
     <Modal
@@ -208,6 +272,25 @@ const UserHistoryDetailsModal = ({
       className="max-w-2xl text-dark-mode"
     >
       <div className="space-y-6">
+        {/* Warning about points */}
+        <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+          <div className="flex items-start gap-2">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="text-sm text-amber-800">
+              <p>
+                <strong>Important:</strong> Adding or removing hunt items will{" "}
+                <strong>NOT</strong> change the user&apos;s points. To manually
+                adjust points, edit them in the user settings.
+              </p>
+              <p className="mt-1">
+                Adding a hunt item will also <strong>NOT</strong> add any linked
+                collectibles. This must be done manually via the Collectibles
+                panel.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
             <p className="text-red-800 text-sm">{error}</p>
@@ -222,10 +305,69 @@ const UserHistoryDetailsModal = ({
           <>
             {/* Claimed Items Section */}
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <Trophy className="w-5 h-5 text-yellow-600" />
-                Claimed Items ({userHistory.length})
-              </h3>
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-yellow-600" />
+                  Claimed Items ({userHistory.length})
+                </h3>
+                <button
+                  onClick={() => setShowAddPanel(!showAddPanel)}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Hunt Item
+                </button>
+              </div>
+
+              {/* Add Hunt Item Panel */}
+              {showAddPanel && (
+                <div className="p-4 mb-4 bg-gray-50 border border-gray-200 rounded-lg">
+                  <div className="flex items-start gap-2 mb-3">
+                    <Info className="w-4 h-4 text-blue-500 mt-0.5" />
+                    <p className="text-sm text-gray-600">
+                      Click on a hunt item to add it. Each hunt item can only be claimed once per user.
+                    </p>
+                  </div>
+
+                  {unclaimedhuntItems.length === 0 ? (
+                    <p className="text-gray-500 text-sm text-center py-4">
+                      No more hunt items available to add (user has claimed all items or no items exist).
+                    </p>
+                  ) : (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
+                      {unclaimedhuntItems.map((item) => (
+                        <button
+                          key={item._id}
+                          onClick={() => addHuntItem(item._id)}
+                          disabled={isAdding}
+                          className="flex items-center gap-2 p-2 bg-white border border-gray-200 rounded-lg hover:bg-green-50 hover:border-green-300 transition disabled:opacity-50 disabled:cursor-wait text-left"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-gray-900 truncate">
+                              {item.name}
+                            </p>
+                            <p className="text-xs text-gray-500 truncate">
+                              {item.identifier} • {item.points} pts
+                            </p>
+                          </div>
+                          {!item.active && (
+                            <span className="text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded shrink-0">
+                              Inactive
+                            </span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+
+                  {isAdding && (
+                    <div className="flex items-center justify-center gap-2 mt-3 text-sm text-green-600">
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      Adding hunt item...
+                    </div>
+                  )}
+                </div>
+              )}
 
               {userHistory.length === 0 ? (
                 <div className="text-center py-6 bg-gray-50 rounded-lg">

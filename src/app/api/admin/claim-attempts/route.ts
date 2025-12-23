@@ -300,8 +300,8 @@ export async function DELETE(request: Request) {
     // Remove the item from user's claimedItems
     user.claimedItems.splice(itemIndex, 1);
 
-    // Subtract the hunt item's points from the user's total
-    user.points = Math.max(0, (user.points || 0) - (huntItem.points || 0));
+    // NOTE: Points are NOT updated when removing hunt items manually
+    // Admin must manually adjust points if needed
 
     // Note: We intentionally keep the claim attempt record for audit/history purposes
 
@@ -330,7 +330,8 @@ export async function DELETE(request: Request) {
         details: {
           huntItemName: huntItem.name,
           huntItemIdentifier: huntItem.identifier,
-          pointsRemoved: huntItem.points,
+          huntItemPoints: huntItem.points,
+          note: "Points were NOT updated",
         },
         previousData,
         newData,
@@ -340,8 +341,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: `Removed "${huntItem.name}" from ${userEmail}'s claimed items`,
-      newPoints: user.points,
+      message: `Removed "${huntItem.name}" from ${userEmail}'s claimed items. Note: Points were not updated.`,
     });
   } catch (error) {
     console.error("Error removing claimed item:", error);
