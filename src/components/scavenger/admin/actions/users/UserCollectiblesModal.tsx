@@ -149,11 +149,16 @@ const UserCollectiblesModal = ({
     }
   };
 
-  const removeCollectible = async (instanceId: string, collectibleName: string) => {
+  const removeCollectible = async (
+    instanceId: string,
+    collectibleName: string
+  ) => {
     if (!userId) return;
 
     const confirmed = window.confirm(
-      `Remove "${collectibleName}" from ${userName || userEmail}'s collectibles?\n\n` +
+      `Remove "${collectibleName}" from ${
+        userName || userEmail
+      }'s collectibles?\n\n` +
         `⚠️ Note: This will NOT change the user's points. To adjust points, manually edit them in the user settings.`
     );
     if (!confirmed) return;
@@ -412,7 +417,9 @@ const UserCollectiblesModal = ({
                           ? "bg-gray-200 text-gray-700 hover:bg-gray-300"
                           : "bg-green-100 text-green-700 hover:bg-green-200"
                       }`}
-                      title={collectible.used ? "Mark as unused" : "Mark as used"}
+                      title={
+                        collectible.used ? "Mark as unused" : "Mark as used"
+                      }
                     >
                       {togglingUsedId === collectible._id ? (
                         <RefreshCw className="w-3 h-3 animate-spin inline" />

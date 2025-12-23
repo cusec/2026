@@ -58,7 +58,9 @@ const UserHistoryDetailsModal = ({
 }: UserHistoryDetailsModalProps) => {
   const [userHistory, setUserHistory] = useState<HuntItem[]>([]);
   const [claimAttempts, setClaimAttempts] = useState<ClaimAttempt[]>([]);
-  const [availableHuntItems, setAvailableHuntItems] = useState<AvailableHuntItem[]>([]);
+  const [availableHuntItems, setAvailableHuntItems] = useState<
+    AvailableHuntItem[]
+  >([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isClearing, setIsClearing] = useState(false);
@@ -325,13 +327,15 @@ const UserHistoryDetailsModal = ({
                   <div className="flex items-start gap-2 mb-3">
                     <Info className="w-4 h-4 text-blue-500 mt-0.5" />
                     <p className="text-sm text-gray-600">
-                      Click on a hunt item to add it. Each hunt item can only be claimed once per user.
+                      Click on a hunt item to add it. Each hunt item can only be
+                      claimed once per user.
                     </p>
                   </div>
 
                   {unclaimedhuntItems.length === 0 ? (
                     <p className="text-gray-500 text-sm text-center py-4">
-                      No more hunt items available to add (user has claimed all items or no items exist).
+                      No more hunt items available to add (user has claimed all
+                      items or no items exist).
                     </p>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-48 overflow-y-auto">
