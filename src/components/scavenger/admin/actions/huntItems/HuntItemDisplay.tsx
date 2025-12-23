@@ -126,9 +126,14 @@ const HuntItemDisplay = ({
           <Edit2 size={16} />
         </button>
         <button
-          onClick={onDelete}
-          className="p-2 text-red-600 hover:bg-red-50 rounded transition-colors"
-          title="Delete Item"
+          onClick={item.claimCount > 0 ? undefined : onDelete}
+          disabled={item.claimCount > 0}
+          className={`p-2 rounded transition-colors ${
+            item.claimCount > 0
+              ? "text-gray-400 cursor-not-allowed"
+              : "text-red-600 hover:bg-red-50"
+          }`}
+          title={item.claimCount > 0 ? "Claimed by users" : "Delete Item"}
         >
           <Trash2 size={16} />
         </button>
