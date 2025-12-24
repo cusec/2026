@@ -12,8 +12,6 @@ import {
 import { auth0 } from "@/lib/auth0";
 import { getUserByEmail } from "@/lib/userService";
 import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
-import ServiceWorkerRegistration from "@/components/scavenger/ServiceWorkerRegistration";
-import InstallLink from "@/components/scavenger/InstallLink";
 
 export default async function ScavengerPage() {
   const session = await auth0.getSession();
@@ -39,7 +37,6 @@ export default async function ScavengerPage() {
 
   return (
     <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
-      <ServiceWorkerRegistration />
       <Navbar />
       <main className="relative w-full overflow-y-hidden overflow-x-hidden flex justify-center items-center pt-[15vh]">
         <Particles />
@@ -133,11 +130,6 @@ export default async function ScavengerPage() {
                 >
                   Get Early Access (2026)
                 </a>
-                {scavengerEnabled && (
-                  <p className="mx-auto max-w-2xl text-lg mb-4">
-                    <InstallLink />
-                  </p>
-                )}
               </div>
               <div className="grid md:grid-cols-3 gap-8 mb-16">
                 <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
