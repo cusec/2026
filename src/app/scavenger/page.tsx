@@ -38,7 +38,7 @@ export default async function ScavengerPage() {
   return (
     <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen">
       <Navbar />
-      <main className="relative min-h-screen h-full w-full overflow-x-hidden flex justify-center items-center pt-[15vh]">
+      <main className="relative w-full overflow-y-hidden overflow-x-hidden flex justify-center items-center pt-[15vh]">
         <Particles />
         <SmoothFollower />
         {user ? (
