@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { User, Collectible, ShopItem } from "@/lib/models";
+import { User, Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 
 // GET - Fetch user's inventory (claimed hunt items, shop prizes, and collectibles)
