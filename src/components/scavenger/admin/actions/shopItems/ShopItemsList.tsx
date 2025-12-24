@@ -28,7 +28,7 @@ const ShopItemsList = ({
   if (loading) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600">Loading shop items...</p>
+        <p className="text-gray-600">Loading shop prizes...</p>
       </div>
     );
   }
@@ -36,7 +36,7 @@ const ShopItemsList = ({
   if (items.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600">No shop items found.</p>
+        <p className="text-gray-600">No shop prizes found.</p>
       </div>
     );
   }

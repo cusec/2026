@@ -13,10 +13,9 @@ interface InventoryCollectible {
   addedAt: string;
   name: string;
   description: string;
-  slug: string;
   cost: number;
-  imageData: string;
-  imageContentType: string;
+  imageData?: string;
+  imageContentType?: string;
 }
 
 interface InventoryModalProps {
@@ -34,20 +33,51 @@ interface InventoryResponse {
   };
 }
 
-// Helper function to get image source from collectible
-const getCollectibleImageSrc = (item: InventoryCollectible): string | null => {
-  if (item.imageData && item.imageContentType) {
-    return `data:${item.imageContentType};base64,${item.imageData}`;
-  }
-  return null;
-};
-
 // Helper function to get image source from shop item
 const getShopItemImageSrc = (item: ShopItem): string | null => {
   if (item.imageData && item.imageContentType) {
     return `data:${item.imageContentType};base64,${item.imageData}`;
   }
   return null;
+};
+
+// Interface for grouped collectibles
+interface GroupedCollectible {
+  name: string;
+  description: string;
+  imageData?: string;
+  imageContentType?: string;
+  available: number;
+  used: number;
+}
+
+// Helper function to group collectibles by name
+const groupCollectiblesByName = (
+  collectibles: InventoryCollectible[]
+): GroupedCollectible[] => {
+  const grouped = new Map<string, GroupedCollectible>();
+
+  for (const collectible of collectibles) {
+    const existing = grouped.get(collectible.name);
+    if (existing) {
+      if (collectible.used) {
+        existing.used++;
+      } else {
+        existing.available++;
+      }
+    } else {
+      grouped.set(collectible.name, {
+        name: collectible.name,
+        description: collectible.description,
+        imageData: collectible.imageData,
+        imageContentType: collectible.imageContentType,
+        available: collectible.used ? 0 : 1,
+        used: collectible.used ? 1 : 0,
+      });
+    }
+  }
+
+  return Array.from(grouped.values());
 };
 
 const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
@@ -148,7 +178,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                   {claimedItems.map((item) => (
                     <div
                       key={item._id}
-                      className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
+                      className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
                       <div className="w-10 h-10 rounded-full bg-light-mode/10 flex items-center justify-center shrink-0">
                         <Package className="w-5 h-5 text-light-mode" />
@@ -203,22 +233,18 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                   {shopPrizes.map((prize) => (
                     <div
                       key={prize._id}
-                      className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
+                      className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
-                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
-                        {getShopItemImageSrc(prize) ? (
-                          // eslint-disable-next-line @next/next/no-img-element
+                      {getShopItemImageSrc(prize) && (
+                        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={getShopItemImageSrc(prize)!}
                             alt={prize.name}
                             className="w-full h-full object-cover"
                           />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center">
-                            <Gift className="w-5 h-5 text-light-mode" />
-                          </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold truncate text-light-mode">
                           {prize.name}
@@ -264,35 +290,47 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                 </div>
               ) : (
                 <div className="grid gap-3">
-                  {collectibles.map((collectible) => (
+                  {groupCollectiblesByName(collectibles).map((collectible) => (
                     <div
-                      key={collectible._id}
-                      className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
+                      key={collectible.name}
+                      className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
-                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={getCollectibleImageSrc(collectible) || ""}
-                          alt={collectible.name}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      {collectible.imageData &&
+                        collectible.imageContentType && (
+                          <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={`data:${collectible.imageContentType};base64,${collectible.imageData}`}
+                              alt={collectible.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <p className="font-semibold truncate text-light-mode">
-                            {collectible.name}
-                          </p>
-                          {collectible.used && (
-                            <span className="text-xs px-1.5 py-0.5 bg-light-mode/20 text-light-mode/70 rounded">
-                              Used
-                            </span>
-                          )}
-                        </div>
+                        <p className="font-semibold truncate text-light-mode">
+                          {collectible.name}
+                        </p>
                         {collectible.description && (
                           <p className="text-xs text-light-mode/60 mt-1 line-clamp-2">
                             {collectible.description}
                           </p>
                         )}
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <div className="text-light-mode">
+                          <span className="text-light-mode/60 text-sm">
+                            Available:{" "}
+                          </span>
+                          <span className="font-bold">
+                            {collectible.available}
+                          </span>
+                        </div>
+                        <div className="text-light-mode">
+                          <span className="text-light-mode/60 text-sm">
+                            Used:{" "}
+                          </span>
+                          <span className="font-bold">{collectible.used}</span>
+                        </div>
                       </div>
                     </div>
                   ))}

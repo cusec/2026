@@ -195,8 +195,8 @@ const shopItemSchema = new Schema(
     active: { type: Boolean, default: true },
     activationStart: { type: Date, default: null },
     activationEnd: { type: Date, default: null },
-    imageData: { type: String, required: true }, // Base64 encoded image data
-    imageContentType: { type: String, required: true }, // MIME type (e.g., image/png, image/jpeg)
+    imageData: { type: String, default: null }, // Base64 encoded image data (optional)
+    imageContentType: { type: String, default: null }, // MIME type (optional)
   },
   {
     timestamps: true,
@@ -224,8 +224,8 @@ const collectibleSchema = new Schema(
     active: { type: Boolean, default: true },
     activationStart: { type: Date, default: null },
     activationEnd: { type: Date, default: null },
-    imageData: { type: String, required: true },
-    imageContentType: { type: String, required: true },
+    imageData: { type: String, default: null }, // Base64 encoded image data (optional)
+    imageContentType: { type: String, default: null }, // MIME type (optional)
   },
   {
     timestamps: true,

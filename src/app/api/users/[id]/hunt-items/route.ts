@@ -276,8 +276,9 @@ export async function POST(
 
     // Award collectibles linked to this hunt item
     const awardedCollectibles: { _id: string; name: string }[] = [];
-    const skippedCollectibles: { _id: string; name: string; reason: string }[] = [];
-    
+    const skippedCollectibles: { _id: string; name: string; reason: string }[] =
+      [];
+
     if (huntItem.collectibles && huntItem.collectibles.length > 0) {
       // Fetch the collectible details
       const collectibleDocs = await Collectible.find({
@@ -358,7 +359,8 @@ export async function POST(
         points: huntItem.points,
       },
       collectibles: awardedCollectibles,
-      skippedCollectibles: skippedCollectibles.length > 0 ? skippedCollectibles : undefined,
+      skippedCollectibles:
+        skippedCollectibles.length > 0 ? skippedCollectibles : undefined,
       newPoints: user.points,
       totalItemsClaimed: user.claimedItems.length,
     });

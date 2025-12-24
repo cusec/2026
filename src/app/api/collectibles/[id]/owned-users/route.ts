@@ -39,8 +39,11 @@ export async function GET(
     const ownedUsers = users.map((user) => {
       // Find the specific collectible entry for this user
       const collectibleEntry = user.collectibles?.find(
-        (c: { collectibleId: { toString: () => string }; used: boolean; addedAt: Date }) => 
-          c.collectibleId?.toString() === collectibleId
+        (c: {
+          collectibleId: { toString: () => string };
+          used: boolean;
+          addedAt: Date;
+        }) => c.collectibleId?.toString() === collectibleId
       );
 
       return {

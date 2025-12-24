@@ -72,7 +72,7 @@ const CollectibleAddForm = ({
     }
   };
 
-  const isFormValid = formData.name && formData.imageData;
+  const isFormValid = formData.name;
 
   return (
     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -264,10 +264,7 @@ const CollectibleAddForm = ({
             className="w-4 h-4 text-blue-600 rounded"
             disabled={isSubmitting}
           />
-          <label
-            htmlFor="active"
-            className="text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="active" className="text-sm font-medium text-gray-700">
             Active
           </label>
         </div>
@@ -310,7 +307,8 @@ const CollectibleAddForm = ({
           </div>
         </div>
         <p className="text-xs text-gray-500">
-          If both dates are set, the collectible will only be available during this period.
+          If both dates are set, the collectible will only be available during
+          this period.
         </p>
 
         <div className="flex gap-2">

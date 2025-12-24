@@ -104,7 +104,8 @@ const HuntItemEditForm = ({
           </code>
         </div>
         <p className="text-xs text-blue-600 mt-1">
-          This is the code users enter to claim this item. It cannot be changed after creation.
+          This is the code users enter to claim this item. It cannot be changed
+          after creation.
         </p>
       </div>
 

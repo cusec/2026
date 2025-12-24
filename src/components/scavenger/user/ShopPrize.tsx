@@ -161,20 +161,16 @@ const ShopPrize = ({
     <>
       <div className="flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode">
         <div className="flex items-center space-x-4">
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
-            {getImageSrc(item) ? (
-              // eslint-disable-next-line @next/next/no-img-element
+          {getImageSrc(item) && (
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={getImageSrc(item)!}
                 alt={item.name}
                 className="w-full h-full object-cover"
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
-                ?
-              </div>
-            )}
-          </div>
+            </div>
+          )}
           <div>
             <p className="font-semibold">{item.name}</p>
             <p className="text-sm">
@@ -209,20 +205,16 @@ const ShopPrize = ({
       >
         <div className="space-y-4">
           {/* Large Image */}
-          <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-200">
-            {getImageSrc(item) ? (
-              // eslint-disable-next-line @next/next/no-img-element
+          {getImageSrc(item) && (
+            <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-200">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={getImageSrc(item)!}
                 alt={item.name}
                 className="w-full h-full object-cover"
               />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                No image available
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Description */}
           <p className="text-gray-700">{item.description}</p>
@@ -283,20 +275,16 @@ const ShopPrize = ({
             <>
               {/* Item Info */}
               <div className="flex items-center space-x-4 p-3 bg-gray-100 rounded-lg">
-                <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0">
-                  {getImageSrc(item) ? (
-                    // eslint-disable-next-line @next/next/no-img-element
+                {getImageSrc(item) && (
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={getImageSrc(item)!}
                       alt={item.name}
                       className="w-full h-full object-cover"
                     />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
-                      ?
-                    </div>
-                  )}
-                </div>
+                  </div>
+                )}
                 <div>
                   <p className="font-semibold">{item.name}</p>
                   <p className="text-sm text-primary font-bold">

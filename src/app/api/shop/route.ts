@@ -8,13 +8,13 @@ function isWithinActivationPeriod(item: {
   activationEnd?: Date | null;
 }): boolean {
   const now = new Date();
-  
+
   if (item.activationStart && item.activationEnd) {
     const startDate = new Date(item.activationStart);
     const endDate = new Date(item.activationEnd);
     return now >= startDate && now <= endDate;
   }
-  
+
   // If no activation period set, item is always available
   return true;
 }

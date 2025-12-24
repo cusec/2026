@@ -153,9 +153,7 @@ const CollectibleUsersModal = ({
           ) : ownedUsers.length === 0 ? (
             <div className="text-center py-8 bg-gray-50 rounded-lg">
               <Users className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <p className="text-gray-600">
-                No users own this collectible yet
-              </p>
+              <p className="text-gray-600">No users own this collectible yet</p>
             </div>
           ) : (
             <div className="space-y-2 max-h-64 overflow-y-auto">

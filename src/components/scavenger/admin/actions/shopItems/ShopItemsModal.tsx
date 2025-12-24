@@ -55,7 +55,7 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Manage Shop Items"
+      title="Manage Shop Prizes"
       className="max-w-4xl max-h-[70vh] text-dark-mode"
     >
       <div className="space-y-6">
@@ -74,7 +74,7 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
         {/* Add New Item Button */}
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-medium text-gray-900">
-            Shop Items ({shopItems.length})
+            Shop Prizes ({shopItems.length})
           </h3>
           <button
             onClick={() => setShowAddForm(!showAddForm)}

@@ -74,7 +74,7 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
               >
                 <ShoppingBag className="mr-3 h-6 w-6" />
-                Manage Shop Items
+                Manage Shop Prizes
               </button>
 
               <button

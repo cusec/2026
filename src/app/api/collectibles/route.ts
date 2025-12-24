@@ -90,11 +90,8 @@ export async function POST(request: Request) {
       imageContentType,
     } = await request.json();
 
-    if (!name || !imageData || !imageContentType) {
-      return NextResponse.json(
-        { error: "Name, image data and image content type are required" },
-        { status: 400 }
-      );
+    if (!name) {
+      return NextResponse.json({ error: "Name is required" }, { status: 400 });
     }
 
     await connectMongoDB();
@@ -118,8 +115,8 @@ export async function POST(request: Request) {
       active: active !== undefined ? active : true,
       activationStart: activationStart || null,
       activationEnd: activationEnd || null,
-      imageData,
-      imageContentType,
+      imageData: imageData || null,
+      imageContentType: imageContentType || null,
     });
 
     await collectible.save();

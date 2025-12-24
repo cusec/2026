@@ -86,14 +86,16 @@ const ShopCollectible = ({
     <>
       <div className="flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode">
         <div className="flex items-center space-x-4">
-          <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={getCollectibleImageSrc(collectible) || ""}
-              alt={collectible.name}
-              className="w-full h-full object-cover"
-            />
-          </div>
+          {getCollectibleImageSrc(collectible) && (
+            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={getCollectibleImageSrc(collectible)!}
+                alt={collectible.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          )}
           <div>
             <p className="font-semibold">{collectible.name}</p>
             <p className="text-sm">{collectible.cost} points</p>
@@ -131,14 +133,16 @@ const ShopCollectible = ({
         ) : (
           <div className="space-y-4">
             {/* Collectible Image */}
-            <div className="w-full h-32 rounded-lg overflow-hidden">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getCollectibleImageSrc(collectible) || ""}
-                alt={collectible.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            {getCollectibleImageSrc(collectible) && (
+              <div className="w-full h-32 rounded-lg overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getCollectibleImageSrc(collectible)!}
+                  alt={collectible.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
             {/* Description */}
             {collectible.description && (
@@ -162,8 +166,16 @@ const ShopCollectible = ({
               {collectible.limited && (
                 <div className="flex justify-between">
                   <span className="font-medium">Availability:</span>
-                  <span className={collectible.remaining > 0 ? "text-orange-600" : "text-red-600"}>
-                    {collectible.remaining > 0 ? `${collectible.remaining} remaining` : "Sold out"}
+                  <span
+                    className={
+                      collectible.remaining > 0
+                        ? "text-orange-600"
+                        : "text-red-600"
+                    }
+                  >
+                    {collectible.remaining > 0
+                      ? `${collectible.remaining} remaining`
+                      : "Sold out"}
                   </span>
                 </div>
               )}
@@ -179,8 +191,8 @@ const ShopCollectible = ({
             {/* Points Warning */}
             {!canAfford && !isSoldOut && (
               <div className="p-3 bg-yellow-50 text-yellow-700 rounded-lg text-sm">
-                You need {collectible.cost - userPoints} more points to
-                purchase this collectible.
+                You need {collectible.cost - userPoints} more points to purchase
+                this collectible.
               </div>
             )}
 

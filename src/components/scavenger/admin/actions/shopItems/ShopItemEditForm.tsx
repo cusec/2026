@@ -228,11 +228,17 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="datetime-local"
-                value={item.activationStart ? new Date(item.activationStart).toISOString().slice(0, 16) : ""}
+                value={
+                  item.activationStart
+                    ? new Date(item.activationStart).toISOString().slice(0, 16)
+                    : ""
+                }
                 onChange={(e) =>
                   onChange({
                     ...item,
-                    activationStart: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+                    activationStart: e.target.value
+                      ? new Date(e.target.value).toISOString()
+                      : undefined,
                   })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
@@ -244,11 +250,17 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="datetime-local"
-                value={item.activationEnd ? new Date(item.activationEnd).toISOString().slice(0, 16) : ""}
+                value={
+                  item.activationEnd
+                    ? new Date(item.activationEnd).toISOString().slice(0, 16)
+                    : ""
+                }
                 onChange={(e) =>
                   onChange({
                     ...item,
-                    activationEnd: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+                    activationEnd: e.target.value
+                      ? new Date(e.target.value).toISOString()
+                      : undefined,
                   })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
@@ -256,7 +268,8 @@ const ShopItemEditForm = ({
             </div>
           </div>
           <p className="text-xs text-gray-500">
-            If both dates are set, the item will only be available during this period.
+            If both dates are set, the item will only be available during this
+            period.
           </p>
         </div>
       </div>

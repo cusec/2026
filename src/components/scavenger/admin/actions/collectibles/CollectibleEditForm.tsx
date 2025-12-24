@@ -79,7 +79,7 @@ const CollectibleEditForm = ({
   };
 
   const imageSrc = getImageSrc();
-  const isFormValid = item.name && item.imageData;
+  const isFormValid = item.name;
 
   return (
     <div className="space-y-3">
@@ -198,9 +198,7 @@ const CollectibleEditForm = ({
             type="checkbox"
             id={`limited-${item._id}`}
             checked={item.limited}
-            onChange={(e) =>
-              onChange({ ...item, limited: e.target.checked })
-            }
+            onChange={(e) => onChange({ ...item, limited: e.target.checked })}
             className="w-4 h-4 text-blue-600 rounded"
           />
           <label
@@ -238,9 +236,7 @@ const CollectibleEditForm = ({
           type="checkbox"
           id={`active-${item._id}`}
           checked={item.active}
-          onChange={(e) =>
-            onChange({ ...item, active: e.target.checked })
-          }
+          onChange={(e) => onChange({ ...item, active: e.target.checked })}
           className="w-4 h-4 text-blue-600 rounded"
         />
         <label
@@ -259,11 +255,17 @@ const CollectibleEditForm = ({
           </label>
           <input
             type="datetime-local"
-            value={item.activationStart ? new Date(item.activationStart).toISOString().slice(0, 16) : ""}
+            value={
+              item.activationStart
+                ? new Date(item.activationStart).toISOString().slice(0, 16)
+                : ""
+            }
             onChange={(e) =>
               onChange({
                 ...item,
-                activationStart: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+                activationStart: e.target.value
+                  ? new Date(e.target.value).toISOString()
+                  : undefined,
               })
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
@@ -275,11 +277,17 @@ const CollectibleEditForm = ({
           </label>
           <input
             type="datetime-local"
-            value={item.activationEnd ? new Date(item.activationEnd).toISOString().slice(0, 16) : ""}
+            value={
+              item.activationEnd
+                ? new Date(item.activationEnd).toISOString().slice(0, 16)
+                : ""
+            }
             onChange={(e) =>
               onChange({
                 ...item,
-                activationEnd: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+                activationEnd: e.target.value
+                  ? new Date(e.target.value).toISOString()
+                  : undefined,
               })
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
@@ -287,7 +295,8 @@ const CollectibleEditForm = ({
         </div>
       </div>
       <p className="text-xs text-gray-500">
-        If both dates are set, the collectible will only be available during this period.
+        If both dates are set, the collectible will only be available during
+        this period.
       </p>
 
       <div className="flex gap-2">

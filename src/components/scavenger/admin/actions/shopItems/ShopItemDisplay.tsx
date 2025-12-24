@@ -19,20 +19,16 @@ const ShopItemDisplay = ({ item, onEdit, onDelete }: ShopItemDisplayProps) => {
     <div className="flex items-start justify-between">
       <div className="flex items-start space-x-4 flex-1">
         {/* Image */}
-        <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 shrink-0">
-          {imageSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
+        {imageSrc && (
+          <div className="w-16 h-16 rounded-lg overflow-hidden bg-gray-200 shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imageSrc}
               alt={item.name}
               className="w-full h-full object-cover"
             />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs">
-              No image
-            </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Details */}
         <div className="flex-1 min-w-0">

@@ -1,13 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  Users,
-  RefreshCw,
-  Clock,
-  Mail,
-  Gift,
-} from "lucide-react";
+import { Users, RefreshCw, Clock, Mail, Gift } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
 interface RedeemedUser {
@@ -44,9 +38,7 @@ const ShopItemUsersModal = ({
       setLoading(true);
       setError(null);
 
-      const response = await fetch(
-        `/api/shop/${shopItemId}/redeemed-users`
-      );
+      const response = await fetch(`/api/shop/${shopItemId}/redeemed-users`);
       const data = await response.json();
 
       if (data.success) {
@@ -92,7 +84,7 @@ const ShopItemUsersModal = ({
           <div className="flex items-center gap-2">
             <Gift className="w-5 h-5 text-purple-600" />
             <p className="text-sm text-purple-800">
-              <strong>Shop Item:</strong> {shopItemName} |{" "}
+              <strong>Shop Prize:</strong> {shopItemName} |{" "}
               <strong>Cost:</strong> {shopItemCost} points |{" "}
               <strong>Total Redeemed:</strong> {redeemedUsers.length}
             </p>

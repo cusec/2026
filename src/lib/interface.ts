@@ -93,8 +93,8 @@ export interface ShopItem {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData: string; // Base64 encoded image data
-  imageContentType: string; // MIME type
+  imageData?: string; // Base64 encoded image data (optional)
+  imageContentType?: string; // MIME type (optional)
   createdAt?: string;
   updatedAt?: string;
 }
@@ -108,8 +108,8 @@ export interface ShopItemFormData {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData: string; // Base64 encoded image data
-  imageContentType: string; // MIME type
+  imageData?: string; // Base64 encoded image data (optional)
+  imageContentType?: string; // MIME type (optional)
 }
 
 export interface Notice {
@@ -136,8 +136,8 @@ export interface Collectible {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData: string;
-  imageContentType: string;
+  imageData?: string; // Base64 encoded image data (optional)
+  imageContentType?: string; // MIME type (optional)
   createdAt?: string;
   updatedAt?: string;
 }
@@ -152,8 +152,8 @@ export interface CollectibleFormData {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData: string;
-  imageContentType: string;
+  imageData?: string; // Base64 encoded image data (optional)
+  imageContentType?: string; // MIME type (optional)
 }
 
 export interface Day {

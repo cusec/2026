@@ -142,8 +142,9 @@ const HuntItemAddForm = ({
             disabled={isSubmitting}
           />
           <p className="text-xs text-blue-700 mt-2">
-            <strong>Important:</strong> This is the code that users will type into their text box to claim this hunt item. 
-            It must be unique across all hunt items and cannot be changed after creation.
+            <strong>Important:</strong> This is the code that users will type
+            into their text box to claim this hunt item. It must be unique
+            across all hunt items and cannot be changed after creation.
           </p>
         </div>
         <div>

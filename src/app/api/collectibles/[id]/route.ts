@@ -109,7 +109,8 @@ export async function PUT(
     if (limited !== undefined) collectible.limited = limited;
     if (remaining !== undefined) collectible.remaining = remaining;
     if (active !== undefined) collectible.active = active;
-    if (activationStart !== undefined) collectible.activationStart = activationStart;
+    if (activationStart !== undefined)
+      collectible.activationStart = activationStart;
     if (activationEnd !== undefined) collectible.activationEnd = activationEnd;
     if (imageData !== undefined) collectible.imageData = imageData;
     if (imageContentType !== undefined)

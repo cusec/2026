@@ -35,35 +35,30 @@ export async function POST(request: Request) {
       imageContentType,
     } = body;
 
-    if (
-      !name ||
-      !description ||
-      cost === undefined ||
-      !imageData ||
-      !imageContentType
-    ) {
+    if (!name || !description || cost === undefined) {
       return NextResponse.json(
         {
-          error:
-            "Missing required fields: name, description, cost, imageData, imageContentType",
+          error: "Missing required fields: name, description, cost",
         },
         { status: 400 }
       );
     }
 
-    // Validate image content type
-    const allowedTypes = [
-      "image/png",
-      "image/jpeg",
-      "image/jpg",
-      "image/gif",
-      "image/webp",
-    ];
-    if (!allowedTypes.includes(imageContentType)) {
-      return NextResponse.json(
-        { error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP" },
-        { status: 400 }
-      );
+    // Validate image content type if image is provided
+    if (imageData && imageContentType) {
+      const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/jpg",
+        "image/gif",
+        "image/webp",
+      ];
+      if (!allowedTypes.includes(imageContentType)) {
+        return NextResponse.json(
+          { error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP" },
+          { status: 400 }
+        );
+      }
     }
 
     const shopItem = new ShopItem({
@@ -75,8 +70,8 @@ export async function POST(request: Request) {
       active: active !== undefined ? active : true,
       activationStart: activationStart || null,
       activationEnd: activationEnd || null,
-      imageData,
-      imageContentType,
+      imageData: imageData || null,
+      imageContentType: imageContentType || null,
     });
 
     await shopItem.save();
@@ -105,7 +100,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Shop item created successfully",
+      message: "Shop prize created successfully",
       shopItem: {
         _id: shopItem._id,
         name: shopItem.name,
@@ -158,7 +153,7 @@ export async function PUT(request: Request) {
     const shopItem = await ShopItem.findById(itemId);
     if (!shopItem) {
       return NextResponse.json(
-        { error: "Shop item not found" },
+        { error: "Shop prize not found" },
         { status: 404 }
       );
     }
@@ -184,8 +179,10 @@ export async function PUT(request: Request) {
     if (updates.limited !== undefined) shopItem.limited = updates.limited;
     if (updates.remaining !== undefined) shopItem.remaining = updates.remaining;
     if (updates.active !== undefined) shopItem.active = updates.active;
-    if (updates.activationStart !== undefined) shopItem.activationStart = updates.activationStart;
-    if (updates.activationEnd !== undefined) shopItem.activationEnd = updates.activationEnd;
+    if (updates.activationStart !== undefined)
+      shopItem.activationStart = updates.activationStart;
+    if (updates.activationEnd !== undefined)
+      shopItem.activationEnd = updates.activationEnd;
     if (
       updates.imageData !== undefined &&
       updates.imageContentType !== undefined
@@ -236,7 +233,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Shop item updated successfully",
+      message: "Shop prize updated successfully",
       shopItem: {
         _id: shopItem._id,
         name: shopItem.name,
@@ -289,7 +286,7 @@ export async function DELETE(request: Request) {
     const shopItem = await ShopItem.findById(itemId);
     if (!shopItem) {
       return NextResponse.json(
-        { error: "Shop item not found" },
+        { error: "Shop prize not found" },
         { status: 404 }
       );
     }
@@ -321,7 +318,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Shop item deleted successfully",
+      message: "Shop prize deleted successfully",
     });
   } catch (error) {
     console.error("Error deleting shop item:", error);

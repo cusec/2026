@@ -131,7 +131,7 @@ export const useShopItems = (isOpen: boolean) => {
 
   // Delete shop item
   const deleteShopItem = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this shop item?")) {
+    if (!confirm("Are you sure you want to delete this shop prize?")) {
       return;
     }
 

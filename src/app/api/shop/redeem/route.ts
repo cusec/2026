@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     if (!shopItemId || !userId) {
       return NextResponse.json(
-        { error: "Shop item ID and user ID are required" },
+        { error: "Shop prize ID and user ID are required" },
         { status: 400 }
       );
     }
@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const shopItem = await ShopItem.findById(shopItemId);
     if (!shopItem) {
       return NextResponse.json(
-        { error: "Shop item not found" },
+        { error: "Shop prize not found" },
         { status: 404 }
       );
     }

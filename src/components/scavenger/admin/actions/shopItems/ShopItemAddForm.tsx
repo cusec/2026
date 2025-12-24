@@ -75,7 +75,7 @@ const ShopItemAddForm = ({
   return (
     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
       <h4 className="text-md font-medium mb-4 text-gray-900">
-        Add New Shop Item
+        Add New Shop Prize
       </h4>
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -276,18 +276,14 @@ const ShopItemAddForm = ({
           </div>
         </div>
         <p className="text-xs text-gray-500">
-          If both dates are set, the item will only be available during this period.
+          If both dates are set, the item will only be available during this
+          period.
         </p>
 
         <div className="flex gap-2">
           <button
             onClick={onSubmit}
-            disabled={
-              !formData.name ||
-              !formData.description ||
-              !formData.imageData ||
-              isSubmitting
-            }
+            disabled={!formData.name || !formData.description || isSubmitting}
             className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
           >
             {isSubmitting ? "Creating..." : "Create Item"}
