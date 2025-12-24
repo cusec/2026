@@ -96,15 +96,10 @@ const Leaderboard = () => {
             <Trophy className="w-8 h-8" />
             <h2 className="text-2xl font-bold">Leaderboard</h2>
           </div>
-          {leaderboard.length > 0 && (
-            <div className="mt-2 text-center text-sm">
-              Showing top {leaderboard.length} participants
-            </div>
-          )}
         </div>
 
         {/* Leaderboard List */}
-        {leaderboard.length === 0 ? (
+        {leaderboard.length < 3 ? (
           <div className="text-center py-8">
             <Trophy className="w-16 h-16 mx-auto mb-4" />
             <p>No scores yet. Be the first to earn points!</p>

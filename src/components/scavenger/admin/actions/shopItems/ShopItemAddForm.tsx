@@ -221,22 +221,63 @@ const ShopItemAddForm = ({
           <div className="flex items-center space-x-2">
             <input
               type="checkbox"
-              id="moderated"
-              checked={formData.moderated}
+              id="active"
+              checked={formData.active}
               onChange={(e) =>
-                setFormData({ ...formData, moderated: e.target.checked })
+                setFormData({ ...formData, active: e.target.checked })
               }
               className="w-4 h-4 text-blue-600 rounded"
               disabled={isSubmitting}
             />
             <label
-              htmlFor="moderated"
+              htmlFor="active"
               className="text-sm font-medium text-gray-700"
             >
-              Requires Approval
+              Active
             </label>
           </div>
         </div>
+
+        {/* Activation Period */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Activation Start (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={formData.activationStart || ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  activationStart: e.target.value || null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Activation End (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={formData.activationEnd || ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  activationEnd: e.target.value || null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+        <p className="text-xs text-gray-500">
+          If both dates are set, the item will only be available during this period.
+        </p>
 
         <div className="flex gap-2">
           <button

@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { User, Collectible } from "@/lib/models";
+import { User, Collectible, ShopItem } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 
-// GET - Fetch user's inventory (claimed hunt items and collectibles)
+// GET - Fetch user's inventory (claimed hunt items, shop prizes, and collectibles)
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -19,10 +19,12 @@ export async function GET(
 
     await connectMongoDB();
 
-    // Find the user and populate their claimed items
+    // Find the user and populate their claimed items and shop prizes
     const user = await User.findOne({
       $and: [{ email: session.user.email }, { _id: userId }],
-    }).populate("claimedItems");
+    })
+      .populate("claimedItems")
+      .populate("shopPrizes");
 
     if (!user) {
       return NextResponse.json(
@@ -64,10 +66,8 @@ export async function GET(
           addedAt: userCollectible.addedAt,
           // Include collectible details
           name: collectibleDoc?.name || "Unknown",
-          subtitle: collectibleDoc?.subtitle || "",
           description: collectibleDoc?.description || "",
-          slug: collectibleDoc?.slug || "",
-          points: collectibleDoc?.points || 0,
+          cost: collectibleDoc?.cost || 0,
           imageData: collectibleDoc?.imageData || "",
           imageContentType: collectibleDoc?.imageContentType || "",
         };
@@ -78,6 +78,7 @@ export async function GET(
       success: true,
       inventory: {
         claimedItems: user.claimedItems || [],
+        shopPrizes: user.shopPrizes || [],
         collectibles: collectiblesWithDetails,
       },
     });

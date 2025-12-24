@@ -39,11 +39,14 @@ const CollectiblesModal = ({ isOpen, onClose }: CollectiblesModalProps) => {
     setShowAddForm(false);
     setFormData({
       name: "",
-      subtitle: "",
       description: "",
-      slug: "",
-      points: 0,
+      cost: 0,
       purchasable: false,
+      limited: false,
+      remaining: 0,
+      active: true,
+      activationStart: null,
+      activationEnd: null,
       imageData: "",
       imageContentType: "",
     });

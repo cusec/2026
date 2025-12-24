@@ -17,10 +17,9 @@ interface UserCollectible {
   used: boolean;
   addedAt: string;
   name: string;
-  subtitle: string;
   description: string;
   slug: string;
-  points: number;
+  cost: number;
   imageData: string;
   imageContentType: string;
 }
@@ -28,10 +27,9 @@ interface UserCollectible {
 interface AvailableCollectible {
   _id: string;
   name: string;
-  subtitle: string;
   description: string;
   slug: string;
-  points: number;
+  cost: number;
   imageData: string;
   imageContentType: string;
 }
@@ -100,7 +98,7 @@ const UserCollectiblesModal = ({
 
   const fetchAvailableCollectibles = async () => {
     try {
-      const response = await fetch("/api/collectibles");
+      const response = await fetch("/api/collectibles?includeAll=true");
       const data = await response.json();
 
       if (data.success) {
@@ -333,11 +331,6 @@ const UserCollectiblesModal = ({
                           <p className="text-sm font-medium text-gray-900 truncate">
                             {collectible.name}
                           </p>
-                          {collectible.subtitle && (
-                            <p className="text-xs text-gray-500 truncate">
-                              {collectible.subtitle}
-                            </p>
-                          )}
                         </div>
                       </button>
                     ))}
@@ -396,11 +389,6 @@ const UserCollectiblesModal = ({
                           </span>
                         )}
                       </div>
-                      {collectible.subtitle && (
-                        <p className="text-sm text-gray-600 truncate">
-                          {collectible.subtitle}
-                        </p>
-                      )}
                       <p className="text-xs text-gray-400 mt-1">
                         Added:{" "}
                         {new Date(collectible.addedAt).toLocaleDateString()}

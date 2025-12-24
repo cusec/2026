@@ -72,7 +72,7 @@ const CollectibleAddForm = ({
     }
   };
 
-  const isFormValid = formData.name && formData.slug && formData.imageData;
+  const isFormValid = formData.name && formData.imageData;
 
   return (
     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
@@ -95,21 +95,6 @@ const CollectibleAddForm = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Subtitle
-          </label>
-          <input
-            type="text"
-            value={formData.subtitle}
-            onChange={(e) =>
-              setFormData({ ...formData, subtitle: e.target.value })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="Enter subtitle"
-            disabled={isSubmitting}
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
             Description
           </label>
           <textarea
@@ -125,40 +110,19 @@ const CollectibleAddForm = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Slug *
-          </label>
-          <input
-            type="text"
-            value={formData.slug}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                slug: e.target.value.toLowerCase().replace(/\s+/g, "-"),
-              })
-            }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="Enter unique slug (e.g., rare-badge)"
-            disabled={isSubmitting}
-          />
-          <p className="text-xs text-gray-500 mt-1">
-            Unique identifier for this collectible (cannot be changed later)
-          </p>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Points
+            Cost (points)
           </label>
           <input
             type="number"
-            value={formData.points}
+            value={formData.cost}
             onChange={(e) =>
               setFormData({
                 ...formData,
-                points: parseInt(e.target.value) || 0,
+                cost: parseInt(e.target.value) || 0,
               })
             }
             className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="Enter points value"
+            placeholder="Enter cost in points"
             disabled={isSubmitting}
             min={0}
           />
@@ -242,6 +206,111 @@ const CollectibleAddForm = ({
         <p className="text-xs text-gray-500">
           If enabled, this collectible will appear in the shop and can be
           purchased with points.
+        </p>
+
+        {/* Limited Toggle */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="limited"
+              checked={formData.limited}
+              onChange={(e) =>
+                setFormData({ ...formData, limited: e.target.checked })
+              }
+              className="w-4 h-4 text-blue-600 rounded"
+              disabled={isSubmitting}
+            />
+            <label
+              htmlFor="limited"
+              className="text-sm font-medium text-gray-700"
+            >
+              Limited Quantity
+            </label>
+          </div>
+
+          {formData.limited && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Remaining
+              </label>
+              <input
+                type="number"
+                value={formData.remaining}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    remaining: parseInt(e.target.value) || 0,
+                  })
+                }
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+                placeholder="Quantity"
+                min={0}
+                disabled={isSubmitting}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Active Toggle */}
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="active"
+            checked={formData.active}
+            onChange={(e) =>
+              setFormData({ ...formData, active: e.target.checked })
+            }
+            className="w-4 h-4 text-blue-600 rounded"
+            disabled={isSubmitting}
+          />
+          <label
+            htmlFor="active"
+            className="text-sm font-medium text-gray-700"
+          >
+            Active
+          </label>
+        </div>
+
+        {/* Activation Period */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Activation Start (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={formData.activationStart || ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  activationStart: e.target.value || null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+              disabled={isSubmitting}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Activation End (optional)
+            </label>
+            <input
+              type="datetime-local"
+              value={formData.activationEnd || ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  activationEnd: e.target.value || null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+              disabled={isSubmitting}
+            />
+          </div>
+        </div>
+        <p className="text-xs text-gray-500">
+          If both dates are set, the collectible will only be available during this period.
         </p>
 
         <div className="flex gap-2">

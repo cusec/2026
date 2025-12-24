@@ -43,7 +43,9 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
       cost: 0,
       limited: false,
       remaining: 0,
-      moderated: false,
+      active: true,
+      activationStart: null,
+      activationEnd: null,
       imageData: "",
       imageContentType: "",
     });

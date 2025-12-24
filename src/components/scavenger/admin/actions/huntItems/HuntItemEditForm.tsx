@@ -51,7 +51,7 @@ const HuntItemEditForm = ({
     const fetchCollectibles = async () => {
       try {
         setLoadingCollectibles(true);
-        const response = await fetch("/api/collectibles");
+        const response = await fetch("/api/collectibles?includeAll=true");
         const data = await response.json();
         if (data.success) {
           setCollectibles(data.collectibles);
@@ -93,6 +93,21 @@ const HuntItemEditForm = ({
 
   return (
     <div className="space-y-3">
+      {/* Identifier - Read-only, shown first */}
+      <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+        <label className="block text-sm font-medium text-blue-800 mb-1">
+          Identifier (Claim Code)
+        </label>
+        <div className="flex items-center gap-2">
+          <code className="flex-1 px-3 py-2 bg-white border border-blue-300 rounded-lg text-blue-900 font-mono text-sm">
+            {item.identifier}
+          </code>
+        </div>
+        <p className="text-xs text-blue-600 mt-1">
+          This is the code users enter to claim this item. It cannot be changed after creation.
+        </p>
+      </div>
+
       <div>
         <label className="block text-sm font-medium text-dark-mode mb-1">
           Name
@@ -287,11 +302,6 @@ const HuntItemEditForm = ({
                   <span className="text-sm font-medium text-gray-900">
                     {collectible.name}
                   </span>
-                  {collectible.subtitle && (
-                    <span className="text-xs text-gray-500 ml-2">
-                      ({collectible.subtitle})
-                    </span>
-                  )}
                 </div>
               </label>
             ))}
@@ -304,9 +314,6 @@ const HuntItemEditForm = ({
         )}
       </div>
 
-      <p className="text-xs text-gray-500">
-        Identifier: {item.identifier} (cannot be changed)
-      </p>
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => onSave(item)}

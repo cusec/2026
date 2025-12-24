@@ -57,9 +57,14 @@ const ShopItemDisplay = ({ item, onEdit, onDelete }: ShopItemDisplayProps) => {
                   : "Sold out"}
               </span>
             )}
-            {item.moderated && (
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                Requires approval
+            {!item.active && (
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                Inactive
+              </span>
+            )}
+            {(item.activationStart || item.activationEnd) && (
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                Time-limited
               </span>
             )}
           </div>

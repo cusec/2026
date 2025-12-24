@@ -276,18 +276,55 @@ export async function POST(
 
     // Award collectibles linked to this hunt item
     const awardedCollectibles: { _id: string; name: string }[] = [];
+    const skippedCollectibles: { _id: string; name: string; reason: string }[] = [];
+    
     if (huntItem.collectibles && huntItem.collectibles.length > 0) {
       // Fetch the collectible details
       const collectibleDocs = await Collectible.find({
         _id: { $in: huntItem.collectibles },
       });
 
-      // Add collectibles to user's collection (duplicates are allowed)
+      // Add collectibles to user's collection (only if active and within activation period)
       for (const collectible of collectibleDocs) {
+        // Check if collectible is active
+        if (!collectible.active) {
+          skippedCollectibles.push({
+            _id: collectible._id.toString(),
+            name: collectible.name,
+            reason: "Collectible is not active",
+          });
+          continue;
+        }
+
+        // Check if collectible is within activation period
+        if (collectible.activationStart && collectible.activationEnd) {
+          const now = new Date();
+          const startDate = new Date(collectible.activationStart);
+          const endDate = new Date(collectible.activationEnd);
+          if (now < startDate || now > endDate) {
+            skippedCollectibles.push({
+              _id: collectible._id.toString(),
+              name: collectible.name,
+              reason: "Collectible is outside activation period",
+            });
+            continue;
+          }
+        }
+
+        // Check if collectible is limited and has remaining stock
+        if (collectible.limited && collectible.remaining <= 0) {
+          skippedCollectibles.push({
+            _id: collectible._id.toString(),
+            name: collectible.name,
+            reason: "Collectible is sold out",
+          });
+          continue;
+        }
+
         if (!user.collectibles) {
           user.collectibles = [];
         }
-        // Always add the collectible (duplicates allowed with new structure)
+        // Add the collectible to user's collection
         user.collectibles.push({
           collectibleId: collectible._id,
           used: false,
@@ -297,6 +334,12 @@ export async function POST(
           _id: collectible._id.toString(),
           name: collectible.name,
         });
+
+        // Decrement remaining count if limited
+        if (collectible.limited) {
+          collectible.remaining -= 1;
+          await collectible.save();
+        }
       }
     }
 
@@ -315,6 +358,7 @@ export async function POST(
         points: huntItem.points,
       },
       collectibles: awardedCollectibles,
+      skippedCollectibles: skippedCollectibles.length > 0 ? skippedCollectibles : undefined,
       newPoints: user.points,
       totalItemsClaimed: user.claimedItems.length,
     });

@@ -40,6 +40,35 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if collectible is active
+    if (!collectible.active) {
+      return NextResponse.json(
+        { error: "This collectible is currently not available" },
+        { status: 400 }
+      );
+    }
+
+    // Check if collectible is within activation period
+    if (collectible.activationStart && collectible.activationEnd) {
+      const now = new Date();
+      const startDate = new Date(collectible.activationStart);
+      const endDate = new Date(collectible.activationEnd);
+      if (now < startDate || now > endDate) {
+        return NextResponse.json(
+          { error: "This collectible is outside its availability period" },
+          { status: 400 }
+        );
+      }
+    }
+
+    // Check if collectible is limited and has remaining stock
+    if (collectible.limited && collectible.remaining <= 0) {
+      return NextResponse.json(
+        { error: "This collectible is sold out" },
+        { status: 400 }
+      );
+    }
+
     // Find the current user
     const user = await User.findOne({ email: session.user.email });
     if (!user) {
@@ -47,11 +76,11 @@ export async function POST(request: Request) {
     }
 
     // Check if user has enough points
-    if (user.points < collectible.points) {
+    if (user.points < collectible.cost) {
       return NextResponse.json(
         {
           error: "You do not have enough points",
-          required: collectible.points,
+          required: collectible.cost,
           available: user.points,
         },
         { status: 400 }
@@ -59,7 +88,7 @@ export async function POST(request: Request) {
     }
 
     // Deduct points from user
-    user.points -= collectible.points;
+    user.points -= collectible.cost;
 
     // Add collectible to user's collectibles array with used: false
     if (!user.collectibles) {
@@ -73,6 +102,12 @@ export async function POST(request: Request) {
 
     await user.save();
 
+    // Decrement remaining count if limited
+    if (collectible.limited) {
+      collectible.remaining -= 1;
+      await collectible.save();
+    }
+
     return NextResponse.json({
       success: true,
       message: `Successfully purchased ${collectible.name}`,
@@ -80,7 +115,7 @@ export async function POST(request: Request) {
         collectible: {
           _id: collectible._id,
           name: collectible.name,
-          points: collectible.points,
+          cost: collectible.cost,
         },
         user: {
           newPoints: user.points,

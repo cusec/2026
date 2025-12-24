@@ -187,12 +187,14 @@ const DaySchema = new Schema({
 
 const shopItemSchema = new Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     description: { type: String, required: true },
     cost: { type: Number, required: true, default: 0 },
     limited: { type: Boolean, default: false },
     remaining: { type: Number, default: 0 },
-    moderated: { type: Boolean, default: false },
+    active: { type: Boolean, default: true },
+    activationStart: { type: Date, default: null },
+    activationEnd: { type: Date, default: null },
     imageData: { type: String, required: true }, // Base64 encoded image data
     imageContentType: { type: String, required: true }, // MIME type (e.g., image/png, image/jpeg)
   },
@@ -213,12 +215,15 @@ const noticeSchema = new Schema(
 
 const collectibleSchema = new Schema(
   {
-    name: { type: String, required: true },
-    subtitle: { type: String, default: "" },
+    name: { type: String, required: true, unique: true },
     description: { type: String, default: "" },
-    slug: { type: String, required: true, unique: true },
-    points: { type: Number, default: 0 },
+    cost: { type: Number, default: 0 },
     purchasable: { type: Boolean, default: false },
+    limited: { type: Boolean, default: false },
+    remaining: { type: Number, default: 0 },
+    active: { type: Boolean, default: true },
+    activationStart: { type: Date, default: null },
+    activationEnd: { type: Date, default: null },
     imageData: { type: String, required: true },
     imageContentType: { type: String, required: true },
   },

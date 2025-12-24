@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { Save, X, Upload } from "lucide-react";
+import { Save, X, Upload, Users } from "lucide-react";
 import { Collectible } from "@/lib/interface";
+import CollectibleUsersModal from "./CollectibleUsersModal";
 
 interface CollectibleEditFormProps {
   item: Collectible;
@@ -19,6 +20,7 @@ const CollectibleEditForm = ({
 }: CollectibleEditFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [showUsersModal, setShowUsersModal] = useState(false);
 
   // Initialize image preview from existing data
   useEffect(() => {
@@ -94,17 +96,6 @@ const CollectibleEditForm = ({
       </div>
       <div>
         <label className="block text-sm font-medium text-dark-mode mb-1">
-          Subtitle
-        </label>
-        <input
-          type="text"
-          value={item.subtitle}
-          onChange={(e) => onChange({ ...item, subtitle: e.target.value })}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-dark-mode mb-1">
           Description
         </label>
         <textarea
@@ -116,13 +107,13 @@ const CollectibleEditForm = ({
       </div>
       <div>
         <label className="block text-sm font-medium text-dark-mode mb-1">
-          Points
+          Cost (points)
         </label>
         <input
           type="number"
-          value={item.points}
+          value={item.cost}
           onChange={(e) =>
-            onChange({ ...item, points: parseInt(e.target.value) || 0 })
+            onChange({ ...item, cost: parseInt(e.target.value) || 0 })
           }
           className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
           min={0}
@@ -200,8 +191,103 @@ const CollectibleEditForm = ({
         </span>
       </div>
 
+      {/* Limited Toggle */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-end">
+        <div className="flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id={`limited-${item._id}`}
+            checked={item.limited}
+            onChange={(e) =>
+              onChange({ ...item, limited: e.target.checked })
+            }
+            className="w-4 h-4 text-blue-600 rounded"
+          />
+          <label
+            htmlFor={`limited-${item._id}`}
+            className="text-sm font-medium text-gray-700"
+          >
+            Limited Quantity
+          </label>
+        </div>
+
+        {item.limited && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Remaining
+            </label>
+            <input
+              type="number"
+              value={item.remaining}
+              onChange={(e) =>
+                onChange({
+                  ...item,
+                  remaining: parseInt(e.target.value) || 0,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
+              min={0}
+            />
+          </div>
+        )}
+      </div>
+
+      {/* Active Toggle */}
+      <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id={`active-${item._id}`}
+          checked={item.active}
+          onChange={(e) =>
+            onChange({ ...item, active: e.target.checked })
+          }
+          className="w-4 h-4 text-blue-600 rounded"
+        />
+        <label
+          htmlFor={`active-${item._id}`}
+          className="text-sm font-medium text-gray-700"
+        >
+          Active
+        </label>
+      </div>
+
+      {/* Activation Period */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Activation Start
+          </label>
+          <input
+            type="datetime-local"
+            value={item.activationStart ? new Date(item.activationStart).toISOString().slice(0, 16) : ""}
+            onChange={(e) =>
+              onChange({
+                ...item,
+                activationStart: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+              })
+            }
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Activation End
+          </label>
+          <input
+            type="datetime-local"
+            value={item.activationEnd ? new Date(item.activationEnd).toISOString().slice(0, 16) : ""}
+            onChange={(e) =>
+              onChange({
+                ...item,
+                activationEnd: e.target.value ? new Date(e.target.value).toISOString() : undefined,
+              })
+            }
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
+          />
+        </div>
+      </div>
       <p className="text-xs text-gray-500">
-        Slug: {item.slug} (cannot be changed)
+        If both dates are set, the collectible will only be available during this period.
       </p>
 
       <div className="flex gap-2">
@@ -220,7 +306,23 @@ const CollectibleEditForm = ({
           <X size={16} />
           Cancel
         </button>
+        <button
+          onClick={() => setShowUsersModal(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+        >
+          <Users size={16} />
+          View Users
+        </button>
       </div>
+
+      {/* Users Modal */}
+      <CollectibleUsersModal
+        isOpen={showUsersModal}
+        onClose={() => setShowUsersModal(false)}
+        collectibleId={item._id}
+        collectibleName={item.name}
+        collectibleCost={item.cost}
+      />
     </div>
   );
 };

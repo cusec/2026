@@ -247,12 +247,6 @@ const ShopPrize = ({
                 </span>
               </div>
             )}
-            {item.moderated && (
-              <div className="flex justify-between">
-                <span className="font-medium">Note:</span>
-                <span className="text-yellow-600">Requires approval</span>
-              </div>
-            )}
           </div>
 
           {/* Redeem Button (only for volunteers/admins) */}

@@ -28,7 +28,9 @@ export async function POST(request: Request) {
       cost,
       limited,
       remaining,
-      moderated,
+      active,
+      activationStart,
+      activationEnd,
       imageData,
       imageContentType,
     } = body;
@@ -70,7 +72,9 @@ export async function POST(request: Request) {
       cost,
       limited: limited || false,
       remaining: remaining || 0,
-      moderated: moderated || false,
+      active: active !== undefined ? active : true,
+      activationStart: activationStart || null,
+      activationEnd: activationEnd || null,
       imageData,
       imageContentType,
     });
@@ -89,7 +93,9 @@ export async function POST(request: Request) {
         cost,
         limited,
         remaining,
-        moderated,
+        active,
+        activationStart,
+        activationEnd,
         imageContentType,
         // Don't log the full image data, just note it exists
         hasImage: true,
@@ -107,7 +113,9 @@ export async function POST(request: Request) {
         cost: shopItem.cost,
         limited: shopItem.limited,
         remaining: shopItem.remaining,
-        moderated: shopItem.moderated,
+        active: shopItem.active,
+        activationStart: shopItem.activationStart,
+        activationEnd: shopItem.activationEnd,
         imageData: shopItem.imageData,
         imageContentType: shopItem.imageContentType,
       },
@@ -161,7 +169,9 @@ export async function PUT(request: Request) {
       cost: shopItem.cost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
-      moderated: shopItem.moderated,
+      active: shopItem.active,
+      activationStart: shopItem.activationStart,
+      activationEnd: shopItem.activationEnd,
       imageContentType: shopItem.imageContentType,
       hasImage: !!shopItem.imageData,
     });
@@ -173,7 +183,9 @@ export async function PUT(request: Request) {
     if (updates.cost !== undefined) shopItem.cost = updates.cost;
     if (updates.limited !== undefined) shopItem.limited = updates.limited;
     if (updates.remaining !== undefined) shopItem.remaining = updates.remaining;
-    if (updates.moderated !== undefined) shopItem.moderated = updates.moderated;
+    if (updates.active !== undefined) shopItem.active = updates.active;
+    if (updates.activationStart !== undefined) shopItem.activationStart = updates.activationStart;
+    if (updates.activationEnd !== undefined) shopItem.activationEnd = updates.activationEnd;
     if (
       updates.imageData !== undefined &&
       updates.imageContentType !== undefined
@@ -204,7 +216,9 @@ export async function PUT(request: Request) {
       cost: shopItem.cost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
-      moderated: shopItem.moderated,
+      active: shopItem.active,
+      activationStart: shopItem.activationStart,
+      activationEnd: shopItem.activationEnd,
       imageContentType: shopItem.imageContentType,
       hasImage: !!shopItem.imageData,
     });
@@ -230,7 +244,9 @@ export async function PUT(request: Request) {
         cost: shopItem.cost,
         limited: shopItem.limited,
         remaining: shopItem.remaining,
-        moderated: shopItem.moderated,
+        active: shopItem.active,
+        activationStart: shopItem.activationStart,
+        activationEnd: shopItem.activationEnd,
         imageData: shopItem.imageData,
         imageContentType: shopItem.imageContentType,
       },
@@ -284,7 +300,9 @@ export async function DELETE(request: Request) {
       cost: shopItem.cost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
-      moderated: shopItem.moderated,
+      active: shopItem.active,
+      activationStart: shopItem.activationStart,
+      activationEnd: shopItem.activationEnd,
       imageContentType: shopItem.imageContentType,
       hasImage: !!shopItem.imageData,
     });

@@ -44,22 +44,39 @@ const CollectibleDisplay = ({
                   In Shop
                 </span>
               )}
+              {!item.active && (
+                <span className="px-2 py-0.5 bg-gray-100 text-gray-700 text-xs rounded-full">
+                  Inactive
+                </span>
+              )}
             </div>
-            {item.subtitle && (
-              <p className="text-sm text-gray-600 mt-1">{item.subtitle}</p>
-            )}
             {item.description && (
               <p className="text-sm text-gray-500 mt-1 line-clamp-2">
                 {item.description}
               </p>
             )}
             <div className="flex flex-wrap gap-2 mt-2 text-xs text-gray-500">
-              <span className="px-2 py-1 bg-gray-100 rounded">
-                Slug: {item.slug}
-              </span>
               <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded">
-                {item.points} points
+                {item.cost} points
               </span>
+              {item.limited && (
+                <span
+                  className={`px-2 py-1 rounded ${
+                    item.remaining > 0
+                      ? "bg-orange-100 text-orange-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {item.remaining > 0
+                    ? `${item.remaining} remaining`
+                    : "Sold out"}
+                </span>
+              )}
+              {(item.activationStart || item.activationEnd) && (
+                <span className="px-2 py-1 bg-purple-100 text-purple-700 rounded">
+                  Time-limited
+                </span>
+              )}
             </div>
           </div>
         </div>

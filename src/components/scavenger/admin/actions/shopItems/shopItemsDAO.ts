@@ -9,7 +9,9 @@ const emptyFormData: ShopItemFormData = {
   cost: 0,
   limited: false,
   remaining: 0,
-  moderated: false,
+  active: true,
+  activationStart: null,
+  activationEnd: null,
   imageData: "",
   imageContentType: "",
 };
@@ -29,7 +31,7 @@ export const useShopItems = (isOpen: boolean) => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("/api/shop");
+      const response = await fetch("/api/shop?includeAll=true");
       const data = await response.json();
 
       if (!data.success) {
@@ -98,7 +100,9 @@ export const useShopItems = (isOpen: boolean) => {
             cost: item.cost,
             limited: item.limited,
             remaining: item.remaining,
-            moderated: item.moderated,
+            active: item.active,
+            activationStart: item.activationStart,
+            activationEnd: item.activationEnd,
             imageData: item.imageData,
             imageContentType: item.imageContentType,
           },

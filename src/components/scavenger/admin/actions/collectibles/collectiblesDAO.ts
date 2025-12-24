@@ -5,11 +5,14 @@ import { Collectible, CollectibleFormData } from "@/lib/interface";
 
 const emptyFormData: CollectibleFormData = {
   name: "",
-  subtitle: "",
   description: "",
-  slug: "",
-  points: 0,
+  cost: 0,
   purchasable: false,
+  limited: false,
+  remaining: 0,
+  active: true,
+  activationStart: null,
+  activationEnd: null,
   imageData: "",
   imageContentType: "",
 };
@@ -29,7 +32,7 @@ export const useCollectibles = (isOpen: boolean) => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch("/api/collectibles");
+      const response = await fetch("/api/collectibles?includeAll=true");
       const data = await response.json();
 
       if (!data.success) {
@@ -92,10 +95,14 @@ export const useCollectibles = (isOpen: boolean) => {
         },
         body: JSON.stringify({
           name: item.name,
-          subtitle: item.subtitle,
           description: item.description,
-          points: item.points,
+          cost: item.cost,
           purchasable: item.purchasable,
+          limited: item.limited,
+          remaining: item.remaining,
+          active: item.active,
+          activationStart: item.activationStart,
+          activationEnd: item.activationEnd,
           imageData: item.imageData,
           imageContentType: item.imageContentType,
         }),

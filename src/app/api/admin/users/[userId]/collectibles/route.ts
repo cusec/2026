@@ -68,10 +68,8 @@ export async function GET(
           addedAt: userCollectible.addedAt,
           // Include collectible details
           name: collectibleDoc?.name || "Unknown",
-          subtitle: collectibleDoc?.subtitle || "",
           description: collectibleDoc?.description || "",
-          slug: collectibleDoc?.slug || "",
-          points: collectibleDoc?.points || 0,
+          cost: collectibleDoc?.cost || 0,
           imageData: collectibleDoc?.imageData || "",
           imageContentType: collectibleDoc?.imageContentType || "",
         };
@@ -175,7 +173,6 @@ export async function POST(
         resourceId: collectibleId,
         details: {
           collectibleName: collectible.name,
-          collectibleSlug: collectible.slug,
           note: "Points were NOT updated",
         },
         previousData,
@@ -282,7 +279,6 @@ export async function DELETE(
         resourceId: instanceId,
         details: {
           collectibleName: collectible?.name || "Unknown",
-          collectibleSlug: collectible?.slug || "Unknown",
           note: "Points were NOT updated",
         },
         previousData,
@@ -386,7 +382,6 @@ export async function PATCH(
         resourceId: instanceId,
         details: {
           collectibleName: collectible?.name || "Unknown",
-          collectibleSlug: collectible?.slug || "Unknown",
           previousUsed,
           newUsed: used,
         },

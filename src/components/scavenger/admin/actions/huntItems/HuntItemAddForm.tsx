@@ -50,7 +50,7 @@ const HuntItemAddForm = ({
     const fetchCollectibles = async () => {
       try {
         setLoadingCollectibles(true);
-        const response = await fetch("/api/collectibles");
+        const response = await fetch("/api/collectibles?includeAll=true");
         const data = await response.json();
         if (data.success) {
           setCollectibles(data.collectibles);
@@ -127,9 +127,9 @@ const HuntItemAddForm = ({
             disabled={isSubmitting}
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            Identifier *
+        <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
+          <label className="block text-sm font-medium text-blue-800 mb-1">
+            Identifier (Claim Code) *
           </label>
           <input
             type="text"
@@ -137,10 +137,14 @@ const HuntItemAddForm = ({
             onChange={(e) =>
               setFormData({ ...formData, identifier: e.target.value })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
-            placeholder="Enter unique identifier"
+            className="w-full px-3 py-2 border border-blue-300 rounded-lg bg-white text-gray-900 font-mono"
+            placeholder="Enter unique identifier (e.g., SPEAKER-INTRO)"
             disabled={isSubmitting}
           />
+          <p className="text-xs text-blue-700 mt-2">
+            <strong>Important:</strong> This is the code that users will type into their text box to claim this hunt item. 
+            It must be unique across all hunt items and cannot be changed after creation.
+          </p>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -316,11 +320,6 @@ const HuntItemAddForm = ({
                     <span className="text-sm font-medium text-gray-900">
                       {collectible.name}
                     </span>
-                    {collectible.subtitle && (
-                      <span className="text-xs text-gray-500 ml-2">
-                        ({collectible.subtitle})
-                      </span>
-                    )}
                   </div>
                 </label>
               ))}

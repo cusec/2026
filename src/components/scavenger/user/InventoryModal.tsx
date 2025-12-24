@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Package, Gem, X } from "lucide-react";
+import { Package, Gem, X, Gift } from "lucide-react";
 import Modal from "@/components/ui/modal";
-import { HuntItem } from "@/lib/interface";
+import { HuntItem, ShopItem } from "@/lib/interface";
 
 // Extended collectible interface for inventory (includes instance-specific fields)
 interface InventoryCollectible {
@@ -12,10 +12,9 @@ interface InventoryCollectible {
   used: boolean;
   addedAt: string;
   name: string;
-  subtitle: string;
   description: string;
   slug: string;
-  points: number;
+  cost: number;
   imageData: string;
   imageContentType: string;
 }
@@ -30,6 +29,7 @@ interface InventoryResponse {
   success: boolean;
   inventory: {
     claimedItems: HuntItem[];
+    shopPrizes: ShopItem[];
     collectibles: InventoryCollectible[];
   };
 }
@@ -42,8 +42,17 @@ const getCollectibleImageSrc = (item: InventoryCollectible): string | null => {
   return null;
 };
 
+// Helper function to get image source from shop item
+const getShopItemImageSrc = (item: ShopItem): string | null => {
+  if (item.imageData && item.imageContentType) {
+    return `data:${item.imageContentType};base64,${item.imageData}`;
+  }
+  return null;
+};
+
 const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
   const [claimedItems, setClaimedItems] = useState<HuntItem[]>([]);
+  const [shopPrizes, setShopPrizes] = useState<ShopItem[]>([]);
   const [collectibles, setCollectibles] = useState<InventoryCollectible[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -58,6 +67,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
 
       if (data.success) {
         setClaimedItems(data.inventory.claimedItems || []);
+        setShopPrizes(data.inventory.shopPrizes || []);
         setCollectibles(data.inventory.collectibles || []);
       } else {
         throw new Error("Failed to load inventory");
@@ -117,14 +127,14 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
           <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
             {/* Hunt Items Section */}
             <div>
-              <div className="flex items-center gap-2 mb-4 sticky top-0 bg-dark-mode/90 py-2">
-                <Package className="w-5 h-5 text-accent" />
+              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+                <Package className="w-5 h-5 text-sea" />
                 <h3 className="text-lg font-semibold">
                   Hunt Items ({claimedItems.length})
                 </h3>
               </div>
               {claimedItems.length === 0 ? (
-                <div className="text-center py-6 bg-light-mode/5 rounded-lg">
+                <div className="text-center py-6 rounded-lg">
                   <Package className="w-12 h-12 mx-auto mb-2 text-light-mode/30" />
                   <p className="text-light-mode/50">
                     No hunt items claimed yet.
@@ -140,11 +150,13 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       key={item._id}
                       className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
                     >
-                      <div className="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
-                        <Package className="w-5 h-5 text-accent" />
+                      <div className="w-10 h-10 rounded-full bg-light-mode/10 flex items-center justify-center shrink-0">
+                        <Package className="w-5 h-5 text-light-mode" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate">{item.name}</p>
+                        <p className="font-semibold truncate text-light-mode">
+                          {item.name}
+                        </p>
                         {item.description && (
                           <p className="text-sm text-light-mode/60 truncate">
                             {item.description}
@@ -152,8 +164,74 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                         )}
                       </div>
                       <div className="shrink-0 text-right">
-                        <span className="text-accent font-bold">
+                        <span className="text-light-mode font-bold">
                           {item.points}
+                        </span>
+                        <span className="text-light-mode/60 text-sm ml-1">
+                          pts
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Divider */}
+            <div className="border-t border-light-mode/20"></div>
+
+            {/* Shop Prizes Section */}
+            <div>
+              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+                <Gift className="w-5 h-5 text-accent" />
+                <h3 className="text-lg font-semibold">
+                  Shop Prizes ({shopPrizes.length})
+                </h3>
+              </div>
+              {shopPrizes.length === 0 ? (
+                <div className="text-center py-6 rounded-lg">
+                  <Gift className="w-12 h-12 mx-auto mb-2 text-light-mode/30" />
+                  <p className="text-light-mode/50">
+                    No shop prizes redeemed yet.
+                  </p>
+                  <p className="text-light-mode/40 text-sm mt-1">
+                    Visit the shop to redeem prizes!
+                  </p>
+                </div>
+              ) : (
+                <div className="grid gap-3">
+                  {shopPrizes.map((prize) => (
+                    <div
+                      key={prize._id}
+                      className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
+                    >
+                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                        {getShopItemImageSrc(prize) ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={getShopItemImageSrc(prize)!}
+                            alt={prize.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <Gift className="w-5 h-5 text-light-mode" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-semibold truncate text-light-mode">
+                          {prize.name}
+                        </p>
+                        {prize.description && (
+                          <p className="text-sm text-light-mode/60 truncate">
+                            {prize.description}
+                          </p>
+                        )}
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <span className="text-light-mode font-bold">
+                          {prize.cost}
                         </span>
                         <span className="text-light-mode/60 text-sm ml-1">
                           pts
@@ -170,14 +248,14 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
 
             {/* Collectibles Section */}
             <div>
-              <div className="flex items-center gap-2 mb-4 sticky top-0 bg-dark-mode/90 py-2">
-                <Gem className="w-5 h-5 text-purple-400" />
+              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+                <Gem className="w-5 h-5 text-secondary" />
                 <h3 className="text-lg font-semibold">
                   Collectibles ({collectibles.length})
                 </h3>
               </div>
               {collectibles.length === 0 ? (
-                <div className="text-center py-6 bg-light-mode/5 rounded-lg">
+                <div className="text-center py-6 rounded-lg">
                   <Gem className="w-12 h-12 mx-auto mb-2 text-light-mode/30" />
                   <p className="text-light-mode/50">No collectibles yet.</p>
                   <p className="text-light-mode/40 text-sm mt-1">
@@ -191,7 +269,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       key={collectible._id}
                       className="flex items-center gap-4 p-4 bg-light-mode/10 rounded-lg"
                     >
-                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
+                      <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={getCollectibleImageSrc(collectible) || ""}
@@ -201,7 +279,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
-                          <p className="font-semibold truncate">
+                          <p className="font-semibold truncate text-light-mode">
                             {collectible.name}
                           </p>
                           {collectible.used && (
@@ -210,13 +288,8 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                             </span>
                           )}
                         </div>
-                        {collectible.subtitle && (
-                          <p className="text-sm text-light-mode/60 truncate">
-                            {collectible.subtitle}
-                          </p>
-                        )}
                         {collectible.description && (
-                          <p className="text-xs text-light-mode/40 mt-1 line-clamp-2">
+                          <p className="text-xs text-light-mode/60 mt-1 line-clamp-2">
                             {collectible.description}
                           </p>
                         )}

@@ -90,7 +90,9 @@ export interface ShopItem {
   cost: number;
   limited: boolean;
   remaining: number;
-  moderated: boolean;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
   imageData: string; // Base64 encoded image data
   imageContentType: string; // MIME type
   createdAt?: string;
@@ -103,7 +105,9 @@ export interface ShopItemFormData {
   cost: number;
   limited: boolean;
   remaining: number;
-  moderated: boolean;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
   imageData: string; // Base64 encoded image data
   imageContentType: string; // MIME type
 }
@@ -124,11 +128,14 @@ export interface NoticeFormData {
 export interface Collectible {
   _id: string;
   name: string;
-  subtitle: string;
   description: string;
-  slug: string;
-  points: number;
+  cost: number;
   purchasable: boolean;
+  limited: boolean;
+  remaining: number;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
   imageData: string;
   imageContentType: string;
   createdAt?: string;
@@ -137,11 +144,14 @@ export interface Collectible {
 
 export interface CollectibleFormData {
   name: string;
-  subtitle: string;
   description: string;
-  slug: string;
-  points: number;
+  cost: number;
   purchasable: boolean;
+  limited: boolean;
+  remaining: number;
+  active: boolean;
+  activationStart: string | null;
+  activationEnd: string | null;
   imageData: string;
   imageContentType: string;
 }

@@ -5,8 +5,26 @@ import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
+// Helper function to check if item is within activation period
+function isWithinActivationPeriod(item: {
+  activationStart?: Date | null;
+  activationEnd?: Date | null;
+}): boolean {
+  const now = new Date();
+
+  if (item.activationStart && item.activationEnd) {
+    const startDate = new Date(item.activationStart);
+    const endDate = new Date(item.activationEnd);
+    return now >= startDate && now <= endDate;
+  }
+
+  // If no activation period set, item is always available
+  return true;
+}
+
 // GET - Fetch all collectibles (Available to all authenticated users)
-export async function GET() {
+// For shop display, only returns active collectibles within activation period
+export async function GET(request: Request) {
   try {
     const session = await auth0.getSession();
 
@@ -14,12 +32,23 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const { searchParams } = new URL(request.url);
+    const includeAll = searchParams.get("includeAll") === "true";
+
     await connectMongoDB();
     const collectibles = await Collectible.find({}).sort({ createdAt: -1 });
 
+    // If includeAll is true (admin request), return all collectibles
+    // Otherwise, filter to only return active collectibles within activation period
+    const filteredCollectibles = includeAll
+      ? collectibles
+      : collectibles.filter(
+          (item) => item.active && isWithinActivationPeriod(item)
+        );
+
     return NextResponse.json({
       success: true,
-      collectibles,
+      collectibles: filteredCollectibles,
     });
   } catch (error) {
     console.error("Error fetching collectibles:", error);
@@ -49,40 +78,46 @@ export async function POST(request: Request) {
 
     const {
       name,
-      subtitle,
       description,
-      slug,
-      points,
+      cost,
       purchasable,
+      limited,
+      remaining,
+      active,
+      activationStart,
+      activationEnd,
       imageData,
       imageContentType,
     } = await request.json();
 
-    if (!name || !slug || !imageData || !imageContentType) {
+    if (!name || !imageData || !imageContentType) {
       return NextResponse.json(
-        { error: "Name, slug, image data and image content type are required" },
+        { error: "Name, image data and image content type are required" },
         { status: 400 }
       );
     }
 
     await connectMongoDB();
 
-    // Check if slug already exists
-    const existingCollectible = await Collectible.findOne({ slug });
+    // Check if name already exists (name must be unique)
+    const existingCollectible = await Collectible.findOne({ name });
     if (existingCollectible) {
       return NextResponse.json(
-        { error: "Collectible with this slug already exists" },
+        { error: "A collectible with this name already exists" },
         { status: 400 }
       );
     }
 
     const collectible = new Collectible({
       name,
-      subtitle: subtitle || "",
       description: description || "",
-      slug,
-      points: points || 0,
+      cost: cost || 0,
       purchasable: purchasable || false,
+      limited: limited || false,
+      remaining: remaining || 0,
+      active: active !== undefined ? active : true,
+      activationStart: activationStart || null,
+      activationEnd: activationEnd || null,
       imageData,
       imageContentType,
     });
@@ -94,11 +129,12 @@ export async function POST(request: Request) {
     if (adminEmail) {
       const newData = sanitizeDataForLogging({
         name: collectible.name,
-        subtitle: collectible.subtitle,
         description: collectible.description,
-        slug: collectible.slug,
-        points: collectible.points,
+        cost: collectible.cost,
         purchasable: collectible.purchasable,
+        limited: collectible.limited,
+        remaining: collectible.remaining,
+        active: collectible.active,
       });
 
       await logAdminAction({
@@ -106,7 +142,7 @@ export async function POST(request: Request) {
         action: "CREATE_COLLECTIBLE",
         resourceType: "collectible",
         resourceId: collectible._id.toString(),
-        details: { name: collectible.name, slug: collectible.slug },
+        details: { name: collectible.name },
         newData,
         request,
       });

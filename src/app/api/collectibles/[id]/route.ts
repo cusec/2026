@@ -65,10 +65,14 @@ export async function PUT(
     const { id } = await params;
     const {
       name,
-      subtitle,
       description,
-      points,
+      cost,
       purchasable,
+      limited,
+      remaining,
+      active,
+      activationStart,
+      activationEnd,
       imageData,
       imageContentType,
     } = await request.json();
@@ -87,18 +91,26 @@ export async function PUT(
     // Store previous data for audit log
     const previousData = sanitizeDataForLogging({
       name: collectible.name,
-      subtitle: collectible.subtitle,
       description: collectible.description,
-      points: collectible.points,
+      cost: collectible.cost,
       purchasable: collectible.purchasable,
+      limited: collectible.limited,
+      remaining: collectible.remaining,
+      active: collectible.active,
+      activationStart: collectible.activationStart,
+      activationEnd: collectible.activationEnd,
     });
 
-    // Update fields (slug cannot be changed)
+    // Update fields
     if (name !== undefined) collectible.name = name;
-    if (subtitle !== undefined) collectible.subtitle = subtitle;
     if (description !== undefined) collectible.description = description;
-    if (points !== undefined) collectible.points = points;
+    if (cost !== undefined) collectible.cost = cost;
     if (purchasable !== undefined) collectible.purchasable = purchasable;
+    if (limited !== undefined) collectible.limited = limited;
+    if (remaining !== undefined) collectible.remaining = remaining;
+    if (active !== undefined) collectible.active = active;
+    if (activationStart !== undefined) collectible.activationStart = activationStart;
+    if (activationEnd !== undefined) collectible.activationEnd = activationEnd;
     if (imageData !== undefined) collectible.imageData = imageData;
     if (imageContentType !== undefined)
       collectible.imageContentType = imageContentType;
@@ -110,10 +122,14 @@ export async function PUT(
     if (adminEmail) {
       const newData = sanitizeDataForLogging({
         name: collectible.name,
-        subtitle: collectible.subtitle,
         description: collectible.description,
-        points: collectible.points,
+        cost: collectible.cost,
         purchasable: collectible.purchasable,
+        limited: collectible.limited,
+        remaining: collectible.remaining,
+        active: collectible.active,
+        activationStart: collectible.activationStart,
+        activationEnd: collectible.activationEnd,
       });
 
       await logAdminAction({
@@ -121,7 +137,7 @@ export async function PUT(
         action: "UPDATE_COLLECTIBLE",
         resourceType: "collectible",
         resourceId: collectible._id.toString(),
-        details: { name: collectible.name, slug: collectible.slug },
+        details: { name: collectible.name },
         previousData,
         newData,
         request,
@@ -177,11 +193,14 @@ export async function DELETE(
     // Store data for audit log
     const previousData = sanitizeDataForLogging({
       name: collectible.name,
-      subtitle: collectible.subtitle,
       description: collectible.description,
-      slug: collectible.slug,
-      points: collectible.points,
+      cost: collectible.cost,
       purchasable: collectible.purchasable,
+      limited: collectible.limited,
+      remaining: collectible.remaining,
+      active: collectible.active,
+      activationStart: collectible.activationStart,
+      activationEnd: collectible.activationEnd,
     });
 
     await Collectible.findByIdAndDelete(id);
@@ -194,7 +213,7 @@ export async function DELETE(
         action: "DELETE_COLLECTIBLE",
         resourceType: "collectible",
         resourceId: id,
-        details: { name: collectible.name, slug: collectible.slug },
+        details: { name: collectible.name },
         previousData,
         request,
       });
