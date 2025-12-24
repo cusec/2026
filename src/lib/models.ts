@@ -35,6 +35,15 @@ const userSchema = new Schema(
       ],
       default: [],
     },
+    shopPrizes: {
+      type: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: "ShopItem",
+        },
+      ],
+      default: [],
+    },
     claim_attempts: {
       type: [
         {

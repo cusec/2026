@@ -44,6 +44,7 @@ export interface DbUser {
   points: number;
   claimedItems: string[];
   collectibles: string[];
+  shopPrizes: string[]; // Array of ShopItem IDs that have been redeemed for this user
   claim_attempts?: ClaimAttempt[];
 }
 
