@@ -97,7 +97,7 @@ export default function SmoothFollower() {
 
   // Return the same structure on both server and client
   return (
-    <div className="hidden md:block pointer-events-none fixed inset-0 z-50">
+    <div className="hidden md:block pointer-events-none fixed inset-0 z-80">
       <div
         className="absolute rounded-full bg-light-mode/70"
         style={{
