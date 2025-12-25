@@ -159,40 +159,36 @@ const ShopPrize = ({
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode">
-        <div className="flex items-center space-x-4">
-          {getImageSrc(item) && (
-            <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getImageSrc(item)!}
-                alt={item.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
-          <div>
-            <p className="font-semibold">{item.name}</p>
-            <p className="text-sm">
-              {item.cost} points
-              {item.limited && item.remaining > 0 && (
-                <span className="ml-2 text-orange-600">
-                  ({item.remaining} left)
-                </span>
-              )}
-              {isSoldOut && (
-                <span className="ml-2 text-red-600">(Sold out)</span>
-              )}
-            </p>
+      <div className="flex flex-col gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-48 w-48 rounded-2xl border-2 border-light-mode/20 text-light-mode">
+        {getImageSrc(item) && (
+          <div className="w-18 h-18 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={getImageSrc(item)!}
+              alt={item.name}
+              className="w-full h-full object-cover"
+            />
           </div>
-        </div>
-        <div className="flex gap-2">
+        )}
+
+        <p>{item.name}</p>
+
+        <div className="flex items-center justify-center space-x-1 text-xs">
+          <div className="flex items-center justify-center px-2 py-1 rounded-full bg-light-mode/20">
+            {item.cost}
+          </div>
           <button
             onClick={openItemModal}
-            className="px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors text-sm"
+            className="px-2 py-1 bg-dark-mode/10 border border-light-mode/30 rounded-full"
           >
             More Info
           </button>
+
+          {item.limited && (
+            <span className="bg-accent/80 px-2 py-1 rounded-full">
+              {item.remaining} left
+            </span>
+          )}
         </div>
       </div>
 

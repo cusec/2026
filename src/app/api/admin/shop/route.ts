@@ -183,26 +183,32 @@ export async function PUT(request: Request) {
       shopItem.activationStart = updates.activationStart;
     if (updates.activationEnd !== undefined)
       shopItem.activationEnd = updates.activationEnd;
-    if (
-      updates.imageData !== undefined &&
-      updates.imageContentType !== undefined
-    ) {
-      // Validate image content type
-      const allowedTypes = [
-        "image/png",
-        "image/jpeg",
-        "image/jpg",
-        "image/gif",
-        "image/webp",
-      ];
-      if (!allowedTypes.includes(updates.imageContentType)) {
-        return NextResponse.json(
-          { error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP" },
-          { status: 400 }
-        );
+    // Handle image updates (including removal when null is passed)
+    if ("imageData" in updates) {
+      if (updates.imageData === null) {
+        // Remove image
+        shopItem.imageData = null;
+        shopItem.imageContentType = null;
+      } else if (updates.imageData && updates.imageContentType) {
+        // Validate image content type
+        const allowedTypes = [
+          "image/png",
+          "image/jpeg",
+          "image/jpg",
+          "image/gif",
+          "image/webp",
+        ];
+        if (!allowedTypes.includes(updates.imageContentType)) {
+          return NextResponse.json(
+            {
+              error: "Invalid image type. Allowed types: PNG, JPEG, GIF, WebP",
+            },
+            { status: 400 }
+          );
+        }
+        shopItem.imageData = updates.imageData;
+        shopItem.imageContentType = updates.imageContentType;
       }
-      shopItem.imageData = updates.imageData;
-      shopItem.imageContentType = updates.imageContentType;
     }
 
     await shopItem.save();

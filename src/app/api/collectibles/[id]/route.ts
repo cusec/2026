@@ -112,9 +112,15 @@ export async function PUT(
     if (activationStart !== undefined)
       collectible.activationStart = activationStart;
     if (activationEnd !== undefined) collectible.activationEnd = activationEnd;
-    if (imageData !== undefined) collectible.imageData = imageData;
-    if (imageContentType !== undefined)
-      collectible.imageContentType = imageContentType;
+    // Handle image updates (including removal when null is passed)
+    if (imageData === null) {
+      collectible.imageData = null;
+      collectible.imageContentType = null;
+    } else if (imageData !== undefined) {
+      collectible.imageData = imageData;
+      if (imageContentType !== undefined)
+        collectible.imageContentType = imageContentType;
+    }
 
     await collectible.save();
 

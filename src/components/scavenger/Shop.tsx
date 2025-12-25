@@ -151,7 +151,7 @@ const Shop = ({ user, dbUser }: ShopProps) => {
           <>
             {/* Shop Prizes Section */}
             {shopItems.length > 0 && (
-              <div className="space-y-3 mb-6">
+              <div className="w-full flex flex-col items-center justify-center text-center sm:grid sm:grid-cols-2 md:grid-cols-3 gap-4 pt-4">
                 {shopItems.map((item) => (
                   <ShopPrize
                     key={item._id}
@@ -165,7 +165,7 @@ const Shop = ({ user, dbUser }: ShopProps) => {
 
             {/* Collectibles Section */}
             {collectibles.length > 0 && (
-              <div className="space-y-3">
+              <div className="w-full flex flex-col items-center justify-center text-center sm:grid sm:grid-cols-2 gap-4 pt-4">
                 {collectibles.map((collectible) => (
                   <ShopCollectible
                     key={collectible._id}

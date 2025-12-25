@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { Save, X, Upload, Users } from "lucide-react";
+import { Save, X, Upload, Users, Trash2 } from "lucide-react";
 import { Collectible } from "@/lib/interface";
 import CollectibleUsersModal from "./CollectibleUsersModal";
 
@@ -66,6 +66,19 @@ const CollectibleEditForm = ({
       setImagePreview(base64);
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleRemoveImage = () => {
+    // Use null (not undefined) to signal explicit removal to the API
+    onChange({
+      ...item,
+      imageData: null as unknown as string | undefined,
+      imageContentType: null as unknown as string | undefined,
+    });
+    setImagePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const getImageSrc = () => {
@@ -141,6 +154,14 @@ const CollectibleEditForm = ({
                 title="Change image"
               >
                 <Upload size={10} />
+              </button>
+              <button
+                type="button"
+                onClick={handleRemoveImage}
+                className="absolute -top-1 -right-1 p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
+                title="Remove image"
+              >
+                <Trash2 size={10} />
               </button>
             </div>
           ) : (

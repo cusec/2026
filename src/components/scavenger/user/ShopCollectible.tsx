@@ -84,33 +84,37 @@ const ShopCollectible = ({
 
   return (
     <>
-      <div className="flex items-center justify-between p-4 bg-light-mode/70 rounded-lg border transition-all duration-200 hover:shadow-md text-dark-mode">
-        <div className="flex items-center space-x-4">
-          {getCollectibleImageSrc(collectible) && (
-            <div className="w-10 h-10 rounded-full overflow-hidden shrink-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={getCollectibleImageSrc(collectible)!}
-                alt={collectible.name}
-                className="w-full h-full object-cover"
-              />
+      <div className="flex flex-col sm:flex-row gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-48 w-48 sm:h-28 sm:w-70 rounded-2xl border-2 border-light-mode/20 text-light-mode">
+        {getCollectibleImageSrc(collectible) && (
+          <div className="w-18 h-18 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={getCollectibleImageSrc(collectible)!}
+              alt={collectible.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
+        <div className="flex flex-col gap-2 items-center">
+          <p>{collectible.name}</p>
+
+          <div className="flex items-center justify-center space-x-1 text-xs">
+            <div className="flex items-center justify-center px-2 py-1 rounded-full bg-light-mode/20">
+              {collectible.cost}
             </div>
-          )}
-          <div>
-            <p className="font-semibold">{collectible.name}</p>
-            <p className="text-sm">{collectible.cost} points</p>
-            {isSoldOut && (
-              <span className="text-xs text-red-600 font-medium">Sold out</span>
+            <button
+              onClick={openModal}
+              className="px-2 py-1 bg-dark-mode/10 border border-light-mode/30 rounded-full"
+            >
+              More Info
+            </button>
+
+            {collectible.limited && (
+              <span className="bg-accent/80 px-2 py-1 rounded-full">
+                {collectible.remaining} left
+              </span>
             )}
           </div>
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={openModal}
-            className="px-3 py-1 bg-primary text-white rounded-lg hover:bg-primary/80 transition-colors text-sm"
-          >
-            More Info
-          </button>
         </div>
       </div>
 
@@ -155,12 +159,6 @@ const ShopCollectible = ({
                 <span className="font-medium">Cost:</span>
                 <span className="text-primary font-bold">
                   {collectible.cost} points
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Your Points:</span>
-                <span className={canAfford ? "text-green-600" : "text-red-600"}>
-                  {userPoints} points
                 </span>
               </div>
               {collectible.limited && (
