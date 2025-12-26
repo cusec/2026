@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "@/components/ui/modal";
 import { ShopItem } from "@/lib/interface";
-import { X, Gift, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 interface UserShopPrizesModalProps {
   userId: string;
