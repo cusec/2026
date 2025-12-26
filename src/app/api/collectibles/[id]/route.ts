@@ -210,6 +210,16 @@ export async function DELETE(
       activationEnd: collectible.activationEnd,
     });
 
+
+    // Check if any user owns this collectible
+    const usersWithCollectible = await (await import("@/lib/models")).User.find({ "collectibles.collectibleId": id }).limit(1);
+    if (usersWithCollectible.length > 0) {
+      return NextResponse.json(
+        { error: "Cannot delete: This collectible has already been redeemed by at least one user." },
+        { status: 400 }
+      );
+    }
+
     await Collectible.findByIdAndDelete(id);
 
     // Log the admin action

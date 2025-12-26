@@ -121,7 +121,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      className="mx-4 max-w-[90vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl max-h-[80vh]"
+      className="mx-4 overflow-y-hidden max-w-[90vw] md:max-w-2xl bg-dark-mode/85 text-light-mode rounded-2xl max-h-[80vh]"
     >
       <div className="p-6">
         {/* Header */}
@@ -154,10 +154,10 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
             </button>
           </div>
         ) : (
-          <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
+          <div className="overflow-y-scroll space-y-6 max-h-[60vh] pr-2">
             {/* Hunt Items Section */}
             <div>
-              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+              <div className="flex items-center gap-2 mb-4 top-0 py-2">
                 <Package className="w-5 h-5 text-sea" />
                 <h3 className="text-lg font-semibold">
                   Hunt Items ({claimedItems.length})
@@ -180,7 +180,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       key={item._id}
                       className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
-                      <div className="w-10 h-10 rounded-full bg-light-mode/10 flex items-center justify-center shrink-0">
+                      <div className="w-10 h-10 hidden md:flex rounded-full bg-light-mode/10  items-center justify-center shrink-0">
                         <Package className="w-5 h-5 text-light-mode" />
                       </div>
                       <div className="flex-1 min-w-0">
@@ -212,7 +212,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
 
             {/* Shop Prizes Section */}
             <div>
-              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+              <div className="flex items-center gap-2 mb-4 top-0 py-2">
                 <Gift className="w-5 h-5 text-accent" />
                 <h3 className="text-lg font-semibold">
                   Shop Prizes ({shopPrizes.length})
@@ -236,7 +236,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
                       {getShopItemImageSrc(prize) && (
-                        <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                        <div className="w-10 h-10 hidden md:flex rounded-full overflow-hidden shrink-0 bg-light-mode/10">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
                             src={getShopItemImageSrc(prize)!}
@@ -274,7 +274,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
 
             {/* Collectibles Section */}
             <div>
-              <div className="flex items-center gap-2 mb-4 sticky top-0 py-2">
+              <div className="flex items-center gap-2 mb-4 top-0 py-2">
                 <Gem className="w-5 h-5 text-secondary" />
                 <h3 className="text-lg font-semibold">
                   Collectibles ({collectibles.length})
@@ -297,7 +297,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                     >
                       {collectible.imageData &&
                         collectible.imageContentType && (
-                          <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                          <div className="w-10 h-10 hidden md:flex rounded-full overflow-hidden shrink-0 bg-light-mode/10">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
                               src={`data:${collectible.imageContentType};base64,${collectible.imageData}`}

@@ -123,14 +123,14 @@ const ShopCollectible = ({
         isOpen={isModalOpen}
         onClose={closeModal}
         title={collectible.name}
-        className="max-w-md text-dark-mode"
+        className="max-w-md text-light-mode bg-dark-mode/85"
       >
         {redeemSuccess ? (
           <div className="text-center py-4">
             <div className="text-green-600 font-semibold mb-2">
               ✓ {redeemSuccess}
             </div>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm">
               Check your inventory to see your new collectible!
             </p>
           </div>
@@ -138,7 +138,7 @@ const ShopCollectible = ({
           <div className="space-y-4">
             {/* Collectible Image */}
             {getCollectibleImageSrc(collectible) && (
-              <div className="w-full h-32 rounded-lg overflow-hidden">
+              <div className="w-50 h-50 mx-auto rounded-lg overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={getCollectibleImageSrc(collectible)!}
@@ -149,17 +149,13 @@ const ShopCollectible = ({
             )}
 
             {/* Description */}
-            {collectible.description && (
-              <p className="text-gray-700">{collectible.description}</p>
-            )}
+            {collectible.description && <p>{collectible.description}</p>}
 
             {/* Details */}
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="font-medium">Cost:</span>
-                <span className="text-primary font-bold">
-                  {collectible.cost} points
-                </span>
+                <span className="font-medium">{collectible.cost} points</span>
               </div>
               {collectible.limited && (
                 <div className="flex justify-between">
@@ -205,7 +201,7 @@ const ShopCollectible = ({
             <button
               onClick={handleRedeem}
               disabled={!canAfford || isRedeeming || isSoldOut}
-              className="w-full py-2 bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isRedeeming ? (
                 <>

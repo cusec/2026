@@ -197,12 +197,12 @@ const ShopPrize = ({
         isOpen={isModalOpen}
         onClose={closeModal}
         title={item.name}
-        className="max-w-md text-dark-mode"
+        className="max-w-md text-light-mode bg-dark-mode/85"
       >
         <div className="space-y-4">
           {/* Large Image */}
           {getImageSrc(item) && (
-            <div className="w-full h-48 rounded-lg overflow-hidden bg-gray-200">
+            <div className="w-50 h-50 mx-auto rounded-lg overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={getImageSrc(item)!}
@@ -213,13 +213,13 @@ const ShopPrize = ({
           )}
 
           {/* Description */}
-          <p className="text-gray-700">{item.description}</p>
+          <p>{item.description}</p>
 
           {/* Details */}
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="font-medium">Cost:</span>
-              <span className="text-primary font-bold">{item.cost} points</span>
+              <span className="font-medium">{item.cost} points</span>
             </div>
             {item.limited && (
               <div className="flex justify-between">
@@ -245,7 +245,7 @@ const ShopPrize = ({
                 openRedeemModal();
               }}
               disabled={isSoldOut}
-              className="w-full py-2 bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSoldOut ? "Sold Out" : "Redeem for User"}
             </button>
@@ -258,7 +258,7 @@ const ShopPrize = ({
         isOpen={isRedeemModalOpen}
         onClose={closeRedeemModal}
         title={`Redeem: ${item.name}`}
-        className="max-w-md text-dark-mode"
+        className="max-w-md text-light-mode bg-dark-mode/85"
       >
         <div className="space-y-4">
           {redeemSuccess ? (
@@ -270,9 +270,9 @@ const ShopPrize = ({
           ) : (
             <>
               {/* Item Info */}
-              <div className="flex items-center space-x-4 p-3 bg-gray-100 rounded-lg">
+              <div className="flex items-center space-x-4 p-3 rounded-lg">
                 {getImageSrc(item) && (
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200 shrink-0">
+                  <div className="w-12 h-12 rounded-full overflow-hidden shrink-0">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={getImageSrc(item)!}
@@ -282,9 +282,8 @@ const ShopPrize = ({
                   </div>
                 )}
                 <div>
-                  <p className="font-semibold">{item.name}</p>
-                  <p className="text-sm text-primary font-bold">
-                    {item.cost} points
+                  <p className="font-semibold">
+                    {item.name} ({item.cost} points)
                   </p>
                 </div>
               </div>
@@ -292,28 +291,26 @@ const ShopPrize = ({
               {/* User Selection */}
               {selectedUser ? (
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium">
                     Selected User
                   </label>
-                  <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
+                  <div className="flex items-center justify-between p-3 rounded-lg border border-blue-200">
                     <div className="flex items-center space-x-3">
-                      <User className="w-8 h-8 text-blue-500" />
+                      <User className="w-8 h-8 " />
                       <div>
                         <p className="font-semibold">{selectedUser.name}</p>
-                        <p className="text-sm text-gray-600">
-                          {selectedUser.email}
-                        </p>
+                        <p className="text-sm ">{selectedUser.email}</p>
                         {selectedUser.linked_email && (
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs">
                             Linked: {selectedUser.linked_email}
                           </p>
                         )}
                         {selectedUser.discord_handle && (
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs">
                             Discord: {selectedUser.discord_handle}
                           </p>
                         )}
-                        <p className="text-sm font-medium text-primary">
+                        <p className="text-sm font-medium">
                           {selectedUser.points} points available
                         </p>
                       </div>
@@ -322,7 +319,7 @@ const ShopPrize = ({
                       onClick={clearSelectedUser}
                       className="p-1 hover:bg-blue-100 rounded-full"
                     >
-                      <X className="w-5 h-5 text-gray-500" />
+                      <X className="w-5 h-5 " />
                     </button>
                   </div>
 
@@ -336,20 +333,20 @@ const ShopPrize = ({
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="block text-sm font-medium">
                     Search for User
                   </label>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4" />
                     <input
                       type="text"
                       value={searchQuery}
                       onChange={(e) => handleSearch(e.target.value)}
                       placeholder="Search by name, email, linked email, or discord..."
-                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg"
                     />
                     {isSearching && (
-                      <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 animate-spin" />
+                      <Loader2 className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 animate-spin" />
                     )}
                   </div>
 
@@ -360,13 +357,11 @@ const ShopPrize = ({
                         <button
                           key={user._id}
                           onClick={() => selectUser(user)}
-                          className="w-full p-3 text-left hover:bg-gray-50 border-b border-gray-100 last:border-b-0"
+                          className="w-full p-3 text-left hover:bg-dark-mode border-b border-gray-100 last:border-b-0"
                         >
                           <p className="font-semibold">{user.name}</p>
-                          <p className="text-sm text-gray-600">{user.email}</p>
-                          <p className="text-xs text-primary">
-                            {user.points} points
-                          </p>
+                          <p className="text-sm ">{user.email}</p>
+                          <p className="text-xs ">{user.points} points</p>
                         </button>
                       ))}
                     </div>
@@ -375,7 +370,7 @@ const ShopPrize = ({
                   {searchQuery.length >= 2 &&
                     !isSearching &&
                     searchResults.length === 0 && (
-                      <p className="text-sm text-gray-500 text-center py-2">
+                      <p className="text-sm  text-center py-2">
                         No users found
                       </p>
                     )}
@@ -397,7 +392,7 @@ const ShopPrize = ({
                   selectedUser.points < item.cost ||
                   isRedeeming
                 }
-                className="w-full py-2 bg-accent text-white rounded-lg hover:bg-accent/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isRedeeming ? (
                   <>
