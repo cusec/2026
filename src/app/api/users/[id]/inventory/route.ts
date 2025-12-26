@@ -74,11 +74,32 @@ export async function GET(
       }
     );
 
+    // Group shop prizes by type and count occurrences
+    const shopPrizeCounts = user.shopPrizes.reduce(
+      (
+        acc: Record<
+          string,
+          { count: number; prize: (typeof user.shopPrizes)[0] }
+        >,
+        prize: (typeof user.shopPrizes)[0]
+      ) => {
+        const prizeId = prize._id.toString();
+        if (!acc[prizeId]) {
+          acc[prizeId] = { ...prize.toObject(), count: 0 };
+        }
+        acc[prizeId].count += 1;
+        return acc;
+      },
+      {}
+    );
+
+    const groupedShopPrizes = Object.values(shopPrizeCounts);
+
     return NextResponse.json({
       success: true,
       inventory: {
         claimedItems: user.claimedItems || [],
-        shopPrizes: user.shopPrizes || [],
+        shopPrizes: groupedShopPrizes,
         collectibles: collectiblesWithDetails,
       },
     });

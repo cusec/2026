@@ -10,12 +10,14 @@ import {
   Users as UsersIcon,
   History,
   Gem,
+  Gift,
   // Trash2,
   RefreshCw,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import UserHistoryDetailsModal from "./UserHistoryDetailsModal";
 import UserCollectiblesModal from "./UserCollectiblesModal";
+import UserShopPrizesModal from "./UserShopPrizesModal";
 
 interface User {
   _id: string;
@@ -58,6 +60,9 @@ const UsersManagementModal = ({
 
   // Collectibles modal state
   const [collectiblesModalOpen, setCollectiblesModalOpen] = useState(false);
+
+  // Shop prizes modal state
+  const [shopPrizesModalOpen, setShopPrizesModalOpen] = useState(false);
 
   const fetchUsers = async () => {
     try {
@@ -444,6 +449,16 @@ const UsersManagementModal = ({
                             <Gem className="w-3 h-3" />
                             Collectibles
                           </button>
+                          <button
+                            onClick={() => {
+                              setSelectedUser(user);
+                              setShopPrizesModalOpen(true);
+                            }}
+                            className="flex items-center gap-1 px-3 py-1 bg-accent text-white rounded hover:bg-accent-dark text-sm"
+                            title="Manage Shop Prizes"
+                          >
+                            <Gift className="w-4 h-4" /> Shop Prizes
+                          </button>
                         </div>
                       </div>
                     ) : (
@@ -567,6 +582,13 @@ const UsersManagementModal = ({
         userId={selectedUser?._id || null}
         userName={selectedUser?.name || ""}
         userEmail={selectedUser?.email || ""}
+      />
+
+      {/* User Shop Prizes Modal */}
+      <UserShopPrizesModal
+        isOpen={shopPrizesModalOpen}
+        onClose={() => setShopPrizesModalOpen(false)}
+        userId={selectedUser?._id || ""}
       />
     </>
   );

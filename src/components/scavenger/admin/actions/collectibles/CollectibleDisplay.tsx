@@ -90,8 +90,13 @@ const CollectibleDisplay = ({
           </button>
           <button
             onClick={onDelete}
-            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            className={`p-2 rounded-lg transition-colors ${
+              item.claimCount > 0
+                ? "text-gray-400 bg-gray-100 cursor-not-allowed"
+                : "text-red-600 hover:bg-red-50"
+            }`}
             title="Delete collectible"
+            disabled={item.claimCount > 0}
           >
             <Trash2 size={16} />
           </button>

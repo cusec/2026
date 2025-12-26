@@ -86,8 +86,10 @@ export async function POST(request: Request) {
     // Decrement remaining count if limited
     if (shopItem.limited) {
       shopItem.remaining -= 1;
-      await shopItem.save();
     }
+
+    shopItem.claimCount = (shopItem.claimCount || 0) + 1;
+    await shopItem.save();
 
     // Log admin/volunteer action
     await logAdminAction({

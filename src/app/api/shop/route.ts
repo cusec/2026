@@ -53,6 +53,7 @@ export async function GET(request: Request) {
         activationEnd: item.activationEnd,
         imageData: item.imageData,
         imageContentType: item.imageContentType,
+        claimCount: item.claimCount,
         createdAt: item.createdAt,
         updatedAt: item.updatedAt,
       })),

@@ -105,8 +105,10 @@ export async function POST(request: Request) {
     // Decrement remaining count if limited
     if (collectible.limited) {
       collectible.remaining -= 1;
-      await collectible.save();
     }
+
+    collectible.claimCount = (collectible.claimCount || 0) + 1;
+    await collectible.save();
 
     return NextResponse.json({
       success: true,

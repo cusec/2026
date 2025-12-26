@@ -268,6 +268,12 @@ export async function DELETE(
       collectiblesCount: user.collectibles.length,
     });
 
+    // Decrement claimCount on the collectible
+    if (collectible) {
+      collectible.claimCount = Math.max((collectible.claimCount || 1) - 1, 0);
+      await collectible.save();
+    }
+
     // Log the admin action
     const adminEmail = session.user.email;
     if (adminEmail) {

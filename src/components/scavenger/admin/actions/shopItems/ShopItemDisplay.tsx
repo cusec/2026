@@ -78,8 +78,13 @@ const ShopItemDisplay = ({ item, onEdit, onDelete }: ShopItemDisplayProps) => {
         </button>
         <button
           onClick={onDelete}
-          className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+          className={`p-2 rounded-lg transition-colors ${
+            item.claimCount > 0
+              ? "text-gray-400 bg-gray-100 cursor-not-allowed"
+              : "text-red-600 hover:bg-red-100"
+          }`}
           title="Delete"
+          disabled={item.claimCount > 0}
         >
           <Trash2 size={18} />
         </button>

@@ -84,6 +84,7 @@ export interface HuntItemFormData {
 }
 
 export interface ShopItem {
+  count?: number; // For internal use, not stored in DB, Just for displaying quantity in inventory
   _id: string;
   name: string;
   description: string;
@@ -97,6 +98,7 @@ export interface ShopItem {
   imageContentType?: string; // MIME type (optional)
   createdAt?: string;
   updatedAt?: string;
+  claimCount: number;
 }
 
 export interface ShopItemFormData {
@@ -140,6 +142,7 @@ export interface Collectible {
   imageContentType?: string; // MIME type (optional)
   createdAt?: string;
   updatedAt?: string;
+  claimCount: number;
 }
 
 export interface CollectibleFormData {

@@ -247,7 +247,7 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       )}
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold truncate text-light-mode">
-                          {prize.name}
+                          {prize.count > 1 ? `(${prize.count}x) ` : ""}{prize.name}
                         </p>
                         {prize.description && (
                           <p className="text-sm text-light-mode/60 truncate">
