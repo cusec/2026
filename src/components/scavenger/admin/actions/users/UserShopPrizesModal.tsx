@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Modal from "@/components/ui/modal";
 import { ShopItem } from "@/lib/interface";
-import { Trash2 } from "lucide-react";
+import { Trash2, AlertTriangle } from "lucide-react";
 
 interface UserShopPrizesModalProps {
   userId: string;
@@ -70,6 +70,18 @@ const UserShopPrizesModal: React.FC<UserShopPrizesModalProps> = ({
       title="User's Shop Prizes"
     >
       <div className="p-6">
+        {/* Warning about points */}
+        <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+          <div className="flex items-start gap-2">
+            <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div className="text-sm text-amber-800">
+              <strong>Important:</strong> Removing shop prizes here will{" "}
+              <strong>NOT</strong> change the user&apos;s points. To update
+              points, manually edit them in the user settings if you remove it
+              here.
+            </div>
+          </div>
+        </div>
         {loading ? (
           <div className="text-center py-8">Loading...</div>
         ) : error ? (

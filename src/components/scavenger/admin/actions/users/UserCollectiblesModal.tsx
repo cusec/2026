@@ -248,8 +248,8 @@ const UserCollectiblesModal = ({
           <div className="flex items-start gap-2">
             <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
             <div className="text-sm text-amber-800">
-              <strong>Important:</strong> Adding or removing collectibles will{" "}
-              <strong>NOT</strong> change the user&apos;s points. To update
+              <strong>Important:</strong> Adding or removing collectibles here
+              will <strong>NOT</strong> change the user&apos;s points. To update
               points, manually edit them in the user settings.
             </div>
           </div>

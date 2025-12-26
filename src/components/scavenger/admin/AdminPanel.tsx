@@ -62,6 +62,14 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
           <div className="space-y-4">
             <div className="flex flex-col gap-3">
               <button
+                onClick={() => setIsUsersModalOpen(true)}
+                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+              >
+                <Users className="mr-3 h-6 w-6" />
+                Manage Users
+              </button>
+
+              <button
                 onClick={() => setIsHuntItemsModalOpen(true)}
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
               >
@@ -78,11 +86,11 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
               </button>
 
               <button
-                onClick={() => setIsUsersModalOpen(true)}
+                onClick={() => setIsCollectiblesModalOpen(true)}
                 className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
               >
-                <Users className="mr-3 h-6 w-6" />
-                Manage Users
+                <Gem className="mr-3 h-6 w-6" />
+                Manage Collectibles
               </button>
 
               <button
@@ -91,14 +99,6 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
               >
                 <Megaphone className="mr-3 h-6 w-6" />
                 Manage Notices
-              </button>
-
-              <button
-                onClick={() => setIsCollectiblesModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <Gem className="mr-3 h-6 w-6" />
-                Manage Collectibles
               </button>
 
               <button
