@@ -19,3 +19,4 @@ export { default as Heart } from "./speakers/Heart";
 export { default as TeamHero } from "./team/TeamHero";
 export { default as TeamMembers } from "./team/TeamMembers";
 export { default as Dashboard } from "./scavenger/Dashboard";
+export { default as MainFAQ } from "./scavenger/faqs/MainFAQ";
