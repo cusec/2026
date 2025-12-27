@@ -331,7 +331,7 @@ export default function DaySchedule({
                   >
                     <div className="flex-1">
                       <div className="p-1 xxs:p-3 pb-0">
-                        <h1 className="text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
                           {event.title}
                         </h1>
                         <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
@@ -364,21 +364,21 @@ export default function DaySchedule({
                       <>
                         <button
                           onClick={() => handleEditEvent(event)}
-                          className="absolute top-2 right-9 md:right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          className="absolute top-2 right-7.75 md:right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Edit event"
                         >
                           <Pencil
-                            size={isMobile ? 12 : 15}
+                            size={isMobile ? 10 : 15}
                             className="text-dark-mode"
                           />
                         </button>
                         <button
                           onClick={() => handleDeleteEvent(event)}
-                          className="absolute top-2 right-16 md:right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
+                          className="absolute top-2 right-13 md:right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Delete event"
                         >
                           <Trash2
-                            size={isMobile ? 12 : 15}
+                            size={isMobile ? 10 : 15}
                             className="text-dark-mode"
                           />
                         </button>
