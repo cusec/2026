@@ -67,6 +67,7 @@ export async function PUT(
       name,
       description,
       cost,
+      discountedCost,
       purchasable,
       limited,
       remaining,
@@ -93,6 +94,7 @@ export async function PUT(
       name: collectible.name,
       description: collectible.description,
       cost: collectible.cost,
+      discountedCost: collectible.discountedCost,
       purchasable: collectible.purchasable,
       limited: collectible.limited,
       remaining: collectible.remaining,
@@ -105,6 +107,8 @@ export async function PUT(
     if (name !== undefined) collectible.name = name;
     if (description !== undefined) collectible.description = description;
     if (cost !== undefined) collectible.cost = cost;
+    if (discountedCost !== undefined)
+      collectible.discountedCost = discountedCost;
     if (purchasable !== undefined) collectible.purchasable = purchasable;
     if (limited !== undefined) collectible.limited = limited;
     if (remaining !== undefined) collectible.remaining = remaining;
@@ -131,6 +135,7 @@ export async function PUT(
         name: collectible.name,
         description: collectible.description,
         cost: collectible.cost,
+        discountedCost: collectible.discountedCost,
         purchasable: collectible.purchasable,
         limited: collectible.limited,
         remaining: collectible.remaining,
@@ -202,6 +207,7 @@ export async function DELETE(
       name: collectible.name,
       description: collectible.description,
       cost: collectible.cost,
+      discountedCost: collectible.discountedCost,
       purchasable: collectible.purchasable,
       limited: collectible.limited,
       remaining: collectible.remaining,
@@ -210,12 +216,16 @@ export async function DELETE(
       activationEnd: collectible.activationEnd,
     });
 
-
     // Check if any user owns this collectible
-    const usersWithCollectible = await (await import("@/lib/models")).User.find({ "collectibles.collectibleId": id }).limit(1);
+    const usersWithCollectible = await (
+      await import("@/lib/models")
+    ).User.find({ "collectibles.collectibleId": id }).limit(1);
     if (usersWithCollectible.length > 0) {
       return NextResponse.json(
-        { error: "Cannot delete: This collectible has already been redeemed by at least one user." },
+        {
+          error:
+            "Cannot delete: This collectible has already been redeemed by at least one user.",
+        },
         { status: 400 }
       );
     }

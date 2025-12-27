@@ -159,9 +159,9 @@ const ShopPrize = ({
 
   return (
     <>
-      <div className="flex flex-col gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-48 w-48 rounded-2xl border-2 border-light-mode/20 text-light-mode">
+      <div className="flex flex-col gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 rounded-2xl border-2 border-light-mode/20 text-light-mode">
         {getImageSrc(item) && (
-          <div className="w-18 h-18 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
+          <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={getImageSrc(item)!}
@@ -175,7 +175,14 @@ const ShopPrize = ({
 
         <div className="flex items-center justify-center space-x-1 text-xs">
           <div className="flex items-center justify-center px-2 py-1 rounded-full bg-light-mode/20">
-            {item.cost}
+            {item.discountedCost != null ? (
+              <>
+                <s>{item.cost} </s>&nbsp;
+                {`-> ${item.discountedCost}`}
+              </>
+            ) : (
+              <>{item.cost}</>
+            )}
           </div>
           <button
             onClick={openItemModal}
