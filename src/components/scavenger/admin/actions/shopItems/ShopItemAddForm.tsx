@@ -113,6 +113,27 @@ const ShopItemAddForm = ({
               disabled={isSubmitting}
             />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Discounted Cost (optional)
+            </label>
+            <input
+              type="number"
+              value={formData.discountedCost ?? ""}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  discountedCost: e.target.value
+                    ? parseInt(e.target.value)
+                    : null,
+                })
+              }
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+              placeholder="Enter cost in points"
+              min={0}
+              disabled={isSubmitting}
+            />
+          </div>
         </div>
 
         <div>
@@ -133,7 +154,7 @@ const ShopItemAddForm = ({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Image *
+            Image
           </label>
           {imagePreview ? (
             <div className="relative inline-block">

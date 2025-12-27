@@ -89,6 +89,7 @@ export interface ShopItem {
   name: string;
   description: string;
   cost: number;
+  discountedCost: number | null;
   limited: boolean;
   remaining: number;
   active: boolean;
@@ -105,6 +106,7 @@ export interface ShopItemFormData {
   name: string;
   description: string;
   cost: number;
+  discountedCost: number | null;
   limited: boolean;
   remaining: number;
   active: boolean;
@@ -132,6 +134,7 @@ export interface Collectible {
   name: string;
   description: string;
   cost: number;
+  discountedCost: number | null;
   purchasable: boolean;
   limited: boolean;
   remaining: number;
@@ -149,6 +152,7 @@ export interface CollectibleFormData {
   name: string;
   description: string;
   cost: number;
+  discountedCost: number | null;
   purchasable: boolean;
   limited: boolean;
   remaining: number;

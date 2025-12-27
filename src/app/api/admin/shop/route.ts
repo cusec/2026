@@ -26,6 +26,7 @@ export async function POST(request: Request) {
       name,
       description,
       cost,
+      discountedCost,
       limited,
       remaining,
       active,
@@ -65,6 +66,7 @@ export async function POST(request: Request) {
       name,
       description,
       cost,
+      discountedCost: discountedCost || null,
       limited: limited || false,
       remaining: remaining || 0,
       active: active !== undefined ? active : true,
@@ -86,6 +88,7 @@ export async function POST(request: Request) {
         name,
         description,
         cost,
+        discountedCost,
         limited,
         remaining,
         active,
@@ -106,6 +109,7 @@ export async function POST(request: Request) {
         name: shopItem.name,
         description: shopItem.description,
         cost: shopItem.cost,
+        discountedCost: shopItem.discountedCost,
         limited: shopItem.limited,
         remaining: shopItem.remaining,
         active: shopItem.active,
@@ -162,6 +166,7 @@ export async function PUT(request: Request) {
       name: shopItem.name,
       description: shopItem.description,
       cost: shopItem.cost,
+      discountedCost: shopItem.discountedCost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       active: shopItem.active,
@@ -170,12 +175,14 @@ export async function PUT(request: Request) {
       imageContentType: shopItem.imageContentType,
       hasImage: !!shopItem.imageData,
     });
-
+    console.log("Updates received for shop item:", updates);
     // Apply updates
     if (updates.name !== undefined) shopItem.name = updates.name;
     if (updates.description !== undefined)
       shopItem.description = updates.description;
     if (updates.cost !== undefined) shopItem.cost = updates.cost;
+    if (updates.discountedCost !== undefined)
+      shopItem.discountedCost = updates.discountedCost;
     if (updates.limited !== undefined) shopItem.limited = updates.limited;
     if (updates.remaining !== undefined) shopItem.remaining = updates.remaining;
     if (updates.active !== undefined) shopItem.active = updates.active;
@@ -217,6 +224,7 @@ export async function PUT(request: Request) {
       name: shopItem.name,
       description: shopItem.description,
       cost: shopItem.cost,
+      discountedCost: shopItem.discountedCost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       active: shopItem.active,
@@ -245,6 +253,7 @@ export async function PUT(request: Request) {
         name: shopItem.name,
         description: shopItem.description,
         cost: shopItem.cost,
+        discountedCost: shopItem.discountedCost,
         limited: shopItem.limited,
         remaining: shopItem.remaining,
         active: shopItem.active,
@@ -301,6 +310,7 @@ export async function DELETE(request: Request) {
       name: shopItem.name,
       description: shopItem.description,
       cost: shopItem.cost,
+      discountedCost: shopItem.discountedCost,
       limited: shopItem.limited,
       remaining: shopItem.remaining,
       active: shopItem.active,

@@ -41,6 +41,7 @@ const CollectiblesModal = ({ isOpen, onClose }: CollectiblesModalProps) => {
       name: "",
       description: "",
       cost: 0,
+      discountedCost: null,
       purchasable: false,
       limited: false,
       remaining: 0,

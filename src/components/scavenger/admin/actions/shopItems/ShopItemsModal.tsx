@@ -41,6 +41,7 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
       name: "",
       description: "",
       cost: 0,
+      discountedCost: null,
       limited: false,
       remaining: 0,
       active: true,

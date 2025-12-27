@@ -46,6 +46,7 @@ export async function GET(request: Request) {
         name: item.name,
         description: item.description,
         cost: item.cost,
+        discountedCost: item.discountedCost,
         limited: item.limited,
         remaining: item.remaining,
         active: item.active,

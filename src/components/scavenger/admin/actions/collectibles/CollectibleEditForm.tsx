@@ -132,6 +132,24 @@ const CollectibleEditForm = ({
           min={0}
         />
       </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Discounted Cost (Optional)
+        </label>
+        <input
+          type="number"
+          value={item.discountedCost ?? ""}
+          onChange={(e) =>
+            onChange({
+              ...item,
+              discountedCost: e.target.value ? parseInt(e.target.value) : null,
+            })
+          }
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
+          placeholder="Enter cost in points"
+          min={0}
+        />
+      </div>
 
       {/* Image */}
       <div>
