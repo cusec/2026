@@ -53,11 +53,11 @@ export async function POST(request: Request) {
     }
 
     // Check if user has enough points
-    if (user.points < shopItem.cost) {
+    if (user.points < (shopItem.discountedCost ?? shopItem.cost)) {
       return NextResponse.json(
         {
           error: "User does not have enough points",
-          required: shopItem.cost,
+          required: shopItem.discountedCost ?? shopItem.cost,
           available: user.points,
         },
         { status: 400 }
@@ -73,7 +73,7 @@ export async function POST(request: Request) {
     }
 
     // Deduct points from user
-    user.points -= shopItem.cost;
+    user.points -= shopItem.discountedCost ?? shopItem.cost;
 
     // Add shop item to user's shopPrizes array
     if (!user.shopPrizes) {
@@ -101,9 +101,11 @@ export async function POST(request: Request) {
       details: sanitizeDataForLogging({
         shopItemName: shopItem.name,
         cost: shopItem.cost,
+        discountedCost: shopItem.discountedCost,
         userName: user.name,
         userEmail: user.email,
-        previousPoints: user.points + shopItem.cost,
+        previousPoints:
+          user.points + (shopItem.discountedCost ?? shopItem.cost),
         newPoints: user.points,
       }),
       request,
@@ -119,6 +121,7 @@ export async function POST(request: Request) {
           _id: shopItem._id,
           name: shopItem.name,
           cost: shopItem.cost,
+          discountedCost: shopItem.discountedCost,
         },
         user: {
           _id: user._id,

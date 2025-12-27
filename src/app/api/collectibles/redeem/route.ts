@@ -76,11 +76,11 @@ export async function POST(request: Request) {
     }
 
     // Check if user has enough points
-    if (user.points < collectible.cost) {
+    if (user.points < (collectible.discountedCost ?? collectible.cost)) {
       return NextResponse.json(
         {
           error: "You do not have enough points",
-          required: collectible.cost,
+          required: collectible.discountedCost ?? collectible.cost,
           available: user.points,
         },
         { status: 400 }
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
     }
 
     // Deduct points from user
-    user.points -= collectible.cost;
+    user.points -= collectible.discountedCost ?? collectible.cost;
 
     // Add collectible to user's collectibles array with used: false
     if (!user.collectibles) {
@@ -118,6 +118,7 @@ export async function POST(request: Request) {
           _id: collectible._id,
           name: collectible.name,
           cost: collectible.cost,
+          discountedCost: collectible.discountedCost,
         },
         user: {
           newPoints: user.points,

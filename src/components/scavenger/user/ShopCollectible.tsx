@@ -29,7 +29,10 @@ const ShopCollectible = ({
   const [redeemError, setRedeemError] = useState<string | null>(null);
   const [redeemSuccess, setRedeemSuccess] = useState<string | null>(null);
 
-  const canAfford = userPoints >= collectible.cost;
+  const canAfford =
+    collectible.discountedCost != null
+      ? userPoints >= collectible.discountedCost
+      : userPoints >= collectible.cost;
 
   const isSoldOut = collectible.limited && collectible.remaining <= 0;
 
@@ -111,7 +114,7 @@ const ShopCollectible = ({
             </div>
             <button
               onClick={openModal}
-              className="px-2 py-1 bg-dark-mode/10 border border-light-mode/30 rounded-full"
+              className="px-2 py-1 bg-dark-mode/10 hover:bg-dark-mode/50 border border-light-mode/30 rounded-full"
             >
               More Info
             </button>
@@ -129,7 +132,11 @@ const ShopCollectible = ({
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={collectible.name}
+        title={
+          collectible.discountedCost != null
+            ? `${collectible.name} (Price Updated)`
+            : collectible.name
+        }
         className="max-w-md text-light-mode bg-dark-mode/85"
       >
         {redeemSuccess ? (
@@ -162,7 +169,17 @@ const ShopCollectible = ({
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="font-medium">Cost:</span>
-                <span className="font-medium">{collectible.cost} points</span>
+                <span className="font-medium">
+                  {collectible.discountedCost != null ? (
+                    <>
+                      <s>{collectible.cost} </s>&nbsp;
+                      {`-> ${collectible.discountedCost}`}
+                    </>
+                  ) : (
+                    <>{collectible.cost}</>
+                  )}{" "}
+                  points
+                </span>
               </div>
               {collectible.limited && (
                 <div className="flex justify-between">
@@ -192,8 +209,11 @@ const ShopCollectible = ({
             {/* Points Warning */}
             {!canAfford && !isSoldOut && (
               <div className="p-3 bg-yellow-50 text-yellow-700 rounded-lg text-sm">
-                You need {collectible.cost - userPoints} more points to purchase
-                this collectible.
+                You need{" "}
+                {Math.abs(
+                  (collectible.discountedCost ?? collectible.cost) - userPoints
+                )}{" "}
+                more points to purchase this collectible.
               </div>
             )}
 

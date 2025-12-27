@@ -339,8 +339,11 @@ export async function POST(
         // Decrement remaining count if limited
         if (collectible.limited) {
           collectible.remaining -= 1;
-          await collectible.save();
         }
+
+        // Increment claimCount on the collectible
+        collectible.claimCount = (collectible.claimCount || 0) + 1;
+        await collectible.save();
       }
     }
 

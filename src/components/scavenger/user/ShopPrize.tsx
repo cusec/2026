@@ -114,7 +114,7 @@ const ShopPrize = ({
     if (!selectedUser) return;
 
     // Check if user has enough points
-    if (selectedUser.points < item.cost) {
+    if (selectedUser.points < (item.discountedCost ?? item.cost)) {
       setRedeemError(
         `${selectedUser.name} doesn't have enough points. They have ${selectedUser.points} points but need ${item.cost}.`
       );
@@ -186,7 +186,7 @@ const ShopPrize = ({
           </div>
           <button
             onClick={openItemModal}
-            className="px-2 py-1 bg-dark-mode/10 border border-light-mode/30 rounded-full"
+            className="px-2 py-1 bg-dark-mode/10 hover:bg-dark-mode/50 border border-light-mode/30 rounded-full"
           >
             More Info
           </button>
@@ -203,7 +203,11 @@ const ShopPrize = ({
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}
-        title={item.name}
+        title={
+          item.discountedCost != null
+            ? `${item.name} (Price Updated)`
+            : item.name
+        }
         className="max-w-md text-light-mode bg-dark-mode/85"
       >
         <div className="space-y-4">
@@ -226,7 +230,17 @@ const ShopPrize = ({
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="font-medium">Cost:</span>
-              <span className="font-medium">{item.cost} points</span>
+              <span className="font-medium">
+                {item.discountedCost != null ? (
+                  <>
+                    <s>{item.cost} </s>&nbsp;
+                    {`-> ${item.discountedCost}`}
+                  </>
+                ) : (
+                  <>{item.cost}</>
+                )}{" "}
+                points
+              </span>
             </div>
             {item.limited && (
               <div className="flex justify-between">
@@ -290,7 +304,16 @@ const ShopPrize = ({
                 )}
                 <div>
                   <p className="font-semibold">
-                    {item.name} ({item.cost} points)
+                    {item.name} (
+                    {item.discountedCost != null ? (
+                      <>
+                        <s>{item.cost} </s>&nbsp;
+                        {`-> ${item.discountedCost}`}
+                      </>
+                    ) : (
+                      <>{item.cost}</>
+                    )}{" "}
+                    points)
                   </p>
                 </div>
               </div>
@@ -331,10 +354,11 @@ const ShopPrize = ({
                   </div>
 
                   {/* Points Check */}
-                  {selectedUser.points < item.cost && (
+                  {selectedUser.points < (item.discountedCost ?? item.cost) && (
                     <p className="text-red-600 text-sm">
                       ⚠️ This user doesn&apos;t have enough points (needs{" "}
-                      {item.cost}, has {selectedUser.points})
+                      {item.discountedCost ?? item.cost}, has{" "}
+                      {selectedUser.points})
                     </p>
                   )}
                 </div>
@@ -396,7 +420,7 @@ const ShopPrize = ({
                 onClick={handleRedeem}
                 disabled={
                   !selectedUser ||
-                  selectedUser.points < item.cost ||
+                  selectedUser.points < (item.discountedCost ?? item.cost) ||
                   isRedeeming
                 }
                 className="w-full py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"

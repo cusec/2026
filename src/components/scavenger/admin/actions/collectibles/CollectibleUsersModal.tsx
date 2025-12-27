@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import {
-  Users,
-  RefreshCw,
-  Clock,
-  Mail,
-  Sparkles,
-  CheckCircle,
-  XCircle,
-} from "lucide-react";
+import { Users, RefreshCw, Clock, Mail, Sparkles } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
 interface OwnedUser {
@@ -83,9 +75,6 @@ const CollectibleUsersModal = ({
     return new Date(dateStr).toLocaleString();
   };
 
-  const usedCount = ownedUsers.filter((u) => u.used).length;
-  const unusedCount = ownedUsers.length - usedCount;
-
   return (
     <Modal
       isOpen={isOpen}
@@ -105,20 +94,6 @@ const CollectibleUsersModal = ({
             </p>
           </div>
         </div>
-
-        {/* Status Summary */}
-        {ownedUsers.length > 0 && (
-          <div className="flex gap-4">
-            <div className="flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm">
-              <CheckCircle className="w-4 h-4" />
-              Used: {usedCount}
-            </div>
-            <div className="flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
-              <XCircle className="w-4 h-4" />
-              Unused: {unusedCount}
-            </div>
-          </div>
-        )}
 
         {error && (
           <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
@@ -160,11 +135,7 @@ const CollectibleUsersModal = ({
               {ownedUsers.map((user) => (
                 <div
                   key={user._id}
-                  className={`p-3 border rounded-lg bg-white flex items-center justify-between ${
-                    user.used
-                      ? "border-green-200 bg-green-50"
-                      : "border-gray-200"
-                  }`}
+                  className={`p-3 border rounded-lg bg-white flex items-center justify-between`}
                 >
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
@@ -175,17 +146,6 @@ const CollectibleUsersModal = ({
                       {user.name && (
                         <span className="text-sm text-gray-500">
                           ({user.name})
-                        </span>
-                      )}
-                      {user.used ? (
-                        <span className="ml-2 px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded-full flex items-center gap-1">
-                          <CheckCircle className="w-3 h-3" />
-                          Used
-                        </span>
-                      ) : (
-                        <span className="ml-2 px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full flex items-center gap-1">
-                          <XCircle className="w-3 h-3" />
-                          Unused
                         </span>
                       )}
                     </div>

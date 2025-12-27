@@ -66,7 +66,7 @@ const CollectiblesList = ({
               onDelete={() => {
                 if (
                   confirm(
-                    `Are you sure you want to delete "${item.name}"? This action cannot be undone.`
+                    `This will unlink the collectible from any hunt items that have it associated (If any). Are you sure you want to delete "${item.name}"? This action cannot be undone.`
                   )
                 ) {
                   onDelete(item._id);

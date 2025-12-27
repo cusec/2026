@@ -5,13 +5,21 @@ import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
-// GET - Fetch all hunt items (Available to all authenticated users)
+// GET - Fetch all hunt items (Available only to admins)
 export async function GET() {
   try {
     const session = await auth0.getSession();
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // Check if user is admin
+    if (!(await isAdmin())) {
+      return NextResponse.json(
+        { error: "Forbidden: Admin access required" },
+        { status: 403 }
+      );
     }
 
     await connectMongoDB();

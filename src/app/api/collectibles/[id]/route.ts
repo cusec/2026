@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { Collectible } from "@/lib/models";
+import { HuntItem, Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
+import { Types } from "mongoose";
 
 // GET - Fetch a specific collectible
 export async function GET(
@@ -230,6 +231,15 @@ export async function DELETE(
       );
     }
 
+    // Remove the collectible from any hunt items that have it within their collectibles array
+    const huntItems = await HuntItem.find({ collectibles: id });
+    for (const huntItem of huntItems) {
+      huntItem.collectibles = huntItem.collectibles.filter(
+        (collectibleId: Types.ObjectId) => collectibleId.toString() !== id
+      );
+      await huntItem.save();
+    }
+
     await Collectible.findByIdAndDelete(id);
 
     // Log the admin action
@@ -240,7 +250,10 @@ export async function DELETE(
         action: "DELETE_COLLECTIBLE",
         resourceType: "collectible",
         resourceId: id,
-        details: { name: collectible.name },
+        details: {
+          name: collectible.name,
+          relatedHuntItemsUpdated: huntItems.map((item) => item._id.toString()),
+        },
         previousData,
         request,
       });
