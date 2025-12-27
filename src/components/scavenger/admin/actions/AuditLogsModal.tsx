@@ -116,7 +116,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black text-dark-mode bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-hidden">
+      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-scroll">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <h2 className="text-xl font-semibold text-gray-900">
@@ -212,7 +212,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1">
           {error && (
             <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700">
               {error}
@@ -281,7 +281,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
 
           {/* Pagination Controls */}
           {totalPages > 0 && (
-            <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
+            <div className="flex flex-wrap items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
               <div className="text-sm text-gray-700">
                 Showing{" "}
                 {auditLogs.length > 0
@@ -298,7 +298,7 @@ const AuditLogsModal = ({ isOpen, onClose }: AuditLogsModalProps) => {
                 >
                   <ChevronLeft size={16} />
                 </button>
-                <div className="flex items-center gap-1">
+                <div className="flex flex-wrap items-center gap-1">
                   {/* Show page numbers */}
                   {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                     let pageNum: number;

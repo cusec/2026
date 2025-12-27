@@ -30,7 +30,7 @@ const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
       isOpen={isOpen}
       onClose={onClose}
       title={`QR Code for ${item.name}`}
-      className="max-w-md"
+      className="max-w-md text-dark-mode"
     >
       <div className="text-center space-y-4">
         <div className="flex justify-center">

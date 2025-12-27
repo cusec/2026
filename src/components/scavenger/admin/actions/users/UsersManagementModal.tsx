@@ -545,24 +545,6 @@ const UsersManagementModal = ({
               </div>
             )}
           </div>
-
-          <div className="text-xs text-gray-500 border-t border-gray-200 pt-4">
-            <div className="flex items-center gap-2 mb-2">
-              <AlertTriangle className="w-4 h-4 text-yellow-600" />
-              <strong>Admin Controls Warning</strong>
-            </div>
-            <ul className="space-y-1 ml-6">
-              <li>
-                • <strong>Clear Claimed Items</strong>: Permanently removes all
-                claimed items (points are calculated dynamically)
-              </li>
-              <li>
-                • <strong>Clear Attempts</strong>: Removes audit trail of claim
-                attempts (not recommended)
-              </li>
-              <li>• These actions cannot be undone</li>
-            </ul>
-          </div>
         </div>
       </Modal>
 
