@@ -111,7 +111,7 @@ const UserHunt = ({
             </button>
 
             <a href={`/auth/logout?returnTo=${baseURL}/scavenger`}>
-              <button className="w-45 select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 register-hover">
+              <button className="w-45 select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 hover:bg-dark-mode/50">
                 <LogOut className="mr-3 h-6 w-6" />
                 Log Out
               </button>
@@ -123,7 +123,7 @@ const UserHunt = ({
             {isAdmin && (
               <button
                 onClick={() => setIsAdminPanelOpen(true)}
-                className="w-45 select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 register-hover"
+                className="w-45 select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 hover:bg-dark-mode/50"
               >
                 <Shield className="mr-3 h-6 w-6" />
                 Admin Panel

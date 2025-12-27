@@ -43,8 +43,8 @@ const Dashboard = ({ user, dbUser, baseURL }: DashboardProps) => {
           />
         </>
       )}
-      <Shop user={user} dbUser={dbUser} />
       <Leaderboard />
+      <Shop user={user} dbUser={dbUser} />
     </div>
   );
 };

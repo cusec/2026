@@ -188,7 +188,7 @@ const ItemClaim = ({
                   value={manualCode}
                   onChange={(e) => setManualCode(e.target.value)}
                   placeholder="Enter the item code..."
-                  className="w-full px-4 py-3 bg-light-mode/10 border border-light-mode/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent text-light-mode placeholder-light-mode/40"
+                  className="w-full px-4 py-3 bg-light-mode/10 border border-light-mode/20 rounded-xl focus:outline-none focus:ring-1 focus:ring-light-mode/20 focus:border-light-mode text-light-mode placeholder-light-mode/40"
                   autoFocus
                   disabled={isSubmitting}
                 />
@@ -196,7 +196,7 @@ const ItemClaim = ({
               <button
                 type="submit"
                 disabled={isSubmitting || !manualCode.trim()}
-                className="w-full px-6 py-3 bg-accent hover:bg-accent/80 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition"
+                className="w-full px-6 py-3 bg-light-mode/10 hover:bg-light-mode/20 disabled:opacity-50 disabled:cursor-not-allowed text-light-mode font-semibold rounded-xl transition"
               >
                 {isSubmitting ? "Claiming..." : "Claim Item"}
               </button>
@@ -225,7 +225,7 @@ const ItemClaim = ({
         {/* Error State */}
         {error && (
           <div className="text-center space-y-4">
-            <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-xl">
+            <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
               <p className="text-red-400 font-medium">{error}</p>
             </div>
             <button
@@ -284,7 +284,7 @@ const ItemClaim = ({
                 </p>
               </div>
             ) : (
-              <div className="p-4 bg-red-500/20 border border-red-500/30 rounded-xl">
+              <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl">
                 <p className="text-red-400 font-semibold mb-2">
                   {claimResult.message}
                 </p>
@@ -313,7 +313,7 @@ const ItemClaim = ({
               )}
               <button
                 onClick={handleClose}
-                className="px-6 py-3 bg-accent hover:bg-accent/80 text-white rounded-xl transition font-semibold"
+                className="px-6 py-3 bg-light-mode/2 hover:bg-light-mode/12 text-light-mode rounded-xl transition font-semibold"
               >
                 Done
               </button>
