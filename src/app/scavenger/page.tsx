@@ -48,19 +48,6 @@ export default async function ScavengerPage() {
               dbUser={dbUser}
               baseURL={process.env.APP_BASE_URL || ""}
             />
-            {/* <div className="min-w-fit flex flex-col items-center justify-center gap-4 bg-light-mode rounded-4xl shadow-lg p-8 w-3/4 sm:w-1/2 md:w-1/3 lg:w-1/4">
-              <span>Welcome, {user.name}!</span>
-              <span>[Roles: {user["cusec/roles"].join(", ")}]</span>
-              <a
-                href={`/auth/logout?returnTo=${process.env.APP_BASE_URL}/scavenger`}
-              >
-                <button className="px-6 py-2 rounded-lg bg-light-mode text-primary font-semibold shadow hover:bg-primary hover:text-white transition">
-                  Log Out
-                </button>
-              </a>
-              <ScavengerOptions user={user} />
-              <Leaderboard />
-            </div> */}
           </div>
         ) : (
           <div className="max-w-6xl mx-auto text-center z-10">
@@ -121,14 +108,13 @@ export default async function ScavengerPage() {
                   Three simple steps to become the ultimate CUSEC 2026 scavenger
                   hunt champion.
                 </p>
-
                 <a
                   href="https://www.youtube.com/watch?v=Aq5WXmQQooo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="underline"
                 >
-                  Get Early Access (2026)
+                  Access Beta Features (2026)
                 </a>
               </div>
               <div className="grid md:grid-cols-3 gap-8 mb-16">
