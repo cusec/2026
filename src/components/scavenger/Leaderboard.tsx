@@ -110,7 +110,7 @@ const Leaderboard = () => {
             {leaderboard.length >= 3 && (
               <div className="flex min-h-[250px] md:min-h-[350px] text-xs md:text-body">
                 {/* Rank 2 */}
-                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[30px]">
+                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[35px] md:mt-[50px]">
                   <div className="relative min-h-10 min-w-10 lg:min-h-15 lg:min-w-15">
                     <Image
                       alt="Second Place Icon"
@@ -146,7 +146,7 @@ const Leaderboard = () => {
                   <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                 </div>
                 {/* Rank 3 */}
-                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[60px]">
+                <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[70px] md:mt-[100px]">
                   <div className="relative min-h-10 min-w-10 lg:min-h-15 lg:min-w-15">
                     <Image
                       alt="Third Place Icon"
