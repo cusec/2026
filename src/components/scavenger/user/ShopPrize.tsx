@@ -159,7 +159,7 @@ const ShopPrize = ({
 
   return (
     <>
-      <div className="flex flex-col backdrop-blur-sm gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
+      <div className="flex flex-col backdrop-blur-sm gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-62 w-62 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
         {getImageSrc(item) && (
           <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -173,7 +173,7 @@ const ShopPrize = ({
 
         <p>{item.name}</p>
 
-        <div className="flex items-center justify-center space-x-1 text-xs">
+        <div className="flex items-center justify-center space-x-1 text-xs md:text-sm">
           <div className="flex items-center justify-center px-2 py-1 rounded-full bg-light-mode/20">
             {item.discountedCost != null ? (
               <>

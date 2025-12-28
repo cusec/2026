@@ -34,7 +34,7 @@ const MainFAQ: React.FC = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className={`w-[80vw] md:w-[65vw] max-w-[2000px] text-start transition-opacity duration-300 ${
+              className={`min-w-[80vw] md:min-w-[60vw] max-w-[2000px] text-start transition-opacity duration-300 ${
                 openItem && openItem !== `item-${index}`
                   ? "opacity-50"
                   : "opacity-100"

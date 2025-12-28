@@ -87,7 +87,7 @@ const ShopCollectible = ({
 
   return (
     <>
-      <div className="flex flex-col backdrop-blur-sm sm:flex-row gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 sm:h-32 sm:w-89 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
+      <div className="flex flex-col backdrop-blur-sm sm:flex-row gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 sm:h-32 sm:w-95 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
         {getCollectibleImageSrc(collectible) && (
           <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -107,7 +107,7 @@ const ShopCollectible = ({
         >
           <p>{collectible.name}</p>
 
-          <div className="flex items-center justify-center space-x-1 text-xs">
+          <div className="flex items-center justify-center space-x-1 text-xs md:text-sm">
             <div className="flex items-center justify-center px-2 py-1 rounded-full bg-light-mode/20">
               {collectible.discountedCost != null ? (
                 <>
