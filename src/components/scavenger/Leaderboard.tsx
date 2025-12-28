@@ -122,10 +122,10 @@ const Leaderboard = () => {
                   <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
                     {leaderboard[1].score}
                   </div>
+                  <div className="flex backdrop-blur-sm justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                   <div className="absolute pt-25 text-5xl text-light-mode/50 font-space-grotesk!">
                     2
                   </div>
-                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                 </div>
                 {/* Rank 1 */}
                 <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%]">
@@ -140,10 +140,10 @@ const Leaderboard = () => {
                   <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
                     {leaderboard[0].score}
                   </div>
+                  <div className="flex backdrop-blur-sm justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                   <div className="absolute pt-10 text-5xl text-light-mode/50 font-space-grotesk!">
                     1
                   </div>
-                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                 </div>
                 {/* Rank 3 */}
                 <div className="flex flex-col justify-center items-center text-center gap-2 w-[40%] mt-[70px] md:mt-[100px]">
@@ -158,10 +158,10 @@ const Leaderboard = () => {
                   <div className="flex items-center justify-center px-5 rounded-full bg-light-mode/20 py-1">
                     {leaderboard[2].score}
                   </div>
+                  <div className="flex backdrop-blur-sm justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                   <div className="absolute pt-25 text-5xl text-light-mode/50 font-space-grotesk!">
                     3
                   </div>
-                  <div className="flex justify-center rounded-t-xl w-full h-full bg-light-mode/15 mask-[linear-gradient(to_bottom,black_10%,transparent_100%)]"></div>
                 </div>
               </div>
             )}
@@ -170,7 +170,7 @@ const Leaderboard = () => {
               {leaderboard.slice(3).map((entry) => (
                 <div
                   key={entry.rank}
-                  className="flex justify-between items-center text-center px-5 py-4 border border-light-mode/30 rounded-2xl bg-dark-mode/60 text-sm md:text-lg"
+                  className="flex backdrop-blur-sm justify-between items-center text-center px-5 py-4 border border-light-mode/30 rounded-2xl bg-dark-mode/30 text-sm md:text-lg"
                 >
                   <div className="flex gap-3">
                     <div>{entry.rank}</div>

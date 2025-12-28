@@ -5,6 +5,7 @@ import {
   Navbar,
   // ScavengerOptions,
   // Leaderboard,
+  MainFAQ,
   Footer,
   SmoothFollower,
   Dashboard,
@@ -36,134 +37,144 @@ export default async function ScavengerPage() {
   }
 
   return (
-    <div className="bg-linear-[35deg] from-secondary from-0% via-primary via-55% to-accent to-140% -z-20 bg-cover bg-center min-h-screen overflow-x-hidden">
-      <Navbar />
-      <main className="relative min-w-screen overflow-y-hidden overflow-x-hidden flex justify-center items-center pt-[15vh]">
-        <Particles />
-        <SmoothFollower />
-        {user ? (
-          <div className="relative z-10">
-            <Dashboard
-              user={user}
-              dbUser={dbUser}
-              baseURL={process.env.APP_BASE_URL || ""}
-            />
+    <div className="relative overflow-x-hidden overflow-y-hidden bg-linear-[35deg] from-dark-mode from-0% via-primary via-55% to-accent to-140% bg-cover bg-center h-full">
+      <div className="bg-linear-[15deg] from-accent/20 from-0% via-primary/0 via-55% to-accent/0 to-100%">
+        <Navbar />
+        <main className="relative min-w-screen overflow-y-hidden overflow-x-hidden flex justify-center items-center pt-[15vh]">
+          <div
+            className="absolute inset-0 overflow-hidden"
+            style={{ height: "2000px" }}
+          >
+            <Particles className="absolute inset-0 animate-fade-in" />
           </div>
-        ) : (
-          <div className="max-w-6xl mx-auto text-center z-10">
-            {/* Hero Section */}
-            <div className="mt-[20vh] md:mt-[25vh]">
-              <div className="mb-12">
-                <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-light-mode mb-4 tracking-wider">
-                  SCAVENGER
-                </h1>
-                <h2 className="text-4xl md:text-6xl font-bold text-accent mb-6">
-                  HUNT
-                </h2>
-              </div>
-              <p className="mb-12 text-lg sm:text-xl md:text-2xl text-light-mode/90 max-w-3xl mx-auto leading-relaxed">
-                An epic adventure awaits! Scan codes, solve puzzles, compete
-                with fellow attendees, and win exclusive prizes at CUSEC 2026.
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
-                {scavengerEnabled ? (
-                  <a
-                    className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
-                    href="/auth/login?returnTo=/scavenger"
-                  >
-                    <Trophy className="mr-3 h-6 w-6" />
-                    Start Hunting
-                  </a>
-                ) : (
-                  <div className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover">
-                    <Trophy className="mr-3 h-6 w-6" />
-                    Coming Soon
-                  </div>
+          <SmoothFollower />
+          {user ? (
+            <div className="relative z-10">
+              <Dashboard
+                user={user}
+                dbUser={dbUser}
+                baseURL={process.env.APP_BASE_URL || ""}
+              />
+            </div>
+          ) : (
+            <div className="max-w-6xl mx-auto text-center z-10">
+              {/* Hero Section */}
+              <div className="mt-[20vh]">
+                <div className="mb-12">
+                  <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold text-light-mode mb-4 tracking-wider">
+                    SCAVENGER
+                  </h1>
+                  <h2 className="text-4xl md:text-6xl font-bold text-accent mb-6">
+                    HUNT
+                  </h2>
+                </div>
+                <p className="mb-12 text-lg sm:text-xl md:text-2xl text-light-mode/90 max-w-3xl mx-auto leading-relaxed">
+                  An epic adventure awaits! Scan codes, solve puzzles, compete
+                  with fellow attendees, and win exclusive prizes at CUSEC 2026.
+                </p>
+                <div className="flex flex-col gap-4 sm:flex-row sm:justify-center items-center text-light-mode/90">
+                  {scavengerEnabled ? (
+                    <a
+                      className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
+                      href="/auth/login?returnTo=/scavenger"
+                    >
+                      <Trophy className="mr-3 h-6 w-6" />
+                      Start Hunting
+                    </a>
+                  ) : (
+                    <div className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover">
+                      <Trophy className="mr-3 h-6 w-6" />
+                      Coming Soon
+                    </div>
+                  )}
+                  {scavengerEnabled && (
+                    <div>
+                      <a
+                        className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                        href="#Faq"
+                      >
+                        <Users className="mr-3 h-6 w-6" />
+                        FAQ
+                      </a>
+                    </div>
+                  )}
+                </div>
+                {!scavengerEnabled && (
+                  <p className="mt-6 text-md text-muted-foreground text-light-mode">
+                    ⏰ The hunt will be available closer to the conference date
+                  </p>
                 )}
+              </div>
 
-                <div className="hidden">
+              {/* Features Grid */}
+              <div className="mt-[25vh] text-center mx-2">
+                <div className="mb-16 text-center text-light-mode">
+                  <h2 className="mb-4 text-4xl font-black text-foreground">
+                    How It Works
+                  </h2>
+                  <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-2">
+                    Three simple steps to become the ultimate CUSEC 2026
+                    scavenger hunt champion.
+                  </p>
                   <a
-                    className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
-                    href="#"
+                    href="https://www.youtube.com/watch?v=Aq5WXmQQooo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline"
                   >
-                    <Users className="mr-3 h-6 w-6" />
-                    Rules & Guidelines
+                    Access Beta Features (2026)
                   </a>
                 </div>
+                <div className="grid md:grid-cols-3 gap-8 mb-16">
+                  <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                      <QrCode className="h-8 w-8 text-light-mode" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                      Scan & Earn
+                    </h3>
+                    <p className="text-light-mode/80">
+                      Find hidden QR codes throughout the venue & events such as
+                      a presentation or at sponsor booths. Each scan earns you
+                      points.
+                    </p>
+                  </div>
+
+                  <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                      <Puzzle className="h-8 w-8 text-green-300/80" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                      Solve Puzzles
+                    </h3>
+                    <p className="text-light-mode/80">
+                      Earn more points by challenging yourself with riddles and
+                      technical puzzles, designed to test your skills.
+                    </p>
+                  </div>
+
+                  <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
+                      <Trophy className="h-8 w-8 text-yellow-300/80" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                      Win Prizes
+                    </h3>
+                    <p className="text-light-mode/80">
+                      Compete against the other attendees, climb the leaderboard
+                      and build your score to redeem exclusive CUSEC merchandise
+                      and stickers.
+                    </p>
+                  </div>
+                </div>
               </div>
-              {!scavengerEnabled && (
-                <p className="mt-6 text-md text-muted-foreground text-light-mode">
-                  ⏰ The hunt will be available closer to the conference date
-                </p>
-              )}
+
+              {scavengerEnabled && <MainFAQ />}
             </div>
-
-            {/* Features Grid */}
-            <div className="mt-[28vh] text-center mx-2">
-              <div className="mb-16 text-center text-light-mode">
-                <h2 className="mb-4 text-4xl font-black text-foreground">
-                  How It Works
-                </h2>
-                <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-2">
-                  Three simple steps to become the ultimate CUSEC 2026 scavenger
-                  hunt champion.
-                </p>
-                <a
-                  href="https://www.youtube.com/watch?v=Aq5WXmQQooo"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline"
-                >
-                  Access Beta Features (2026)
-                </a>
-              </div>
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
-                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
-                    <QrCode className="h-8 w-8 text-light-mode" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-light-mode mb-4">
-                    Scan & Earn
-                  </h3>
-                  <p className="text-light-mode/80">
-                    Find hidden QR codes throughout the venue & events such as a
-                    presentation or at sponsor booths. Each scan earns you
-                    points.
-                  </p>
-                </div>
-
-                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
-                    <Puzzle className="h-8 w-8 text-green-300/80" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-light-mode mb-4">
-                    Solve Puzzles
-                  </h3>
-                  <p className="text-light-mode/80">
-                    Earn more points by challenging yourself with riddles and
-                    technical puzzles, designed to test your skills.
-                  </p>
-                </div>
-
-                <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
-                    <Trophy className="h-8 w-8 text-yellow-300/80" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-light-mode mb-4">
-                    Win Prizes
-                  </h3>
-                  <p className="text-light-mode/80">
-                    Compete against the other attendees, climb the leaderboard
-                    and build your score to redeem exclusive CUSEC merchandise
-                    and stickers.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </main>
-      <Footer />
+          )}
+        </main>
+        <Footer />
+      </div>
     </div>
   );
 }

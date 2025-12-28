@@ -87,7 +87,7 @@ const ShopCollectible = ({
 
   return (
     <>
-      <div className="flex flex-col sm:flex-row gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 sm:h-32 sm:w-89 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
+      <div className="flex flex-col backdrop-blur-sm sm:flex-row gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/30 h-58 w-58 sm:h-32 sm:w-89 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200">
         {getCollectibleImageSrc(collectible) && (
           <div className="w-24 h-24 rounded-full overflow-hidden bg-gray-200 shrink-0 ring-1 ring-light-mode/30 ring-offset-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -98,7 +98,13 @@ const ShopCollectible = ({
             />
           </div>
         )}
-        <div className="flex flex-col gap-2 items-center">
+        <div
+          className={`flex flex-col gap-2 pl-1 ${
+            collectible.imageData && collectible.imageContentType
+              ? "items-start"
+              : "items-center"
+          }`}
+        >
           <p>{collectible.name}</p>
 
           <div className="flex items-center justify-center space-x-1 text-xs">
@@ -114,7 +120,7 @@ const ShopCollectible = ({
             </div>
             <button
               onClick={openModal}
-              className="px-2 py-1 bg-dark-mode/10 hover:bg-dark-mode/50 border border-light-mode/30 rounded-full"
+              className="px-2 py-1 cursor-pointer bg-dark-mode/10 hover:bg-dark-mode/50 border border-light-mode/30 rounded-full"
             >
               More Info
             </button>
@@ -208,7 +214,7 @@ const ShopCollectible = ({
 
             {/* Points Warning */}
             {!canAfford && !isSoldOut && (
-              <div className="p-3 bg-yellow-50 text-yellow-700 rounded-lg text-sm">
+              <div className="p-3 bg-light-mode/70 text-dark-mode rounded-lg text-sm">
                 You need{" "}
                 {Math.abs(
                   (collectible.discountedCost ?? collectible.cost) - userPoints
@@ -228,7 +234,7 @@ const ShopCollectible = ({
             <button
               onClick={handleRedeem}
               disabled={!canAfford || isRedeeming || isSoldOut}
-              className="w-full py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full cursor-pointer py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isRedeeming ? (
                 <>

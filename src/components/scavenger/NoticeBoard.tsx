@@ -104,7 +104,7 @@ const NoticeBoard = () => {
           {notices.map((notice) => (
             <div
               key={notice._id}
-              className="p-4 rounded-xl border-2 border-light-mode/30 bg-dark-mode/30"
+              className="flex flex-col items-center text-center p-4 backdrop-blur-sm rounded-xl border-2 border-light-mode/30 bg-dark-mode/30"
             >
               <h3 className="text-lg font-semibold mb-2">{notice.title}</h3>
               <p className="text-light-mode/80">{notice.description}</p>

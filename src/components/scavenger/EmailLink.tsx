@@ -107,7 +107,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
           <button
             onClick={handleSubmitClick}
             disabled={isSubmitting}
-            className="border-b border-light-mode disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-b cursor-pointer border-light-mode disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
@@ -173,13 +173,16 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
           displayed on a leaderboard.
         </p>
         <div className="flex gap-3 justify-end">
-          <button onClick={handleCancel} className="px-4 py-2 rounded-lg">
+          <button
+            onClick={handleCancel}
+            className="px-4 py-2 cursor-pointer rounded-lg"
+          >
             Cancel
           </button>
           <button
             onClick={handleConfirm}
             disabled={!displayName.trim()}
-            className="px-4 py-2 bg-sunset rounded-lg border border-accent hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 cursor-pointer bg-sunset rounded-lg border border-accent hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Confirm
           </button>
