@@ -55,7 +55,7 @@ const NoticeBoard = () => {
         <div className="p-6">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Megaphone className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Notice Board</h2>
+            <h2 className="text-2xl md:text-4xl font-bold">Notice Board</h2>
           </div>
           <div className="space-y-3">
             {[...Array(2)].map((_, i) => (
@@ -76,7 +76,7 @@ const NoticeBoard = () => {
         <div className="p-6">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Megaphone className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Notice Board</h2>
+            <h2 className="text-2xl md:text-4xl font-bold">Notice Board</h2>
           </div>
           <div className="text-center text-red-400">
             <p>{error}</p>
@@ -97,7 +97,7 @@ const NoticeBoard = () => {
       <div className="p-6">
         <div className="flex items-center justify-center space-x-2 mb-6">
           <Megaphone className="w-8 h-8" />
-          <h2 className="text-2xl font-bold">Notice Board</h2>
+          <h2 className="text-2xl md:text-4xl font-bold">Notice Board</h2>
         </div>
 
         <div className="space-y-4">

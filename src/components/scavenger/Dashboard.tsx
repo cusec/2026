@@ -7,6 +7,7 @@ import NoticeBoard from "./NoticeBoard";
 import UserHunt from "./UserHunt";
 import Leaderboard from "./Leaderboard";
 import Shop from "./Shop";
+import DashboardFAQ from "./faqs/DashboardFAQ";
 
 interface DashboardProps {
   user: Auth0User;
@@ -45,6 +46,7 @@ const Dashboard = ({ user, dbUser, baseURL }: DashboardProps) => {
       )}
       <Leaderboard />
       <Shop user={user} dbUser={dbUser} />
+      <DashboardFAQ />
     </div>
   );
 };

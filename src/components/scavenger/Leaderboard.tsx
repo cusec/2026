@@ -56,7 +56,7 @@ const Leaderboard = () => {
         <div className=" p-6">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Trophy className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Leaderboard</h2>
+            <h2 className="text-2xl md:text-4xl font-bold">Leaderboard</h2>
           </div>
           <div className="space-y-3">
             {[...Array(5)].map((_, i) => (
@@ -77,7 +77,7 @@ const Leaderboard = () => {
         <div className="p-6">
           <div className="flex items-center justify-center space-x-2 mb-6">
             <Trophy className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Leaderboard</h2>
+            <h2 className="text-2xl md:text-4xl font-bold">Leaderboard</h2>
           </div>
           <div className="text-center py-8">
             <p className="text-red-400 mb-4">{error}</p>
@@ -94,7 +94,7 @@ const Leaderboard = () => {
         <div className="flex flex-col items-center mb-6">
           <div className="flex items-center justify-center space-x-2">
             <Trophy className="w-8 h-8" />
-            <h2 className="text-2xl font-bold">Leaderboard</h2>
+            <h2 className="text-2xl md:text-4xl font-bold">Leaderboard</h2>
           </div>
         </div>
 

@@ -97,7 +97,7 @@ const Shop = ({ user, dbUser }: ShopProps) => {
           <div className="flex flex-col items-center mb-6">
             <div className="flex items-center justify-center space-x-2">
               <ShoppingBag className="w-8 h-8" />
-              <h2 className="text-2xl font-bold">Shop</h2>
+              <h2 className="text-2xl md:text-4xl font-bold">Shop</h2>
             </div>
           </div>
           <div className="space-y-3">
@@ -120,7 +120,7 @@ const Shop = ({ user, dbUser }: ShopProps) => {
           <div className="flex flex-col items-center mb-6">
             <div className="flex items-center justify-center space-x-2">
               <ShoppingBag className="w-8 h-8" />
-              <h2 className="text-2xl font-bold">Shop</h2>
+              <h2 className="text-2xl md:text-4xl font-bold">Shop</h2>
             </div>
           </div>
           <div className="text-center py-8">
@@ -138,7 +138,7 @@ const Shop = ({ user, dbUser }: ShopProps) => {
 
         <div className="flex items-center justify-center space-x-2">
           <ShoppingBag className="w-8 h-8" />
-          <h2 className="text-2xl font-bold">Shop</h2>
+          <h2 className="text-2xl md:text-4xl font-bold">Shop</h2>
         </div>
 
         {/* Shop Items List */}

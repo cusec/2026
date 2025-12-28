@@ -65,7 +65,7 @@ const UserHunt = ({
       <div className="p-8">
         {/* Welcome Header */}
         <div className="text-center mb-6">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl md:text-4xl font-bold">
             Welcome {dbUser.name || "Hunter"}!
             {linkedEmail && (
               <span className="text-lg font-normal text-light-mode/70">
