@@ -25,7 +25,7 @@ export default function ParticleTooltip({
         // Fade in
         setTimeout(() => {
           if (!sessionStorage.getItem("tooltipShown")) setOpacity(1);
-        }, 4500);
+        }, 5500);
 
         // Set timer to hide tooltip after 2 seconds
         const hideTimer = setTimeout(() => {
@@ -36,7 +36,7 @@ export default function ParticleTooltip({
             // Mark tooltip as shown
             sessionStorage.setItem("tooltipShown", "true");
           }, 500); // Match the transition duration
-        }, 7500);
+        }, 9500);
 
         return () => clearTimeout(hideTimer);
       }, 500);
@@ -49,7 +49,7 @@ export default function ParticleTooltip({
 
   return (
     <div
-      className="bg-linear-[45deg] from-[#959595]/60 from-0% via-light-mode/60 via-60% to-[#8d8d8d]/50 to-100% fixed z-30 bottom-[80px] left-1/2 transform -translate-x-1/2 px-5 py-2 backdrop-blur-sm text-dark-mode text-sm md:text-md lg:text-xl rounded-full shadow-lg shadow-black/30 transition-all duration-500 ease-in-out"
+      className="bg-linear-[45deg] from-[#959595]/80 from-0% via-light-mode/80 via-60% to-[#8d8d8d]/80 to-100% fixed z-30 bottom-[80px] left-1/2 transform -translate-x-1/2 px-5 py-2 backdrop-blur-sm text-dark-mode text-sm md:text-md lg:text-xl rounded-full shadow-lg shadow-black/30 transition-all duration-1000 ease-in-out"
       style={{ opacity }}
       onMouseEnter={() => setIslandHovered(true)}
       onMouseLeave={() => setIslandHovered(false)}
