@@ -31,13 +31,13 @@ const sponsors: SponsorData = {
       image: "/images/sponsors/cse.svg",
       link: "https://www.cse-cst.gc.ca/",
     },
+  ],
+  collaborators: [],
+  inkind: [
     {
       image: "/images/sponsors/tailed.png",
       link: "https://www.tailed.ca",
     },
-  ],
-  collaborators: [],
-  inkind: [
     /*
     {
       image: "/images/sponsors/wolfram.png",

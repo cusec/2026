@@ -31,7 +31,7 @@ const About: React.FC = () => {
   return (
     <div
       id="Gallery"
-      className="mt-[25vh] md:mt-[60vh] max-w-[1800px] w-full flex flex-col justify-center mx-auto"
+      className="mt-[25vh] md:mt-[50vh] max-w-[1800px] w-full flex flex-col justify-center mx-auto"
     >
       <div className="w-full flex justify-center text-center mb-12">
         <h2 className="text-3xl md:text-5xl xl:text-6xl font-bold pb-4 border-b-1 text-light-mode">

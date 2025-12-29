@@ -7,7 +7,7 @@ import BottomKoi from "./BottomKoi";
 const Sponsors = () => {
   return (
     <section
-      className="w-full relative py-12 mt-[12vh] md:mt-[60vh] mb-12 px-4 text-light-mode"
+      className="w-full relative py-12 mt-[12vh] md:mt-[50vh] mb-12 px-4 text-light-mode"
       id="Sponsors"
     >
       <TopKoi />
@@ -19,7 +19,7 @@ const Sponsors = () => {
       </div>
 
       {/* Sponsors Layout */}
-      <div className="flex flex-col items-center gap-12 m-auto w-[95%] mb-16 md:w-full">
+      <div className="flex flex-col items-center gap-12 m-auto w-[95%] mb-0 sm:mb-16 md:w-full">
         {/* Gold / Partner Sponsors */}
         {sponsors.gold.length > 0 && (
           <div className="flex flex-col items-center gap-12 py-12">
@@ -47,7 +47,7 @@ const Sponsors = () => {
       </div>
 
       {/* Silver Sponsors */}
-      <div className="flex flex-col items-center gap-12 m-auto w-[95%] md:w-full mb-24">
+      <div className="flex flex-col items-center gap-12 m-auto w-[95%] md:w-full mb-12 sm:mb-24">
         {sponsors.silver.length > 0 && (
           <div className="flex justify-center items-center gap-12 lg:gap-24">
             {sponsors.silver.map((sponsor: Sponsor, index: number) => (
@@ -73,7 +73,7 @@ const Sponsors = () => {
 
       {/* Bronze Sponsors */}
       {sponsors.bronze.length > 0 && (
-        <div className="flex flex-col items-center gap-12 mb-24">
+        <div className="flex flex-col items-center gap-12 mb-16 sm:mb-24">
           <div className="flex justify-center items-center gap-12 lg:gap-24">
             {sponsors.bronze.map((sponsor: Sponsor, index: number) => (
               <a
@@ -88,7 +88,7 @@ const Sponsors = () => {
                   alt={`Bronze Sponsor ${index + 1}`}
                   width={260}
                   height={91}
-                  className="object-contain h-[91px] w-[260px]"
+                  className="object-contain h-[91px] w-[260px] max-h-[18vw] sm:max-h-fit"
                 />
               </a>
             ))}
@@ -98,7 +98,7 @@ const Sponsors = () => {
 
       {/* Collaborators Section */}
       {sponsors.collaborators.length > 0 && (
-        <div className="w-full flex flex-col items-center justify-center mb-24">
+        <div className="w-full flex flex-col items-center justify-center mb-12 sm:mb-24">
           <h3 className="text-3xl font-bold text-center mb-6">Collaborators</h3>
           <div className="flex justify-center items-center gap-12 lg:gap-24">
             {sponsors.collaborators.map((sponsor: Sponsor, index: number) => (
@@ -125,8 +125,8 @@ const Sponsors = () => {
       {/* In-Kind Sponsors Section */}
       {sponsors.inkind.length > 0 && (
         <div className="w-full flex flex-col items-center justify-center mb-24">
-          <h3 className="text-3xl font-bold text-center mb-6">
-            In-Kind Sponsors
+          <h3 className="text-sm md:text-2xl font-bold text-center mb-6">
+            In-Kind Sponsors / Community Partners
           </h3>
           <div className="flex justify-center items-center gap-12 lg:gap-24">
             {sponsors.inkind.map((sponsor: Sponsor, index: number) => (
@@ -141,7 +141,7 @@ const Sponsors = () => {
                   src={sponsor.image}
                   alt={`In-Kind Sponsor ${index + 1}`}
                   width={125}
-                  height={125}
+                  height={40}
                   className="object-contain"
                 />
               </a>
