@@ -20,6 +20,7 @@ const slideImages: string[] = [
   "/images/gallery/13.webp",
   "/images/gallery/14.webp",
   "/images/gallery/15.webp",
+  "/images/gallery/16.webp",
 ];
 
 const About: React.FC = () => {
