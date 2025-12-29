@@ -91,6 +91,7 @@ export default async function ScavengerPage() {
                   )}
                   {scavengerEnabled && (
                     <>
+                      <InstallButton />
                       <div>
                         <a
                           className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
@@ -100,7 +101,6 @@ export default async function ScavengerPage() {
                           FAQ
                         </a>
                       </div>
-                      <InstallButton />
                     </>
                   )}
                 </div>

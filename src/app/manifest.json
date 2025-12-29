@@ -1,7 +1,7 @@
 {
   "id": "cusec2026",
   "name": "CUSEC 2026 App",
-  "short_name": "CUSEC 2026",
+  "short_name": "CUSEC",
   "icons": [
     {
       "src": "icons/pwa/dark-icon-192x192.png",
