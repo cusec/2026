@@ -20,3 +20,5 @@ export { default as TeamHero } from "./team/TeamHero";
 export { default as TeamMembers } from "./team/TeamMembers";
 export { default as Dashboard } from "./scavenger/Dashboard";
 export { default as MainFAQ } from "./scavenger/faqs/MainFAQ";
+export { default as InstallPrompt } from "./scavenger/pwa/InstallPrompt";
+export { default as InstallButton } from "./scavenger/pwa/InstallButton";

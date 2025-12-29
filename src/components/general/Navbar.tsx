@@ -6,12 +6,11 @@ import React, { useState, useEffect } from "react";
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
 
   // Check which features are enabled via environment variables
   // Default to disabled if not explicitly set to "true"
-  const speakersEnabled = process.env.NEXT_PUBLIC_SPEAKERS_ENABLED === "true";
   const scheduleEnabled = process.env.NEXT_PUBLIC_SCHEDULE_ENABLED === "true";
-  const teamEnabled = process.env.NEXT_PUBLIC_TEAM_ENABLED === "true";
 
   // Filter nav items based on enabled features
   const navItems: Record<string, string> = {
@@ -21,12 +20,17 @@ const Navbar: React.FC = () => {
     Sponsors: "/#Sponsors",
     Pricing: "/#Pricing",
     Faq: "/#Faq",
+    Speakers: "/speakers",
+    "The Team": "/team",
   };
-
-  if (speakersEnabled) navItems.Speakers = "/speakers";
   if (scheduleEnabled) navItems.Schedule = "/schedule";
-  if (teamEnabled) navItems["The Team"] = "/team";
   navItems["Scavenger Hunt"] = "/scavenger";
+
+  const pwaNavItems: Record<string, string> = {
+    "Scavenger Hunt": "/scavenger",
+  };
+  if (scheduleEnabled) navItems.Schedule = "/schedule";
+  pwaNavItems.Speakers = "/speakers";
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -37,6 +41,23 @@ const Navbar: React.FC = () => {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
     }
+
+    const checkStandaloneMode = () => {
+      // Standard way for most browsers (Chrome, Firefox, etc.)
+      const mediaQuery = window.matchMedia("(display-mode: standalone)");
+      const matchFound = mediaQuery.matches;
+
+      // iOS specific check (non-standard but widely used)
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const navigator = window.navigator as any; // Since the standalone property is non-standard
+      const isiOSStandalone = navigator.standalone === true;
+
+      // Combine checks
+      setIsStandalone(matchFound || isiOSStandalone);
+    };
+
+    // Initial check
+    checkStandaloneMode();
 
     return () => {
       document.body.style.overflow = "auto";
@@ -73,15 +94,25 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6">
-            {Object.entries(navItems).map(([item, url]) => (
-              <Link
-                key={item}
-                href={url}
-                className="text-sm 2xl:text-md px-2 2xl:px-4 py-2 tracking-wide rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
-              >
-                {item}
-              </Link>
-            ))}
+            {isStandalone
+              ? Object.entries(pwaNavItems).map(([item, url]) => (
+                  <Link
+                    key={item}
+                    href={url}
+                    className="text-sm 2xl:text-md px-2 2xl:px-4 py-2 tracking-wide rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    {item}
+                  </Link>
+                ))
+              : Object.entries(navItems).map(([item, url]) => (
+                  <Link
+                    key={item}
+                    href={url}
+                    className="text-sm 2xl:text-md px-2 2xl:px-4 py-2 tracking-wide rounded-xl transition-all duration-300 ease-out hover:bg-white/8 hover:backdrop-blur-sm hover:shadow-md hover:shadow-white/10 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
+                  >
+                    {item}
+                  </Link>
+                ))}
           </div>
 
           {/* Mobile Burger Menu Button */}
@@ -118,16 +149,27 @@ const Navbar: React.FC = () => {
               : "inset(0% 0% 100% 0%)",
           }}
         >
-          {Object.entries(navItems).map(([item, url]) => (
-            <Link
-              key={item}
-              href={url}
-              className="block w-full text-center tracking-wide text-md px-4 py-3 transition-all duration-300 ease-out hover:bg-light-mode/20"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item}
-            </Link>
-          ))}
+          {isStandalone
+            ? Object.entries(pwaNavItems).map(([item, url]) => (
+                <Link
+                  key={item}
+                  href={url}
+                  className="block w-full text-center tracking-wide text-md px-4 py-3 transition-all duration-300 ease-out hover:bg-light-mode/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))
+            : Object.entries(navItems).map(([item, url]) => (
+                <Link
+                  key={item}
+                  href={url}
+                  className="block w-full text-center tracking-wide text-md px-4 py-3 transition-all duration-300 ease-out hover:bg-light-mode/20"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              ))}
         </div>
       )}
     </>

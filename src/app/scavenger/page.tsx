@@ -9,6 +9,8 @@ import {
   Footer,
   SmoothFollower,
   Dashboard,
+  InstallPrompt,
+  InstallButton,
 } from "@/components";
 import { auth0 } from "@/lib/auth0";
 import { getUserByEmail } from "@/lib/userService";
@@ -88,19 +90,22 @@ export default async function ScavengerPage() {
                     </div>
                   )}
                   {scavengerEnabled && (
-                    <div>
-                      <a
-                        className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
-                        href="#Faq"
-                      >
-                        <Users className="mr-3 h-6 w-6" />
-                        FAQ
-                      </a>
-                    </div>
+                    <>
+                      <div>
+                        <a
+                          className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                          href="#Faq"
+                        >
+                          <Users className="mr-3 h-6 w-6" />
+                          FAQ
+                        </a>
+                      </div>
+                      <InstallButton />
+                    </>
                   )}
                 </div>
                 {!scavengerEnabled && (
-                  <p className="mt-6 text-md text-muted-foreground text-light-mode">
+                  <p className="mt-6 text-md text-muted-foreground text-light-mode/90">
                     ⏰ The hunt will be available closer to the conference date
                   </p>
                 )}
@@ -108,11 +113,11 @@ export default async function ScavengerPage() {
 
               {/* Features Grid */}
               <div className="mt-[25vh] text-center mx-2">
-                <div className="mb-16 text-center text-light-mode">
-                  <h2 className="mb-4 text-4xl font-black text-foreground">
+                <div className="mb-16 text-center text-light-mode/90">
+                  <h2 className="mx-auto text-3xl md:text-5xl font-black pb-4 mb-[5vh] border-b w-fit border-light-mode/70">
                     How It Works
                   </h2>
-                  <p className="mx-auto max-w-2xl text-lg text-muted-foreground mb-2">
+                  <p className="mx-auto max-w-2xl text-md sm:text-lg md:text-xl leading-relaxed mb-2">
                     Three simple steps to become the ultimate CUSEC 2026
                     scavenger hunt champion.
                   </p>
@@ -122,15 +127,15 @@ export default async function ScavengerPage() {
                     rel="noopener noreferrer"
                     className="underline"
                   >
-                    Access Beta Features (2026)
+                    (CUSEC 2027 Early Access)
                   </a>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8 mb-16">
                   <div className="bg-light-mode/10 backdrop-blur-sm rounded-xl p-8 border border-white/20 hover:bg-light-mode/15 transition-all duration-300">
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
-                      <QrCode className="h-8 w-8 text-light-mode" />
+                      <QrCode className="h-8 w-8 text-light-mode/90" />
                     </div>
-                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    <h3 className="text-2xl font-bold text-light-mode/90 mb-4">
                       Scan & Earn
                     </h3>
                     <p className="text-light-mode/80">
@@ -144,7 +149,7 @@ export default async function ScavengerPage() {
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
                       <Puzzle className="h-8 w-8 text-green-300/80" />
                     </div>
-                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    <h3 className="text-2xl font-bold text-light-mode/90 mb-4">
                       Solve Puzzles
                     </h3>
                     <p className="text-light-mode/80">
@@ -157,7 +162,7 @@ export default async function ScavengerPage() {
                     <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary/50">
                       <Trophy className="h-8 w-8 text-yellow-300/80" />
                     </div>
-                    <h3 className="text-2xl font-bold text-light-mode mb-4">
+                    <h3 className="text-2xl font-bold text-light-mode/90 mb-4">
                       Win Prizes
                     </h3>
                     <p className="text-light-mode/80">
@@ -169,7 +174,12 @@ export default async function ScavengerPage() {
                 </div>
               </div>
 
-              {scavengerEnabled && <MainFAQ />}
+              {scavengerEnabled && (
+                <>
+                  <InstallPrompt />
+                  <MainFAQ />
+                </>
+              )}
             </div>
           )}
         </main>

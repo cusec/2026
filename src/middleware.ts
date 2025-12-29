@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
     disabledRoutes.some((route) => request.nextUrl.pathname.startsWith(route))
   ) {
     return new NextResponse(
-      "Access Restricted by CUSEC Team. Contact Director of Technology for access.",
+      "Access Restricted by CUSEC Team. Contact Technology Team for access.",
       { status: 404 }
     );
   }
