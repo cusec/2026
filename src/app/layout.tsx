@@ -31,6 +31,7 @@ if (typeof window === "undefined") {
 }
 
 export const metadata: Metadata = {
+  manifest: "/manifest.json",
   title: "CUSEC 2026 - Canadian University Software Engineering Conference",
   description:
     "Join CUSEC 2026, Canada's longest running student-led software engineering conference. The 25th annual conference offering unique tech experiences to university students across Canada.",
