@@ -109,6 +109,20 @@
       }
     },
     {
+      "name": "Alex Velazquez",
+      "pronouns": "He/Him",
+      "title": "Software Engineer Mentor @ Work With Alex V",
+      "bio": "Alex Velazquez is a former Google Software Engineer, technical interviewer, and hiring-committee member turned career coach. After 10 years in Big Tech, Alex now dedicates his work to helping early-career software engineers break into the industry. Through workshops, coaching programs, and hands-on interview training, he has supported hundreds of students across North America in landing internships and new-grad roles at top tech companies. He’s passionate about making the path into software engineering more accessible, practical, and confidence-building for the next generation of builders.",
+      "image": "/images/speakers/alexVelazquez.jpg",
+      "talkTitle": "Engineering your own lottery: A software engineer's guide to financial freedom",
+      "talkDescription": "What if you could create your own lottery win through simple math and smart habits? In this talk, Alex explains how early-career developers can use straightforward investing principles and intentional decision-making to reach financial independence. Learn what FIRE truly means, why freedom matters more than income, and how to start building a future where money supports your goals.",
+      "socials": {
+        "website": "https://workwithalexv.com/",
+        "linkedin": "https://www.linkedin.com/in/velazqua/",
+        "github": "https://github.com/velazqua"
+      }
+    },
+    {
       "name": "Vicky Desjardins",
       "pronouns": "She/Her",
       "title": "PhD Candidate @ University of Montreal, Cyberdefense Consultant",
