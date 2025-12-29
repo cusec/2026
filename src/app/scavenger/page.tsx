@@ -43,13 +43,13 @@ export default async function ScavengerPage() {
         <main className="relative min-w-screen overflow-y-hidden overflow-x-hidden flex justify-center items-center pt-[15vh]">
           <div
             className="absolute inset-0 overflow-hidden"
-            style={{ height: "2000px" }}
+            style={{ height: "3500px" }}
           >
             <Particles className="absolute inset-0 animate-fade-in" />
           </div>
           <SmoothFollower />
           {user ? (
-            <div className="relative z-10">
+            <div>
               <Dashboard
                 user={user}
                 dbUser={dbUser}

@@ -29,10 +29,13 @@ const faqData: FAQItem[] = [
     ),
   },
   {
-    question: "Who do I contact for support?",
+    question: "How do I request Scavenger Hunt related assistance?",
     answer: (
       <>
-        Support for Scavenger Hunt is available through the
+        Ensure that you have updated your discord handle at the top of the page
+        for faster assistance.
+        <br />
+        <br /> Support for Scavenger Hunt is available through the
         &apos;#scavenger-hunt&apos; channel on the official Discord server for
         2026. <br />
         <br />

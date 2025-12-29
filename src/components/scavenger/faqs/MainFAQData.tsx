@@ -29,7 +29,7 @@ const faqData: FAQItem[] = [
     ),
   },
   {
-    question: "Who do I contact for support?",
+    question: "How do I request Scavenger Hunt related assistance?",
     answer: (
       <>
         Support for Scavenger Hunt is available through the

@@ -397,7 +397,8 @@ const UsersManagementModal = ({
                           </div>
                           <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Points
+                              Points (Updating points here doesn&apos;t affect
+                              the leaderboard)
                             </label>
                             <input
                               type="number"

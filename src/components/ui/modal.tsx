@@ -46,7 +46,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center",
+        "fixed inset-0 z-45 flex items-center justify-center",
         isClosing
           ? "animate-out fade-out duration-200"
           : "animate-in fade-in duration-200"
@@ -66,7 +66,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
       {/* Modal Content */}
       <div
         className={cn(
-          "relative z-10 w-full max-w-2xl max-h-[80vh] overflow-y-auto bg-white rounded-lg shadow-xl",
+          "relative z-10 w-full max-w-2xl max-h-[70vh] overflow-y-auto bg-white rounded-lg shadow-xl",
           isClosing
             ? "animate-out fade-out zoom-out-95 duration-200"
             : "animate-in fade-in zoom-in-95 duration-200",

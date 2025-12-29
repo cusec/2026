@@ -86,7 +86,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
 
   return (
     <div className="w-full overflow-x-hidden text-light-mode">
-      <div className="flex flex-col justify-center items-center">
+      <div className="relative z-10 flex flex-col justify-center items-center">
         <div className="flex flex-wrap gap-1 items-center justify-center md:justify-between text-center font-semibold">
           <div>
             <label htmlFor="linkedEmail">Ticket Email:</label>{" "}
@@ -161,12 +161,11 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
           />
         </div>
         <p className="text-sm mb-2 text-light-mode/80">
-          Please select something appropriate, complying with the CUSEC Code of
-          Conduct, or it will be redacted by the Tech team.
+          Must comply with the CUSEC Code of Conduct, or else...
         </p>
         <p className="text-sm mb-2 text-light-mode/80">
-          If you wish to update this after this moment, you will have to contact
-          the Tech team.
+          If you wish to update your name after this moment, you will have to
+          contact us through the support channel to have it be changed.
         </p>
         <p className="text-sm mb-6 text-light-mode/80">
           We recommend selecting something short and simple that can be

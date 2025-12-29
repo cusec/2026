@@ -79,7 +79,7 @@ const UserHunt = ({
             <span>{discordHandle || "Not set"}</span>
             <button
               onClick={() => setIsEditDiscordModalOpen(true)}
-              className="p-2 hover:bg-light-mode/10 rounded-full transition"
+              className="relative z-10 p-2 hover:bg-light-mode/10 rounded-full transition"
               title="Edit Discord handle"
             >
               <Pencil className="w-3 h-3" />
@@ -92,7 +92,7 @@ const UserHunt = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex flex-col gap-4 justify-center items-center">
+        <div className="relative z-10 flex flex-col gap-4 justify-center items-center">
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={handleScanClick}
