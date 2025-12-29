@@ -20,7 +20,8 @@ const VipCard: React.FC = () => {
           src="images/vip_price.svg"
           alt="CUSEC Logo"
           width={100}
-          height={0}
+          height={100}
+          className="w-auto h-auto"
         />
       </div>
       <h2 className="text-xl md:text-3xl mb-6 md:mb-8 font-semibold">VIP</h2>

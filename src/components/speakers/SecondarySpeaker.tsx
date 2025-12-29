@@ -35,6 +35,7 @@ export default function SecondarySpeaker({
                     src={speaker.image}
                     alt={speaker.name}
                     fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-102"
                   />
                 </div>

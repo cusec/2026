@@ -13,7 +13,7 @@ const Hero: React.FC = () => {
     <div className="lg:max-w-4xl flex flex-col gap-6 lg:gap-10 backdrop-blur-xs bg-dark-mode/40 py-8 px-2 mx-6 rounded-4xl text-center text-light-mode shadow-2xl shadow-black/80">
       <div className="flex justify-center items-center gap-3 lg:gap-8 border-b-2 lg:border-b-0 pb-5 border-light-mode/40">
         <div className="lg:border-r-2 border-light-mode/40 relative">
-          <div className="w-[8vh] h-[8vh] lg:w-[10vh] lg:h-[10vh] lg:mr-10">
+          <div className="relative w-[8vh] h-[8vh] lg:w-[10vh] lg:h-[10vh] lg:mr-5 lg:ml-5">
             <Image
               src="/images/logo.svg"
               alt="CUSEC Logo"

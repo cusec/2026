@@ -108,6 +108,7 @@ export default function RootLayout({
       lang="en-CA"
       dir="ltr"
       className={`${jost.variable} ${spaceGrotesk.variable}`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />

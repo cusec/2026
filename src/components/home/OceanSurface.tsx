@@ -17,7 +17,7 @@ const OceanSurface: React.FC = () => {
 
   return (
     <div
-      className="absolute top-0 w-full h-[100vh] pointer-events-none z-10 "
+      className="absolute top-0 w-full h-screen pointer-events-none z-10 "
       ref={container}
       aria-hidden="true"
     >

@@ -63,7 +63,7 @@ const Sponsors = () => {
                   alt={`Silver Sponsor ${index + 1}`}
                   width={390}
                   height={152}
-                  className="object-contain"
+                  className="object-contain h-[152px] w-[390px]"
                 />
               </a>
             ))}
@@ -88,7 +88,7 @@ const Sponsors = () => {
                   alt={`Bronze Sponsor ${index + 1}`}
                   width={260}
                   height={91}
-                  className="object-contain"
+                  className="object-contain h-[91px] w-[260px]"
                 />
               </a>
             ))}
