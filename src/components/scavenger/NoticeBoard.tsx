@@ -51,22 +51,23 @@ const NoticeBoard = () => {
 
   if (loading) {
     return (
-      <div className="w-full max-w-4xl mx-auto text-light-mode/90">
-        <div className="p-6">
-          <div className="flex items-center justify-center space-x-2 mb-6">
-            <Megaphone className="w-8 h-8" />
-            <h2 className="text-2xl md:text-4xl font-bold">Notice Board</h2>
-          </div>
-          <div className="space-y-3">
-            {[...Array(2)].map((_, i) => (
-              <div
-                key={i}
-                className="animate-pulse bg-gray-700 rounded-lg h-16"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      <></>
+      // <div className="w-full max-w-4xl mx-auto text-light-mode/90">
+      //   <div className="p-6">
+      //     <div className="flex items-center justify-center space-x-2 mb-6">
+      //       <Megaphone className="w-8 h-8" />
+      //       <h2 className="text-2xl md:text-4xl font-bold">Notice Board</h2>
+      //     </div>
+      //     <div className="space-y-3">
+      //       {[...Array(2)].map((_, i) => (
+      //         <div
+      //           key={i}
+      //           className="animate-pulse bg-gray-700 rounded-lg h-16"
+      //         />
+      //       ))}
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 

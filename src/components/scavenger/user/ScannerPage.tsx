@@ -114,13 +114,13 @@ const ScannerPage = ({
   return (
     <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 bg-black text-white">
+      <div className="flex items-center justify-between pt-20 p-4 bg-black text-white">
         <h2 className="text-lg font-semibold">Scan QR Code</h2>
         <div className="flex items-center gap-2">
           {hasPermission && (
             <button
               onClick={toggleCamera}
-              className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-lg bg-light-mode/10 hover:bg-light-mode/20 transition-colors"
               title="Switch Camera"
             >
               <RotateCcw size={20} />
@@ -128,7 +128,7 @@ const ScannerPage = ({
           )}
           <button
             onClick={handleClose}
-            className="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 transition-colors"
+            className="p-2 rounded-lg bg-light-mode/10 hover:bg-light-mode/20 transition-colors"
           >
             <X size={20} />
           </button>
