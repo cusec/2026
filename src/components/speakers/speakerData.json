@@ -119,6 +119,25 @@
       "socials": {
         "linkedin": "http://www.linkedin.com/in/vicky-desjardins-208134221"
       }
+    },
+    {
+      "name": "Rida Mehdi",
+      "pronouns": "She/Her",
+      "title": "Solution Engineer @ Snowflake",
+      "bio": "Rida is a Solution Engineer at Snowflake who drives the translation of complex data and AI concepts into practical, business-ready solutions for my customers. Her background is unique, combining Biochemistry and Computer Science (University of Windsor) with a Master of Management in Analytics (McGill). She utilizes this diverse knowledge, along with a passion for storytelling through data, to craft high-impact solutions and prototypes for clients across finance, media, sports, and beyond—she loves showing them what modern technology enables. Defined by creativity and a genuine interest in problem-solving, she also build personal AI projects and actively inspire others to challenge assumptions about what's technologically possible.",
+      "image": "/images/speakers/ridaMehdi.jpg",
+      "talkTitle": "You Belong in Tech: Rethinking Who Gets to Build the Future",
+      "socials": {
+        "linkedin": "https://www.linkedin.com/in/rida-mehdi/"
+      }
+    },
+    {
+      "name": "Ananya Nair",
+      "pronouns": "She/Her",
+      "title": "Sr. Solution Engineer @ Databricks",
+      "bio": "Ananya is a Senior Solutions Engineer at Databricks, where she partners with teams in the Financial Services industry and tries her best to turn business challenges into high-impact Data & AI solutions. Her time at McGill pursuing Economics & Finance and then a Masters in Analytics has shaped her journey and helped her thrive at the intersection of people, business, and technology. She is passionate about being an enabler and always looking for ways to grow, teach and build along the way!",
+      "image": "/images/speakers/ananyaNair.jpeg",
+      "talkTitle": "You Belong in Tech: Rethinking Who Gets to Build the Future"
     }
   ]
 }
