@@ -34,7 +34,7 @@ const DashboardFAQ: React.FC = () => {
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className={`md:min-w-[700px] max-w-[700px] text-start transition-opacity duration-300 ${
+              className={`md:min-w-[700px] lg:min-w-[800px] max-w-[800px] text-start transition-opacity duration-300 ${
                 openItem && openItem !== `item-${index}`
                   ? "opacity-50"
                   : "opacity-100"
