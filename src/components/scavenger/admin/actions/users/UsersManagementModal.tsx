@@ -34,7 +34,7 @@ interface User {
 interface UsersManagementModalProps {
   isOpen: boolean;
   onClose: () => void;
-  isAdmin?: boolean;
+  isAdmin: boolean;
 }
 
 const UsersManagementModal = ({
@@ -571,6 +571,7 @@ const UsersManagementModal = ({
       <UserCollectiblesModal
         isOpen={collectiblesModalOpen}
         onClose={() => setCollectiblesModalOpen(false)}
+        isAdmin={isAdmin}
         userId={selectedUser?._id || null}
         userName={selectedUser?.name || ""}
         userEmail={selectedUser?.email || ""}

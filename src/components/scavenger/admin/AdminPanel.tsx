@@ -23,7 +23,7 @@ import CollectiblesModal from "./actions/collectibles/CollectiblesModal";
 interface AdminPanelProps {
   isOpen: boolean;
   onClose: () => void;
-  isAdmin?: boolean;
+  isAdmin: boolean;
 }
 
 const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
