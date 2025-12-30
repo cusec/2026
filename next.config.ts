@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 import withSerwistInit from "@serwist/next";
+import { PHASE_DEVELOPMENT_SERVER } from "next/dist/shared/lib/constants";
 
-module.exports = async () => {
+module.exports = async (phase: string) => {
   const nextConfig: NextConfig = {
     /* config options here */
     async headers() {
@@ -44,11 +45,14 @@ module.exports = async () => {
     },
   };
 
-  const withSerwist = withSerwistInit({
-    swSrc: "src/service-worker/app-worker.ts",
-    swDest: "public/sw.js",
-    reloadOnOnline: true,
-  });
+  if (phase !== PHASE_DEVELOPMENT_SERVER) {
+    const withSerwist = withSerwistInit({
+      swSrc: "src/service-worker/app-worker.ts",
+      swDest: "public/sw.js",
+      reloadOnOnline: true,
+    });
 
-  return withSerwist(nextConfig);
+    return withSerwist(nextConfig);
+  }
+  return nextConfig;
 };
