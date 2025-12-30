@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
 import { HuntItem } from "@/lib/models";
+import { getQRCodeURL } from "@/lib/qrCode";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
@@ -110,6 +111,32 @@ export async function POST(request: Request) {
       );
     }
 
+    // Helper to fetch and convert QR image to base64 (server-side)
+    async function fetchQRBase64(url: string): Promise<string> {
+      const res = await fetch(url);
+      const arrayBuffer = await res.arrayBuffer();
+      const base64 = Buffer.from(arrayBuffer).toString("base64");
+      // The QR server always returns PNG
+      return `data:image/png;base64,${base64}`;
+    }
+
+    const qrUrls = {
+      localhost: getQRCodeURL(identifier, 300, "http://localhost:3000"),
+      production: getQRCodeURL(identifier, 300, "https://2026.cusec.net"),
+      staging: getQRCodeURL(
+        identifier,
+        300,
+        process.env.NEXT_PUBLIC_STAGING_URL || ""
+      ),
+    };
+
+    // Fetch all QR images as base64
+    const [localhostQR, productionQR, stagingQR] = await Promise.all([
+      fetchQRBase64(qrUrls.localhost),
+      fetchQRBase64(qrUrls.production),
+      fetchQRBase64(qrUrls.staging),
+    ]);
+
     const huntItem = new HuntItem({
       name,
       description,
@@ -121,6 +148,11 @@ export async function POST(request: Request) {
       activationStart: activationStart ? new Date(activationStart) : null,
       activationEnd: activationEnd ? new Date(activationEnd) : null,
       collectibles: collectibles || [],
+      qrCodes: {
+        localhost: localhostQR,
+        production: productionQR,
+        staging: stagingQR,
+      },
     });
 
     await huntItem.save();

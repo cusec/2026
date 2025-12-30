@@ -75,11 +75,21 @@ const ScannerPage = ({
       const scannedText = result[0]?.rawValue;
       console.log("QR Code scanned:", scannedText);
 
+      // Try to extract identifier from URL or use as is
+      let identifier = scannedText;
+      try {
+        const url = new URL(scannedText);
+        const param = url.searchParams.get("identifier");
+        if (param) identifier = param;
+      } catch {
+        // Not a URL, use as is
+      }
+
       // Stop scanning
       setIsScanning(false);
 
-      // Call the success callback with the scanned identifier
-      onScanSuccess(scannedText);
+      // Call the success callback with the identifier
+      onScanSuccess(identifier);
 
       // Close the scanner
       onClose();

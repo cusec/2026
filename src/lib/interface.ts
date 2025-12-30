@@ -69,6 +69,11 @@ export interface HuntItem {
   collectibles: string[];
   createdAt: string;
   updatedAt: string;
+  qrCodes?: {
+    localhost?: string;
+    production?: string;
+    staging?: string;
+  };
 }
 
 export interface HuntItemFormData {

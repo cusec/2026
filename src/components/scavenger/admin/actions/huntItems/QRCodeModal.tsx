@@ -1,9 +1,7 @@
 "use client";
 
-import { Download } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import { HuntItem } from "@/lib/interface";
-import { generateAndDownloadQR, getQRCodeURL } from "@/lib/qrCode";
 
 interface QRCodeModalProps {
   isOpen: boolean;
@@ -12,18 +10,18 @@ interface QRCodeModalProps {
   onError: (error: string) => void;
 }
 
+import { useState } from "react";
+
 const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
+  const [env, setEnv] = useState<"production" | "staging" | "localhost">(
+    "production"
+  );
   if (!item) return null;
 
-  const handleDownload = async () => {
-    try {
-      await generateAndDownloadQR(item.identifier, item.name);
-    } catch (err) {
-      onError(
-        err instanceof Error ? err.message : "Failed to download QR code"
-      );
-    }
-  };
+  if (!item.qrCodes || !item.qrCodes[env]) {
+    onError("QR code not available for the selected environment.");
+    return null;
+  }
 
   return (
     <Modal
@@ -34,24 +32,35 @@ const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
       className="max-w-md text-dark-mode"
     >
       <div className="text-center space-y-4">
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">Environment</label>
+          <select
+            value={env}
+            onChange={(e) =>
+              setEnv(e.target.value as "production" | "staging" | "localhost")
+            }
+            className="px-3 py-2 border rounded"
+          >
+            <option value="production">Production (2026.cusec.net)</option>
+            <option value="staging">Staging</option>
+            <option value="localhost">Localhost</option>
+          </select>
+        </div>
         <div className="flex justify-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={getQRCodeURL(item.identifier)}
+            src={item.qrCodes?.[env] || ""}
             alt={`QR Code for ${item.identifier}`}
             className="border rounded-lg"
+            style={{ maxWidth: 250, maxHeight: 250 }}
           />
         </div>
         <p className="text-sm text-gray-600">
           <strong>Identifier:</strong> {item.identifier}
         </p>
-        <button
-          onClick={handleDownload}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mx-auto"
-        >
-          <Download size={16} />
-          Download QR Code
-        </button>
+        <p className="text-xs text-gray-500">
+          Long-press or right-click the QR code to save the image.
+        </p>
       </div>
     </Modal>
   );

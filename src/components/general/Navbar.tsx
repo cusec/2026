@@ -26,11 +26,13 @@ const Navbar: React.FC = () => {
   if (scheduleEnabled) navItems.Schedule = "/schedule";
   navItems["Scavenger Hunt"] = "/scavenger";
 
-  const pwaNavItems: Record<string, string> = {
-    "Scavenger Hunt": "/scavenger",
+  const standaloneNavItems: Record<string, string> = {
+    Home: "/#Hero",
+    Speakers: "/speakers",
+    "The Team": "/team",
   };
-  if (scheduleEnabled) navItems.Schedule = "/schedule";
-  pwaNavItems.Speakers = "/speakers";
+  if (scheduleEnabled) standaloneNavItems.Schedule = "/schedule";
+  standaloneNavItems["Scavenger Hunt"] = "/scavenger";
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -95,7 +97,7 @@ const Navbar: React.FC = () => {
           {/* Desktop Navigation */}
           <div className="hidden xl:flex items-center gap-6">
             {isStandalone
-              ? Object.entries(navItems).map(([item, url]) => (
+              ? Object.entries(standaloneNavItems).map(([item, url]) => (
                   <Link
                     key={item}
                     href={url}
@@ -152,7 +154,7 @@ const Navbar: React.FC = () => {
           }}
         >
           {isStandalone
-            ? Object.entries(navItems).map(([item, url]) => (
+            ? Object.entries(standaloneNavItems).map(([item, url]) => (
                 <Link
                   key={item}
                   href={url}

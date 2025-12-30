@@ -89,6 +89,17 @@ const huntItemSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    qrCodes: {
+      type: new Schema(
+        {
+          localhost: { type: String, default: null },
+          production: { type: String, default: null },
+          staging: { type: String, default: null },
+        },
+        { _id: false }
+      ),
+      default: () => ({})
+    },
   },
   {
     timestamps: true,

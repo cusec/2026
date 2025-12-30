@@ -117,6 +117,9 @@ export async function POST(
       );
     }
 
+    console.log(
+      `User ${user.email} is attempting to claim hunt item with identifier: ${identifier}`
+    );
     // Find the hunt item by identifier
     const huntItem = await HuntItem.findOne({ identifier });
 

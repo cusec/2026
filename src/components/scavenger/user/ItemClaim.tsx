@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { QrCode, Keyboard, X } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import ScannerPage from "./ScannerPage";
@@ -44,6 +44,25 @@ const ItemClaim = ({
   onPointsUpdate,
 }: ItemClaimProps) => {
   const [claimMethod, setClaimMethod] = useState<ClaimMethod>("select");
+  // Auto-claim if identifier is present in query param
+  useEffect(() => {
+    if (typeof window === "undefined" || !isOpen) return;
+    const url = new URL(window.location.href);
+    const identifier = url.searchParams.get("identifier");
+    if (identifier) {
+      // Remove identifier from URL (without reload)
+      url.searchParams.delete("identifier");
+      window.history.replaceState(
+        {},
+        document.title,
+        url.pathname + url.search
+      );
+      // Auto-claim
+      claimHuntItem(identifier);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [claimResult, setClaimResult] = useState<ClaimResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
