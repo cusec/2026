@@ -60,14 +60,18 @@ const UserHunt = ({
 
   // Auto-claim if identifier is present in query param
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === "undefined" || !linkedEmail) return;
 
-    const url = new URL(window.location.href);
-    const identifier = url.searchParams.get("identifier");
-    if (identifier) {
-      setIsClaimModalOpen(true);
+    if (linkedEmail) {
+      const url = new URL(window.location.href);
+      const identifier = url.searchParams.get("identifier");
+      if (identifier) {
+        setIsClaimModalOpen(true);
+      }
+    } else {
+      setShowLinkEmailWarning(true);
     }
-  }, [isClaimModalOpen]);
+  }, [isClaimModalOpen, linkedEmail]);
 
   return (
     <div className="w-full max-w-4xl mx-auto text-light-mode/90">

@@ -177,9 +177,16 @@ const ScannerPage = ({
                 onScan={handleScan}
                 onError={handleError}
                 constraints={{
-                  facingMode,
+                  facingMode: "environment",
+                  aspectRatio: 1,
                   width: { ideal: 640 },
                   height: { ideal: 480 },
+                }}
+                components={{
+                  onOff: true, // Show camera on/off button
+                  torch: true, // Show torch/flashlight button (if supported)
+                  zoom: true, // Show zoom control (if supported)
+                  finder: true, // Show finder overlay
                 }}
               />
 
