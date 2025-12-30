@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
+import withSerwistInit from "@serwist/next";
 
 module.exports = async () => {
   const nextConfig: NextConfig = {
     /* config options here */
   };
 
-  const withSerwist = (await import("@serwist/next")).default({
+  const withSerwist = withSerwistInit({
     swSrc: "src/service-worker/app-worker.ts",
     swDest: "public/sw.js",
     reloadOnOnline: true,
