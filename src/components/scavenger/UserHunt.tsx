@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   QrCode,
   Shield,
@@ -13,7 +13,6 @@ import {
 import { Auth0User, DbUser } from "@/lib/interface";
 import ItemClaim from "./user/ItemClaim";
 import AdminPanel from "./admin/AdminPanel";
-import RedeemPointsModal from "./volunteer/RedeemPointsModal";
 import InventoryModal from "./user/InventoryModal";
 import EditDiscordModal from "./user/EditDiscordModal";
 import Modal from "@/components/ui/modal";
@@ -39,7 +38,6 @@ const UserHunt = ({
   );
   const [isClaimModalOpen, setIsClaimModalOpen] = useState(false);
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
-  const [isRedeemPointsModalOpen, setIsRedeemPointsModalOpen] = useState(false);
   const [isInventoryModalOpen, setIsInventoryModalOpen] = useState(false);
   const [isEditDiscordModalOpen, setIsEditDiscordModalOpen] = useState(false);
   const [showLinkEmailWarning, setShowLinkEmailWarning] = useState(false);
@@ -59,6 +57,17 @@ const UserHunt = ({
       setIsClaimModalOpen(true);
     }
   };
+
+  // Auto-claim if identifier is present in query param
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const url = new URL(window.location.href);
+    const identifier = url.searchParams.get("identifier");
+    if (identifier) {
+      setIsClaimModalOpen(true);
+    }
+  }, [isClaimModalOpen]);
 
   return (
     <div className="w-full max-w-4xl mx-auto text-light-mode/90">
@@ -156,14 +165,6 @@ const UserHunt = ({
           isOpen={isAdminPanelOpen}
           onClose={() => setIsAdminPanelOpen(false)}
           isAdmin={isAdmin}
-        />
-      )}
-
-      {/* Redeem Points Modal - Only rendered for admins and volunteers */}
-      {(isAdmin || isVolunteer) && (
-        <RedeemPointsModal
-          isOpen={isRedeemPointsModalOpen}
-          onClose={() => setIsRedeemPointsModalOpen(false)}
         />
       )}
 

@@ -62,7 +62,7 @@ const ItemClaim = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isOpen]);
   const [claimResult, setClaimResult] = useState<ClaimResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
