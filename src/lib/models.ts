@@ -236,6 +236,18 @@ const collectibleSchema = new Schema(
   }
 );
 
+const registeredUserSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    linkedEmail: { type: String, required: true, unique: true },
+    schoolEmail: { type: String, required: false },
+    personalEmail: { type: String, required: false },
+  },
+  {
+    timestamps: false,
+  }
+);
+
 const Day = mongoose.models.Day || mongoose.model("Day", DaySchema);
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);
@@ -251,4 +263,17 @@ const Collectible =
   mongoose.models.Collectible ||
   mongoose.model("Collectible", collectibleSchema);
 
-export { User, HuntItem, AdminAuditLog, Day, ShopItem, Notice, Collectible };
+const RegisteredUser =
+  mongoose.models.RegisteredUser ||
+  mongoose.model("RegisteredUser", registeredUserSchema);
+
+export {
+  User,
+  HuntItem,
+  AdminAuditLog,
+  Day,
+  ShopItem,
+  Notice,
+  Collectible,
+  RegisteredUser,
+};

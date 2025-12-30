@@ -232,3 +232,10 @@ export interface TeamMember {
     website?: string;
   };
 }
+
+export interface RegisteredUser {
+  name: string;
+  linkedEmail: string;
+  schoolEmail?: string;
+  personalEmail?: string;
+}
