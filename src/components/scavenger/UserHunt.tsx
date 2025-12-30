@@ -64,17 +64,15 @@ const UserHunt = ({
     <div className="w-full max-w-4xl mx-auto text-light-mode/90">
       <div className="p-8">
         {/* Welcome Header */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl md:text-4xl font-bold">
+        <div className="text-center mb-4">
+          <h2 className="text-2xl md:text-4xl font-bold mb-1">
             Welcome {dbUser.name || "Hunter"}!
-            {linkedEmail && (
-              <span className="text-lg font-normal text-light-mode/70">
-                {" "}
-                ({linkedEmail})
-              </span>
-            )}
           </h2>
-          <div className="flex items-center justify-center gap-1 text-sm text-light-mode/70 mb-2">
+          <div className="flex items-center justify-center gap-1 text-sm text-light-mode/70">
+            <span>Linked Email:</span>
+            <span>{linkedEmail || "Not set"}</span>
+          </div>
+          <div className="flex items-center justify-center gap-1 text-sm text-light-mode/70 mb-6">
             <span>Discord:</span>
             <span>{discordHandle || "Not set"}</span>
             <button
