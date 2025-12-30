@@ -13,7 +13,7 @@ import {
   InstallButton,
 } from "@/components";
 import { auth0 } from "@/lib/auth0";
-import { getUserByEmail } from "@/lib/userService";
+import { findOrCreateUser } from "@/lib/userService";
 import { Trophy, QrCode, Puzzle, Users } from "lucide-react";
 
 export default async function ScavengerPage() {
@@ -21,10 +21,13 @@ export default async function ScavengerPage() {
   const user = session?.user;
   const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
 
-  // Fetch MongoDB user if logged in
+  // Find or create MongoDB user if logged in
   let dbUser = null;
   if (user?.email) {
-    const mongoUser = await getUserByEmail(user.email);
+    const mongoUser = await findOrCreateUser({
+      email: user.email,
+      name: user.name || "Hunter",
+    });
     if (mongoUser) {
       // Convert Mongoose document to plain object to avoid serialization issues
       const plainUser = mongoUser.toObject();

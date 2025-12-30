@@ -37,6 +37,7 @@ interface AvailableCollectible {
 interface UserCollectiblesModalProps {
   isOpen: boolean;
   onClose: () => void;
+  isAdmin: boolean;
   userId: string | null;
   userName: string;
   userEmail: string;
@@ -56,6 +57,7 @@ const getCollectibleImageSrc = (
 const UserCollectiblesModal = ({
   isOpen,
   onClose,
+  isAdmin,
   userId,
   userName,
   userEmail,
@@ -279,17 +281,19 @@ const UserCollectiblesModal = ({
                 <Gem className="w-5 h-5 text-purple-600" />
                 User Collectibles ({userCollectibles.length})
               </h3>
-              <button
-                onClick={() => setShowAddPanel(!showAddPanel)}
-                className="flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
-              >
-                <Plus className="w-4 h-4" />
-                Add Collectible
-              </button>
+              {isAdmin && (
+                <button
+                  onClick={() => setShowAddPanel(!showAddPanel)}
+                  className="flex items-center gap-1 px-3 py-1.5 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  Add Collectible
+                </button>
+              )}
             </div>
 
             {/* Add Collectible Panel */}
-            {showAddPanel && (
+            {showAddPanel && isAdmin && (
               <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg">
                 <div className="flex items-start gap-2 mb-3">
                   <Info className="w-4 h-4 text-blue-500 mt-0.5" />
@@ -417,20 +421,22 @@ const UserCollectiblesModal = ({
                         "Unused"
                       )}
                     </button>
-                    <button
-                      onClick={() =>
-                        removeCollectible(collectible._id, collectible.name)
-                      }
-                      disabled={removingId === collectible._id}
-                      className="p-1.5 text-red-600 hover:bg-red-100 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                      title="Remove this collectible"
-                    >
-                      {removingId === collectible._id ? (
-                        <RefreshCw className="w-4 h-4 animate-spin" />
-                      ) : (
-                        <Trash2 className="w-4 h-4" />
-                      )}
-                    </button>
+                    {isAdmin && (
+                      <button
+                        onClick={() =>
+                          removeCollectible(collectible._id, collectible.name)
+                        }
+                        disabled={removingId === collectible._id}
+                        className="p-1.5 text-red-600 hover:bg-red-100 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        title="Remove this collectible"
+                      >
+                        {removingId === collectible._id ? (
+                          <RefreshCw className="w-4 h-4 animate-spin" />
+                        ) : (
+                          <Trash2 className="w-4 h-4" />
+                        )}
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>

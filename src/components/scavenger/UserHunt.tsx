@@ -62,7 +62,7 @@ const UserHunt = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto text-light-mode/90">
-      <div className="p-8">
+      <div className="pt-4 p-6">
         {/* Welcome Header */}
         <div className="text-center mb-4">
           <h2 className="text-2xl md:text-4xl font-bold mb-1">
@@ -84,7 +84,7 @@ const UserHunt = ({
             </button>
           </div>
           <p className="text-lg">
-            You have <span className="font-bold text-accent">{points}</span>{" "}
+            You have <span className="font-bold text-[#ce4d50]">{points}</span>{" "}
             points
           </p>
         </div>
@@ -118,7 +118,7 @@ const UserHunt = ({
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             {/* Admin Panel Button - Only visible to admins */}
-            {isAdmin && (
+            {(isAdmin || isVolunteer) && (
               <button
                 onClick={() => setIsAdminPanelOpen(true)}
                 className="w-45 cursor-pointer select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-4xl border-light-mode/50 hover:bg-dark-mode/50"
@@ -150,11 +150,12 @@ const UserHunt = ({
         onPointsUpdate={handlePointsUpdate}
       />
 
-      {/* Admin Panel Modal - Only rendered for admins */}
-      {isAdmin && (
+      {/* Admin Panel Modal - Only rendered for admins & volunteers */}
+      {(isAdmin || isVolunteer) && (
         <AdminPanel
           isOpen={isAdminPanelOpen}
           onClose={() => setIsAdminPanelOpen(false)}
+          isAdmin={isAdmin}
         />
       )}
 

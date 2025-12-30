@@ -3,9 +3,10 @@ import { auth0 } from "@/lib/auth0";
 import { User } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
+import isVolunteer from "@/lib/isVolunteer";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
-// GET - Fetch all users with optional search and pagination (Admin only)
+// GET - Fetch all users with optional search and pagination (Admin & Volunteer only)
 export async function GET(request: Request) {
   try {
     const session = await auth0.getSession();
@@ -14,8 +15,8 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Check if user is admin
-    if (!(await isAdmin())) {
+    // Check if user is admin or volunteer
+    if (!((await isAdmin()) || (await isVolunteer()))) {
       return NextResponse.json(
         { error: "Forbidden: Admin access required" },
         { status: 403 }

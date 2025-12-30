@@ -24,7 +24,10 @@ const faqData: FAQItem[] = [
         >
           privacy policy
         </a>
-        .
+        .<br />
+        <br />
+        Participants are not allowed to share scavenger hunt codes with others
+        to ensure a fair competition.
       </>
     ),
   },

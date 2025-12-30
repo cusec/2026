@@ -23,9 +23,10 @@ import CollectiblesModal from "./actions/collectibles/CollectiblesModal";
 interface AdminPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  isAdmin?: boolean;
 }
 
-const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
+const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
   const [isHuntItemsModalOpen, setIsHuntItemsModalOpen] = useState(false);
   const [isShopItemsModalOpen, setIsShopItemsModalOpen] = useState(false);
   const [isUsersModalOpen, setIsUsersModalOpen] = useState(false);
@@ -69,53 +70,57 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
                 Manage Users
               </button>
 
-              <button
-                onClick={() => setIsHuntItemsModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <FileSearch className="mr-3 h-6 w-6" />
-                Manage Hunt Items
-              </button>
+              {isAdmin && (
+                <>
+                  <button
+                    onClick={() => setIsHuntItemsModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <FileSearch className="mr-3 h-6 w-6" />
+                    Manage Hunt Items
+                  </button>
 
-              <button
-                onClick={() => setIsShopItemsModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <ShoppingBag className="mr-3 h-6 w-6" />
-                Manage Shop Prizes
-              </button>
+                  <button
+                    onClick={() => setIsShopItemsModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <ShoppingBag className="mr-3 h-6 w-6" />
+                    Manage Shop Prizes
+                  </button>
 
-              <button
-                onClick={() => setIsCollectiblesModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <Gem className="mr-3 h-6 w-6" />
-                Manage Collectibles
-              </button>
+                  <button
+                    onClick={() => setIsCollectiblesModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <Gem className="mr-3 h-6 w-6" />
+                    Manage Collectibles
+                  </button>
 
-              <button
-                onClick={() => setIsNoticesModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <Megaphone className="mr-3 h-6 w-6" />
-                Manage Notices
-              </button>
+                  <button
+                    onClick={() => setIsNoticesModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <Megaphone className="mr-3 h-6 w-6" />
+                    Manage Notices
+                  </button>
 
-              <button
-                onClick={() => setIsClaimAttemptsModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <ClipboardList className="mr-3 h-6 w-6" />
-                View Claim Attempts
-              </button>
+                  <button
+                    onClick={() => setIsClaimAttemptsModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <ClipboardList className="mr-3 h-6 w-6" />
+                    View Claim Attempts
+                  </button>
 
-              <button
-                onClick={() => setIsAuditLogsModalOpen(true)}
-                className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
-              >
-                <History className="mr-3 h-6 w-6" />
-                View Admin Logs
-              </button>
+                  <button
+                    onClick={() => setIsAuditLogsModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <History className="mr-3 h-6 w-6" />
+                    View Admin Logs
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -135,6 +140,7 @@ const AdminPanel = ({ isOpen, onClose }: AdminPanelProps) => {
       <UsersManagementModal
         isOpen={isUsersModalOpen}
         onClose={() => setIsUsersModalOpen(false)}
+        isAdmin={isAdmin}
       />
 
       <ClaimAttemptsModal

@@ -3,9 +3,10 @@ import { auth0 } from "@/lib/auth0";
 import { User, Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
+import isVolunteer from "@/lib/isVolunteer";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 
-// GET - Fetch user's collectibles (Admin only)
+// GET - Fetch user's collectibles (Admin & Volunteer only)
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ userId: string }> }
@@ -17,8 +18,8 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Check if user is admin
-    if (!(await isAdmin())) {
+    // Check if user is admin or volunteer
+    if (!((await isAdmin()) || (await isVolunteer()))) {
       return NextResponse.json(
         { error: "Forbidden: Admin access required" },
         { status: 403 }
@@ -306,7 +307,7 @@ export async function DELETE(
   }
 }
 
-// PATCH - Update a collectible's used status (Admin only)
+// PATCH - Update a collectible's used status (Admin & Volunteer only)
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ userId: string }> }
@@ -318,8 +319,8 @@ export async function PATCH(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Check if user is admin
-    if (!(await isAdmin())) {
+    // Check if user is admin or volunteer
+    if (!((await isAdmin()) || (await isVolunteer()))) {
       return NextResponse.json(
         { error: "Forbidden: Admin access required" },
         { status: 403 }

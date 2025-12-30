@@ -34,11 +34,13 @@ interface User {
 interface UsersManagementModalProps {
   isOpen: boolean;
   onClose: () => void;
+  isAdmin?: boolean;
 }
 
 const UsersManagementModal = ({
   isOpen,
   onClose,
+  isAdmin,
 }: UsersManagementModalProps) => {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
@@ -359,6 +361,7 @@ const UsersManagementModal = ({
                               }
                               className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter name"
+                              readOnly={!isAdmin}
                             />
                           </div>
                           <div>
@@ -376,6 +379,7 @@ const UsersManagementModal = ({
                               }
                               className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter linked email (optional)"
+                              readOnly={!isAdmin}
                             />
                           </div>
                           <div>
@@ -393,6 +397,7 @@ const UsersManagementModal = ({
                               }
                               className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter discord handle (optional)"
+                              readOnly={!isAdmin}
                             />
                           </div>
                           <div>
@@ -412,13 +417,14 @@ const UsersManagementModal = ({
                               className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter points"
                               min="0"
+                              readOnly={!isAdmin}
                             />
                           </div>
                         </div>
                         <div className="flex flex-wrap gap-2">
                           <button
                             onClick={() => saveUser(user._id)}
-                            disabled={isSubmitting}
+                            disabled={isSubmitting || !isAdmin}
                             className="flex items-center gap-1 px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 disabled:bg-gray-400 text-sm"
                           >
                             <Save className="w-3 h-3" />
@@ -433,14 +439,16 @@ const UsersManagementModal = ({
                             Cancel
                           </button>
                           <div className="border-l border-gray-300 mx-1"></div>
-                          <button
-                            onClick={() => showUserHistory(user)}
-                            className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
-                            title="View Claimed Items & Attempts"
-                          >
-                            <History className="w-3 h-3" />
-                            Claimed Items
-                          </button>
+                          {isAdmin && (
+                            <button
+                              onClick={() => showUserHistory(user)}
+                              className="flex items-center gap-1 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                              title="View Claimed Items & Attempts"
+                            >
+                              <History className="w-3 h-3" />
+                              Claimed Items
+                            </button>
+                          )}
                           <button
                             onClick={() => showUserCollectibles(user)}
                             className="flex items-center gap-1 px-3 py-1 bg-purple-600 text-white rounded hover:bg-purple-700 text-sm"
@@ -449,16 +457,18 @@ const UsersManagementModal = ({
                             <Gem className="w-3 h-3" />
                             Collectibles
                           </button>
-                          <button
-                            onClick={() => {
-                              setSelectedUser(user);
-                              setShopPrizesModalOpen(true);
-                            }}
-                            className="flex items-center gap-1 px-3 py-1 bg-accent text-white rounded hover:bg-accent-dark text-sm"
-                            title="Manage Shop Prizes"
-                          >
-                            <Gift className="w-4 h-4" /> Shop Prizes
-                          </button>
+                          {isAdmin && (
+                            <button
+                              onClick={() => {
+                                setSelectedUser(user);
+                                setShopPrizesModalOpen(true);
+                              }}
+                              className="flex items-center gap-1 px-3 py-1 bg-accent text-white rounded hover:bg-accent-dark text-sm"
+                              title="Manage Shop Prizes"
+                            >
+                              <Gift className="w-4 h-4" /> Shop Prizes
+                            </button>
+                          )}
                         </div>
                       </div>
                     ) : (
