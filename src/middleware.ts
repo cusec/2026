@@ -8,10 +8,10 @@ const buildDisabledRoutes = (): string[] => {
 
   // Check if features are enabled (default to false/disabled if not set)
   const scheduleEnabled = process.env.SCHEDULE_ENABLED === "true";
-  const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
+  //const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
 
   if (!scheduleEnabled) disabled.push("/schedule");
-  if (!scavengerEnabled) disabled.push("/auth/login?returnTo=/scavenger");
+  //if (!scavengerEnabled) disabled.push("/auth/login?returnTo=/scavenger");
 
   return disabled;
 };

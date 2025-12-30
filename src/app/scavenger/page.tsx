@@ -20,6 +20,10 @@ export default async function ScavengerPage() {
   const session = await auth0.getSession();
   const user = session?.user;
   const scavengerEnabled = process.env.SCAVENGER_HUNT_ENABLED === "true";
+  const isUserAdmin: boolean =
+    user?.["cusec/roles"]?.includes("Admin") || false;
+  const isUserVolunteer: boolean =
+    user?.["cusec/roles"]?.includes("Volunteer") || false;
 
   // Find or create MongoDB user if logged in
   let dbUser = null;
@@ -53,7 +57,7 @@ export default async function ScavengerPage() {
             <Particles className="absolute inset-0 animate-fade-in" />
           </div>
           <SmoothFollower />
-          {user ? (
+          {user && (scavengerEnabled || isUserAdmin || isUserVolunteer) ? (
             <div>
               <Dashboard
                 user={user}
@@ -87,10 +91,13 @@ export default async function ScavengerPage() {
                       Start Hunting
                     </a>
                   ) : (
-                    <div className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover">
+                    <a
+                      className="select-none flex max-w-fit px-8 py-4 text-lg font-semibold border-2 rounded-4xl border-light-mode/50 bg-dark-mode/50! register-hover"
+                      href="/auth/login?returnTo=/scavenger"
+                    >
                       <Trophy className="mr-3 h-6 w-6" />
-                      Coming Soon
-                    </div>
+                      Coming Soon (Beta Access)
+                    </a>
                   )}
                   <InstallButton />
                   {scavengerEnabled && (
