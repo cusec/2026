@@ -12,20 +12,19 @@ const InstallPrompt: React.FC = () => {
         <p className="mx-auto text-lg sm:text-xl md:text-2xl leading-relaxed mb-12">
           Attendees are encouraged to add the CUSEC 2026 App to their home
           screens. This will provide an enhanced experience at the conference
-          with easy access to the Scavenger Hunt, Schedule & Speakers.
+          with easy access to the Scavenger Hunt, Schedule, and more.
         </p>
-        <ol className="mx-auto px-12 md:px-24 text-md sm:text-lg md:text-xl leading-relaxed list-decimal text-start">
+        <ol className="mx-auto px-8 md:px-24 text-md sm:text-lg md:text-xl leading-relaxed list-decimal text-start">
           <li className="mb-4">
             If you see an Install button at the top of this page, next to
             &quot;Start Hunting&quot; & &quot;FAQ&quot; — clicking it will
             prompt you to add the app to your home screen.
           </li>
           <li>
-            On iOS devices, you might not see the button mentioned above. In
-            this case tap &quot;Share&quot;, then select &quot;Add to Home
-            Screen.&quot; For certain Android devices, if this is not available,
-            click the three-dot menu in the top-right corner of your browser and
-            look for &quot;Add to Home screen&quot; or &quot;Install app.&quot;
+            If you do not see the button, iOS users can tap the
+            &quot;Share&quot; icon -&gt; &quot;Add to Home Screen.&quot; Android
+            users can click the &quot;three-dot menu&quot; -&gt; &quot;Add to
+            Home screen/Install app.&quot;
           </li>
         </ol>
       </div>

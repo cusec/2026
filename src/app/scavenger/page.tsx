@@ -89,19 +89,15 @@ export default async function ScavengerPage() {
                       Coming Soon
                     </div>
                   )}
+                  <InstallButton />
                   {scavengerEnabled && (
-                    <>
-                      <InstallButton />
-                      <div>
-                        <a
-                          className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
-                          href="#Faq"
-                        >
-                          <Users className="mr-3 h-6 w-6" />
-                          FAQ
-                        </a>
-                      </div>
-                    </>
+                    <a
+                      className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                      href="#Faq"
+                    >
+                      <Users className="mr-3 h-6 w-6" />
+                      FAQ
+                    </a>
                   )}
                 </div>
                 {!scavengerEnabled && (
