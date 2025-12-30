@@ -27,6 +27,7 @@ const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
 
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={onClose}
       title={`QR Code for ${item.name}`}

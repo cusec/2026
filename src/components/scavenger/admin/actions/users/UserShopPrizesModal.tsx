@@ -66,6 +66,7 @@ const UserShopPrizesModal: React.FC<UserShopPrizesModalProps> = ({
     <Modal
       isOpen={isOpen}
       onClose={onClose}
+      simple={true}
       className="max-w-lg text-dark-mode"
       title="User's Shop Prizes"
     >

@@ -241,6 +241,7 @@ const UserCollectiblesModal = ({
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
+      simple={true}
       title={`Collectibles: ${userName || userEmail}`}
       className="max-w-3xl text-dark-mode"
     >

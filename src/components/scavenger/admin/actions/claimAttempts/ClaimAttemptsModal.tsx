@@ -11,6 +11,7 @@ interface ClaimAttemptsModalProps {
 const ClaimAttemptsModal = ({ isOpen, onClose }: ClaimAttemptsModalProps) => {
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={onClose}
       title="Claim Attempts Monitor (Read-Only)"

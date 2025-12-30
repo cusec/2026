@@ -55,6 +55,7 @@ const CollectiblesModal = ({ isOpen, onClose }: CollectiblesModalProps) => {
 
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={onClose}
       title="Manage Collectibles"

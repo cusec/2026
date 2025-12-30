@@ -77,6 +77,7 @@ const CollectibleUsersModal = ({
 
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={handleClose}
       title={`Users Who Own: ${collectibleName}`}

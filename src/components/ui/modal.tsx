@@ -10,9 +10,17 @@ interface ModalProps {
   children: React.ReactNode;
   title?: string;
   className?: string;
+  simple?: boolean;
 }
 
-const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  title,
+  className,
+  simple,
+}: ModalProps) => {
   const [isClosing, setIsClosing] = React.useState(false);
 
   const handleClose = React.useCallback(() => {
@@ -55,7 +63,7 @@ const Modal = ({ isOpen, onClose, children, title, className }: ModalProps) => {
       {/* Backdrop */}
       <div
         className={cn(
-          "absolute inset-0 bg-black/30 backdrop-blur-sm",
+          `absolute inset-0 bg-black/30 ${simple ? "" : "backdrop-blur-sm"}`,
           isClosing
             ? "animate-out fade-out duration-200"
             : "animate-in fade-in duration-200"

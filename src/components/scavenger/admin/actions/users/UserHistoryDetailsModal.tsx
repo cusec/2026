@@ -270,6 +270,7 @@ const UserHistoryDetailsModal = ({
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
+      simple={true}
       title={`Claimed Items: ${userName || userEmail}`}
       className="max-w-2xl text-dark-mode"
     >

@@ -65,6 +65,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
   return (
     <>
       <Modal
+        simple={true}
         isOpen={isOpen}
         onClose={onClose}
         title="Manage Hunt Items"

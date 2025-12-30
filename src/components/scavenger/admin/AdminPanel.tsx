@@ -45,6 +45,7 @@ const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
       <Modal
         isOpen={isOpen}
         onClose={handleClose}
+        simple={true}
         className="mx-4 max-w-[80vw] md:max-w-lg bg-dark-mode/90 text-light-mode rounded-2xl"
       >
         <div className="p-6">

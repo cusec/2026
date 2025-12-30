@@ -45,6 +45,7 @@ const NoticesModal = ({ isOpen, onClose }: NoticesModalProps) => {
 
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={onClose}
       title="Manage Notices"

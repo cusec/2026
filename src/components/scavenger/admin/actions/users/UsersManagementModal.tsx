@@ -278,6 +278,7 @@ const UsersManagementModal = ({
       <Modal
         isOpen={isOpen}
         onClose={handleClose}
+        simple={true}
         title="Users Management"
         className="max-w-6xl text-dark-mode"
       >

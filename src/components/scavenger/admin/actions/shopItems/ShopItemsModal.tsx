@@ -54,6 +54,7 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
 
   return (
     <Modal
+      simple={true}
       isOpen={isOpen}
       onClose={onClose}
       title="Manage Shop Prizes"
