@@ -360,7 +360,7 @@ export default function DaySchedule({
                   >
                     <div className="flex flex-col pl-1 xxs:pl-3">
                       <div className="pb-1">
-                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                        <h1 className="xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
                           {event.title}
                         </h1>
                         <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
