@@ -27,12 +27,12 @@ const Navbar: React.FC = () => {
   navItems["Scavenger Hunt"] = "/scavenger";
 
   const standaloneNavItems: Record<string, string> = {
-    Home: "/#Hero",
-    Speakers: "/speakers",
-    "The Team": "/team",
+    "Begin Hunting": "/scavenger",
   };
-  if (scheduleEnabled) standaloneNavItems.Schedule = "/schedule";
-  standaloneNavItems["Scavenger Hunt"] = "/scavenger";
+  if (scheduleEnabled) standaloneNavItems["Events & Schedule"] = "/schedule";
+  standaloneNavItems["Speakers"] = "/speakers";
+  standaloneNavItems["Team"] = "/team";
+  standaloneNavItems["Other Details"] = "/";
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
       {true && (
         <div
           className={`fixed w-full h-screen overflow-y-auto z-50 bg-dark-mode/60 backdrop-blur-sm text-light-mode/90 pb-4 py-18 space-y-3 transition-all duration-1000 ${
-            isStandalone ? "" : "" // if true - flex flex-col justify-center
+            isStandalone ? "flex flex-col justify-center" : "" // if true - flex flex-col justify-center
           }`}
           style={{
             clipPath: isMenuOpen
