@@ -123,26 +123,26 @@ export async function POST(request: Request) {
     // Try QuickChart URLs first, fallback to qrserver.com if any fail
     let localhostQR, productionQR, stagingQR;
     try {
-      [localhostQR, productionQR, stagingQR] = await Promise.all([
-        getQRCodeURL(identifier, 300, "http://localhost:3000"),
+      [productionQR] = await Promise.all([
+        //getQRCodeURL(identifier, 300, "http://localhost:3000"),
         getQRCodeURL(identifier, 300, "https://2026.cusec.net"),
-        getQRCodeURL(
-          identifier,
-          300,
-          process.env.NEXT_PUBLIC_STAGING_URL || ""
-        ),
+        // getQRCodeURL(
+        //   identifier,
+        //   300,
+        //   process.env.NEXT_PUBLIC_STAGING_URL || ""
+        // ),
       ]).then(async (urls) => Promise.all(urls.map(fetchQRBase64)));
     } catch {
       // If any fail, try all with fallback=true (qrserver.com)
-      [localhostQR, productionQR, stagingQR] = await Promise.all([
-        getQRCodeURL(identifier, 300, "http://localhost:3000", true),
+      [productionQR] = await Promise.all([
+        // getQRCodeURL(identifier, 300, "http://localhost:3000", true),
         getQRCodeURL(identifier, 300, "https://2026.cusec.net", true),
-        getQRCodeURL(
-          identifier,
-          300,
-          process.env.NEXT_PUBLIC_STAGING_URL || "",
-          true
-        ),
+        // getQRCodeURL(
+        //   identifier,
+        //   300,
+        //   process.env.NEXT_PUBLIC_STAGING_URL || "",
+        //   true
+        // ),
       ]).then(async (urls) => Promise.all(urls.map(fetchQRBase64)));
     }
 

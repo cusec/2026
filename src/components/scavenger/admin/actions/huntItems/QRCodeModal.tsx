@@ -42,8 +42,12 @@ const QRCodeModal = ({ isOpen, onClose, item, onError }: QRCodeModalProps) => {
             className="px-3 py-2 border rounded"
           >
             <option value="production">Production (2026.cusec.net)</option>
-            <option value="staging">Staging</option>
-            <option value="localhost">Localhost</option>
+            <option value="staging" disabled>
+              Staging
+            </option>
+            <option value="localhost" disabled>
+              Localhost
+            </option>
           </select>
         </div>
         <div className="flex justify-center">
