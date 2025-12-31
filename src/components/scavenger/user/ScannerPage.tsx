@@ -1,5 +1,6 @@
 "use client";
 
+import { on } from "events";
 import { X } from "lucide-react";
 import { useZxing } from "react-zxing";
 
@@ -29,6 +30,7 @@ const ScannerPage = ({
             const safeIdentifier = identifier.match(/^[a-zA-Z0-9_-]{1,64}$/);
             if (safeIdentifier) {
               onScanSuccess(identifier);
+              onClose();
             } else {
               onError?.("Invalid identifier format in QR code.");
             }
