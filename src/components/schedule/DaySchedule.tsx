@@ -296,11 +296,27 @@ export default function DaySchedule({
                 let left;
                 // Special handling for AB and BC tracks
                 if (event.track === "AB") {
-                  width = "44%";
-                  left = "-0.5%";
+                  if (
+                    typeof window !== "undefined" &&
+                    window.innerWidth < 640
+                  ) {
+                    width = "44%";
+                    left = "4%";
+                  } else {
+                    width = "44%";
+                    left = "0%";
+                  }
                 } else if (event.track === "BC") {
-                  width = "44%";
-                  left = "50%";
+                  if (
+                    typeof window !== "undefined" &&
+                    window.innerWidth < 640
+                  ) {
+                    width = "44%";
+                    left = "54.5%";
+                  } else {
+                    width = "44%";
+                    left = "50%";
+                  }
                 } else {
                   width = `${95 / layout.totalColumns - 2}%`;
                   // if viewport width is less than 640px and event is only in its time slot or only 1 column, make it full width
