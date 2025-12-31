@@ -98,7 +98,7 @@ const huntItemSchema = new Schema(
         },
         { _id: false }
       ),
-      default: () => ({})
+      default: () => ({}),
     },
   },
   {
@@ -181,7 +181,7 @@ const ScheduleItemSchema = new Schema({
   location: { type: String },
   description: { type: String },
   detailedDescription: { type: String },
-  track: { type: String, enum: ["A", "B", "C"], required: true },
+  track: { type: String, enum: ["A", "B", "C", "AB", "BC"], required: true },
   color: {
     type: String,
     enum: ["primary", "secondary", "accent", "sunset", "sea", "white"],

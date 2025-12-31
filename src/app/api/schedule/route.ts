@@ -53,9 +53,9 @@ export async function POST(request: Request) {
     }
 
     // Validate track value
-    if (!["A", "B", "C"].includes(event.track)) {
+    if (!["A", "B", "C", "AB", "BC"].includes(event.track)) {
       return NextResponse.json(
-        { error: "Track must be A, B, or C" },
+        { error: "Track must be A, B, C, AB or BC" },
         { status: 400 }
       );
     }
@@ -63,7 +63,9 @@ export async function POST(request: Request) {
     // Validate color value if provided
     if (
       event.color &&
-      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(event.color)
+      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(
+        event.color
+      )
     ) {
       return NextResponse.json(
         { error: "Color must be primary, secondary, accent, sunset, or sea" },
@@ -173,9 +175,9 @@ export async function PUT(request: Request) {
     }
 
     // Validate track value
-    if (!["A", "B", "C"].includes(event.track)) {
+    if (!["A", "B", "C", "AB", "BC"].includes(event.track)) {
       return NextResponse.json(
-        { error: "Track must be A, B, or C" },
+        { error: "Track must be A, B, C, AB, or BC" },
         { status: 400 }
       );
     }
@@ -183,10 +185,15 @@ export async function PUT(request: Request) {
     // Validate color value if provided
     if (
       event.color &&
-      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(event.color)
+      !["primary", "secondary", "accent", "sunset", "sea", "white"].includes(
+        event.color
+      )
     ) {
       return NextResponse.json(
-      { error: "Color must be primary, secondary, accent, sunset, sea, or white" },
+        {
+          error:
+            "Color must be primary, secondary, accent, sunset, sea, or white",
+        },
         { status: 400 }
       );
     }

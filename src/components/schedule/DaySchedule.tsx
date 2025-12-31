@@ -194,7 +194,7 @@ export default function DaySchedule({
   }
 
   const totalMinutes = displayEnd - displayStart;
-  const pixelsPerMinute = 4; // Increased for a taller hour
+  const pixelsPerMinute = 5; // Set to 5 for hour height
 
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
@@ -290,30 +290,42 @@ export default function DaySchedule({
                 });
 
                 const top = startMinutes * pixelsPerMinute;
-                const height = Math.max(duration * pixelsPerMinute, 96); // Minimum height of 96px for better visibility
-                let width = `${95 / layout.totalColumns - 2}%`;
-                // if viewport width is less than 640px and event is only in its time slot or only 1 column, make it full width
-                if (
-                  typeof window !== "undefined" &&
-                  window.innerWidth < 640 &&
-                  layout.totalColumns == 1
-                ) {
-                  width = "100%";
-                }
+                const height = Math.max(duration * pixelsPerMinute, 120); // Minimum height of 120px for better visibility (updated for 5px/min)
 
-                if (isOnlyEventInSlot) {
-                  width = "94.5%";
-                }
-
+                let width;
                 let left;
-                if (typeof window !== "undefined" && window.innerWidth < 640) {
-                  left = `${(layout.column * 95) / layout.totalColumns + 4}%`;
+                // Special handling for AB and BC tracks
+                if (event.track === "AB") {
+                  width = "45%";
+                  left = "-0.5%";
+                } else if (event.track === "BC") {
+                  width = "45%";
+                  left = "50%";
                 } else {
-                  left = `${
-                    layout.column
-                      ? (layout.column * 95) / layout.totalColumns + 1
-                      : -0.5
-                  }%`;
+                  width = `${95 / layout.totalColumns - 2}%`;
+                  // if viewport width is less than 640px and event is only in its time slot or only 1 column, make it full width
+                  if (
+                    typeof window !== "undefined" &&
+                    window.innerWidth < 640 &&
+                    layout.totalColumns == 1
+                  ) {
+                    width = "100%";
+                  }
+                  if (isOnlyEventInSlot) {
+                    width = "94.5%";
+                  }
+                  if (
+                    typeof window !== "undefined" &&
+                    window.innerWidth < 640
+                  ) {
+                    left = `${(layout.column * 95) / layout.totalColumns + 4}%`;
+                  } else {
+                    left = `${
+                      layout.column
+                        ? (layout.column * 95) / layout.totalColumns + 1
+                        : -0.5
+                    }%`;
+                  }
                 }
 
                 return (
@@ -343,7 +355,7 @@ export default function DaySchedule({
                         <TruncatedText
                           text={event.description}
                           // estimate available height for description area
-                          maxHeight={Math.max(height - 56, 24)}
+                          maxHeight={Math.max(height - 60, 24)}
                           className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline"
                           onClick={() => handleOpenDetails(event)}
                         />
@@ -461,7 +473,7 @@ function TruncatedText({
       rafId = requestAnimationFrame(() => {
         const fits = (candidate: string) => {
           el.innerText = candidate;
-          return el.scrollHeight <= maxHeight - 40; // small padding for safety
+          return el.scrollHeight <= maxHeight - 40; // small padding for safety (updated for 5px/min)
         };
 
         if (fits(original)) {

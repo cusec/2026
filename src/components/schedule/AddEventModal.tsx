@@ -253,6 +253,8 @@ export default function AddEventModal({
               <option value="A">Track A</option>
               <option value="B">Track B</option>
               <option value="C">Track C</option>
+              <option value="AB">Tracks A (full) & B (half)</option>
+              <option value="BC">Tracks B (half) & C (full)</option>
             </select>
             <p className="mt-1 text-xs text-gray-500">
               Select which track this event belongs to.

@@ -184,7 +184,7 @@ export interface ScheduleItem {
   description?: string;
   detailedDescription?: string;
   location?: string;
-  track: "A" | "B" | "C";
+  track: "A" | "B" | "C" | "AB" | "BC";
   color?: "primary" | "secondary" | "accent" | "sunset" | "sea" | "white";
 }
 
