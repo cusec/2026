@@ -194,7 +194,7 @@ export default function DaySchedule({
   }
 
   const totalMinutes = displayEnd - displayStart;
-  const pixelsPerMinute = 2.5; // Adjust this to change the scale
+  const pixelsPerMinute = 4; // Increased for a taller hour
 
   // Determine container width based on number of tracks
   const getContainerWidthClass = () => {
@@ -289,8 +289,8 @@ export default function DaySchedule({
                   return eventStart < otherEnd && eventEnd > otherStart;
                 });
 
-                const top = (startMinutes / 60) * 60 * pixelsPerMinute; // 180px per hour (if 3 pixels per minute)
-                const height = Math.max(duration * pixelsPerMinute, 64); // Minimum height of 64px
+                const top = startMinutes * pixelsPerMinute;
+                const height = Math.max(duration * pixelsPerMinute, 96); // Minimum height of 96px for better visibility
                 let width = `${95 / layout.totalColumns - 2}%`;
                 // if viewport width is less than 640px and event is only in its time slot or only 1 column, make it full width
                 if (
@@ -329,9 +329,9 @@ export default function DaySchedule({
                       left,
                     }}
                   >
-                    <div className="flex-1">
+                    <div className="flex flex-col">
                       <div className="p-1 xxs:p-3 pb-0">
-                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl font-semibold leading-tight">
                           {event.title}
                         </h1>
                         <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
