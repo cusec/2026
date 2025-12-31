@@ -64,11 +64,20 @@ const HuntItemAddForm = ({
     fetchCollectibles();
   }, []);
 
+  // Identifier validation: alphanumeric, dash, underscore, max 64 chars
+  const identifierPattern = /^[a-zA-Z0-9_-]{1,64}$/;
+  let identifierError: string | null = null;
+  if (formData.identifier && !identifierPattern.test(formData.identifier)) {
+    identifierError =
+      "Identifier must be 1-64 characters, only letters, numbers, dash, and underscore allowed.";
+  }
+
   const dateError = validateDates(
     formData.activationStart,
     formData.activationEnd
   );
-  const isFormValid = formData.name && formData.identifier && !dateError;
+  const isFormValid =
+    formData.name && formData.identifier && !dateError && !identifierError;
 
   const handleClearDates = () => {
     setFormData({
@@ -138,10 +147,16 @@ const HuntItemAddForm = ({
             onChange={(e) =>
               setFormData({ ...formData, identifier: e.target.value })
             }
-            className="w-full px-3 py-2 border border-blue-300 rounded-lg bg-white text-gray-900 font-mono"
+            className={`w-full px-3 py-2 border rounded-lg bg-white text-gray-900 font-mono ${
+              identifierError ? "border-red-400" : "border-blue-300"
+            }`}
             placeholder="Enter unique identifier (e.g., SPEAKER-INTRO)"
             disabled={isSubmitting}
+            maxLength={64}
           />
+          {identifierError && (
+            <p className="text-xs text-red-600 mt-2">{identifierError}</p>
+          )}
           <p className="text-xs text-blue-700 mt-2">
             <strong>Important:</strong> This is the code that users will type
             into their text box to claim this hunt item. It must be unique

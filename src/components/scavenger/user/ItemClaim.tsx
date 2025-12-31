@@ -44,27 +44,40 @@ const ItemClaim = ({
   onPointsUpdate,
 }: ItemClaimProps) => {
   const [claimMethod, setClaimMethod] = useState<ClaimMethod>("select");
-  // Auto-claim if identifier is present in query param
-  useEffect(() => {
-    if (typeof window === "undefined" || !isOpen) return;
-    const url = new URL(window.location.href);
-    const identifier = url.searchParams.get("identifier");
-    if (identifier) {
-      // Only allow alphanumeric, dash, underscore, and max 64 chars
-      const safeIdentifier = identifier.match(/^[a-zA-Z0-9_-]{1,64}$/);
-      if (safeIdentifier) {
-        // Remove identifier from URL (without reload)
-        url.searchParams.delete("identifier");
-        window.history.replaceState(
-          {},
-          document.title,
-          url.pathname + url.search
-        );
-        // Auto-claim
-        claimHuntItem(identifier);
-      }
-    }
 
+  // Auto-claim if identifier is present in query param
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    let didCancel = false;
+    const autoClaim = async () => {
+      if (typeof window === "undefined" || !isOpen) return;
+      setIsLoading(true);
+      try {
+        const url = new URL(window.location.href);
+        const identifier = url.searchParams.get("identifier");
+        if (identifier) {
+          // Only allow alphanumeric, dash, underscore, and max 64 chars
+          const safeIdentifier = identifier.match(/^[a-zA-Z0-9_-]{1,64}$/);
+          if (safeIdentifier) {
+            // Remove identifier from URL (without reload)
+            url.searchParams.delete("identifier");
+            window.history.replaceState(
+              {},
+              document.title,
+              url.pathname + url.search
+            );
+            // Auto-claim
+            await claimHuntItem(identifier);
+          }
+        }
+      } finally {
+        if (!didCancel) setIsLoading(false);
+      }
+    };
+    autoClaim();
+    return () => {
+      didCancel = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
   const [claimResult, setClaimResult] = useState<ClaimResult | null>(null);
@@ -173,22 +186,47 @@ const ItemClaim = ({
             <p className="text-light-mode/70 text-center mb-6">
               Choose how you want to claim your item
             </p>
-            <div className="flex flex-col gap-3">
-              <button
-                onClick={() => setClaimMethod("manual")}
-                className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-light-mode/10 hover:bg-light-mode/20 rounded-xl transition font-semibold"
-              >
-                <Keyboard className="w-5 h-5" />
-                Enter Code
-              </button>
-              <button
-                onClick={() => setClaimMethod("scan")}
-                className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-light-mode/10 hover:bg-light-mode/20 rounded-xl transition font-semibold"
-              >
-                <QrCode className="w-5 h-5" />
-                Scan QR Code
-              </button>
-            </div>
+            {isLoading ? (
+              <div className="flex justify-center items-center py-8">
+                <svg
+                  className="animate-spin h-8 w-8 text-accent"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => setClaimMethod("manual")}
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-light-mode/10 hover:bg-light-mode/20 rounded-xl transition font-semibold"
+                >
+                  <Keyboard className="w-5 h-5" />
+                  Enter Code
+                </button>
+                <button
+                  onClick={() => setClaimMethod("scan")}
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-light-mode/10 hover:bg-light-mode/20 rounded-xl transition font-semibold"
+                >
+                  <QrCode className="w-5 h-5" />
+                  Scan QR Code
+                </button>
+              </div>
+            )}
           </div>
         )}
 

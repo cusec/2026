@@ -1,6 +1,5 @@
 "use client";
 
-import { on } from "events";
 import { X } from "lucide-react";
 import { useZxing } from "react-zxing";
 

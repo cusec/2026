@@ -1,57 +1,17 @@
 /**
- * Generate and download a QR code for a hunt item identifier
- */
-
-const getBaseUrl = () => {
-  if (typeof window !== "undefined") {
-    return window.location.origin;
-  }
-  return process.env.NEXT_PUBLIC_URL || "https://2026.cusec.net";
-};
-
-export const generateAndDownloadQR = async (
-  identifier: string,
-  itemName: string,
-  customBaseUrl?: string
-): Promise<void> => {
-  try {
-    const baseUrl = customBaseUrl || getBaseUrl();
-    const qrData = `${baseUrl}/scavenger?identifier=${encodeURIComponent(
-      identifier
-    )}`;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(
-      qrData
-    )}`;
-
-    // Create a temporary link to download the QR code
-    const response = await fetch(qrUrl);
-    const blob = await response.blob();
-    const url = window.URL.createObjectURL(blob);
-
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `qr-${itemName.replace(
-      /[^a-zA-Z0-9]/g,
-      "-"
-    )}-${identifier}.png`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-  } catch (err) {
-    console.error("Error generating QR code:", err);
-    throw new Error("Failed to generate QR code");
-  }
-};
-
-/**
  * Generate QR code URL for display
+ * @param identifier - The unique identifier for the QR code
+ * @param size - The size of the QR code (default 250)
+ * @param customBaseUrl - Optional custom base URL
+ * @param fallback - If true, use fallback (qrserver.com) directly; otherwise, try QuickChart first
+ * @returns {Promise<string>} - The QR code image URL
  */
-export const getQRCodeURL = (
+export const getQRCodeURL = async (
   identifier: string,
   size: number = 250,
-  customBaseUrl?: string
-): string => {
+  customBaseUrl?: string,
+  fallback: boolean = false
+): Promise<string> => {
   const baseUrl =
     customBaseUrl ||
     (typeof window !== "undefined"
@@ -60,7 +20,22 @@ export const getQRCodeURL = (
   const qrData = `${baseUrl}/scavenger?identifier=${encodeURIComponent(
     identifier
   )}`;
-  return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(
+
+  // Fallback URL (api.qrserver.com)
+  const fallbackUrl = `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(
     qrData
   )}`;
+
+  if (fallback) {
+    return fallbackUrl;
+  }
+
+  // QuickChart API URL
+  // Use logo.png from public/images as center image
+  const logoUrl = `https://2026.cusec.net/images/logo.png`;
+  const quickChartUrl =
+    `https://quickchart.io/qr?text=${encodeURIComponent(qrData)}` +
+    `&size=300&margin=0&centerImageUrl=${encodeURIComponent(logoUrl)}` +
+    `&centerImageSize=0.4`;
+  return quickChartUrl;
 };
