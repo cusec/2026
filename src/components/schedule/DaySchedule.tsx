@@ -296,10 +296,10 @@ export default function DaySchedule({
                 let left;
                 // Special handling for AB and BC tracks
                 if (event.track === "AB") {
-                  width = "45%";
+                  width = "44%";
                   left = "-0.5%";
                 } else if (event.track === "BC") {
-                  width = "45%";
+                  width = "44%";
                   left = "50%";
                 } else {
                   width = `${95 / layout.totalColumns - 2}%`;
