@@ -96,7 +96,8 @@ const HuntItemEditForm = ({
       {/* Identifier - Read-only, shown first */}
       <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
         <label className="block text-sm font-medium text-blue-800 mb-1">
-          Identifier (Claim Code)
+          Identifier (Claim Code - alphanumeric, dash, underscore, and max 64
+          chars)
         </label>
         <div className="flex items-center gap-2">
           <code className="flex-1 px-3 py-2 bg-white border border-blue-300 rounded-lg text-blue-900 font-mono text-sm">

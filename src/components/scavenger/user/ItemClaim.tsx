@@ -50,15 +50,19 @@ const ItemClaim = ({
     const url = new URL(window.location.href);
     const identifier = url.searchParams.get("identifier");
     if (identifier) {
-      // Remove identifier from URL (without reload)
-      url.searchParams.delete("identifier");
-      window.history.replaceState(
-        {},
-        document.title,
-        url.pathname + url.search
-      );
-      // Auto-claim
-      claimHuntItem(identifier);
+      // Only allow alphanumeric, dash, underscore, and max 64 chars
+      const safeIdentifier = identifier.match(/^[a-zA-Z0-9_-]{1,64}$/);
+      if (safeIdentifier) {
+        // Remove identifier from URL (without reload)
+        url.searchParams.delete("identifier");
+        window.history.replaceState(
+          {},
+          document.title,
+          url.pathname + url.search
+        );
+        // Auto-claim
+        claimHuntItem(identifier);
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

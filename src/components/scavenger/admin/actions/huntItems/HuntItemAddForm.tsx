@@ -129,7 +129,8 @@ const HuntItemAddForm = ({
         </div>
         <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
           <label className="block text-sm font-medium text-blue-800 mb-1">
-            Identifier (Claim Code) *
+            Identifier (Claim Code - alphanumeric, dash, underscore, and max 64
+            chars) *
           </label>
           <input
             type="text"
