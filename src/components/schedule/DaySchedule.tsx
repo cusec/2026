@@ -303,8 +303,8 @@ export default function DaySchedule({
                     width = "44%";
                     left = "4%";
                   } else {
-                    width = "44%";
-                    left = "0%";
+                    width = "46.25%";
+                    left = "1%";
                   }
                 } else if (event.track === "BC") {
                   if (
@@ -314,8 +314,8 @@ export default function DaySchedule({
                     width = "44%";
                     left = "54.5%";
                   } else {
-                    width = "44%";
-                    left = "50%";
+                    width = "46.25%";
+                    left = "49.25%";
                   }
                 } else {
                   width = `${95 / layout.totalColumns - 2}%`;
@@ -336,11 +336,7 @@ export default function DaySchedule({
                   ) {
                     left = `${(layout.column * 95) / layout.totalColumns + 4}%`;
                   } else {
-                    left = `${
-                      layout.column
-                        ? (layout.column * 95) / layout.totalColumns + 1
-                        : -0.5
-                    }%`;
+                    left = `${(layout.column * 95) / layout.totalColumns + 1}%`;
                   }
                 }
 
