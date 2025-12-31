@@ -75,21 +75,11 @@ const ScannerPage = ({
       const scannedText = result[0]?.rawValue;
       console.log("QR Code scanned:", scannedText);
 
-      // Try to extract identifier from URL or use as is
-      let identifier = scannedText;
-      try {
-        const url = new URL(scannedText);
-        const param = url.searchParams.get("identifier");
-        if (param) identifier = param;
-      } catch {
-        // Not a URL, use as is
-      }
-
       // Stop scanning
       setIsScanning(false);
 
-      // Call the success callback with the identifier
-      onScanSuccess(identifier);
+      // Call the success callback with the scanned identifier
+      onScanSuccess(scannedText);
 
       // Close the scanner
       onClose();
@@ -177,16 +167,9 @@ const ScannerPage = ({
                 onScan={handleScan}
                 onError={handleError}
                 constraints={{
-                  facingMode: "environment",
-                  aspectRatio: 1,
+                  facingMode,
                   width: { ideal: 640 },
                   height: { ideal: 480 },
-                }}
-                components={{
-                  onOff: true, // Show camera on/off button
-                  torch: true, // Show torch/flashlight button (if supported)
-                  zoom: true, // Show zoom control (if supported)
-                  finder: true, // Show finder overlay
                 }}
               />
 
