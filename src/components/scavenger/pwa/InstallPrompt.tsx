@@ -5,7 +5,7 @@ const InstallPrompt: React.FC = () => {
     <div className="relative mt-[30vh] px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode/90">
       <div className="w-full flex justify-center text-center">
         <h2 className="mx-auto text-3xl md:text-5xl font-black pb-4 mb-[5vh] border-b w-fit border-light-mode/70">
-          The CUSEC 2026 App (Beta)
+          The CUSEC 2026 App
         </h2>
       </div>
       <div className="w-full flex flex-col justify-center">

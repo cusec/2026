@@ -20,7 +20,7 @@ const DashboardFAQ: React.FC = () => {
     >
       <div className="w-full flex justify-center text-center mb-8">
         <h2 className="text-2xl md:text-4xl font-bold pb-4 text-light-mode">
-          Frequently Asked Questions
+          Scavenger Hunt Information
         </h2>
       </div>
       <div className="w-full flex justify-center">

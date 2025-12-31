@@ -100,15 +100,13 @@ export default async function ScavengerPage() {
                     </a>
                   )}
                   <InstallButton />
-                  {scavengerEnabled && (
-                    <a
-                      className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
-                      href="#Faq"
-                    >
-                      <Users className="mr-3 h-6 w-6" />
-                      FAQ
-                    </a>
-                  )}
+                  <a
+                    className="flex max-w-fit px-4 py-4 text-lg bg-transparent border-b-2 border-light-mode/50 email-hover"
+                    href="#Faq"
+                  >
+                    <Users className="mr-3 h-6 w-6" />
+                    FAQ
+                  </a>
                 </div>
                 {!scavengerEnabled && (
                   <p className="mt-6 text-md text-muted-foreground text-light-mode/90">
@@ -180,12 +178,8 @@ export default async function ScavengerPage() {
                 </div>
               </div>
 
-              {scavengerEnabled && (
-                <>
-                  <InstallPrompt />
-                  <MainFAQ />
-                </>
-              )}
+              <InstallPrompt />
+              <MainFAQ />
             </div>
           )}
         </main>
