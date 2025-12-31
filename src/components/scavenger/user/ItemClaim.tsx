@@ -5,6 +5,12 @@ import { QrCode, Keyboard, X } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import ScannerPage from "./ScannerPage";
 
+// Helper to sanitize hunt item code input
+function sanitizeCodeInput(input: string): string {
+  // Only allow alphanumeric, dash, underscore, max 64 chars
+  return input.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64);
+}
+
 interface ClaimResult {
   success: boolean;
   message: string;
@@ -143,8 +149,9 @@ const ItemClaim = ({
 
   const handleManualSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!manualCode.trim()) return;
-    await claimHuntItem(manualCode.trim());
+    const sanitized = sanitizeCodeInput(manualCode.trim());
+    if (!sanitized) return;
+    await claimHuntItem(sanitized);
   };
 
   const handleClose = () => {
@@ -247,11 +254,15 @@ const ItemClaim = ({
                 <input
                   type="text"
                   value={manualCode}
-                  onChange={(e) => setManualCode(e.target.value)}
+                  onChange={(e) =>
+                    setManualCode(sanitizeCodeInput(e.target.value))
+                  }
                   placeholder="Enter the item code..."
                   className="w-full px-4 py-3 bg-light-mode/10 border border-light-mode/20 rounded-xl focus:outline-none focus:ring-1 focus:ring-light-mode/20 focus:border-light-mode text-light-mode placeholder-light-mode/40"
                   autoFocus
                   disabled={isSubmitting}
+                  maxLength={64}
+                  pattern="[a-zA-Z0-9_-]{1,64}"
                 />
               </div>
               <button

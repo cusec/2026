@@ -4,6 +4,15 @@ import { useState } from "react";
 import { Auth0User, DbUser } from "@/lib/interface";
 import Modal from "@/components/ui/modal";
 
+// Helper to sanitize input (basic XSS prevention)
+function sanitizeInput(input: string): string {
+  return input
+    .replace(/[<>"'`]/g, "") // Remove angle brackets and quotes
+    .replace(/[\\]/g, "") // Remove backslashes
+    .replace(/\s{2,}/g, " ") // Collapse multiple spaces
+    .trim();
+}
+
 interface EmailLinkProps {
   user: Auth0User;
   dbUser: DbUser;
@@ -12,9 +21,11 @@ interface EmailLinkProps {
 
 const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
   const [email, setEmail] = useState("");
-  const [displayName, setDisplayName] = useState(dbUser.name || "");
+  const [displayName, setDisplayName] = useState(
+    sanitizeInput(dbUser.name || "")
+  );
   const [discordHandle, setDiscordHandle] = useState(
-    dbUser.discord_handle || ""
+    sanitizeInput(dbUser.discord_handle || "")
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,19 +34,21 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
   );
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleSubmitClick = () => {
-    if (!email.trim()) {
+    const sanitizedEmail = sanitizeInput(email);
+    if (!sanitizedEmail) {
       setError("Please enter an email address");
       return;
     }
 
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
+    if (!emailRegex.test(sanitizedEmail)) {
       setError("Please enter a valid email address");
       return;
     }
 
     setError(null);
+    setEmail(sanitizedEmail);
     setShowConfirmation(true);
   };
 
@@ -45,15 +58,18 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
     setError(null);
 
     try {
+      const sanitizedEmail = sanitizeInput(email);
+      const sanitizedDisplayName = sanitizeInput(displayName);
+      const sanitizedDiscordHandle = sanitizeInput(discordHandle);
       const response = await fetch("/api/users/link-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          linked_email: email,
-          name: displayName.trim(),
-          discord_handle: discordHandle.trim(),
+          linked_email: sanitizedEmail,
+          name: sanitizedDisplayName,
+          discord_handle: sanitizedDiscordHandle,
         }),
       });
 
@@ -95,7 +111,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
               type="email"
               value={email}
               onChange={(e) => {
-                setEmail(e.target.value);
+                setEmail(sanitizeInput(e.target.value));
                 setError(null);
               }}
               placeholder="Email Linked to Ticket"
@@ -142,7 +158,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
             id="discordHandle"
             type="text"
             value={discordHandle}
-            onChange={(e) => setDiscordHandle(e.target.value)}
+            onChange={(e) => setDiscordHandle(sanitizeInput(e.target.value))}
             placeholder="@discordHandle"
             className="w-full px-3 py-2 bg-light-mode/10 border border-light-mode/30 rounded-lg text-light-mode outline-none focus:border-accent"
           />
@@ -155,7 +171,7 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
             id="displayName"
             type="text"
             value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={(e) => setDisplayName(sanitizeInput(e.target.value))}
             placeholder="Enter your display name"
             className="w-full px-3 py-2 bg-light-mode/10 border border-light-mode/30 rounded-lg text-light-mode outline-none focus:border-accent"
           />

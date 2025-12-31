@@ -1,3 +1,11 @@
+// Helper to sanitize input (basic XSS and injection prevention)
+function sanitizeInput(input: string) {
+  return input
+    .replace(/[<>"'`]/g, "") // Remove angle brackets and quotes
+    .replace(/[\\]/g, "") // Remove backslashes
+    .replace(/\s{2,}/g, " ") // Collapse multiple spaces
+    .trim();
+}
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
 import { User } from "@/lib/models";
@@ -21,7 +29,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const { linked_email, name, discord_handle } = await request.json();
+    let { linked_email, name, discord_handle } = await request.json();
+    linked_email = sanitizeInput(linked_email);
+    name = sanitizeInput(name);
+    discord_handle = sanitizeInput(discord_handle);
 
     if (!linked_email) {
       return NextResponse.json(
@@ -30,7 +41,7 @@ export async function POST(request: Request) {
       );
     }
 
-    if (!name || !name.trim()) {
+    if (!name) {
       return NextResponse.json(
         { error: "Display name is required" },
         { status: 400 }
@@ -69,8 +80,8 @@ export async function POST(request: Request) {
 
     // Update the user with the linked email, display name, and discord handle
     user.linked_email = linked_email;
-    user.name = name.trim();
-    user.discord_handle = discord_handle?.trim() || null;
+    user.name = name;
+    user.discord_handle = discord_handle || null;
     await user.save();
 
     return NextResponse.json({

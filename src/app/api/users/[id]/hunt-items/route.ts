@@ -65,12 +65,13 @@ export async function POST(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { identifier } = await request.json();
+    let { identifier } = await request.json();
+    identifier = identifier.replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64);
     const { id: userId } = await params;
 
     if (!identifier) {
       return NextResponse.json(
-        { error: "Identifier is required" },
+        { error: "Identifier is required or invalid" },
         { status: 400 }
       );
     }
