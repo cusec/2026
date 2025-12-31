@@ -39,7 +39,7 @@ export default function AddEventModal({
     location: "",
     description: "",
     detailedDescription: "",
-    track: "A" as "A" | "B" | "C",
+    track: "A" as "A" | "B" | "C" | "AB" | "BC",
     color: "primary" as
       | "primary"
       | "secondary"
