@@ -300,7 +300,7 @@ export default function DaySchedule({
                     typeof window !== "undefined" &&
                     window.innerWidth < 640
                   ) {
-                    width = "44%";
+                    width = "45.5%";
                     left = "4%";
                   } else {
                     width = "46.25%";
@@ -311,8 +311,8 @@ export default function DaySchedule({
                     typeof window !== "undefined" &&
                     window.innerWidth < 640
                   ) {
-                    width = "44%";
-                    left = "54.5%";
+                    width = "45.5%";
+                    left = "51.5%";
                   } else {
                     width = "46.25%";
                     left = "49.25%";
