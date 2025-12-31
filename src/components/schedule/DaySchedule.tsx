@@ -331,7 +331,7 @@ export default function DaySchedule({
                 return (
                   <div
                     key={event._id}
-                    className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg border-l-6 ${getBorderColorClass(
+                    className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg cursor-pointer border-l-6 ${getBorderColorClass(
                       event.color
                     )} bg-dark-mode/60 shadow-lg/20 hover:bg-dark-mode/65 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
                     style={{
@@ -340,10 +340,11 @@ export default function DaySchedule({
                       width,
                       left,
                     }}
+                    onClick={() => handleOpenDetails(event)}
                   >
-                    <div className="flex flex-col">
-                      <div className="p-1 xxs:p-3 pb-0">
-                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl font-semibold leading-tight">
+                    <div className="flex flex-col pl-1 xxs:pl-3">
+                      <div className="pb-1">
+                        <h1 className="max-w-[10px] xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
                           {event.title}
                         </h1>
                         <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
@@ -351,19 +352,21 @@ export default function DaySchedule({
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
                       </div>
-                      <div className="p-1 xxs:p-3 pt-0">
+                      <div>
                         <TruncatedText
                           text={event.description}
                           // estimate available height for description area
                           maxHeight={Math.max(height - 60, 24)}
-                          className="text-xs md:text-lg text-muted-foreground leading-relaxed cursor-pointer underline"
-                          onClick={() => handleOpenDetails(event)}
+                          className="text-xs md:text-lg text-muted-foreground leading-relaxed"
                         />
                       </div>
                     </div>
                     {/* Download button - visible to everyone */}
                     <button
-                      onClick={() => downloadEventICS(event, dayTimestamp)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        downloadEventICS(event, dayTimestamp);
+                      }}
                       className="absolute top-2 right-2 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                       title="Download ICS File"
                     >
@@ -375,7 +378,10 @@ export default function DaySchedule({
                     {isAdmin && (
                       <>
                         <button
-                          onClick={() => handleEditEvent(event)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleEditEvent(event);
+                          }}
                           className="absolute top-2 right-7.75 md:right-12 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Edit event"
                         >
@@ -385,7 +391,10 @@ export default function DaySchedule({
                           />
                         </button>
                         <button
-                          onClick={() => handleDeleteEvent(event)}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteEvent(event);
+                          }}
                           className="absolute top-2 right-13 md:right-22 p-1 md:p-2 bg-light-mode/80 hover:bg-light-mode/90 rounded-lg shadow-md md:opacity-0 group-hover/event:opacity-100 transition-opacity"
                           title="Delete event"
                         >
