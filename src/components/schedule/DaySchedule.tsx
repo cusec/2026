@@ -366,7 +366,7 @@ export default function DaySchedule({
                         <h1 className="xxs:max-w-fit text-xs sm:text-sm md:text-lg lg:text-xl xxs:font-semibold leading-tight">
                           {event.title}
                         </h1>
-                        <h2 className="text-[8px] xxs:text-xs sm:text-sm md:text-md lg:text-lg text-muted-foreground font-mono">
+                        <h2 className="text-[10px] leading-tight xxs:text-xs sm:text-sm md:text-md lg:text-lg text-muted-foreground font-mono">
                           {event.startTime} - {event.endTime}
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
