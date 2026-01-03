@@ -40,16 +40,9 @@ const faqData: FAQItem[] = [
         Discord server for 2026. <br />
         <br />
         If you require further assistance, you can reach out to organizers at
-        the conference, particularly at the{" "}
-        <a
-          href="/schedule"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline"
-        >
-          scheduled
-        </a>{" "}
-        prize booth sessions.
+        the conference, particularly at the Main Hall prize booth, at scheduled
+        times. The exact timings will be pinned in `#scavenger-hunt-chat` on the
+        official Discord server.
       </>
     ),
   },
@@ -131,17 +124,9 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         Prize booths will be present in the Main Lobby for several hours on each
-        day of the conference. Physical prizes can only be claimed from the
-        prize booths at{" "}
-        <a
-          href="/schedule"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline"
-        >
-          scheduled
-        </a>{" "}
-        times.
+        day of the conference. Physical prizes can only be claimed from the Main
+        Hall prize booth at scheduled times. The exact timings will be pinned in
+        `#scavenger-hunt-chat` on the official Discord server.
       </>
     ),
   },
