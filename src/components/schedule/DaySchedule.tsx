@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { ScheduleItem } from "../../lib/interface";
 import { Pencil, Download, Trash2 } from "lucide-react";
 import AddEventModal from "./AddEventModal";
@@ -461,118 +461,118 @@ export default function DaySchedule({
 }
 
 // TruncatedText: truncates `text` with ellipsis so it fits within `maxHeight` (px).
-function TruncatedText({
-  text,
-  maxHeight,
-  className,
-  onClick,
-}: {
-  text?: string | null;
-  maxHeight: number;
-  className?: string;
-  onClick?: () => void;
-}) {
-  const [displayText, setDisplayText] = useState<string>(text || "");
-  const [measuring, setMeasuring] = useState(true);
-  const pRef = useRef<HTMLParagraphElement | null>(null);
+// function TruncatedText({
+//   text,
+//   maxHeight,
+//   className,
+//   onClick,
+// }: {
+//   text?: string | null;
+//   maxHeight: number;
+//   className?: string;
+//   onClick?: () => void;
+// }) {
+//   const [displayText, setDisplayText] = useState<string>(text || "");
+//   const [measuring, setMeasuring] = useState(true);
+//   const pRef = useRef<HTMLParagraphElement | null>(null);
 
-  useEffect(() => {
-    setDisplayText(text || "");
-    setMeasuring(true);
-  }, [text]);
+//   useEffect(() => {
+//     setDisplayText(text || "");
+//     setMeasuring(true);
+//   }, [text]);
 
-  useEffect(() => {
-    const el = pRef.current;
-    if (!el) {
-      setMeasuring(false);
-      return;
-    }
+//   useEffect(() => {
+//     const el = pRef.current;
+//     if (!el) {
+//       setMeasuring(false);
+//       return;
+//     }
 
-    const original = text || "";
+//     const original = text || "";
 
-    let rafId = 0 as number;
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
-    let ro: ResizeObserver | null = null;
+//     let rafId = 0 as number;
+//     let timeoutId: ReturnType<typeof setTimeout> | null = null;
+//     let ro: ResizeObserver | null = null;
 
-    const measure = () => {
-      if (!el) return;
-      setMeasuring(true);
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        const fits = (candidate: string) => {
-          el.innerText = candidate;
-          return el.scrollHeight <= maxHeight - 40; // small padding for safety (updated for 5px/min)
-        };
+//     const measure = () => {
+//       if (!el) return;
+//       setMeasuring(true);
+//       cancelAnimationFrame(rafId);
+//       rafId = requestAnimationFrame(() => {
+//         const fits = (candidate: string) => {
+//           el.innerText = candidate;
+//           return el.scrollHeight <= maxHeight - 40; // small padding for safety (updated for 5px/min)
+//         };
 
-        if (fits(original)) {
-          setDisplayText(original);
-          setMeasuring(false);
-          return;
-        }
+//         if (fits(original)) {
+//           setDisplayText(original);
+//           setMeasuring(false);
+//           return;
+//         }
 
-        let low = 0;
-        let high = original.length;
-        let best = 0;
+//         let low = 0;
+//         let high = original.length;
+//         let best = 0;
 
-        while (low <= high) {
-          const mid = Math.floor((low + high) / 2);
-          const candidate = original.slice(0, mid) + "...";
-          if (fits(candidate)) {
-            best = mid;
-            low = mid + 1;
-          } else {
-            high = mid - 1;
-          }
-        }
+//         while (low <= high) {
+//           const mid = Math.floor((low + high) / 2);
+//           const candidate = original.slice(0, mid) + "...";
+//           if (fits(candidate)) {
+//             best = mid;
+//             low = mid + 1;
+//           } else {
+//             high = mid - 1;
+//           }
+//         }
 
-        const finalText = original.slice(0, best) + "...";
-        setDisplayText(finalText);
-        setMeasuring(false);
-      });
-    };
+//         const finalText = original.slice(0, best) + "...";
+//         setDisplayText(finalText);
+//         setMeasuring(false);
+//       });
+//     };
 
-    // Initial measure
-    measure();
+//     // Initial measure
+//     measure();
 
-    const scheduleMeasure = () => {
-      if (timeoutId) window.clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => measure(), 60);
-    };
+//     const scheduleMeasure = () => {
+//       if (timeoutId) window.clearTimeout(timeoutId);
+//       timeoutId = setTimeout(() => measure(), 60);
+//     };
 
-    if (typeof ResizeObserver !== "undefined") {
-      try {
-        ro = new ResizeObserver(scheduleMeasure);
-        ro.observe(el);
-      } catch (e) {
-        // fall through to window events
-        console.info("ResizeObserver failed, falling back to window events", e);
-      }
-    }
+//     if (typeof ResizeObserver !== "undefined") {
+//       try {
+//         ro = new ResizeObserver(scheduleMeasure);
+//         ro.observe(el);
+//       } catch (e) {
+//         // fall through to window events
+//         console.info("ResizeObserver failed, falling back to window events", e);
+//       }
+//     }
 
-    if (!ro) {
-      window.addEventListener("resize", scheduleMeasure);
-      window.addEventListener("orientationchange", scheduleMeasure);
-    }
+//     if (!ro) {
+//       window.addEventListener("resize", scheduleMeasure);
+//       window.addEventListener("orientationchange", scheduleMeasure);
+//     }
 
-    return () => {
-      cancelAnimationFrame(rafId);
-      if (ro) ro.disconnect();
-      if (timeoutId) window.clearTimeout(timeoutId);
-      if (!ro) {
-        window.removeEventListener("resize", scheduleMeasure);
-        window.removeEventListener("orientationchange", scheduleMeasure);
-      }
-    };
-  }, [text, maxHeight]);
+//     return () => {
+//       cancelAnimationFrame(rafId);
+//       if (ro) ro.disconnect();
+//       if (timeoutId) window.clearTimeout(timeoutId);
+//       if (!ro) {
+//         window.removeEventListener("resize", scheduleMeasure);
+//         window.removeEventListener("orientationchange", scheduleMeasure);
+//       }
+//     };
+//   }, [text, maxHeight]);
 
-  return (
-    <p
-      ref={pRef}
-      onClick={onClick}
-      className={className}
-      style={{ visibility: measuring ? "hidden" : "visible" }}
-    >
-      {displayText}
-    </p>
-  );
-}
+//   return (
+//     <p
+//       ref={pRef}
+//       onClick={onClick}
+//       className={className}
+//       style={{ visibility: measuring ? "hidden" : "visible" }}
+//     >
+//       {displayText}
+//     </p>
+//   );
+// }
