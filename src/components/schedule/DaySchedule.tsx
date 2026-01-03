@@ -201,7 +201,7 @@ export default function DaySchedule({
     if (numberOfTracks === 1) {
       return "w-[100vw] sm:w-[70vw] max-w-[1100px]";
     } else if (numberOfTracks === 2) {
-      return "w-[100vw] sm:w-[85vw] max-w-[1400px]";
+      return "w-[100vw] sm:w-[90vw] max-w-[1600px]";
     } else {
       return "w-[100vw] sm:w-[90vw] max-w-[1600px]";
     }
@@ -363,22 +363,22 @@ export default function DaySchedule({
                   >
                     <div className="flex flex-col pl-1 xxs:pl-3">
                       <div className="pb-1">
-                        <h1 className="xxs:max-w-fit text-xs xxs:text-sm md:text-xl lg:text-2xl font-semibold leading-tight">
+                        <h1 className="xxs:max-w-fit text-xs sm:text-sm md:text-lg lg:text-xl xxs:font-semibold leading-tight">
                           {event.title}
                         </h1>
-                        <h2 className="text-xs md:text-lg text-muted-foreground font-mono">
+                        <h2 className="text-[8px] xxs:text-xs sm:text-sm md:text-md lg:text-lg text-muted-foreground font-mono">
                           {event.startTime} - {event.endTime}
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
                       </div>
-                      <div>
+                      {/* <div>
                         <TruncatedText
                           text={event.description}
                           // estimate available height for description area
                           maxHeight={Math.max(height - 60, 24)}
                           className="text-xs md:text-lg text-muted-foreground leading-relaxed"
                         />
-                      </div>
+                      </div> */}
                     </div>
                     {/* Download button - visible to everyone */}
                     <button

@@ -82,7 +82,7 @@ export async function POST(request: Request) {
     const existingUser = await User.findOne({ linked_email: linked_email });
     if (existingUser) {
       return NextResponse.json(
-        { error: "Linked email already in use" },
+        { error: "Email already in use" },
         { status: 409 }
       );
     }
@@ -98,7 +98,7 @@ export async function POST(request: Request) {
     if (registeredUsers.length > 1) {
       return NextResponse.json(
         {
-          error: "Linked email associated with multiple tickets",
+          error: "Email associated with multiple tickets",
         },
         { status: 409 }
       );
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
     if (registeredUsers.length === 0) {
       return NextResponse.json(
         {
-          error: "Linked email not associated with any ticket",
+          error: "Email not associated with any ticket",
         },
         { status: 409 }
       );

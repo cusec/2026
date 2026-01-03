@@ -145,8 +145,7 @@ export async function PUT(request: Request) {
 
     // Apply updates
     if (updates.name !== undefined) user.name = updates.name;
-    if (updates.linked_email !== undefined)
-      user.linked_email = updates.linked_email;
+    if (updates.linked_email !== null) user.linked_email = updates.linked_email;
     if (updates.discord_handle !== undefined)
       user.discord_handle = updates.discord_handle;
     if (updates.points !== undefined) user.points = updates.points;
