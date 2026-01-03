@@ -197,9 +197,10 @@ export default function DaySchedule({
   const pixelsPerMinute = 5; // Set to 5 for hour height
 
   // Determine container width based on number of tracks
+  // Depricated: Used to adjust width based on tracks, but now fixed max width
   const getContainerWidthClass = () => {
     if (numberOfTracks === 1) {
-      return "w-[100vw] sm:w-[70vw] max-w-[1100px]";
+      return "w-[100vw] sm:w-[90vw] max-w-[1600px]";
     } else if (numberOfTracks === 2) {
       return "w-[100vw] sm:w-[90vw] max-w-[1600px]";
     } else {
