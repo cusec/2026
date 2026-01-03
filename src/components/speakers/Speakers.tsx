@@ -51,9 +51,9 @@ export default function Speakers() {
         isOpen={modalContent !== null}
         onClose={handleCloseModal}
         title={modalContent?.title || "Talk Details"}
-        className="mx-4 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl overflow-y-hidden"
+        className="mx-4 pb-5 max-w-[80vw] md:max-w-2xl bg-dark-mode/90 text-light-mode rounded-2xl overflow-y-hidden"
       >
-        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed overflow-y-scroll max-h-[40vh] sm:max-h-[50vh] md:max-h-[60vh]">
+        <p className="text-light-mode/90 whitespace-pre-wrap leading-relaxed overflow-y-scroll max-h-[40vh] sm:max-h-[50vh]">
           {modalContent?.description || "No description available."}
         </p>
       </Modal>

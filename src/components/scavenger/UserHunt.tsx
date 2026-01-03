@@ -51,7 +51,7 @@ const UserHunt = ({
   };
 
   const handleScanClick = () => {
-    if (!linkedEmail) {
+    if (!linkedEmail || !dbUser.active) {
       setShowLinkEmailWarning(true);
     } else {
       setIsClaimModalOpen(true);
@@ -62,7 +62,7 @@ const UserHunt = ({
   useEffect(() => {
     if (typeof window === "undefined" || !linkedEmail) return;
 
-    if (linkedEmail) {
+    if (linkedEmail && dbUser.active) {
       const url = new URL(window.location.href);
       const identifier = url.searchParams.get("identifier");
       if (identifier) {
@@ -183,14 +183,15 @@ const UserHunt = ({
       <Modal
         isOpen={showLinkEmailWarning}
         onClose={() => setShowLinkEmailWarning(false)}
-        title="Email Required"
+        title="Account Invalid"
         className="max-w-md text-light-mode bg-dark-mode/90"
       >
         <div className="flex flex-col items-center text-center">
           <AlertCircle className="w-12 h-12 text-yellow-500 mb-4" />
           <p className="mb-6">
-            You need to link an email first before you can scan items. Please
-            link your ticket email to participate in the scavenger hunt.
+            {dbUser.active
+              ? "You need to link an email first before you can scan items. Please link your ticket email to participate in the scavenger hunt."
+              : "Your account is inactive. Please contact support for assistance."}
           </p>
           <button
             onClick={() => setShowLinkEmailWarning(false)}

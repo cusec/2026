@@ -4,7 +4,8 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, default: "Display Name" },
-    linked_email: { type: String, default: null },
+    linked_email: { type: String, default: null, unique: true, sparse: true },
+    active: { type: Boolean, default: true },
     discord_handle: { type: String, default: null },
     points: { type: Number, default: 0 },
     claimedItems: {

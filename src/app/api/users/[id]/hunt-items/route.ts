@@ -92,6 +92,23 @@ export async function POST(
       );
     }
 
+    if (!user.active) {
+      return NextResponse.json(
+        { error: "User account is inactive. Please contact support." },
+        { status: 403 }
+      );
+    }
+
+    if (!user.linked_email) {
+      return NextResponse.json(
+        {
+          error:
+            "Ticket Email not linked. Please link your email before claiming items.",
+        },
+        { status: 403 }
+      );
+    }
+
     // Ensure claim_attempts array exists (for existing users who might not have this field)
     if (!user.claim_attempts) {
       user.claim_attempts = [];

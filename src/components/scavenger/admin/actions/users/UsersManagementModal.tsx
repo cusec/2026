@@ -24,6 +24,7 @@ interface User {
   name?: string;
   linked_email?: string | null;
   discord_handle?: string | null;
+  active: boolean;
   points: number;
   claimedItemsCount: number;
   claimAttemptsCount: number;
@@ -52,6 +53,7 @@ const UsersManagementModal = ({
     linked_email: "",
     discord_handle: "",
     points: 0,
+    active: true,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -116,12 +118,19 @@ const UsersManagementModal = ({
       linked_email: user.linked_email || "",
       discord_handle: user.discord_handle || "",
       points: user.points || 0,
+      active: user.active,
     });
   };
 
   const cancelEdit = () => {
     setEditingUser(null);
-    setEditForm({ name: "", linked_email: "", discord_handle: "", points: 0 });
+    setEditForm({
+      name: "",
+      linked_email: "",
+      discord_handle: "",
+      points: 0,
+      active: true,
+    });
   };
 
   const saveUser = async (userId: string) => {
@@ -140,6 +149,7 @@ const UsersManagementModal = ({
             linked_email: editForm.linked_email || null,
             discord_handle: editForm.discord_handle || null,
             points: editForm.points,
+            active: editForm.active,
           },
         }),
       });
@@ -157,6 +167,7 @@ const UsersManagementModal = ({
                   linked_email: editForm.linked_email || null,
                   discord_handle: editForm.discord_handle || null,
                   points: editForm.points,
+                  active: editForm.active,
                 }
               : user
           )
@@ -172,88 +183,6 @@ const UsersManagementModal = ({
       setIsSubmitting(false);
     }
   };
-
-  // const clearUserHistory = async (userId: string, userName: string) => {
-  //   const confirmed = window.confirm(
-  //     `⚠️ DANGEROUS ACTION ⚠️\n\nThis will permanently clear ALL history and reset points to 0 for user: ${userName}\n\nThis action cannot be undone. Are you sure?`
-  //   );
-
-  //   if (!confirmed) return;
-
-  //   try {
-  //     setIsSubmitting(true);
-
-  //     const response = await fetch("/api/admin/users", {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         userId,
-  //         updates: { clearHistory: true },
-  //       }),
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (data.success) {
-  //       // Update local state
-  //       setUsers(
-  //         users.map((user) =>
-  //           user._id === userId ? { ...user, points: 0, historyCount: 0 } : user
-  //         )
-  //       );
-  //     } else {
-  //       setError(data.error || "Failed to clear user history");
-  //     }
-  //   } catch (err) {
-  //     setError("Failed to clear user history");
-  //     console.error("Error clearing user history:", err);
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
-
-  // const clearClaimAttempts = async (userId: string, userName: string) => {
-  //   const confirmed = window.confirm(
-  //     `Clear all claim attempts for user: ${userName}?\n\nThis will remove the audit trail of their claim attempts. Not recommended unless necessary.`
-  //   );
-
-  //   if (!confirmed) return;
-
-  //   try {
-  //     setIsSubmitting(true);
-
-  //     const response = await fetch("/api/admin/users", {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         userId,
-  //         updates: { clearClaimAttempts: true },
-  //       }),
-  //     });
-
-  //     const data = await response.json();
-
-  //     if (data.success) {
-  //       // Update local state
-  //       setUsers(
-  //         users.map((user) =>
-  //           user._id === userId ? { ...user, claimAttemptsCount: 0 } : user
-  //         )
-  //       );
-  //     } else {
-  //       setError(data.error || "Failed to clear claim attempts");
-  //     }
-  //   } catch (err) {
-  //     setError("Failed to clear claim attempts");
-  //     console.error("Error clearing claim attempts:", err);
-  //   } finally {
-  //     setIsSubmitting(false);
-  //   }
-  // };
 
   const showUserHistory = (user: User) => {
     setSelectedUser(user);
@@ -418,6 +347,24 @@ const UsersManagementModal = ({
                               className="w-full px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
                               placeholder="Enter points"
                               min="0"
+                              readOnly={!isAdmin}
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">
+                              Active
+                            </label>
+                            <input
+                              type="checkbox"
+                              checked={editForm.active}
+                              onChange={(e) =>
+                                setEditForm({
+                                  ...editForm,
+                                  active: e.target.checked,
+                                })
+                              }
+                              className="px-3 py-2 border border-gray-300 rounded bg-white text-gray-900"
+                              placeholder="Enter name"
                               readOnly={!isAdmin}
                             />
                           </div>

@@ -35,10 +35,7 @@ const faqData: FAQItem[] = [
     question: "How do I request Scavenger Hunt related assistance?",
     answer: (
       <>
-        Ensure that you have updated your discord handle at the top of the page
-        for faster assistance.
-        <br />
-        <br /> Support for Scavenger Hunt is available through the
+        Support for Scavenger Hunt is available through the
         &apos;#scavenger-hunt-support&apos; forum/channel on the official
         Discord server for 2026. <br />
         <br />
@@ -60,14 +57,14 @@ const faqData: FAQItem[] = [
     question: "How do I install the CUSEC 2026 app?",
     answer: (
       <>
-        The process defers for each operating systemm device and browser. There
-        are steps present above that guide you through the process for most
-        devices.
+        The process differs for each operating system, device, and browser.
+        There are steps present above that guide you through the process for
+        most devices.
         <br /> <br />
         If you don&apos;t see the prompt, install button or an option from your
         browser to install (not a shortcut), try the following:
         <br />
-        Clear cookies/site data -&gt; Close all CUSEC tabs -&gt; Close the
+        Clear cookies/site data -&gt; Close all CUSEC tabs -&gt; Force stop
         browser -&gt; Clear browser cache -&gt; Restart the browser.
         <br /> <br />
         If you are still having issues, feel free to reach out to organizers
@@ -82,9 +79,7 @@ const faqData: FAQItem[] = [
       <>
         The Scavenger Hunt is open all attendees of CUSEC 2026. To be able to
         scan/claim hunt items, you&apos;ll need to connect your account with the
-        email linked to your CUSEC 2026 ticket. If the same email is used for
-        booking multiple tickets, use your registered personal/school email to
-        link your account.
+        email (school/personal/booking) registered with your CUSEC 2026 ticket.
         <br />
         <br />
         The linking can be done once you log into the Scavenger Hunt page and
@@ -99,7 +94,7 @@ const faqData: FAQItem[] = [
       <>
         Hunt items are QR codes or specific identifiers/codes that participants
         can find and claim during the Scavenger Hunt. To claim an item, you can
-        either scan the QR code (From the Scavenger Hunt page or from your
+        either scan the QR code (from the Scavenger Hunt page or from your
         device&apos;s camera) or manually enter the code associated with the
         item.
         <br />

@@ -41,6 +41,7 @@ export interface DbUser {
   name?: string;
   linked_email?: string | null;
   discord_handle?: string | null;
+  active: boolean;
   points: number;
   claimedItems: string[];
   collectibles: string[];

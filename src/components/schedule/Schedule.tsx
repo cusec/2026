@@ -15,8 +15,8 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
   const [error, setError] = useState<string | null>(null);
 
   // Single source of truth for display times (in hours, 24-hour format)
-  const DISPLAY_START_HOUR = 8; // 8:00 AM
-  const DISPLAY_END_HOUR = 23; // 11:00 PM
+  const DISPLAY_START_HOUR = 9; // 9:00 AM
+  const DISPLAY_END_HOUR = 22; // 10:00 PM
 
   const fetchDays = async () => {
     try {

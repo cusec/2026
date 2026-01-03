@@ -26,6 +26,7 @@ export async function GET() {
     // Step 2: Get all users with claimed items
     const users = await User.find({
       name: { $exists: true, $ne: null },
+      active: true,
       claimedItems: { $exists: true, $not: { $size: 0 } },
     })
       .select("name claimedItems")

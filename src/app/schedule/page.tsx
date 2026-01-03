@@ -1,11 +1,5 @@
 "use server";
-import {
-  Particles,
-  Navbar,
-  SmoothFollower,
-  Footer,
-  Schedule,
-} from "@/components";
+import { Particles, Navbar, Footer, Schedule } from "@/components";
 import isAdmin from "@/lib/isAdmin";
 
 export default async function PrivacyPolicyPage() {
@@ -21,7 +15,6 @@ export default async function PrivacyPolicyPage() {
         <Particles className="absolute inset-0 animate-fade-in" />
       </div>
       <Navbar />
-      <SmoothFollower />
       <div className="flex justify-center items-center h-full min-h-screen overflow-x-hidden pt-[15vh] pb-[10vh]">
         <Schedule adminUser={adminUser} />
       </div>

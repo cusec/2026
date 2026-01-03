@@ -91,7 +91,7 @@ const faqData: FAQItem[] = [
   },
   {
     question:
-      "The points for each hunt item are very low, will I be able to claim any prizes?",
+      "The points for hunt items are very low, will I be able to claim any prizes?",
     answer: (
       <>
         Yes! While individual hunt items may have low point values, we&apos;ve
@@ -107,12 +107,16 @@ const faqData: FAQItem[] = [
   },
   {
     question:
-      "What is the difference between hunt items, shop prizes, collectibles, and shop prizes?",
+      "What is the difference between hunt items, shop prizes and collectibles?",
     answer: (
       <>
         Hunt items are specific codes or QR codes that you can find and claim.
         These reward you with points that contribute to your overall score in
         the Scavenger Hunt. You can use these points to redeem shop prizes.
+        <br /> <br />
+        Shop prizes are items that you can redeem using the points you earn from
+        claiming hunt items. They are usually physical prizes available at
+        designated prize booths during the conference.
         <br /> <br />
         Collectibles are special items that you can find during the hunt. They
         do not contribute to your points but are unique items. You may find a
@@ -120,10 +124,6 @@ const faqData: FAQItem[] = [
         will also be present in the shop for a brief period of time. Each
         collectible is different, but some can be &apos;used&apos; at the prize
         booth for the specified reward.
-        <br /> <br />
-        Shop prizes are items that you can redeem using the points you earn from
-        claiming hunt items. They are usually physical prizes available at
-        designated prize booths during the conference.
       </>
     ),
   },
@@ -142,17 +142,16 @@ const faqData: FAQItem[] = [
     ),
   },
   {
-    question: "Where can I see the hunt items I have claimed?",
+    question: "Where can I see the hunt items that I have claimed?",
     answer: (
       <>
         Once you claim a hunt item, it will be added to your inventory on your
-        dashboard. You can view all the hunt items you have claimed, along with
-        their details and point values, in the inventory section of your
+        dashboard. You can view all the hunt items you have claimed along with
+        their details and point values in the inventory section of your
         dashboard.
         <br /> <br />
-        The inventory also displays any collectibles you have found/redeemed
-        during the hunt. You can also see any shop prizes you have redeemed at
-        the prize booths in the same inventory section.
+        The inventory also displays any collectibles and shop prizes you have
+        found/redeemed during the hunt.
       </>
     ),
   },
@@ -162,14 +161,14 @@ const faqData: FAQItem[] = [
     answer: (
       <>
         The shop acts as a catalog for all prizes & collectibles available at
-        the time of checking.
+        any given time.
         <br /> <br />
         The shop prizes present in the shop need to be redeemed in-person at the
         prize booths during scheduled times at the conference.
         <br /> <br />
-        Some collectibles may only be available for a limited time in the shop.
-        These can be redeemed by the user directly on the platform. They will
-        then see the collectible in their inventory.
+        Some collectibles may be available for a limited time in the shop. These
+        can be redeemed by the user directly on the platform. They will then see
+        the collectible in their inventory.
       </>
     ),
   },

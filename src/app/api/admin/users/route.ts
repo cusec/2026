@@ -45,7 +45,7 @@ export async function GET(request: Request) {
 
     const users = await User.find(query)
       .select(
-        "email name linked_email discord_handle points claimedItems claim_attempts createdAt updatedAt"
+        "email name linked_email discord_handle points active claimedItems claim_attempts createdAt updatedAt"
       )
       .sort({ createdAt: -1 })
       .skip(offset)
@@ -63,6 +63,7 @@ export async function GET(request: Request) {
           linked_email: user.linked_email || null,
           discord_handle: user.discord_handle || null,
           points: user.points || 0,
+          active: user.active,
           claimedItemsCount: user.claimedItems.length,
           claimAttemptsCount: user.claim_attempts?.length || 0,
           createdAt: user.createdAt,
@@ -124,6 +125,7 @@ export async function PUT(request: Request) {
       linked_email: user.linked_email,
       discord_handle: user.discord_handle,
       points: user.points,
+      active: user.active,
       claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
@@ -135,15 +137,7 @@ export async function PUT(request: Request) {
     if (updates.discord_handle !== undefined)
       user.discord_handle = updates.discord_handle;
     if (updates.points !== undefined) user.points = updates.points;
-
-    // Handle dangerous operations
-    if (updates.clearClaimedItems === true) {
-      user.claimedItems = [];
-    }
-
-    if (updates.clearClaimAttempts === true) {
-      user.claim_attempts = [];
-    }
+    if (updates.active !== undefined) user.active = updates.active;
 
     await user.save();
 
@@ -153,6 +147,7 @@ export async function PUT(request: Request) {
       linked_email: user.linked_email,
       discord_handle: user.discord_handle,
       points: user.points,
+      active: user.active,
       claimedItemsLength: user.claimedItems.length,
       claimAttemptsLength: user.claim_attempts?.length || 0,
     });
@@ -196,6 +191,7 @@ export async function PUT(request: Request) {
         linked_email: user.linked_email || null,
         discord_handle: user.discord_handle || null,
         points: user.points || 0,
+        active: user.active,
         claimedItemsCount: user.claimedItems.length,
         claimAttemptsCount: user.claim_attempts?.length || 0,
       },

@@ -210,9 +210,9 @@ export default function DaySchedule({
   return (
     <>
       <div
-        className={`group/full ${getContainerWidthClass()} mt-12 backdrop-blur-lg px-4 md:px-8 lg:px-12 py-12 lg:py-16`}
+        className={`relative group/full ${getContainerWidthClass()} mt-12 px-4 md:px-8 lg:px-12 py-12 lg:py-16`}
       >
-        <div className="absolute w-full h-full top-0 left-0 sm:bg-dark-mode/40 sm:rounded-3xl sm:shadow-lg backdrop-blur-md"></div>
+        <div className="absolute w-full h-full top-0 left-0 sm:bg-dark-mode/40 sm:rounded-3xl sm:shadow-lg"></div>
 
         {/* Download entire day button - top right corner */}
         <button
