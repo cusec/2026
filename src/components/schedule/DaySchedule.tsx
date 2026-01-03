@@ -343,7 +343,11 @@ export default function DaySchedule({
                 return (
                   <div
                     key={event._id}
-                    className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg cursor-pointer border-l-6 ${getBorderColorClass(
+                    className={`absolute items-center w-full sm:mx-[2vw] lg:mx-10 flex rounded-lg ${
+                      event.description || event.detailedDescription
+                        ? " cursor-pointer "
+                        : ""
+                    } border-l-6 ${getBorderColorClass(
                       event.color
                     )} bg-dark-mode/60 shadow-lg/20 hover:bg-dark-mode/65 hover:shadow-lg/30 text-light-mode/90 transition-shadow min-h-16 bg-card group/event`}
                     style={{
@@ -352,7 +356,10 @@ export default function DaySchedule({
                       width,
                       left,
                     }}
-                    onClick={() => handleOpenDetails(event)}
+                    onClick={() => {
+                      if (event.description || event.detailedDescription)
+                        handleOpenDetails(event);
+                    }}
                   >
                     <div className="flex flex-col pl-1 xxs:pl-3">
                       <div className="pb-1">
