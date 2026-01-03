@@ -60,7 +60,7 @@ export async function GET(request: Request) {
           _id: user._id,
           email: user.email,
           name: user.name,
-          linked_email: user.linked_email || null,
+          linked_email: user.linked_email || undefined,
           discord_handle: user.discord_handle || null,
           points: user.points || 0,
           active: user.active,
@@ -117,6 +117,19 @@ export async function PUT(request: Request) {
     const user = await User.findById(userId);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    if (
+      updates.linked_email &&
+      (await User.findOne({
+        linked_email: updates.linked_email,
+        _id: { $ne: userId },
+      }))
+    ) {
+      return NextResponse.json(
+        { error: "Linked email already in use by another user" },
+        { status: 400 }
+      );
     }
 
     // Store previous data for audit logging
@@ -188,7 +201,7 @@ export async function PUT(request: Request) {
         _id: user._id,
         email: user.email,
         name: user.name,
-        linked_email: user.linked_email || null,
+        linked_email: user.linked_email || undefined,
         discord_handle: user.discord_handle || null,
         points: user.points || 0,
         active: user.active,

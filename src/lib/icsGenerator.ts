@@ -64,8 +64,8 @@ export function generateICS(event: ScheduleItem, dayTimestamp: number): string {
   ];
 
   // Add optional fields if they exist
-  if (event.description) {
-    icsLines.push(`DESCRIPTION:${escapeText(event.description)}`);
+  if (event.detailedDescription) {
+    icsLines.push(`DESCRIPTION:${escapeText(event.detailedDescription)}`);
   }
 
   if (event.location) {

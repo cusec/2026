@@ -60,7 +60,7 @@ export async function GET(request: Request) {
         _id: user._id,
         email: user.email,
         name: user.name || "No name",
-        linked_email: user.linked_email || null,
+        linked_email: user.linked_email || undefined,
         discord_handle: user.discord_handle || null,
         points: user.points || 0,
       })),

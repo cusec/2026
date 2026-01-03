@@ -22,7 +22,7 @@ interface User {
   _id: string;
   email: string;
   name?: string;
-  linked_email?: string | null;
+  linked_email?: string | undefined;
   discord_handle?: string | null;
   active: boolean;
   points: number;
@@ -146,7 +146,7 @@ const UsersManagementModal = ({
           userId,
           updates: {
             name: editForm.name,
-            linked_email: editForm.linked_email || null,
+            linked_email: editForm.linked_email || undefined,
             discord_handle: editForm.discord_handle || null,
             points: editForm.points,
             active: editForm.active,
@@ -164,7 +164,7 @@ const UsersManagementModal = ({
               ? {
                   ...user,
                   name: editForm.name,
-                  linked_email: editForm.linked_email || null,
+                  linked_email: editForm.linked_email || undefined,
                   discord_handle: editForm.discord_handle || null,
                   points: editForm.points,
                   active: editForm.active,

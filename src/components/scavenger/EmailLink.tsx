@@ -29,8 +29,8 @@ const EmailLink = ({ user, dbUser, onEmailLinked }: EmailLinkProps) => {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [linkedEmail, setLinkedEmail] = useState<string | null>(
-    dbUser.linked_email || null
+  const [linkedEmail, setLinkedEmail] = useState<string | undefined>(
+    dbUser.linked_email || undefined
   );
   const [showConfirmation, setShowConfirmation] = useState(false);
   const handleSubmitClick = () => {

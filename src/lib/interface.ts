@@ -31,7 +31,7 @@ export interface Auth0User {
   name?: string;
   picture?: string;
   sub?: string;
-  linked_email?: string | null;
+  linked_email?: string | undefined;
   "cusec/roles"?: string[];
 }
 
@@ -39,7 +39,7 @@ export interface DbUser {
   _id: string;
   email: string;
   name?: string;
-  linked_email?: string | null;
+  linked_email?: string | undefined;
   discord_handle?: string | null;
   active: boolean;
   points: number;
@@ -242,6 +242,7 @@ export interface TeamMember {
 export interface RegisteredUser {
   name: string;
   linkedEmail: string;
-  schoolEmail?: string;
+  studentEmail?: string;
   personalEmail?: string;
+  isLinked: boolean;
 }

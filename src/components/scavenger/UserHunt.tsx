@@ -71,7 +71,7 @@ const UserHunt = ({
     } else {
       setShowLinkEmailWarning(true);
     }
-  }, [isClaimModalOpen, linkedEmail]);
+  }, [isClaimModalOpen, linkedEmail, dbUser.active]);
 
   return (
     <div className="w-full max-w-4xl mx-auto text-light-mode/90">

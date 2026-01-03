@@ -8,7 +8,7 @@ function sanitizeInput(input: string) {
 }
 import { NextResponse } from "next/server";
 import { auth0 } from "@/lib/auth0";
-import { User } from "@/lib/models";
+import { User, RegisteredUser } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 
 // POST - Link email to user account (only if not already linked)
@@ -78,17 +78,68 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if the linked email is already in use by another user
+    const existingUser = await User.findOne({ linked_email: linked_email });
+    if (existingUser) {
+      return NextResponse.json(
+        { error: "Linked email already in use" },
+        { status: 409 }
+      );
+    }
+
+    // Check if the linked email belongs to more than 1 registered user (school/personal/email)
+    const registeredUsers = await RegisteredUser.find({
+      $or: [
+        { linkedEmail: linked_email },
+        { studentEmail: linked_email },
+        { personalEmail: linked_email },
+      ],
+    });
+    if (registeredUsers.length > 1) {
+      return NextResponse.json(
+        {
+          error: "Linked email associated with multiple tickets",
+        },
+        { status: 409 }
+      );
+    }
+    if (registeredUsers.length === 0) {
+      return NextResponse.json(
+        {
+          error: "Linked email not associated with any ticket",
+        },
+        { status: 409 }
+      );
+    }
+
+    // Ensure that this registered user has not already been linked
+    const regUser = registeredUsers[0];
+    if (regUser.isLinked) {
+      return NextResponse.json(
+        {
+          error: "This ticket has already been used to link an account",
+        },
+        { status: 409 }
+      );
+    }
+
     // Update the user with the linked email, display name, and discord handle
     user.linked_email = linked_email;
     user.name = name;
     user.discord_handle = discord_handle || null;
     await user.save();
 
+    // Mark the registered user as linked
+    regUser.isLinked = true;
+    await regUser.save();
+
     return NextResponse.json({
       success: true,
       message: "Email linked successfully",
       linked_email: user.linked_email,
+      registered_user_name: regUser.name,
       name: user.name,
+      account_email: user.email,
       discord_handle: user.discord_handle,
     });
   } catch (error) {
@@ -128,7 +179,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      linked_email: user.linked_email || null,
+      linked_email: user.linked_email || undefined,
       has_linked_email: !!user.linked_email,
     });
   } catch (error) {

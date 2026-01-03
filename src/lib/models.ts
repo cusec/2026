@@ -4,7 +4,7 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String, default: "Display Name" },
-    linked_email: { type: String, default: null, unique: true, sparse: true },
+    linked_email: { type: String, required: false, unique: true, sparse: true },
     active: { type: Boolean, default: true },
     discord_handle: { type: String, default: null },
     points: { type: Number, default: 0 },
@@ -252,8 +252,9 @@ const registeredUserSchema = new Schema(
   {
     name: { type: String, required: true },
     linkedEmail: { type: String, required: true, unique: true },
-    schoolEmail: { type: String, required: false },
+    studentEmail: { type: String, required: false },
     personalEmail: { type: String, required: false },
+    isLinked: { type: Boolean, default: false },
   },
   {
     timestamps: false,

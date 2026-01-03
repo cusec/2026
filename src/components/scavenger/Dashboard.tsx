@@ -16,8 +16,8 @@ interface DashboardProps {
 }
 
 const Dashboard = ({ user, dbUser, baseURL }: DashboardProps) => {
-  const [linkedEmail, setLinkedEmail] = useState<string | null>(
-    dbUser?.linked_email || null
+  const [linkedEmail, setLinkedEmail] = useState<string | undefined>(
+    dbUser?.linked_email || undefined
   );
 
   const handleEmailLinked = (email: string) => {

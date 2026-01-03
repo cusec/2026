@@ -15,7 +15,7 @@ interface SearchUser {
   _id: string;
   email: string;
   name: string;
-  linked_email: string | null;
+  linked_email: string | undefined;
   discord_handle: string | null;
   points: number;
 }
