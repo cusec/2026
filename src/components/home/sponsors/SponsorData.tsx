@@ -36,7 +36,7 @@ const sponsors: SponsorData = {
   inkind: [
     {
       image: "/images/sponsors/tailed.png",
-      link: "https://www.tailed.ca",
+      link: "https://community.tailed.ca",
     },
     /*
     {
