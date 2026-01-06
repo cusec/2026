@@ -362,12 +362,12 @@ export default function DaySchedule({
                         handleOpenDetails(event);
                     }}
                   >
-                    <div className="flex flex-col pl-1 xxs:pl-3">
+                    <div className="flex flex-col pl-0.5 sm:pl-3">
                       <div className="pb-1">
-                        <h1 className="xxs:max-w-fit text-xs sm:text-sm md:text-lg lg:text-xl xxs:font-semibold leading-tight">
+                        <h1 className="xxs:max-w-fit text-[10px] xs:text-xs sm:text-sm md:text-lg lg:text-xl xxs:font-semibold leading-tight">
                           {event.title}
                         </h1>
-                        <h2 className="text-xs sm:text-sm md:text-md lg:text-lg text-muted-foreground font-mono">
+                        <h2 className="text-[10px] xs:text-xs sm:text-sm md:text-md lg:text-lg text-muted-foreground font-mono">
                           {event.startTime} - {event.endTime}
                           {event.location ? ` | ${event.location}` : ""}
                         </h2>
