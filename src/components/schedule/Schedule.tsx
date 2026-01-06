@@ -16,7 +16,7 @@ const Schedule = ({ adminUser }: { adminUser: boolean }) => {
 
   // Single source of truth for display times (in hours, 24-hour format)
   const DISPLAY_START_HOUR = 9; // 9:00 AM
-  const DISPLAY_END_HOUR = 22; // 10:00 PM
+  const DISPLAY_END_HOUR = 24; // 12:00 AM (midnight)
 
   // Hardcoded placeholder days for loading state
   const PLACEHOLDER_DAYS = [
