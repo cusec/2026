@@ -12,6 +12,20 @@ interface CollectibleAddFormProps {
   isSubmitting?: boolean;
 }
 
+// Helper to format date for datetime-local input
+// Converts UTC datetime to local time for display
+const formatDateForInput = (dateStr: string | null): string => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  // Get local time components
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 const CollectibleAddForm = ({
   formData,
   setFormData,
@@ -294,15 +308,17 @@ const CollectibleAddForm = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Activation Start (optional)
+              Activation Start (optional, Montreal Time)
             </label>
             <input
               type="datetime-local"
-              value={formData.activationStart || ""}
+              value={formatDateForInput(formData.activationStart)}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  activationStart: e.target.value || null,
+                  activationStart: e.target.value
+                    ? new Date(e.target.value).toISOString()
+                    : null,
                 })
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"
@@ -311,15 +327,17 @@ const CollectibleAddForm = ({
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Activation End (optional)
+              Activation End (optional, Montreal Time)
             </label>
             <input
               type="datetime-local"
-              value={formData.activationEnd || ""}
+              value={formatDateForInput(formData.activationEnd)}
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  activationEnd: e.target.value || null,
+                  activationEnd: e.target.value
+                    ? new Date(e.target.value).toISOString()
+                    : null,
                 })
               }
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900"

@@ -12,6 +12,20 @@ interface CollectibleEditFormProps {
   onChange: (item: Collectible) => void;
 }
 
+// Helper to format date for datetime-local input
+// Converts UTC datetime to local time for display
+const formatDateForInput = (dateStr: string | null): string => {
+  if (!dateStr) return "";
+  const date = new Date(dateStr);
+  // Get local time components
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
 const CollectibleEditForm = ({
   item,
   onSave,
@@ -290,15 +304,11 @@ const CollectibleEditForm = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Activation Start
+            Activation Start (Montreal Time)
           </label>
           <input
             type="datetime-local"
-            value={
-              item.activationStart
-                ? new Date(item.activationStart).toISOString().slice(0, 16)
-                : ""
-            }
+            value={formatDateForInput(item.activationStart)}
             onChange={(e) =>
               onChange({
                 ...item,
@@ -312,15 +322,11 @@ const CollectibleEditForm = ({
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Activation End
+            Activation End (Montreal Time)
           </label>
           <input
             type="datetime-local"
-            value={
-              item.activationEnd
-                ? new Date(item.activationEnd).toISOString().slice(0, 16)
-                : ""
-            }
+            value={formatDateForInput(item.activationEnd)}
             onChange={(e) =>
               onChange({
                 ...item,
