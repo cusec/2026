@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Plus, Search } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import { HuntItem } from "@/lib/interface";
 import { useHuntItems } from "./huntItemsDAO";
@@ -17,6 +17,7 @@ interface HuntItemsModalProps {
 const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
   const [qrModalOpen, setQrModalOpen] = useState(false);
   const [selectedQrItem, setSelectedQrItem] = useState<HuntItem | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const {
     huntItems,
@@ -34,6 +35,18 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
     updateHuntItem,
     deleteHuntItem,
   } = useHuntItems(isOpen);
+
+  // Filter hunt items based on search query
+  const filteredHuntItems = useMemo(() => {
+    if (!searchQuery.trim()) {
+      return huntItems;
+    }
+    
+    const query = searchQuery.toLowerCase();
+    return huntItems.filter((item) =>
+      item.name.toLowerCase().includes(query)
+    );
+  }, [huntItems, searchQuery]);
 
   // Show QR code in modal
   const showQRCode = (item: HuntItem) => {
@@ -87,7 +100,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
           {/* Add New Item Button */}
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium text-dark-mode">
-              Hunt Items ({huntItems.length})
+              Hunt Items ({filteredHuntItems.length}{searchQuery && ` of ${huntItems.length}`})
             </h3>
             <button
               onClick={() => setShowAddForm(!showAddForm)}
@@ -97,6 +110,26 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
               <Plus size={16} />
               Add New Item
             </button>
+          </div>
+
+          {/* Search Bar */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+            <input
+              type="text"
+              placeholder="Search hunt items by name..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              >
+                ×
+              </button>
+            )}
           </div>
 
           {/* Add New Item Form */}
@@ -112,7 +145,7 @@ const HuntItemsModal = ({ isOpen, onClose }: HuntItemsModalProps) => {
 
           {/* Hunt Items List */}
           <HuntItemsList
-            items={huntItems}
+            items={filteredHuntItems}
             loading={loading}
             editingItem={editingItem}
             onEdit={setEditingItem}
