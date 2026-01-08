@@ -27,22 +27,41 @@ export async function uploadImage(
   contentType: string,
   folder: string = "shop-items"
 ): Promise<CloudinaryUploadResult> {
+  // Verify Cloudinary is configured
+  if (
+    !process.env.CLOUDINARY_CLOUD_NAME ||
+    !process.env.CLOUDINARY_API_KEY ||
+    !process.env.CLOUDINARY_API_SECRET
+  ) {
+    console.error("Cloudinary environment variables are not configured:", {
+      hasCloudName: !!process.env.CLOUDINARY_CLOUD_NAME,
+      hasApiKey: !!process.env.CLOUDINARY_API_KEY,
+      hasApiSecret: !!process.env.CLOUDINARY_API_SECRET,
+    });
+    throw new Error("Cloudinary is not configured. Check environment variables.");
+  }
+
   // Construct data URL from base64 data
   const dataUrl = `data:${contentType};base64,${base64Data}`;
 
-  const result = await cloudinary.uploader.upload(dataUrl, {
-    folder: folder,
-    resource_type: "image",
-    transformation: [{ quality: "auto" }, { fetch_format: "auto" }],
-  });
+  try {
+    const result = await cloudinary.uploader.upload(dataUrl, {
+      folder: folder,
+      resource_type: "image",
+      transformation: [{ quality: "auto" }, { fetch_format: "auto" }],
+    });
 
-  return {
-    public_id: result.public_id,
-    secure_url: result.secure_url,
-    width: result.width,
-    height: result.height,
-    format: result.format,
-  };
+    return {
+      public_id: result.public_id,
+      secure_url: result.secure_url,
+      width: result.width,
+      height: result.height,
+      format: result.format,
+    };
+  } catch (error) {
+    console.error("Cloudinary upload failed:", error);
+    throw error;
+  }
 }
 
 /**
