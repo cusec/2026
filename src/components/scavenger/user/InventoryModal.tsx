@@ -294,15 +294,15 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
                       {collectible.imageUrl && (
-                          <div className="w-10 h-10 hidden md:flex rounded-full overflow-hidden shrink-0 bg-light-mode/10">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={collectible.imageUrl}
-                              alt={collectible.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                        )}
+                        <div className="w-10 h-10 hidden md:flex rounded-full overflow-hidden shrink-0 bg-light-mode/10">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={collectible.imageUrl}
+                            alt={collectible.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold wrap-break-word text-light-mode">
                           {collectible.name}

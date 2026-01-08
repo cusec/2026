@@ -313,7 +313,10 @@ const UserCollectiblesModal = ({
                           {collectible.imageUrl && (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
-                              src={getCollectibleImageSrc(collectible.imageUrl) || ""}
+                              src={
+                                getCollectibleImageSrc(collectible.imageUrl) ||
+                                ""
+                              }
                               alt={collectible.name}
                               className="w-full h-full object-cover"
                             />
@@ -359,7 +362,9 @@ const UserCollectiblesModal = ({
                       {collectible.imageUrl && (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                          src={getCollectibleImageSrc(collectible.imageUrl) || ""}
+                          src={
+                            getCollectibleImageSrc(collectible.imageUrl) || ""
+                          }
                           alt={collectible.name}
                           className="w-full h-full object-cover"
                         />
