@@ -184,11 +184,11 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                         <Package className="w-5 h-5 text-light-mode" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate text-light-mode">
+                        <p className="font-semibold wrap-break-word text-light-mode">
                           {item.name}
                         </p>
                         {item.description && (
-                          <p className="text-sm text-light-mode/60 truncate">
+                          <p className="text-sm text-light-mode/60 wrap-break-word">
                             {item.description}
                           </p>
                         )}
@@ -246,12 +246,12 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                         </div>
                       )}
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate text-light-mode">
+                        <p className="font-semibold wrap-break-word text-light-mode">
                           {prize.count || 0 > 1 ? `(${prize.count}x) ` : ""}
                           {prize.name}
                         </p>
                         {prize.description && (
-                          <p className="text-sm text-light-mode/60 truncate">
+                          <p className="text-sm text-light-mode/60 wrap-break-word">
                             {prize.description}
                           </p>
                         )}
@@ -308,11 +308,11 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                           </div>
                         )}
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold truncate text-light-mode">
+                        <p className="font-semibold wrap-break-word text-light-mode">
                           {collectible.name}
                         </p>
                         {collectible.description && (
-                          <p className="text-xs text-light-mode/60 mt-1 line-clamp-2">
+                          <p className="text-xs text-light-mode/60 mt-1 wrap-break-word">
                             {collectible.description}
                           </p>
                         )}

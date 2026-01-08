@@ -164,7 +164,7 @@ const ShopPrize = ({
         className="flex flex-col backdrop-blur-sm gap-2 mx-auto justify-center items-center text-center p-2 bg-dark-mode/85 h-62 w-62 rounded-2xl border-2 border-light-mode/20 text-light-mode hover:scale-101 transition-transform transition-duration-200"
       >
         {getImageSrc(item) && (
-          <div className="w-24 h-24 overflow-hidden">
+          <div className="w-24 h-24 rounded-lg overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={getImageSrc(item)!}
