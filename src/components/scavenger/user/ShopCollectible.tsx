@@ -25,6 +25,7 @@ const ShopCollectible = ({
   onRedeemSuccess,
 }: ShopCollectibleProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
   const [isRedeeming, setIsRedeeming] = useState(false);
   const [redeemError, setRedeemError] = useState<string | null>(null);
   const [redeemSuccess, setRedeemSuccess] = useState<string | null>(null);
@@ -38,17 +39,27 @@ const ShopCollectible = ({
 
   const openModal = () => {
     setIsModalOpen(true);
+    setIsConfirming(false);
     setRedeemError(null);
     setRedeemSuccess(null);
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsConfirming(false);
     setRedeemError(null);
     setRedeemSuccess(null);
   };
 
-  const handleRedeem = async () => {
+  const handlePurchaseClick = () => {
+    setIsConfirming(true);
+  };
+
+  const handleCancelConfirm = () => {
+    setIsConfirming(false);
+  };
+
+  const handleConfirmRedeem = async () => {
     if (!canAfford) return;
 
     setIsRedeeming(true);
@@ -69,6 +80,7 @@ const ShopCollectible = ({
 
       if (data.success) {
         setRedeemSuccess(data.message);
+        setIsConfirming(false);
         // Update points after successful redemption
         onRedeemSuccess?.(data.redemption.user.newPoints);
         setTimeout(() => {
@@ -227,25 +239,59 @@ const ShopCollectible = ({
               </div>
             )}
 
-            {/* Redeem Button */}
-            <button
-              onClick={handleRedeem}
-              disabled={!canAfford || isRedeeming || isSoldOut}
-              className="w-full cursor-pointer py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isRedeeming ? (
-                <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Purchasing...
-                </>
-              ) : isSoldOut ? (
-                "Sold Out"
-              ) : canAfford ? (
-                "Purchase Collectible"
-              ) : (
-                "Not Enough Points"
-              )}
-            </button>
+            {/* Confirmation Dialog */}
+            {isConfirming ? (
+              <div className="space-y-3">
+                <div className="p-3 bg-yellow-500/20 text-yellow-200 rounded-lg text-sm text-center">
+                  <p className="font-semibold mb-1">Confirm Purchase</p>
+                  <p>
+                    Are you sure you want to spend{" "}
+                    <span className="font-bold">
+                      {collectible.discountedCost ?? collectible.cost} points
+                    </span>{" "}
+                    on <span className="font-bold">{collectible.name}</span>?
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleCancelConfirm}
+                    disabled={isRedeeming}
+                    className="flex-1 cursor-pointer py-2 text-white bg-gray-500/50 rounded-lg hover:bg-gray-500/70 transition-colors disabled:opacity-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleConfirmRedeem}
+                    disabled={isRedeeming}
+                    className="flex-1 cursor-pointer py-2 text-white bg-green-600/80 rounded-lg hover:bg-green-600 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {isRedeeming ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Purchasing...
+                      </>
+                    ) : (
+                      "Confirm"
+                    )}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              /* Redeem Button */
+              <button
+                onClick={handlePurchaseClick}
+                disabled={!canAfford || isRedeeming || isSoldOut}
+                className="w-full cursor-pointer py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isSoldOut ? (
+                  "Sold Out"
+                ) : canAfford ? (
+                  "Purchase Collectible"
+                ) : (
+                  "Not Enough Points"
+                )}
+              </button>
+            )}
           </div>
         )}
       </Modal>
