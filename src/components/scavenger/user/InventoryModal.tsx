@@ -14,8 +14,7 @@ interface InventoryCollectible {
   name: string;
   description: string;
   cost: number;
-  imageData?: string;
-  imageContentType?: string;
+  imageUrl?: string;
 }
 
 interface InventoryModalProps {
@@ -35,8 +34,8 @@ interface InventoryResponse {
 
 // Helper function to get image source from shop item
 const getShopItemImageSrc = (item: ShopItem): string | null => {
-  if (item.imageData && item.imageContentType) {
-    return `data:${item.imageContentType};base64,${item.imageData}`;
+  if (item.imageUrl) {
+    return item.imageUrl;
   }
   return null;
 };
@@ -45,8 +44,7 @@ const getShopItemImageSrc = (item: ShopItem): string | null => {
 interface GroupedCollectible {
   name: string;
   description: string;
-  imageData?: string;
-  imageContentType?: string;
+  imageUrl?: string;
   available: number;
   used: number;
 }
@@ -69,8 +67,7 @@ const groupCollectiblesByName = (
       grouped.set(collectible.name, {
         name: collectible.name,
         description: collectible.description,
-        imageData: collectible.imageData,
-        imageContentType: collectible.imageContentType,
+        imageUrl: collectible.imageUrl,
         available: collectible.used ? 0 : 1,
         used: collectible.used ? 1 : 0,
       });
@@ -296,12 +293,11 @@ const InventoryModal = ({ userId, isOpen, onClose }: InventoryModalProps) => {
                       key={collectible.name}
                       className="flex items-center gap-4 p-4 border-l border-light-mode/40"
                     >
-                      {collectible.imageData &&
-                        collectible.imageContentType && (
+                      {collectible.imageUrl && (
                           <div className="w-10 h-10 hidden md:flex rounded-full overflow-hidden shrink-0 bg-light-mode/10">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={`data:${collectible.imageContentType};base64,${collectible.imageData}`}
+                              src={collectible.imageUrl}
                               alt={collectible.name}
                               className="w-full h-full object-cover"
                             />

@@ -22,8 +22,8 @@ interface SearchUser {
 
 // Helper function to get image source from shop item
 const getImageSrc = (item: ShopItem): string | null => {
-  if (item.imageData && item.imageContentType) {
-    return `data:${item.imageContentType};base64,${item.imageData}`;
+  if (item.imageUrl) {
+    return item.imageUrl;
   }
   return null;
 };

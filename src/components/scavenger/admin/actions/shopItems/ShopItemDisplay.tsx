@@ -10,10 +10,7 @@ interface ShopItemDisplayProps {
 }
 
 const ShopItemDisplay = ({ item, onEdit, onDelete }: ShopItemDisplayProps) => {
-  const imageSrc =
-    item.imageData && item.imageContentType
-      ? `data:${item.imageContentType};base64,${item.imageData}`
-      : null;
+  const imageSrc = item.imageUrl || null;
 
   return (
     <div className="flex items-start justify-between">

@@ -14,8 +14,9 @@ const emptyFormData: CollectibleFormData = {
   active: true,
   activationStart: null,
   activationEnd: null,
-  imageData: "",
-  imageContentType: "",
+  imageFile: undefined,
+  imageUrl: undefined,
+  removeImage: false,
 };
 
 export const useCollectibles = (isOpen: boolean) => {
@@ -57,12 +58,40 @@ export const useCollectibles = (isOpen: boolean) => {
       setIsSubmitting(true);
       setError(null);
 
+      // Convert file to base64 if provided
+      let imageData: string | undefined;
+      let imageContentType: string | undefined;
+
+      if (formData.imageFile) {
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(formData.imageFile!);
+        });
+        imageData = base64.split(",")[1];
+        imageContentType = formData.imageFile.type;
+      }
+
       const response = await fetch("/api/collectibles", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          description: formData.description,
+          cost: formData.cost,
+          discountedCost: formData.discountedCost,
+          purchasable: formData.purchasable,
+          limited: formData.limited,
+          remaining: formData.remaining,
+          active: formData.active,
+          activationStart: formData.activationStart,
+          activationEnd: formData.activationEnd,
+          imageData,
+          imageContentType,
+        }),
       });
 
       const data = await response.json();
@@ -89,6 +118,27 @@ export const useCollectibles = (isOpen: boolean) => {
     try {
       setError(null);
 
+      // Check if there's a pending image file to upload (stored in a custom property)
+      const pendingFile = (item as Collectible & { _pendingImageFile?: File })
+        ._pendingImageFile;
+      const shouldRemoveImage = (
+        item as Collectible & { _removeImage?: boolean }
+      )._removeImage;
+
+      let imageData: string | undefined;
+      let imageContentType: string | undefined;
+
+      if (pendingFile) {
+        const base64 = await new Promise<string>((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = reject;
+          reader.readAsDataURL(pendingFile);
+        });
+        imageData = base64.split(",")[1];
+        imageContentType = pendingFile.type;
+      }
+
       const response = await fetch(`/api/collectibles/${item._id}`, {
         method: "PUT",
         headers: {
@@ -105,8 +155,9 @@ export const useCollectibles = (isOpen: boolean) => {
           active: item.active,
           activationStart: item.activationStart,
           activationEnd: item.activationEnd,
-          imageData: item.imageData,
-          imageContentType: item.imageContentType,
+          imageData,
+          imageContentType,
+          removeImage: shouldRemoveImage,
         }),
       });
 

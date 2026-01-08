@@ -208,8 +208,8 @@ const shopItemSchema = new Schema(
     active: { type: Boolean, default: true },
     activationStart: { type: Date, default: null },
     activationEnd: { type: Date, default: null },
-    imageData: { type: String, default: null }, // Base64 encoded image data (optional)
-    imageContentType: { type: String, default: null }, // MIME type (optional)
+    imageUrl: { type: String, default: null }, // Cloudinary image URL
+    imagePublicId: { type: String, default: null }, // Cloudinary public_id for deletion
     claimCount: { type: Number, default: 0 },
   },
   {
@@ -239,8 +239,8 @@ const collectibleSchema = new Schema(
     active: { type: Boolean, default: true },
     activationStart: { type: Date, default: null },
     activationEnd: { type: Date, default: null },
-    imageData: { type: String, default: null }, // Base64 encoded image data (optional)
-    imageContentType: { type: String, default: null }, // MIME type (optional)
+    imageUrl: { type: String, default: null }, // Cloudinary image URL
+    imagePublicId: { type: String, default: null }, // Cloudinary public_id for deletion
     claimCount: { type: Number, default: 0 },
   },
   {

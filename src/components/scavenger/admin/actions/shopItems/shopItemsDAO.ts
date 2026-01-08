@@ -3,6 +3,16 @@
 import { useState, useEffect } from "react";
 import { ShopItem, ShopItemFormData } from "@/lib/interface";
 
+// Helper function to convert File to base64
+const fileToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+};
+
 const emptyFormData: ShopItemFormData = {
   name: "",
   description: "",
@@ -13,8 +23,9 @@ const emptyFormData: ShopItemFormData = {
   active: true,
   activationStart: null,
   activationEnd: null,
-  imageData: "",
-  imageContentType: "",
+  imageFile: undefined,
+  imageUrl: undefined,
+  removeImage: false,
 };
 
 export const useShopItems = (isOpen: boolean) => {
@@ -56,12 +67,34 @@ export const useShopItems = (isOpen: boolean) => {
       setIsSubmitting(true);
       setError(null);
 
+      // Prepare form data for API - convert file to base64 if present
+      let imageData: string | undefined;
+      let imageContentType: string | undefined;
+
+      if (formData.imageFile) {
+        const base64 = await fileToBase64(formData.imageFile);
+        imageData = base64.split(",")[1]; // Remove data URL prefix
+        imageContentType = formData.imageFile.type;
+      }
+
       const response = await fetch("/api/admin/shop", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          description: formData.description,
+          cost: formData.cost,
+          discountedCost: formData.discountedCost,
+          limited: formData.limited,
+          remaining: formData.remaining,
+          active: formData.active,
+          activationStart: formData.activationStart,
+          activationEnd: formData.activationEnd,
+          imageData,
+          imageContentType,
+        }),
       });
 
       const data = await response.json();
@@ -84,9 +117,24 @@ export const useShopItems = (isOpen: boolean) => {
   };
 
   // Update shop item
-  const updateShopItem = async (item: ShopItem) => {
+  const updateShopItem = async (
+    item: ShopItem & { imageFile?: File; removeImage?: boolean }
+  ) => {
     try {
       setError(null);
+
+      // Prepare image data for API
+      let imageData: string | null | undefined;
+      let imageContentType: string | undefined;
+      let removeImage = false;
+
+      if (item.removeImage) {
+        removeImage = true;
+      } else if (item.imageFile) {
+        const base64 = await fileToBase64(item.imageFile);
+        imageData = base64.split(",")[1]; // Remove data URL prefix
+        imageContentType = item.imageFile.type;
+      }
 
       const response = await fetch("/api/admin/shop", {
         method: "PUT",
@@ -105,8 +153,8 @@ export const useShopItems = (isOpen: boolean) => {
             active: item.active,
             activationStart: item.activationStart,
             activationEnd: item.activationEnd,
-            imageData: item.imageData,
-            imageContentType: item.imageContentType,
+            ...(removeImage ? { removeImage: true } : {}),
+            ...(imageData ? { imageData, imageContentType } : {}),
           },
         }),
       });

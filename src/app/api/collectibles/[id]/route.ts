@@ -5,6 +5,7 @@ import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 import { Types } from "mongoose";
+import { uploadImage, deleteImage } from "@/lib/cloudinary";
 
 // GET - Fetch a specific collectible
 export async function GET(
@@ -77,6 +78,7 @@ export async function PUT(
       activationEnd,
       imageData,
       imageContentType,
+      removeImage,
     } = await request.json();
 
     await connectMongoDB();
@@ -102,6 +104,7 @@ export async function PUT(
       active: collectible.active,
       activationStart: collectible.activationStart,
       activationEnd: collectible.activationEnd,
+      imageUrl: collectible.imageUrl,
     });
 
     // Update fields
@@ -117,14 +120,30 @@ export async function PUT(
     if (activationStart !== undefined)
       collectible.activationStart = activationStart;
     if (activationEnd !== undefined) collectible.activationEnd = activationEnd;
-    // Handle image updates (including removal when null is passed)
-    if (imageData === null) {
-      collectible.imageData = null;
-      collectible.imageContentType = null;
-    } else if (imageData !== undefined) {
-      collectible.imageData = imageData;
-      if (imageContentType !== undefined)
-        collectible.imageContentType = imageContentType;
+
+    // Handle image updates with Cloudinary
+    if (removeImage === true) {
+      // Delete old image from Cloudinary if it exists
+      if (collectible.imagePublicId) {
+        await deleteImage(collectible.imagePublicId);
+      }
+      collectible.imageUrl = null;
+      collectible.imagePublicId = null;
+    } else if (imageData && imageContentType) {
+      // Delete old image from Cloudinary if it exists
+      if (collectible.imagePublicId) {
+        await deleteImage(collectible.imagePublicId);
+      }
+      // Upload new image to Cloudinary
+      const uploadResult = await uploadImage(
+        imageData,
+        imageContentType,
+        "collectibles"
+      );
+      if (uploadResult) {
+        collectible.imageUrl = uploadResult.secure_url;
+        collectible.imagePublicId = uploadResult.public_id;
+      }
     }
 
     await collectible.save();
@@ -143,6 +162,7 @@ export async function PUT(
         active: collectible.active,
         activationStart: collectible.activationStart,
         activationEnd: collectible.activationEnd,
+        imageUrl: collectible.imageUrl,
       });
 
       await logAdminAction({
@@ -215,6 +235,7 @@ export async function DELETE(
       active: collectible.active,
       activationStart: collectible.activationStart,
       activationEnd: collectible.activationEnd,
+      imageUrl: collectible.imageUrl,
     });
 
     // Check if any user owns this collectible
@@ -238,6 +259,11 @@ export async function DELETE(
         (collectibleId: Types.ObjectId) => collectibleId.toString() !== id
       );
       await huntItem.save();
+    }
+
+    // Delete image from Cloudinary if it exists
+    if (collectible.imagePublicId) {
+      await deleteImage(collectible.imagePublicId);
     }
 
     await Collectible.findByIdAndDelete(id);

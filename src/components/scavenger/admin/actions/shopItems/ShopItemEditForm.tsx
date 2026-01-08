@@ -5,11 +5,17 @@ import { Upload, Users, Trash2 } from "lucide-react";
 import { ShopItem } from "@/lib/interface";
 import ShopItemUsersModal from "./ShopItemUsersModal";
 
+// Extended ShopItem for editing with file support
+interface EditableShopItem extends ShopItem {
+  imageFile?: File;
+  removeImage?: boolean;
+}
+
 interface ShopItemEditFormProps {
   item: ShopItem;
-  onSave: (item: ShopItem) => void;
+  onSave: (item: EditableShopItem) => void;
   onCancel: () => void;
-  onChange: (item: ShopItem) => void;
+  onChange: (item: EditableShopItem) => void;
 }
 
 // Helper to format date for datetime-local input
@@ -19,10 +25,10 @@ const formatDateForInput = (dateStr: string | null): string => {
   const date = new Date(dateStr);
   // Get local time components
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
@@ -36,11 +42,15 @@ const ShopItemEditForm = ({
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [showUsersModal, setShowUsersModal] = useState(false);
 
-  // Initialize image preview from existing data
+  // Track the current editing item with extended properties
+  const [editingItem, setEditingItem] = useState<EditableShopItem>(item);
+
+  // Initialize image preview from existing URL
   useEffect(() => {
-    if (item.imageData && item.imageContentType) {
-      setImagePreview(`data:${item.imageContentType};base64,${item.imageData}`);
+    if (item.imageUrl) {
+      setImagePreview(item.imageUrl);
     }
+    setEditingItem({ ...item, imageFile: undefined, removeImage: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item._id]); // Only run when item changes (based on _id)
 
@@ -67,42 +77,42 @@ const ShopItemEditForm = ({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result as string;
-      // Remove the data URL prefix to store just the base64 data
-      const base64Data = base64.split(",")[1];
-      onChange({
-        ...item,
-        imageData: base64Data,
-        imageContentType: file.type,
-      });
-      setImagePreview(base64);
+    // Create preview URL and store file
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl);
+
+    const updatedItem = {
+      ...editingItem,
+      imageFile: file,
+      removeImage: false,
     };
-    reader.readAsDataURL(file);
+    setEditingItem(updatedItem);
+    onChange(updatedItem);
   };
 
   const handleRemoveImage = () => {
-    // Use null (not undefined) to signal explicit removal to the API
-    onChange({
-      ...item,
-      imageData: null as unknown as string | undefined,
-      imageContentType: null as unknown as string | undefined,
-    });
+    const updatedItem = {
+      ...editingItem,
+      imageUrl: undefined,
+      imageFile: undefined,
+      removeImage: true,
+    };
+    setEditingItem(updatedItem);
+    onChange(updatedItem);
     setImagePreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
   };
 
+  const handleChange = (updates: Partial<EditableShopItem>) => {
+    const updatedItem = { ...editingItem, ...updates };
+    setEditingItem(updatedItem);
+    onChange(updatedItem);
+  };
+
   const getImageSrc = () => {
-    if (imagePreview) {
-      return imagePreview;
-    }
-    if (item.imageData && item.imageContentType) {
-      return `data:${item.imageContentType};base64,${item.imageData}`;
-    }
-    return null;
+    return imagePreview;
   };
 
   const imageSrc = getImageSrc();
@@ -162,8 +172,8 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="text"
-                value={item.name}
-                onChange={(e) => onChange({ ...item, name: e.target.value })}
+                value={editingItem.name}
+                onChange={(e) => handleChange({ name: e.target.value })}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               />
             </div>
@@ -173,9 +183,9 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="number"
-                value={item.cost}
+                value={editingItem.cost}
                 onChange={(e) =>
-                  onChange({ ...item, cost: parseInt(e.target.value) || 0 })
+                  handleChange({ cost: parseInt(e.target.value) || 0 })
                 }
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
                 min={0}
@@ -187,10 +197,9 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="number"
-                value={item.discountedCost ?? ""}
+                value={editingItem.discountedCost ?? ""}
                 onChange={(e) =>
-                  onChange({
-                    ...item,
+                  handleChange({
                     discountedCost: e.target.value
                       ? parseInt(e.target.value)
                       : null,
@@ -208,10 +217,8 @@ const ShopItemEditForm = ({
               Description
             </label>
             <textarea
-              value={item.description}
-              onChange={(e) =>
-                onChange({ ...item, description: e.target.value })
-              }
+              value={editingItem.description}
+              onChange={(e) => handleChange({ description: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 text-sm"
               rows={2}
             />
@@ -221,32 +228,29 @@ const ShopItemEditForm = ({
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                id={`limited-${item._id}`}
-                checked={item.limited}
-                onChange={(e) =>
-                  onChange({ ...item, limited: e.target.checked })
-                }
+                id={`limited-${editingItem._id}`}
+                checked={editingItem.limited}
+                onChange={(e) => handleChange({ limited: e.target.checked })}
                 className="w-4 h-4 text-blue-600 rounded"
               />
               <label
-                htmlFor={`limited-${item._id}`}
+                htmlFor={`limited-${editingItem._id}`}
                 className="text-sm font-medium text-gray-700"
               >
                 Limited
               </label>
             </div>
 
-            {item.limited && (
+            {editingItem.limited && (
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Remaining
                 </label>
                 <input
                   type="number"
-                  value={item.remaining}
+                  value={editingItem.remaining}
                   onChange={(e) =>
-                    onChange({
-                      ...item,
+                    handleChange({
                       remaining: parseInt(e.target.value) || 0,
                     })
                   }
@@ -259,15 +263,13 @@ const ShopItemEditForm = ({
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
-                id={`active-${item._id}`}
-                checked={item.active}
-                onChange={(e) =>
-                  onChange({ ...item, active: e.target.checked })
-                }
+                id={`active-${editingItem._id}`}
+                checked={editingItem.active}
+                onChange={(e) => handleChange({ active: e.target.checked })}
                 className="w-4 h-4 text-blue-600 rounded"
               />
               <label
-                htmlFor={`active-${item._id}`}
+                htmlFor={`active-${editingItem._id}`}
                 className="text-sm font-medium text-gray-700"
               >
                 Active
@@ -283,10 +285,9 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="datetime-local"
-                value={formatDateForInput(item.activationStart)}
+                value={formatDateForInput(editingItem.activationStart)}
                 onChange={(e) =>
-                  onChange({
-                    ...item,
+                  handleChange({
                     activationStart: e.target.value
                       ? new Date(e.target.value).toISOString()
                       : null,
@@ -301,10 +302,9 @@ const ShopItemEditForm = ({
               </label>
               <input
                 type="datetime-local"
-                value={formatDateForInput(item.activationEnd)}
+                value={formatDateForInput(editingItem.activationEnd)}
                 onChange={(e) =>
-                  onChange({
-                    ...item,
+                  handleChange({
                     activationEnd: e.target.value
                       ? new Date(e.target.value).toISOString()
                       : null,
@@ -323,7 +323,7 @@ const ShopItemEditForm = ({
 
       <div className="flex gap-2 justify-end">
         <button
-          onClick={() => onSave(item)}
+          onClick={() => onSave(editingItem)}
           className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm"
         >
           Save

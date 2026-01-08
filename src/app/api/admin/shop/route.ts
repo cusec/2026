@@ -4,6 +4,7 @@ import { ShopItem } from "@/lib/models";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
 import { auth0 } from "@/lib/auth0";
+import { uploadImage, deleteImage } from "@/lib/cloudinary";
 
 // POST - Create a new shop item (admin only)
 export async function POST(request: Request) {
@@ -45,7 +46,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Validate image content type if image is provided
+    // Upload image to Cloudinary if provided
+    let imageUrl = null;
+    let imagePublicId = null;
+
     if (imageData && imageContentType) {
       const allowedTypes = [
         "image/png",
@@ -60,6 +64,22 @@ export async function POST(request: Request) {
           { status: 400 }
         );
       }
+
+      try {
+        const uploadResult = await uploadImage(
+          imageData,
+          imageContentType,
+          "shop-items"
+        );
+        imageUrl = uploadResult.secure_url;
+        imagePublicId = uploadResult.public_id;
+      } catch (uploadError) {
+        console.error("Error uploading image to Cloudinary:", uploadError);
+        return NextResponse.json(
+          { error: "Failed to upload image" },
+          { status: 500 }
+        );
+      }
     }
 
     const shopItem = new ShopItem({
@@ -72,8 +92,8 @@ export async function POST(request: Request) {
       active: active !== undefined ? active : true,
       activationStart: activationStart || null,
       activationEnd: activationEnd || null,
-      imageData: imageData || null,
-      imageContentType: imageContentType || null,
+      imageUrl,
+      imagePublicId,
     });
 
     await shopItem.save();
@@ -94,9 +114,8 @@ export async function POST(request: Request) {
         active,
         activationStart,
         activationEnd,
-        imageContentType,
-        // Don't log the full image data, just note it exists
-        hasImage: true,
+        imageUrl,
+        hasImage: !!imageUrl,
       }),
       request,
     });
@@ -115,8 +134,7 @@ export async function POST(request: Request) {
         active: shopItem.active,
         activationStart: shopItem.activationStart,
         activationEnd: shopItem.activationEnd,
-        imageData: shopItem.imageData,
-        imageContentType: shopItem.imageContentType,
+        imageUrl: shopItem.imageUrl,
       },
     });
   } catch (error) {
@@ -172,8 +190,8 @@ export async function PUT(request: Request) {
       active: shopItem.active,
       activationStart: shopItem.activationStart,
       activationEnd: shopItem.activationEnd,
-      imageContentType: shopItem.imageContentType,
-      hasImage: !!shopItem.imageData,
+      imageUrl: shopItem.imageUrl,
+      hasImage: !!shopItem.imageUrl,
     });
     console.log("Updates received for shop item:", updates);
     // Apply updates
@@ -190,12 +208,23 @@ export async function PUT(request: Request) {
       shopItem.activationStart = updates.activationStart;
     if (updates.activationEnd !== undefined)
       shopItem.activationEnd = updates.activationEnd;
+
     // Handle image updates (including removal when null is passed)
-    if ("imageData" in updates) {
-      if (updates.imageData === null) {
-        // Remove image
-        shopItem.imageData = null;
-        shopItem.imageContentType = null;
+    if ("imageData" in updates || "removeImage" in updates) {
+      if (updates.removeImage === true || updates.imageData === null) {
+        // Delete old image from Cloudinary if exists
+        if (shopItem.imagePublicId) {
+          try {
+            await deleteImage(shopItem.imagePublicId);
+          } catch (deleteError) {
+            console.error(
+              "Error deleting old image from Cloudinary:",
+              deleteError
+            );
+          }
+        }
+        shopItem.imageUrl = null;
+        shopItem.imagePublicId = null;
       } else if (updates.imageData && updates.imageContentType) {
         // Validate image content type
         const allowedTypes = [
@@ -213,8 +242,35 @@ export async function PUT(request: Request) {
             { status: 400 }
           );
         }
-        shopItem.imageData = updates.imageData;
-        shopItem.imageContentType = updates.imageContentType;
+
+        // Delete old image from Cloudinary if exists
+        if (shopItem.imagePublicId) {
+          try {
+            await deleteImage(shopItem.imagePublicId);
+          } catch (deleteError) {
+            console.error(
+              "Error deleting old image from Cloudinary:",
+              deleteError
+            );
+          }
+        }
+
+        // Upload new image to Cloudinary
+        try {
+          const uploadResult = await uploadImage(
+            updates.imageData,
+            updates.imageContentType,
+            "shop-items"
+          );
+          shopItem.imageUrl = uploadResult.secure_url;
+          shopItem.imagePublicId = uploadResult.public_id;
+        } catch (uploadError) {
+          console.error("Error uploading image to Cloudinary:", uploadError);
+          return NextResponse.json(
+            { error: "Failed to upload image" },
+            { status: 500 }
+          );
+        }
       }
     }
 
@@ -230,8 +286,8 @@ export async function PUT(request: Request) {
       active: shopItem.active,
       activationStart: shopItem.activationStart,
       activationEnd: shopItem.activationEnd,
-      imageContentType: shopItem.imageContentType,
-      hasImage: !!shopItem.imageData,
+      imageUrl: shopItem.imageUrl,
+      hasImage: !!shopItem.imageUrl,
     });
 
     // Log admin action
@@ -259,8 +315,7 @@ export async function PUT(request: Request) {
         active: shopItem.active,
         activationStart: shopItem.activationStart,
         activationEnd: shopItem.activationEnd,
-        imageData: shopItem.imageData,
-        imageContentType: shopItem.imageContentType,
+        imageUrl: shopItem.imageUrl,
       },
     });
   } catch (error) {
@@ -316,9 +371,18 @@ export async function DELETE(request: Request) {
       active: shopItem.active,
       activationStart: shopItem.activationStart,
       activationEnd: shopItem.activationEnd,
-      imageContentType: shopItem.imageContentType,
-      hasImage: !!shopItem.imageData,
+      imageUrl: shopItem.imageUrl,
+      hasImage: !!shopItem.imageUrl,
     });
+
+    // Delete image from Cloudinary if exists
+    if (shopItem.imagePublicId) {
+      try {
+        await deleteImage(shopItem.imagePublicId);
+      } catch (deleteError) {
+        console.error("Error deleting image from Cloudinary:", deleteError);
+      }
+    }
 
     await ShopItem.findByIdAndDelete(itemId);
 

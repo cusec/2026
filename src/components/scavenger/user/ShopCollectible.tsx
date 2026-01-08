@@ -13,8 +13,8 @@ interface ShopCollectibleProps {
 
 // Helper function to get image source from collectible
 const getCollectibleImageSrc = (item: Collectible): string | null => {
-  if (item.imageData && item.imageContentType) {
-    return `data:${item.imageContentType};base64,${item.imageData}`;
+  if (item.imageUrl) {
+    return item.imageUrl;
   }
   return null;
 };
@@ -103,7 +103,7 @@ const ShopCollectible = ({
         )}
         <div
           className={`flex flex-col gap-2 pl-1 ${
-            collectible.imageData && collectible.imageContentType
+            collectible.imageUrl
               ? "items-center md:items-start"
               : "items-center"
           }`}

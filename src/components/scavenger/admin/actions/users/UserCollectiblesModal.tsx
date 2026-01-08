@@ -20,8 +20,7 @@ interface UserCollectible {
   description: string;
   slug: string;
   cost: number;
-  imageData: string;
-  imageContentType: string;
+  imageUrl?: string;
 }
 
 interface AvailableCollectible {
@@ -30,8 +29,7 @@ interface AvailableCollectible {
   description: string;
   slug: string;
   cost: number;
-  imageData: string;
-  imageContentType: string;
+  imageUrl?: string;
 }
 
 interface UserCollectiblesModalProps {
@@ -44,14 +42,8 @@ interface UserCollectiblesModalProps {
 }
 
 // Helper function to get image source from collectible
-const getCollectibleImageSrc = (
-  imageData: string,
-  imageContentType: string
-): string | null => {
-  if (imageData && imageContentType) {
-    return `data:${imageContentType};base64,${imageData}`;
-  }
-  return null;
+const getCollectibleImageSrc = (imageUrl?: string): string | null => {
+  return imageUrl || null;
 };
 
 const UserCollectiblesModal = ({
@@ -318,15 +310,10 @@ const UserCollectiblesModal = ({
                         className="flex items-center gap-2 p-2 bg-white border border-gray-200 rounded-lg hover:bg-purple-50 hover:border-purple-300 transition disabled:opacity-50 disabled:cursor-wait text-left"
                       >
                         <div className="w-8 h-8 rounded-full overflow-hidden shrink-0 bg-gray-200">
-                          {collectible.imageData && (
+                          {collectible.imageUrl && (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
-                              src={
-                                getCollectibleImageSrc(
-                                  collectible.imageData,
-                                  collectible.imageContentType
-                                ) || ""
-                              }
+                              src={getCollectibleImageSrc(collectible.imageUrl) || ""}
                               alt={collectible.name}
                               className="w-full h-full object-cover"
                             />
@@ -369,15 +356,10 @@ const UserCollectiblesModal = ({
                     className="flex items-center gap-3 p-3 border border-gray-200 rounded-lg bg-white"
                   >
                     <div className="w-10 h-10 rounded-full overflow-hidden shrink-0 bg-gray-200">
-                      {collectible.imageData && (
+                      {collectible.imageUrl && (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                          src={
-                            getCollectibleImageSrc(
-                              collectible.imageData,
-                              collectible.imageContentType
-                            ) || ""
-                          }
+                          src={getCollectibleImageSrc(collectible.imageUrl) || ""}
                           alt={collectible.name}
                           className="w-full h-full object-cover"
                         />

@@ -101,8 +101,7 @@ export interface ShopItem {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData?: string; // Base64 encoded image data (optional)
-  imageContentType?: string; // MIME type (optional)
+  imageUrl?: string; // Cloudinary image URL (optional)
   createdAt?: string;
   updatedAt?: string;
   claimCount: number;
@@ -118,8 +117,9 @@ export interface ShopItemFormData {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData?: string; // Base64 encoded image data (optional)
-  imageContentType?: string; // MIME type (optional)
+  imageFile?: File; // File to upload to Cloudinary
+  imageUrl?: string; // Existing Cloudinary URL (for editing)
+  removeImage?: boolean; // Flag to remove existing image
 }
 
 export interface Notice {
@@ -147,8 +147,7 @@ export interface Collectible {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData?: string; // Base64 encoded image data (optional)
-  imageContentType?: string; // MIME type (optional)
+  imageUrl?: string; // Cloudinary image URL (optional)
   createdAt?: string;
   updatedAt?: string;
   claimCount: number;
@@ -165,8 +164,9 @@ export interface CollectibleFormData {
   active: boolean;
   activationStart: string | null;
   activationEnd: string | null;
-  imageData?: string; // Base64 encoded image data (optional)
-  imageContentType?: string; // MIME type (optional)
+  imageFile?: File; // File to upload to Cloudinary
+  imageUrl?: string; // Existing Cloudinary URL (for editing)
+  removeImage?: boolean; // Flag to remove existing image
 }
 
 export interface Day {

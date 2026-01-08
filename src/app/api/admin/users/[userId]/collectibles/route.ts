@@ -71,8 +71,7 @@ export async function GET(
           name: collectibleDoc?.name || "Unknown",
           description: collectibleDoc?.description || "",
           cost: collectibleDoc?.cost || 0,
-          imageData: collectibleDoc?.imageData || "",
-          imageContentType: collectibleDoc?.imageContentType || "",
+          imageUrl: collectibleDoc?.imageUrl || null,
         };
       }
     );

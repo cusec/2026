@@ -48,8 +48,9 @@ const CollectiblesModal = ({ isOpen, onClose }: CollectiblesModalProps) => {
       active: true,
       activationStart: null,
       activationEnd: null,
-      imageData: "",
-      imageContentType: "",
+      imageFile: undefined,
+      imageUrl: undefined,
+      removeImage: false,
     });
   };
 

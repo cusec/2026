@@ -4,6 +4,7 @@ import { Collectible } from "@/lib/models";
 import connectMongoDB from "@/lib/mongodb";
 import isAdmin from "@/lib/isAdmin";
 import { logAdminAction, sanitizeDataForLogging } from "@/lib/adminAuditLogger";
+import { uploadImage } from "@/lib/cloudinary";
 
 // Helper function to check if item is within activation period
 function isWithinActivationPeriod(item: {
@@ -106,6 +107,22 @@ export async function POST(request: Request) {
       );
     }
 
+    // Upload image to Cloudinary if provided
+    let imageUrl: string | null = null;
+    let imagePublicId: string | null = null;
+
+    if (imageData && imageContentType) {
+      const uploadResult = await uploadImage(
+        imageData,
+        imageContentType,
+        "collectibles"
+      );
+      if (uploadResult) {
+        imageUrl = uploadResult.secure_url;
+        imagePublicId = uploadResult.public_id;
+      }
+    }
+
     const collectible = new Collectible({
       name,
       description: description || "",
@@ -117,8 +134,8 @@ export async function POST(request: Request) {
       active: active !== undefined ? active : true,
       activationStart: activationStart || null,
       activationEnd: activationEnd || null,
-      imageData: imageData || null,
-      imageContentType: imageContentType || null,
+      imageUrl,
+      imagePublicId,
     });
 
     await collectible.save();

@@ -19,10 +19,10 @@ const formatDateForInput = (dateStr: string | null): string => {
   const date = new Date(dateStr);
   // Get local time components
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
@@ -59,26 +59,23 @@ const ShopItemAddForm = ({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result as string;
-      // Remove the data URL prefix to store just the base64 data
-      const base64Data = base64.split(",")[1];
-      setFormData({
-        ...formData,
-        imageData: base64Data,
-        imageContentType: file.type,
-      });
-      setImagePreview(base64);
-    };
-    reader.readAsDataURL(file);
+    // Store the file and create preview
+    setFormData({
+      ...formData,
+      imageFile: file,
+      removeImage: false,
+    });
+
+    // Create preview URL
+    const previewUrl = URL.createObjectURL(file);
+    setImagePreview(previewUrl);
   };
 
   const clearImage = () => {
     setFormData({
       ...formData,
-      imageData: "",
-      imageContentType: "",
+      imageFile: undefined,
+      removeImage: false,
     });
     setImagePreview(null);
     if (fileInputRef.current) {

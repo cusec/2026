@@ -19,10 +19,10 @@ const formatDateForInput = (dateStr: string | null): string => {
   const date = new Date(dateStr);
   // Get local time components
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hours = String(date.getHours()).padStart(2, "0");
+  const minutes = String(date.getMinutes()).padStart(2, "0");
   return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
 
@@ -38,8 +38,10 @@ const CollectibleEditForm = ({
 
   // Initialize image preview from existing data
   useEffect(() => {
-    if (item.imageData && item.imageContentType) {
-      setImagePreview(`data:${item.imageContentType};base64,${item.imageData}`);
+    if (item.imageUrl) {
+      setImagePreview(item.imageUrl);
+    } else {
+      setImagePreview(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [item._id]); // Only run when item changes (based on _id)
@@ -67,28 +69,25 @@ const CollectibleEditForm = ({
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result as string;
-      // Remove the data URL prefix to store just the base64 data
-      const base64Data = base64.split(",")[1];
-      onChange({
-        ...item,
-        imageData: base64Data,
-        imageContentType: file.type,
-      });
-      setImagePreview(base64);
-    };
-    reader.readAsDataURL(file);
+    // Store the file in a custom property for later upload
+    const updatedItem = {
+      ...item,
+      _pendingImageFile: file,
+      _removeImage: false,
+    } as Collectible & { _pendingImageFile?: File; _removeImage?: boolean };
+    onChange(updatedItem);
+    setImagePreview(URL.createObjectURL(file));
   };
 
   const handleRemoveImage = () => {
-    // Use null (not undefined) to signal explicit removal to the API
-    onChange({
+    // Mark for removal
+    const updatedItem = {
       ...item,
-      imageData: null as unknown as string | undefined,
-      imageContentType: null as unknown as string | undefined,
-    });
+      imageUrl: undefined,
+      _pendingImageFile: undefined,
+      _removeImage: true,
+    } as Collectible & { _pendingImageFile?: File; _removeImage?: boolean };
+    onChange(updatedItem);
     setImagePreview(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -99,8 +98,8 @@ const CollectibleEditForm = ({
     if (imagePreview) {
       return imagePreview;
     }
-    if (item.imageData && item.imageContentType) {
-      return `data:${item.imageContentType};base64,${item.imageData}`;
+    if (item.imageUrl) {
+      return item.imageUrl;
     }
     return null;
   };

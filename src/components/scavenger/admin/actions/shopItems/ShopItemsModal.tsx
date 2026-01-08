@@ -47,8 +47,9 @@ const ShopItemsModal = ({ isOpen, onClose }: ShopItemsModalProps) => {
       active: true,
       activationStart: null,
       activationEnd: null,
-      imageData: "",
-      imageContentType: "",
+      imageFile: undefined,
+      imageUrl: undefined,
+      removeImage: false,
     });
   };
 
