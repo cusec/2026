@@ -140,7 +140,7 @@
       "title": "Solution Engineer @ Snowflake",
       "bio": "Rida is a Solution Engineer at Snowflake who drives the translation of complex data and AI concepts into practical, business-ready solutions for my customers. Her background is unique, combining Biochemistry and Computer Science (University of Windsor) with a Master of Management in Analytics (McGill). She utilizes this diverse knowledge, along with a passion for storytelling through data, to craft high-impact solutions and prototypes for clients across finance, media, sports, and beyond—she loves showing them what modern technology enables. Defined by creativity and a genuine interest in problem-solving, she also build personal AI projects and actively inspire others to challenge assumptions about what's technologically possible.",
       "image": "/images/speakers/ridaMehdi.jpg",
-      "talkTitle": "You Belong in Tech: Rethinking Who Gets to Build the Future",
+      "talkTitle": "Women in Tech Panel",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/rida-mehdi/"
       }
@@ -151,7 +151,18 @@
       "title": "Sr. Solution Engineer @ Databricks",
       "bio": "Ananya is a Senior Solutions Engineer at Databricks, where she partners with teams in the Financial Services industry and tries her best to turn business challenges into high-impact Data & AI solutions. Her time at McGill pursuing Economics & Finance and then a Masters in Analytics has shaped her journey and helped her thrive at the intersection of people, business, and technology. She is passionate about being an enabler and always looking for ways to grow, teach and build along the way!",
       "image": "/images/speakers/ananyaNair.jpeg",
-      "talkTitle": "You Belong in Tech: Rethinking Who Gets to Build the Future"
+      "talkTitle": "Women in Tech Panel"
+    },
+    {
+      "name": "Alexa Stroll",
+      "pronouns": "She/Her",
+      "title": "Part-time Software Developer, Ultra I&C + Master's Student in Biomedical Engineering, McGill University",
+      "bio": "Alexa Stroll is a part-time software developer at Ultra I&C and a master’s student in Biomedical Engineering at McGill University. She previously served as President of Girls Who Code at McGill, where she focused on supporting women in STEM and building student-run technical communities. Her work spans software development, research, and student leadership.",
+      "image": "/images/speakers/alexaStroll.jpeg",
+      "talkTitle": "Women in Tech Panel",
+      "socials": {
+        "linkedin": "http://linkedin.com/in/alexa-stroll"
+      }
     }
   ]
 }
