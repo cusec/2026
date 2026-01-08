@@ -37,8 +37,8 @@ export async function GET(
 
     // Map users with their collectible-specific data
     const ownedUsers = users.map((user) => {
-      // Find the specific collectible entry for this user
-      const collectibleEntry = user.collectibles?.find(
+      // Find all collectible entries for this user
+      const collectibleEntries = (user.collectibles || []).filter(
         (c: {
           collectibleId: { toString: () => string };
           used: boolean;
@@ -46,13 +46,17 @@ export async function GET(
         }) => c.collectibleId?.toString() === collectibleId
       );
 
+      // Get the first entry for basic data
+      const firstEntry = collectibleEntries[0];
+
       return {
         _id: user._id,
         email: user.email,
         name: user.name,
         points: user.points || 0,
-        used: collectibleEntry?.used || false,
-        addedAt: collectibleEntry?.addedAt || null,
+        count: collectibleEntries.length,
+        used: firstEntry?.used || false,
+        addedAt: firstEntry?.addedAt || null,
       };
     });
 

@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Users, RefreshCw, Clock, Mail, Sparkles } from "lucide-react";
+import {
+  Users,
+  RefreshCw,
+  Clock,
+  Mail,
+  Sparkles,
+  Copy,
+  Check,
+} from "lucide-react";
 import Modal from "@/components/ui/modal";
 
 interface OwnedUser {
@@ -11,6 +19,7 @@ interface OwnedUser {
   addedAt: string | null;
   points: number;
   used: boolean;
+  count: number;
 }
 
 interface CollectibleUsersModalProps {
@@ -31,6 +40,24 @@ const CollectibleUsersModal = ({
   const [ownedUsers, setOwnedUsers] = useState<OwnedUser[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyUsersToClipboard = () => {
+    // Create the list with each user appearing count times
+    const lines: string[] = [];
+    ownedUsers.forEach((user) => {
+      const line = user.name ? `${user.name} - ${user.email}` : user.email;
+      for (let i = 0; i < user.count; i++) {
+        lines.push(line);
+      }
+    });
+
+    const text = lines.join("\n");
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   const fetchOwnedUsers = async () => {
     if (!collectibleId) return;
@@ -75,6 +102,12 @@ const CollectibleUsersModal = ({
     return new Date(dateStr).toLocaleString();
   };
 
+  // Calculate total collectibles count
+  const totalCollectiblesCount = ownedUsers.reduce(
+    (sum, user) => sum + user.count,
+    0
+  );
+
   return (
     <Modal
       simple={true}
@@ -91,7 +124,8 @@ const CollectibleUsersModal = ({
             <p className="text-sm text-amber-800">
               <strong>Collectible:</strong> {collectibleName} |{" "}
               <strong>Cost:</strong> {collectibleCost} points |{" "}
-              <strong>Total Owned:</strong> {ownedUsers.length}
+              <strong>Unique Users:</strong> {ownedUsers.length} |{" "}
+              <strong>Total Count:</strong> {totalCollectiblesCount}
             </p>
           </div>
         </div>
@@ -109,16 +143,35 @@ const CollectibleUsersModal = ({
               <Users className="w-5 h-5 text-gray-600" />
               Users ({ownedUsers.length})
             </h3>
-            <button
-              onClick={fetchOwnedUsers}
-              disabled={loading}
-              className="flex items-center gap-2 px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50"
-            >
-              <RefreshCw
-                className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
-              />
-              Refresh
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={copyUsersToClipboard}
+                disabled={loading || ownedUsers.length === 0}
+                className="flex items-center gap-2 px-3 py-1 text-sm bg-purple-600 text-white rounded hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    Copy Names
+                  </>
+                )}
+              </button>
+              <button
+                onClick={fetchOwnedUsers}
+                disabled={loading}
+                className="flex items-center gap-2 px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 disabled:opacity-50"
+              >
+                <RefreshCw
+                  className={`w-4 h-4 ${loading ? "animate-spin" : ""}`}
+                />
+                Refresh
+              </button>
+            </div>
           </div>
 
           {loading ? (
@@ -147,6 +200,11 @@ const CollectibleUsersModal = ({
                       {user.name && (
                         <span className="text-sm text-gray-500">
                           ({user.name})
+                        </span>
+                      )}
+                      {user.count > 1 && (
+                        <span className="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full font-semibold">
+                          x{user.count}
                         </span>
                       )}
                     </div>
