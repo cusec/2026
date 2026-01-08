@@ -283,13 +283,11 @@ const ShopCollectible = ({
                 disabled={!canAfford || isRedeeming || isSoldOut}
                 className="w-full cursor-pointer py-2 text-white bg-light-mode/5 rounded-lg hover:bg-light-mode/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
-                {isSoldOut ? (
-                  "Sold Out"
-                ) : canAfford ? (
-                  "Purchase Collectible"
-                ) : (
-                  "Not Enough Points"
-                )}
+                {isSoldOut
+                  ? "Sold Out"
+                  : canAfford
+                  ? "Purchase Collectible"
+                  : "Not Enough Points"}
               </button>
             )}
           </div>

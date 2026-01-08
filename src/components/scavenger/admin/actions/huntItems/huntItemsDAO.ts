@@ -151,6 +151,48 @@ export const useHuntItems = (isOpen: boolean) => {
     }
   };
 
+  // Mass update points for future hunt items
+  const massUpdateFuturePoints = async (
+    pointsChange: number
+  ): Promise<{ success: boolean; message: string; updatedCount: number }> => {
+    try {
+      setError(null);
+
+      const response = await fetch("/api/hunt-items/mass-update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pointsChange }),
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || "Failed to mass update hunt items");
+      }
+
+      // Refresh the list to show updated values
+      await fetchHuntItems();
+
+      return {
+        success: true,
+        message: data.message,
+        updatedCount: data.updatedCount,
+      };
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to mass update hunt items";
+      setError(errorMessage);
+      console.error("Error mass updating hunt items:", err);
+      return {
+        success: false,
+        message: errorMessage,
+        updatedCount: 0,
+      };
+    }
+  };
+
   // Reset state when modal opens/closes
   useEffect(() => {
     if (isOpen) {
@@ -182,5 +224,6 @@ export const useHuntItems = (isOpen: boolean) => {
     updateHuntItem,
     deleteHuntItem,
     fetchHuntItems,
+    massUpdateFuturePoints,
   };
 };
