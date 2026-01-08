@@ -38,7 +38,9 @@ export async function uploadImage(
       hasApiKey: !!process.env.CLOUDINARY_API_KEY,
       hasApiSecret: !!process.env.CLOUDINARY_API_SECRET,
     });
-    throw new Error("Cloudinary is not configured. Check environment variables.");
+    throw new Error(
+      "Cloudinary is not configured. Check environment variables."
+    );
   }
 
   // Construct data URL from base64 data
