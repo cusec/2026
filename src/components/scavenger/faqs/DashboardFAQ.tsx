@@ -16,7 +16,7 @@ const DashboardFAQ: React.FC = () => {
   return (
     <div
       id="Faq"
-      className="relative mt-24 mb-24 px-4 md:px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
+      className="relative mt-24 mb-24 px-8 w-full flex flex-col justify-center mx-auto text-light-mode"
     >
       <div className="w-full flex justify-center text-center mb-8">
         <h2 className="text-2xl md:text-4xl font-bold pb-4 text-light-mode select-none">
