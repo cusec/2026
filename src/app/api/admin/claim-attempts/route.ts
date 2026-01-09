@@ -45,7 +45,7 @@ export async function GET(request: Request) {
       item_id?: string;
     }
 
-    let allClaimAttempts: ClaimAttemptWithUser[] = [];
+    const allClaimAttempts: ClaimAttemptWithUser[] = [];
 
     users.forEach((user) => {
       if (user.claim_attempts && user.claim_attempts.length > 0) {
