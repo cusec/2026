@@ -254,7 +254,9 @@ export async function DELETE(
 
     // Remove the collectible from any hunt items that have it within their collectibles array
     // Exclude qrCodes for performance (not needed for collectible removal)
-    const huntItems = await HuntItem.find({ collectibles: id }).select("-qrCodes");
+    const huntItems = await HuntItem.find({ collectibles: id }).select(
+      "-qrCodes"
+    );
     for (const huntItem of huntItems) {
       huntItem.collectibles = huntItem.collectibles.filter(
         (collectibleId: Types.ObjectId) => collectibleId.toString() !== id

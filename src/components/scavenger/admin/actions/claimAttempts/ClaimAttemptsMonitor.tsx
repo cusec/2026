@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Clock, CheckCircle, XCircle } from "lucide-react";
+import {
+  Clock,
+  CheckCircle,
+  XCircle,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 
 interface ClaimAttempt {
   userEmail: string;
@@ -19,6 +27,15 @@ interface ClaimAttemptsStats {
   uniqueUsers: number;
 }
 
+interface Pagination {
+  page: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
 interface ClaimAttemptsMonitorProps {
   isVisible: boolean;
 }
@@ -26,17 +43,22 @@ interface ClaimAttemptsMonitorProps {
 const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
   const [claimAttempts, setClaimAttempts] = useState<ClaimAttempt[]>([]);
   const [stats, setStats] = useState<ClaimAttemptsStats | null>(null);
+  const [pagination, setPagination] = useState<Pagination | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showFailedOnly, setShowFailedOnly] = useState(false);
 
-  const fetchClaimAttempts = async () => {
+  const ITEMS_PER_PAGE = 25;
+
+  const fetchClaimAttempts = async (page: number = 1) => {
     try {
       setLoading(true);
       setError(null);
 
       const params = new URLSearchParams({
-        limit: "50",
+        limit: ITEMS_PER_PAGE.toString(),
+        page: page.toString(),
         ...(showFailedOnly && { failed: "true" }),
       });
 
@@ -46,6 +68,8 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
       if (data.success) {
         setClaimAttempts(data.claimAttempts);
         setStats(data.stats);
+        setPagination(data.pagination);
+        setCurrentPage(page);
       } else {
         setError(data.error || "Failed to fetch claim attempts");
       }
@@ -59,10 +83,16 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
 
   useEffect(() => {
     if (isVisible) {
-      fetchClaimAttempts();
+      fetchClaimAttempts(1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isVisible, showFailedOnly]);
+
+  const goToPage = (page: number) => {
+    if (page >= 1 && page <= (pagination?.totalPages || 1)) {
+      fetchClaimAttempts(page);
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -71,7 +101,7 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
       {/* Controls */}
       <div className="flex gap-4">
         <button
-          onClick={fetchClaimAttempts}
+          onClick={() => fetchClaimAttempts(currentPage)}
           disabled={loading}
           className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
         >
@@ -167,6 +197,54 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
           </div>
         )}
       </div>
+
+      {/* Pagination Controls */}
+      {pagination && pagination.totalPages > 1 && (
+        <div className="flex items-center justify-between border-t border-gray-200 pt-4">
+          <div className="text-sm text-gray-600">
+            Showing {(currentPage - 1) * ITEMS_PER_PAGE + 1} -{" "}
+            {Math.min(currentPage * ITEMS_PER_PAGE, pagination.totalItems)} of{" "}
+            {pagination.totalItems} attempts
+          </div>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => goToPage(1)}
+              disabled={!pagination.hasPrevPage || loading}
+              className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="First page"
+            >
+              <ChevronsLeft className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => goToPage(currentPage - 1)}
+              disabled={!pagination.hasPrevPage || loading}
+              className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Previous page"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <span className="px-3 py-1 text-sm">
+              Page {currentPage} of {pagination.totalPages}
+            </span>
+            <button
+              onClick={() => goToPage(currentPage + 1)}
+              disabled={!pagination.hasNextPage || loading}
+              className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Next page"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => goToPage(pagination.totalPages)}
+              disabled={!pagination.hasNextPage || loading}
+              className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+              title="Last page"
+            >
+              <ChevronsRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className="mt-2 text-xs text-gray-500">
         💡 Monitor for potential brute force attempts or suspicious patterns

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   Calendar,
   Trophy,
@@ -13,6 +13,10 @@ import {
   Trash2,
   Plus,
   Info,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 
@@ -67,6 +71,24 @@ const UserHistoryDetailsModal = ({
   const [removingItemId, setRemovingItemId] = useState<string | null>(null);
   const [showAddPanel, setShowAddPanel] = useState(false);
   const [isAdding, setIsAdding] = useState(false);
+
+  // Pagination for claim attempts
+  const [claimAttemptsPage, setClaimAttemptsPage] = useState(1);
+  const CLAIM_ATTEMPTS_PER_PAGE = 10;
+
+  // Paginated claim attempts (sorted most recent first)
+  const paginatedClaimAttempts = useMemo(() => {
+    const sorted = [...claimAttempts].sort(
+      (a, b) =>
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
+    const startIndex = (claimAttemptsPage - 1) * CLAIM_ATTEMPTS_PER_PAGE;
+    return sorted.slice(startIndex, startIndex + CLAIM_ATTEMPTS_PER_PAGE);
+  }, [claimAttempts, claimAttemptsPage]);
+
+  const claimAttemptsTotalPages = Math.ceil(
+    claimAttempts.length / CLAIM_ATTEMPTS_PER_PAGE
+  );
 
   // Rate limit calculation
   const calculateRateLimit = () => {
@@ -258,6 +280,7 @@ const UserHistoryDetailsModal = ({
     setClaimAttempts([]);
     setShowAddPanel(false);
     setError(null);
+    setClaimAttemptsPage(1);
     onClose();
   };
 
@@ -437,9 +460,7 @@ const UserHistoryDetailsModal = ({
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                   <FileText className="w-5 h-5 text-blue-600" />
-                  Recent Claim Attempts ({
-                    claimAttempts.slice(-10).length
-                  } of {claimAttempts.length})
+                  Claim Attempts ({claimAttempts.length} total)
                 </h3>
 
                 {/* Rate Limit Controls */}
@@ -510,11 +531,9 @@ const UserHistoryDetailsModal = ({
                   <p className="text-gray-600">No claim attempts recorded</p>
                 </div>
               ) : (
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  {claimAttempts
-                    .slice(-10) // Show last 10 attempts
-                    .reverse() // Most recent first
-                    .map((attempt, index) => (
+                <>
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    {paginatedClaimAttempts.map((attempt, index) => (
                       <div
                         key={index}
                         className={`p-3 rounded-lg border ${
@@ -549,7 +568,73 @@ const UserHistoryDetailsModal = ({
                         </div>
                       </div>
                     ))}
-                </div>
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {claimAttemptsTotalPages > 1 && (
+                    <div className="flex items-center justify-between border-t border-gray-200 pt-3 mt-3">
+                      <div className="text-sm text-gray-600">
+                        Showing{" "}
+                        {(claimAttemptsPage - 1) * CLAIM_ATTEMPTS_PER_PAGE + 1}{" "}
+                        -{" "}
+                        {Math.min(
+                          claimAttemptsPage * CLAIM_ATTEMPTS_PER_PAGE,
+                          claimAttempts.length
+                        )}{" "}
+                        of {claimAttempts.length}
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <button
+                          onClick={() => setClaimAttemptsPage(1)}
+                          disabled={claimAttemptsPage === 1}
+                          className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="First page"
+                        >
+                          <ChevronsLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() =>
+                            setClaimAttemptsPage((p) => Math.max(1, p - 1))
+                          }
+                          disabled={claimAttemptsPage === 1}
+                          className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="Previous page"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                        </button>
+                        <span className="px-3 py-1 text-sm">
+                          Page {claimAttemptsPage} of {claimAttemptsTotalPages}
+                        </span>
+                        <button
+                          onClick={() =>
+                            setClaimAttemptsPage((p) =>
+                              Math.min(claimAttemptsTotalPages, p + 1)
+                            )
+                          }
+                          disabled={
+                            claimAttemptsPage === claimAttemptsTotalPages
+                          }
+                          className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="Next page"
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() =>
+                            setClaimAttemptsPage(claimAttemptsTotalPages)
+                          }
+                          disabled={
+                            claimAttemptsPage === claimAttemptsTotalPages
+                          }
+                          className="p-1.5 rounded hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                          title="Last page"
+                        >
+                          <ChevronsRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </>

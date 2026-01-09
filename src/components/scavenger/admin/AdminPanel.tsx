@@ -10,6 +10,7 @@ import {
   ShoppingBag,
   Megaphone,
   Gem,
+  ShieldAlert,
 } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import HuntItemsModal from "./actions/huntItems/HuntItemsModal";
@@ -20,6 +21,7 @@ import AuditLogsModal from "./actions/AuditLogsModal";
 import NoticesModal from "./actions/notices/NoticesModal";
 import CollectiblesModal from "./actions/collectibles/CollectiblesModal";
 import RegisteredUsersModal from "./actions/registeredUsers/RegisteredUsersModal";
+import SuspiciousActivityModal from "./actions/suspiciousActivity/SuspiciousActivityModal";
 
 interface AdminPanelProps {
   isOpen: boolean;
@@ -37,6 +39,8 @@ const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
   const [isNoticesModalOpen, setIsNoticesModalOpen] = useState(false);
   const [isCollectiblesModalOpen, setIsCollectiblesModalOpen] = useState(false);
   const [isRegisteredUsersModalOpen, setIsRegisteredUsersModalOpen] =
+    useState(false);
+  const [isSuspiciousActivityModalOpen, setIsSuspiciousActivityModalOpen] =
     useState(false);
 
   const handleClose = () => {
@@ -117,6 +121,14 @@ const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
                   </button>
 
                   <button
+                    onClick={() => setIsSuspiciousActivityModalOpen(true)}
+                    className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
+                  >
+                    <ShieldAlert className="mr-3 h-6 w-6" />
+                    Suspicious Activity
+                  </button>
+
+                  <button
                     onClick={() => setIsAuditLogsModalOpen(true)}
                     className="select-none flex items-center justify-center px-4 py-2 text-md font-semibold border-2 rounded-2xl border-light-mode/50 bg-dark-mode/50 register-hover"
                   >
@@ -178,6 +190,11 @@ const AdminPanel = ({ isOpen, onClose, isAdmin }: AdminPanelProps) => {
       <RegisteredUsersModal
         isOpen={isRegisteredUsersModalOpen}
         onClose={() => setIsRegisteredUsersModalOpen(false)}
+      />
+
+      <SuspiciousActivityModal
+        isOpen={isSuspiciousActivityModalOpen}
+        onClose={() => setIsSuspiciousActivityModalOpen(false)}
       />
     </>
   );

@@ -25,16 +25,16 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const email = searchParams.get("email");
     const failedOnly = searchParams.get("failed") === "true";
-    const limit = parseInt(searchParams.get("limit") || "100");
+    const limit = parseInt(searchParams.get("limit") || "50");
+    const page = parseInt(searchParams.get("page") || "1");
+    const skip = (page - 1) * limit;
 
     await connectMongoDB();
 
     const query = email ? { email } : {};
 
-    const users = await User.find(query)
-      .select("email name claim_attempts")
-      .sort({ "claim_attempts.timestamp": -1 })
-      .limit(limit);
+    // First, get all users with claim attempts for accurate stats
+    const users = await User.find(query).select("email name claim_attempts");
 
     interface ClaimAttemptWithUser {
       userEmail: string;
@@ -45,7 +45,7 @@ export async function GET(request: Request) {
       item_id?: string;
     }
 
-    let claimAttempts: ClaimAttemptWithUser[] = [];
+    let allClaimAttempts: ClaimAttemptWithUser[] = [];
 
     users.forEach((user) => {
       if (user.claim_attempts && user.claim_attempts.length > 0) {
@@ -57,7 +57,7 @@ export async function GET(request: Request) {
             item_id?: string;
           }) => {
             if (!failedOnly || !attempt.success) {
-              claimAttempts.push({
+              allClaimAttempts.push({
                 userEmail: user.email,
                 userName: user.name,
                 identifier: attempt.identifier,
@@ -72,28 +72,38 @@ export async function GET(request: Request) {
     });
 
     // Sort by timestamp descending
-    claimAttempts.sort(
+    allClaimAttempts.sort(
       (a, b) =>
         new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
     );
 
-    // Apply limit after combining all attempts
-    claimAttempts = claimAttempts.slice(0, limit);
-
+    // Calculate stats from all attempts (before pagination)
     const stats = {
-      totalAttempts: claimAttempts.length,
-      failedAttempts: claimAttempts.filter((attempt) => !attempt.success)
+      totalAttempts: allClaimAttempts.length,
+      failedAttempts: allClaimAttempts.filter((attempt) => !attempt.success)
         .length,
-      successfulAttempts: claimAttempts.filter((attempt) => attempt.success)
+      successfulAttempts: allClaimAttempts.filter((attempt) => attempt.success)
         .length,
-      uniqueUsers: new Set(claimAttempts.map((attempt) => attempt.userEmail))
+      uniqueUsers: new Set(allClaimAttempts.map((attempt) => attempt.userEmail))
         .size,
     };
 
+    // Apply pagination
+    const paginatedAttempts = allClaimAttempts.slice(skip, skip + limit);
+    const totalPages = Math.ceil(allClaimAttempts.length / limit);
+
     return NextResponse.json({
       success: true,
-      claimAttempts,
+      claimAttempts: paginatedAttempts,
       stats,
+      pagination: {
+        page,
+        limit,
+        totalItems: allClaimAttempts.length,
+        totalPages,
+        hasNextPage: page < totalPages,
+        hasPrevPage: page > 1,
+      },
     });
   } catch (error) {
     console.error("Error fetching claim attempts:", error);
