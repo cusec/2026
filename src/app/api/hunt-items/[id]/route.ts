@@ -68,7 +68,8 @@ export async function PUT(
 
     await connectMongoDB();
 
-    const huntItem = await HuntItem.findById(id);
+    // Exclude qrCodes for performance (large base64 strings not needed for updates)
+    const huntItem = await HuntItem.findById(id).select("-qrCodes");
     if (!huntItem) {
       return NextResponse.json(
         { error: "Hunt item not found" },
@@ -171,7 +172,8 @@ export async function DELETE(
 
     await connectMongoDB();
 
-    const huntItem = await HuntItem.findById(id);
+    // Exclude qrCodes for performance (not needed for deletion)
+    const huntItem = await HuntItem.findById(id).select("-qrCodes");
     if (!huntItem) {
       return NextResponse.json(
         { error: "Hunt item not found" },

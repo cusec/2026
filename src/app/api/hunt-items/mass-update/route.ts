@@ -36,9 +36,10 @@ export async function POST(request: Request) {
     const now = new Date();
 
     // Find all hunt items with activation start time in the future
+    // Exclude qrCodes for performance (large base64 strings not needed here)
     const futureItems = await HuntItem.find({
       activationStart: { $gt: now },
-    });
+    }).select("-qrCodes");
 
     if (futureItems.length === 0) {
       return NextResponse.json({
@@ -64,10 +65,10 @@ export async function POST(request: Request) {
 
     await Promise.all(updatePromises);
 
-    // Fetch updated items to return
+    // Fetch updated items to return (exclude qrCodes for performance)
     const updatedItems = await HuntItem.find({
       _id: { $in: futureItems.map((item) => item._id) },
-    });
+    }).select("-qrCodes");
 
     const newData = updatedItems.map((item) => ({
       id: item._id.toString(),

@@ -24,7 +24,10 @@ export async function GET() {
     }
 
     await connectMongoDB();
-    const huntItems = await HuntItem.find({}).sort({ createdAt: -1 });
+    // Exclude qrCodes from listing to improve performance (QR codes are large base64 strings)
+    const huntItems = await HuntItem.find({})
+      .select("-qrCodes")
+      .sort({ createdAt: -1 });
 
     return NextResponse.json({
       success: true,
