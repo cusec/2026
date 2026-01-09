@@ -9,6 +9,7 @@ import {
   ChevronRight,
   ChevronsLeft,
   ChevronsRight,
+  Search,
 } from "lucide-react";
 
 interface ClaimAttempt {
@@ -48,6 +49,8 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showFailedOnly, setShowFailedOnly] = useState(false);
+  const [identifierSearch, setIdentifierSearch] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   const ITEMS_PER_PAGE = 25;
 
@@ -60,6 +63,7 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
         limit: ITEMS_PER_PAGE.toString(),
         page: page.toString(),
         ...(showFailedOnly && { failed: "true" }),
+        ...(identifierSearch && { identifier: identifierSearch }),
       });
 
       const response = await fetch(`/api/admin/claim-attempts?${params}`);
@@ -86,7 +90,7 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
       fetchClaimAttempts(1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isVisible, showFailedOnly]);
+  }, [isVisible, showFailedOnly, identifierSearch]);
 
   const goToPage = (page: number) => {
     if (page >= 1 && page <= (pagination?.totalPages || 1)) {
@@ -94,12 +98,21 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
     }
   };
 
+  const handleSearch = () => {
+    setIdentifierSearch(searchInput);
+  };
+
+  const clearSearch = () => {
+    setSearchInput("");
+    setIdentifierSearch("");
+  };
+
   if (!isVisible) return null;
 
   return (
     <div className="space-y-6 text-dark-mode">
       {/* Controls */}
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4 items-center">
         <button
           onClick={() => fetchClaimAttempts(currentPage)}
           disabled={loading}
@@ -117,6 +130,42 @@ const ClaimAttemptsMonitor = ({ isVisible }: ClaimAttemptsMonitorProps) => {
           Show failed attempts only
         </label>
       </div>
+
+      {/* Identifier Search */}
+      <div className="flex gap-2">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Search by identifier (case-insensitive)..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+          />
+        </div>
+        <button
+          onClick={handleSearch}
+          disabled={loading}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 text-sm"
+        >
+          Search
+        </button>
+        {identifierSearch && (
+          <button
+            onClick={clearSearch}
+            className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 text-sm"
+          >
+            Clear
+          </button>
+        )}
+      </div>
+
+      {identifierSearch && (
+        <div className="text-sm text-gray-600">
+          Filtering by identifier: <code className="bg-gray-100 px-1 rounded">{identifierSearch}</code>
+        </div>
+      )}
 
       {/* Stats */}
       {stats && (

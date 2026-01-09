@@ -24,6 +24,7 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url);
     const email = searchParams.get("email");
+    const identifierSearch = searchParams.get("identifier");
     const failedOnly = searchParams.get("failed") === "true";
     const limit = parseInt(searchParams.get("limit") || "50");
     const page = parseInt(searchParams.get("page") || "1");
@@ -45,7 +46,7 @@ export async function GET(request: Request) {
       item_id?: string;
     }
 
-    const allClaimAttempts: ClaimAttemptWithUser[] = [];
+    let allClaimAttempts: ClaimAttemptWithUser[] = [];
 
     users.forEach((user) => {
       if (user.claim_attempts && user.claim_attempts.length > 0) {
@@ -70,6 +71,14 @@ export async function GET(request: Request) {
         );
       }
     });
+
+    // Filter by identifier (case-insensitive) if provided
+    if (identifierSearch) {
+      const searchLower = identifierSearch.toLowerCase();
+      allClaimAttempts = allClaimAttempts.filter((attempt) =>
+        attempt.identifier.toLowerCase().includes(searchLower)
+      );
+    }
 
     // Sort by timestamp descending
     allClaimAttempts.sort(
