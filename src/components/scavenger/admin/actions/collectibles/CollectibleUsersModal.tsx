@@ -46,7 +46,7 @@ const CollectibleUsersModal = ({
     // Create the list with each user appearing count times
     const lines: string[] = [];
     ownedUsers.forEach((user) => {
-      const line = user.name ? `${user.name} - ${user.email}` : user.email;
+      const line = user.name ? user.name : user.email;
       for (let i = 0; i < user.count; i++) {
         lines.push(line);
       }
