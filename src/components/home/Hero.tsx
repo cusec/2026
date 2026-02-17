@@ -2,11 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 
 const Hero: React.FC = () => {
   return (
@@ -60,7 +55,7 @@ const Hero: React.FC = () => {
         </h3>
       </div>
       <div className="px-4 md:justify-center text-xl md:text-2xl flex flex-col lg:flex-row gap-6 lg:gap-12 items-center">
-        <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
+        {/* <div className="text-sm md:text-2xl flex flex-wrap justify-center gap-2 xs:gap-6 bg-transparent">
           <a
             className="font-space-grotesk! w-fit lg:p-2 border-b-2 border-light-mode/40 email-hover"
             href="mailto:talks@cusec.net"
@@ -100,7 +95,26 @@ const Hero: React.FC = () => {
             size="xs"
             className="ml-2"
           />
-        </Link>
+        </Link> */}
+        <a
+          className="relative inline-flex w-full overflow-hidden rounded-2xl p-[1.5px] focus-visible:outline-none"
+          href="https://forms.gle/SLSRzfstSLETexj4A"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {/* Spinning conic gradient — visible only as the 1.5px border */}
+          <span
+            className="cta-border-spin absolute inset-[-1000%] animate-[spin_3s_linear_infinite]"
+            aria-hidden="true"
+          />
+          {/* Inner panel */}
+          <span className="relative inline-flex w-full items-center justify-center rounded-[14px] bg-[#4433a1ee] px-6 py-3 overflow-hidden">
+            <span className="cta-grain" aria-hidden="true" />
+            <span className="font-bebas-neue! relative z-10 text-2xl tracking-[0.3em] text-white">
+              Join the 2027 CUSEC team
+            </span>
+          </span>
+        </a>
       </div>
     </div>
   );

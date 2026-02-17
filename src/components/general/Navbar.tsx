@@ -14,12 +14,12 @@ const Navbar: React.FC = () => {
 
   // Filter nav items based on enabled features
   const navItems: Record<string, string> = {
-    Home: "/#Hero",
+    // Home: "/#Hero",
     About: "/#About",
-    Gallery: "/#Gallery",
+    // Gallery: "/#Gallery",
     Sponsors: "/#Sponsors",
-    Pricing: "/#Pricing",
-    Faq: "/#Faq",
+    // Pricing: "/#Pricing",
+    // Faq: "/#Faq",
     Speakers: "/speakers",
     "The Team": "/team",
   };
