@@ -18,6 +18,7 @@
 
   --font-jost: var(--font-jost);
   --font-space-grotesk: var(--font-space-grotesk);
+  --font-bebas-neue: var(--font-bebas-neue);
 
   --text-body: rgba(250, 250, 250, 0.562);
   --detail-medium-contrast: rgba(89, 83, 172, 0.452);
@@ -281,6 +282,10 @@ html {
 
 .animate-pulse-subtle {
   animation: pulse-subtle 5s ease-in-out infinite;
+}
+
+.cta-border-spin {
+  background: conic-gradient(from 90deg at 50% 50%, #04000f 0%, #dadadaa9 35%, #905aee 40%, #04000f 100%);
 }
 
 .animate-sparkle-1 {

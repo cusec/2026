@@ -54,8 +54,7 @@ export default function LoadingScreen() {
 
     // checks if we need to show splashpage (only shows on intial load)
     if (typeof window !== "undefined") {
-      const splashShown = sessionStorage.getItem("splashShown");
-      if (!splashShown) {
+      if (false) { // if (!sessionStorage.getItem("splashShown"))
         setShowSplash(true);
         sessionStorage.setItem("splashShown", "true");
         lockScroll();

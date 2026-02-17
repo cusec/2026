@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import connectMongoDB from "@/lib/mongodb";
-import { Jost, Space_Grotesk } from "next/font/google";
+import { Jost, Space_Grotesk, Bebas_Neue } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -16,6 +16,13 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const bebasNeue = Bebas_Neue({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-bebas-neue",
   display: "swap",
 });
 
@@ -108,7 +115,7 @@ export default function RootLayout({
     <html
       lang="en-CA"
       dir="ltr"
-      className={`${jost.variable} ${spaceGrotesk.variable}`}
+      className={`${jost.variable} ${spaceGrotesk.variable} ${bebasNeue.variable}`}
       data-scroll-behavior="smooth"
     >
       <head>
