@@ -1,7 +1,8 @@
 "use server";
 
-import EmblaCarousel from "./embla/EmblaCarousel";
+import React from "react";
 import { EmblaOptionsType } from "embla-carousel";
+import EmblaCarousel from "./embla/EmblaCarousel";
 import "../../../app/embla.css";
 
 const slideImages: string[] = [
