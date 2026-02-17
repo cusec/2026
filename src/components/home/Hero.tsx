@@ -102,14 +102,11 @@ const Hero: React.FC = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* Spinning conic gradient — visible only as the 1.5px border */}
           <span
-            className="cta-border-spin absolute inset-[-1000%] animate-[spin_3s_linear_infinite]"
+            className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] cta-border-spin"
             aria-hidden="true"
           />
-          {/* Inner panel */}
           <span className="relative inline-flex w-full items-center justify-center rounded-[14px] bg-[#4433a1ee] px-6 py-3 overflow-hidden">
-            <span className="cta-grain" aria-hidden="true" />
             <span className="font-bebas-neue! relative z-10 text-2xl tracking-[0.3em] text-white">
               Join the 2027 CUSEC team
             </span>
