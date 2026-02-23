@@ -12,6 +12,7 @@ import {
   Footer,
   FAQ,
   Gallery,
+  Testimonials,
 } from "@/components";
 
 const Home = () => {
@@ -32,6 +33,7 @@ const Home = () => {
                 <Hero />
               </div>
             </div>
+            <Testimonials />
             <About />
             <Gallery />
             <Sponsors />
