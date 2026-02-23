@@ -8,6 +8,12 @@ export interface Size {
   height: string; // vh/vw format like "8vh"
 }
 
+export interface Testimonial {
+  quote: string;
+  name: string;
+  title?: string;
+}
+
 export interface Stat {
   id: string;
   name: string;
