@@ -22,7 +22,17 @@
 
   --text-body: rgba(250, 250, 250, 0.562);
   --detail-medium-contrast: rgba(89, 83, 172, 0.452);
+
+  --animate-scroll: scroll var(--animation-duration, 40s)
+    var(--animation-direction, forwards) linear infinite;
+
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
 }
+
 /* @custom-variant dark (&:where(.dark, .dark *)); */
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -141,7 +151,9 @@ html {
     background-position: bottom left;
     -webkit-background-clip: text;
     background-clip: text;
-    transition: background-size 0.3s ease-out, color 0.3s ease-out;
+    transition:
+      background-size 0.3s ease-out,
+      color 0.3s ease-out;
   }
 
   .register-hover:hover {
@@ -285,7 +297,13 @@ html {
 }
 
 .cta-border-spin {
-  background: conic-gradient(from 90deg at 50% 50%, #04000f 0%, #dadadaa9 35%, #905aee 40%, #04000f 100%);
+  background: conic-gradient(
+    from 90deg at 50% 50%,
+    #04000f 0%,
+    #dadadaa9 35%,
+    #905aee 40%,
+    #04000f 100%
+  );
 }
 
 .animate-sparkle-1 {
