@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import useEmblaCarousel from 'embla-carousel-react'
@@ -35,40 +35,24 @@ const KOI_STYLE = {
 }
 
 const Testimonials: React.FC = () => {
+  // autoheight for carousel only needed on mobile, since desktop cards are wide enough that heights are similar
   const [plugins, setPlugins] = useState<EmblaPluginType[]>([])
-
   useEffect(() => {
-    if (window.matchMedia('(max-width: 767px)').matches) {
+    if (window.matchMedia('(max-width: 767px)').matches)
       setPlugins([AutoHeight()])
-    }
   }, [])
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' }, plugins)
-  const { selectedIndex } = useDotButton(emblaApi)
-  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } =
-    usePrevNextButtons(emblaApi)
-
-  // Track viewport height via ResizeObserver so nav buttons follow the
-  // AutoHeight animation in real-time (top: 50% doesn't trigger CSS transitions)
-  const viewportElRef = useRef<HTMLDivElement | null>(null)
-  const [btnTop, setBtnTop] = useState<number | undefined>(undefined)
-
-  const setViewportRef = useCallback(
-    (node: HTMLDivElement | null) => {
-      viewportElRef.current = node
-      emblaRef(node)
-    },
-    [emblaRef]
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: 'center' },
+    plugins
   )
-
-  useEffect(() => {
-    const el = viewportElRef.current
-    if (!el) return
-    setBtnTop(el.offsetHeight / 2)
-    const ro = new ResizeObserver(() => setBtnTop(el.offsetHeight / 2))
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [emblaApi])
+  const { selectedIndex } = useDotButton(emblaApi)
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi)
 
   return (
     <div className='relative mt-[25vh] md:mt-[35vh]'>
@@ -87,33 +71,40 @@ const Testimonials: React.FC = () => {
           <div className='absolute inset-y-0 left-0 w-[18%] z-10 pointer-events-none bg-gradient-to-r from-sea to-transparent' />
           <div className='absolute inset-y-0 right-0 w-[18%] z-10 pointer-events-none bg-gradient-to-l from-sea to-transparent' />
 
-          {/* nav buttons — top set via JS so they track the AutoHeight animation */}
-          <div
-            className='absolute left-2 -translate-y-1/2 z-20 rounded-full bg-sea/70 backdrop-blur-md'
-            style={{ top: btnTop ?? '50%' }}
-          >
-            <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          {/* nav buttons */}
+          <div className='absolute left-2 top-1/2 -translate-y-1/2 z-20 rounded-full bg-sea/70 backdrop-blur-md'>
+            <PrevButton
+              onClick={onPrevButtonClick}
+              disabled={prevBtnDisabled}
+            />
           </div>
-          <div
-            className='absolute right-2 -translate-y-1/2 z-20 rounded-full bg-sea/70 backdrop-blur-md'
-            style={{ top: btnTop ?? '50%' }}
-          >
-            <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+          <div className='absolute right-2 top-1/2 -translate-y-1/2 z-20 rounded-full bg-sea/70 backdrop-blur-md'>
+            <NextButton
+              onClick={onNextButtonClick}
+              disabled={nextBtnDisabled}
+            />
           </div>
 
-          <div
-            className='overflow-hidden py-5 transition-[height] duration-300 ease-in-out'
-            ref={setViewportRef}
-          >
+          <div className='overflow-hidden py-5' ref={emblaRef}>
             <div className='flex items-center [touch-action:pan-y_pinch-zoom] -ml-6'>
               {testimonials.map((item, idx) => (
-                <div key={idx} className='flex-[0_0_85%] md:flex-[0_0_70%] min-w-0 pl-6'>
-                  <div className={cn(CARD_BASE, idx === selectedIndex ? CARD_ACTIVE : CARD_INACTIVE)}>
+                <div
+                  key={idx}
+                  className='flex-[0_0_85%] md:flex-[0_0_70%] min-w-0 pl-6'
+                >
+                  <div
+                    className={cn(
+                      CARD_BASE,
+                      idx === selectedIndex ? CARD_ACTIVE : CARD_INACTIVE
+                    )}
+                  >
                     <p className='text-sm md:text-base leading-[1.6] text-light-mode'>
                       {item.quote}
                     </p>
                     <div className='flex flex-col gap-1'>
-                      <span className='text-sm font-medium text-light-mode/60'>{item.name}</span>
+                      <span className='text-sm font-medium text-light-mode/60'>
+                        {item.name}
+                      </span>
                       {item.title && (
                         <span className='text-xs text-light-mode/40 whitespace-pre-line'>
                           {item.title}
@@ -128,7 +119,7 @@ const Testimonials: React.FC = () => {
         </div>
       </div>
 
-      {/* decorative koi for desktop only */}
+      {/* decorative koi — desktop only, bobs on a 3s loop */}
       <motion.div
         className='hidden md:block absolute left-1/2 z-10'
         style={KOI_STYLE}
@@ -136,7 +127,12 @@ const Testimonials: React.FC = () => {
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
       >
         <div className='relative w-full h-full'>
-          <Image src='/images/koi2.svg' alt='Koi' fill className='object-contain opacity-80' />
+          <Image
+            src='/images/koi2.svg'
+            alt='Koi'
+            fill
+            className='object-contain opacity-80'
+          />
         </div>
       </motion.div>
     </div>
