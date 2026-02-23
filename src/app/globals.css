@@ -22,15 +22,6 @@
 
   --text-body: rgba(250, 250, 250, 0.562);
   --detail-medium-contrast: rgba(89, 83, 172, 0.452);
-
-  --animate-scroll: scroll var(--animation-duration, 40s)
-    var(--animation-direction, forwards) linear infinite;
-
-  @keyframes scroll {
-    to {
-      transform: translate(calc(-50% - 0.5rem));
-    }
-  }
 }
 
 /* @custom-variant dark (&:where(.dark, .dark *)); */
