@@ -28,7 +28,7 @@ const connectMongoDB = async () => {
 
   if (!cached.promise) {
     const opts = {
-      dbName: "CUSEC2026",
+      dbName: "gamifyMeet",
       bufferCommands: false,
       // Optimize connection pool for serverless functions
       maxPoolSize: 100, // Maintain up to 100 socket connections
