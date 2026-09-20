@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/scavenger", "/auth/"],
+      disallow: ["/api/", "/auth/"],
     },
     sitemap: "https://2026.cusec.net/sitemap.xml",
     host: "https://2026.cusec.net",
