@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Particles,
   Navbar,
@@ -5,6 +6,12 @@ import {
   Footer,
   CodeOfConduct,
 } from "@/components";
+
+export const metadata: Metadata = {
+  title: "Code of Conduct | CUSEC 2026",
+  description:
+    "The code of conduct that applied to CUSEC 2026, held January 8-10, 2026.",
+};
 
 export default function CodeOfConductPage() {
   return (

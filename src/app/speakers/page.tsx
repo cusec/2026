@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Particles,
   Navbar,
@@ -6,6 +7,12 @@ import {
   Speakers,
   Heart,
 } from "@/components";
+
+export const metadata: Metadata = {
+  title: "Speakers | CUSEC 2026",
+  description:
+    "The speakers who took the stage at CUSEC 2026, the 25th Canadian University Software Engineering Conference. The CUSEC 2027 lineup is at 2027.cusec.net.",
+};
 
 export default function SpeakersPage() {
   return (
