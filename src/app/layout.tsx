@@ -79,7 +79,9 @@ export const metadata: Metadata = {
     locale: "en_CA",
     images: [
       {
-        url: "/images/logo.svg",
+        url: "/images/logo.png",
+        width: 448,
+        height: 448,
         alt: "CUSEC 2026 Logo",
       },
     ],
@@ -89,7 +91,7 @@ export const metadata: Metadata = {
     title: "CUSEC 2026 - Canadian University Software Engineering Conference",
     description:
       "CUSEC 2026 - the 25th annual conference, held January 8-10, 2026. The next edition is CUSEC 2027.",
-    images: ["/images/logo.svg"],
+    images: ["/images/logo.png"],
   },
   robots: {
     index: true,
