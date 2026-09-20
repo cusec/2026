@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
           <div className="relative w-[8vh] h-[8vh] lg:w-[10vh] lg:h-[10vh] lg:mr-5 lg:ml-5">
             <Image
               src="/images/logo.svg"
-              alt="CUSEC Logo"
+              alt="CUSEC 2026 logo"
               fill
               priority
               className="object-contain"

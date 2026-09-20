@@ -55,7 +55,7 @@ export default function Member({
         <div className="relative w-full h-full overflow-hidden rounded-full transition-shadow duration-300 ease-in-out group-[.active]:ring-1 group-[.active]:ring-light-mode/20 group-[.active]:ring-offset-2">
           <Image
             src={member.primaryImage}
-            alt={member.name}
+            alt={`${member.name}, CUSEC 2026 organizing team`}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
@@ -66,7 +66,7 @@ export default function Member({
           <div className="relative w-full h-full">
             <Image
               src={member.education.logo}
-              alt={member.education.institution}
+              alt={`${member.education.institution} logo`}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
@@ -91,7 +91,7 @@ export default function Member({
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
-                  alt={key}
+                  alt={`${member.name} on ${key}`}
                   fill
                   className="object-contain"
                 />
@@ -162,7 +162,7 @@ export default function Member({
               <div className="relative w-full h-full rounded-full backdrop-blur-md bg-accent/10">
                 <Image
                   src={`/icons/team_socials/${key}.svg`}
-                  alt={key}
+                  alt={`${member.name} on ${key}`}
                   fill
                   className="object-contain"
                 />

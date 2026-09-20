@@ -20,7 +20,7 @@ export default function BottomKoi() {
       >
         <Image
           src="/images/koi2.svg"
-          alt="Koi"
+          alt=""
           fill
           className="object-contain opacity-90"
         />

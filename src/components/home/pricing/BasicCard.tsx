@@ -7,7 +7,7 @@ const BasicCard: React.FC = () => {
       <div className="absolute bottom-10 right-6">
         <Image
           src="images/basic_price.svg"
-          alt="CUSEC Logo"
+          alt="CUSEC 2026 logo"
           width={120}
           height={120}
         />
@@ -30,7 +30,7 @@ const BasicCard: React.FC = () => {
         <div className="w-fit flex items-center gap-6">
           <Image
             src="icons/checkmark.svg"
-            alt="Checkmark"
+            alt=""
             width={24}
             height={24}
           />
@@ -41,11 +41,11 @@ const BasicCard: React.FC = () => {
           </h4>
         </div>
         <div className="w-fit flex items-center gap-6">
-          <Image src="icons/minus.svg" alt="Minus" width={24} height={24} />
+          <Image src="icons/minus.svg" alt="" width={24} height={24} />
           <h4>Priority Networking</h4>
         </div>
         <div className="w-fit flex items-center gap-6">
-          <Image src="icons/minus.svg" alt="Minus" width={24} height={24} />
+          <Image src="icons/minus.svg" alt="" width={24} height={24} />
           <h4>Exclusive CUSEC Merchandise</h4>
         </div>
       </div>

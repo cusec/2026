@@ -26,7 +26,7 @@ export default function PrimarySpeaker({
       <div className="min-w-[80vw] max-w-[80vw] min-h-[80vw] max-h-[80vw] xs:min-w-[35vw] xs:max-w-[35vw] xs:min-h-[35vw] xs:max-h-[35vw] md:min-w-[18vw] md:max-w-[18vw] md:min-h-[18vw] md:max-h-[18vw] relative overflow-hidden rounded-xl group">
         <Image
           src={speaker.image}
-          alt={speaker.name}
+          alt={`${speaker.name}, speaker at CUSEC 2026`}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-105"

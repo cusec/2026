@@ -33,7 +33,7 @@ export default function SecondarySpeaker({
                 <div className="mb-4 w-[150px] h-[150px] xs:w-[200px] xs:h-[200px] relative overflow-hidden rounded-xl">
                   <Image
                     src={speaker.image}
-                    alt={speaker.name}
+                    alt={`${speaker.name}, speaker at CUSEC 2026`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="rounded-xl transition-transform duration-500 ease-out group-hover:scale-102"

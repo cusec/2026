@@ -32,7 +32,7 @@ const OceanSurface: React.FC = () => {
       >
         <Image
           src="/splash/wave.svg"
-          alt="Wave"
+          alt=""
           className="object-contain"
           fill
         />
@@ -44,7 +44,7 @@ const OceanSurface: React.FC = () => {
         <motion.div className="absolute left-2 bottom-[17vw] sm:bottom-[12vw] lg:bottom-[6vw] w-[37.5vw] h-[30vw]">
           <Image
             src="/splash/new_lighthouse.svg"
-            alt="Lighthouse"
+            alt=""
             className="object-contain"
             fill
           />
@@ -63,7 +63,7 @@ const OceanSurface: React.FC = () => {
         >
           <Image
             src="/splash/boat.svg"
-            alt="Boat"
+            alt=""
             className="object-contain"
             fill
           />

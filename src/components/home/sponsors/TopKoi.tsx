@@ -20,7 +20,7 @@ export default function TopKoi() {
       >
         <Image
           src="/images/koi1.svg"
-          alt="Koi"
+          alt=""
           fill
           className="object-contain opacity-90"
         />

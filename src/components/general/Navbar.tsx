@@ -84,7 +84,7 @@ const Navbar: React.FC = () => {
             <div className="w-8 h-8 relative">
               <Image
                 src="/images/logo.svg"
-                alt="CUSEC Logo"
+                alt="CUSEC 2026 logo"
                 fill
                 priority
                 className="object-contain"

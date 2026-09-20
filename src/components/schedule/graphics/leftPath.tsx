@@ -13,7 +13,7 @@ export default function LeftPath() {
       >
         <Image
           src="/images/schedule/leftPath.svg"
-          alt="Left Path"
+          alt=""
           fill
           className="object-contain"
         />
