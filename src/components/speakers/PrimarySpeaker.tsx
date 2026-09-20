@@ -3,6 +3,8 @@
 import { Speaker } from "@/lib/interface";
 import Socials from "./Socials";
 import Image from "next/image";
+import Link from "next/link";
+import { speakerSlug } from "@/lib/speakers";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -35,7 +37,12 @@ export default function PrimarySpeaker({
       <div className="w-full flex flex-col justify-between rounded-xl border border-light-mode/50 bg-light-mode/15 p-5 transition-all duration-300 ease-in-out hover:bg-light-mode/20 group">
         <div>
           <div className="flex flex-col md:flex-row items-baseline">
-            <h2 className="text-3xl md:text-5xl mb-2">{speaker.name}</h2>
+            <Link
+                href={`/speakers/${speakerSlug(speaker.name)}`}
+                className="text-3xl md:text-5xl mb-2 hover:underline underline-offset-4"
+              >
+                <h2>{speaker.name}</h2>
+              </Link>
             <h2 className="text-xl md:text-2xl mb-2 md:ml-3">
               ({speaker.pronouns})
             </h2>

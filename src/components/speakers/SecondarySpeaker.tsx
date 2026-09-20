@@ -3,6 +3,8 @@
 import { Speaker } from "@/lib/interface";
 import Socials from "./Socials";
 import Image from "next/image";
+import Link from "next/link";
+import { speakerSlug } from "@/lib/speakers";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -41,9 +43,12 @@ export default function SecondarySpeaker({
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <h2 className="text-xl md:text-xl xl:text-2xl font-semibold">
-                    {speaker.name}
-                  </h2>
+                  <Link
+                    href={`/speakers/${speakerSlug(speaker.name)}`}
+                    className="text-xl md:text-xl xl:text-2xl font-semibold hover:underline underline-offset-4"
+                  >
+                    <h2>{speaker.name}</h2>
+                  </Link>
                   <h2 className="text-md md:text-md xl:text-lg">
                     ({speaker.pronouns})
                   </h2>
