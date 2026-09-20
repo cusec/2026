@@ -129,7 +129,7 @@ const Testimonials: React.FC = () => {
         <div className='relative w-full h-full'>
           <Image
             src='/images/koi2.svg'
-            alt='Koi'
+            alt=""
             fill
             className='object-contain opacity-80'
           />

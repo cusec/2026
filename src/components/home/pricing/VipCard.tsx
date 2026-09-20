@@ -18,7 +18,7 @@ const VipCard: React.FC = () => {
       <div className="absolute bottom-0 right-2 -z-30">
         <Image
           src="images/vip_price.svg"
-          alt="CUSEC Logo"
+          alt="CUSEC 2026 logo"
           width={100}
           height={100}
           className="w-auto h-auto"
@@ -42,7 +42,7 @@ const VipCard: React.FC = () => {
         <div className="w-fit flex items-center gap-6">
           <Image
             src="icons/vip_checkmark.svg"
-            alt="Checkmark"
+            alt=""
             width={24}
             height={24}
           />
@@ -55,7 +55,7 @@ const VipCard: React.FC = () => {
         <div className="w-fit flex items-center gap-6">
           <Image
             src="icons/vip_checkmark.svg"
-            alt="Checkmark"
+            alt=""
             width={24}
             height={24}
           />
@@ -64,7 +64,7 @@ const VipCard: React.FC = () => {
         <div className="w-fit flex items-center gap-6">
           <Image
             src="icons/vip_checkmark.svg"
-            alt="Checkmark"
+            alt=""
             width={24}
             height={24}
           />

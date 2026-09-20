@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   manifest: "/manifest.json",
   title: "CUSEC 2026 - Canadian University Software Engineering Conference",
   description:
-    "Join CUSEC 2026, Canada's longest running student-led software engineering conference. The 25th annual conference offering unique tech experiences to university students across Canada.",
+    "CUSEC 2026, the 25th Canadian University Software Engineering Conference, took place January 8-10, 2026. The next edition is CUSEC 2027 at 2027.cusec.net.",
   keywords: [
     "CUSEC",
     "Canadian University Software Engineering Conference",
@@ -65,23 +65,26 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://cusec.net"
-  ),
+  metadataBase: new URL("https://2026.cusec.net"),
   alternates: {
-    canonical: "/",
+    canonical: "./",
+  },
+  verification: {
+    google: "rr8EHeTgYYXM7QyXAgy2-R715ahKGs6lkLyR9vsKHMY",
   },
   openGraph: {
     title: "CUSEC 2026 - Canadian University Software Engineering Conference",
     description:
-      "Join CUSEC 2026, Canada's longest running student-led software engineering conference. The 25th annual conference offering unique tech experiences to university students.",
-    url: "/",
+      "CUSEC 2026, the 25th Canadian University Software Engineering Conference, took place January 8-10, 2026. The next edition is CUSEC 2027 at 2027.cusec.net.",
+    url: "./",
     siteName: "CUSEC 2026",
     type: "website",
     locale: "en_CA",
     images: [
       {
-        url: "/images/logo.svg",
+        url: "/images/logo.png",
+        width: 448,
+        height: 448,
         alt: "CUSEC 2026 Logo",
       },
     ],
@@ -90,8 +93,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "CUSEC 2026 - Canadian University Software Engineering Conference",
     description:
-      "Join Canada's longest running student-led software engineering conference. CUSEC 2026 - the 25th annual conference.",
-    images: ["/images/logo.svg"],
+      "CUSEC 2026 - the 25th annual conference, held January 8-10, 2026. The next edition is CUSEC 2027.",
+    images: ["/images/logo.png"],
   },
   robots: {
     index: true,
@@ -104,6 +107,67 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+};
+
+const conferenceJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cusec.net/#organization",
+      name: "CUSEC",
+      alternateName: "Canadian University Software Engineering Conference",
+      url: "https://cusec.net",
+      logo: "https://2026.cusec.net/images/logo.png",
+      sameAs: [
+        "https://2027.cusec.net",
+        "https://instagram.com/cusecofficial",
+        "https://linkedin.com/company/cusec",
+        "https://youtube.com/@cusec_cucgl",
+        "https://github.com/cusec",
+      ],
+    },
+    {
+      "@type": "EventSeries",
+      "@id": "https://cusec.net/#series",
+      name: "Canadian University Software Engineering Conference",
+      url: "https://cusec.net",
+      organizer: { "@id": "https://cusec.net/#organization" },
+    },
+    {
+      "@type": "Event",
+      "@id": "https://2026.cusec.net/#event",
+      name: "CUSEC 2026",
+      url: "https://2026.cusec.net",
+      startDate: "2026-01-08",
+      endDate: "2026-01-10",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      superEvent: { "@id": "https://cusec.net/#series" },
+      organizer: { "@id": "https://cusec.net/#organization" },
+    },
+    {
+      "@type": "Event",
+      "@id": "https://2027.cusec.net/#event",
+      name: "CUSEC 2027",
+      url: "https://2027.cusec.net",
+      startDate: "2027-01",
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: "Montréal, QC",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Montréal",
+          addressRegion: "QC",
+          addressCountry: "CA",
+        },
+      },
+      superEvent: { "@id": "https://cusec.net/#series" },
+      organizer: { "@id": "https://cusec.net/#organization" },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -122,12 +186,12 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="canonical"
-          href={process.env.NEXT_PUBLIC_SITE_URL || "https://cusec.net"}
-        />
       </head>
       <body className={`antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(conferenceJsonLd) }}
+        />
         {children}
         <Analytics />
         <SpeedInsights />

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Particles,
   Navbar,
@@ -5,6 +6,12 @@ import {
   Footer,
   PrivacyPolicy,
 } from "@/components";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | CUSEC 2026",
+  description:
+    "How CUSEC 2026 collected and handled attendee data.",
+};
 
 export default function PrivacyPolicyPage() {
   return (

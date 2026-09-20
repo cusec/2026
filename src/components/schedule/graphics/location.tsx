@@ -13,7 +13,7 @@ export default function Location() {
       >
         <Image
           src="/images/schedule/location.svg"
-          alt="Location"
+          alt=""
           fill
           className="object-contain"
         />

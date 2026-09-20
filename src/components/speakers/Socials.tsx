@@ -38,7 +38,7 @@ export default function Socials({
         <a key={key} href={url} target="_blank" rel="noopener noreferrer">
           <Image
             src={`/icons/${variant === "dark" ? `${key}-dark` : key}.svg`}
-            alt={`${speaker.name} ${key}`}
+            alt={`${speaker.name} on ${key}`}
             width={24}
             height={24}
             className="hover:opacity-70 transition-opacity duration-300"

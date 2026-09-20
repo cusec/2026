@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   Particles,
   Navbar,
@@ -6,6 +7,12 @@ import {
   TeamHero,
   TeamMembers,
 } from "@/components";
+
+export const metadata: Metadata = {
+  title: "The Team | CUSEC 2026",
+  description:
+    "The student organizers behind CUSEC 2026. Applications for the CUSEC 2027 team are open at 2027.cusec.net.",
+};
 
 export default function TeamPage() {
   return (

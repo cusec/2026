@@ -190,6 +190,7 @@ export interface ScheduleItem {
 }
 
 export type Sponsor = {
+  name: string;
   image: string;
   link: string;
 };

@@ -5,6 +5,8 @@ import Link from "next/link";
 import React, { useState } from "react";
 import CreditsModal from "./CreditsModal";
 
+const PAST_EDITIONS = ["2020", "2021", "2022", "2024", "2025"];
+
 const Footer: React.FC = () => {
   const [isCreditsOpen, setIsCreditsOpen] = useState(false);
   const socialLinks = [
@@ -45,7 +47,7 @@ const Footer: React.FC = () => {
             <div className="w-8 h-8 relative">
               <Image
                 src="/images/logo.svg"
-                alt="CUSEC Logo"
+                alt="CUSEC 2026 logo"
                 fill
                 priority
                 className="object-contain"
@@ -55,6 +57,12 @@ const Footer: React.FC = () => {
 
           {/* Center Links */}
           <div className="flex items-center gap-6 md:gap-16 text-white">
+            <a
+              href="https://2027.cusec.net"
+              className="text-sm md:text-base hover:text-white/80 transition-colors duration-200 font-jost"
+            >
+              CUSEC 2027
+            </a>
             <Link
               href="/code-of-conduct"
               className="text-sm md:text-base hover:text-white/80 transition-colors duration-200 font-jost"
@@ -95,6 +103,28 @@ const Footer: React.FC = () => {
               </Link>
             ))}
           </div>
+        </div>
+
+        <div className="w-full md:max-w-[80vw] mx-auto mt-6 pt-6 border-t border-white/15 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-white/70 text-sm font-jost">
+          <span>Past editions:</span>
+          {PAST_EDITIONS.map((year) => (
+            <a
+              key={year}
+              href={`https://${year}.cusec.net`}
+              className="hover:text-white transition-colors duration-200"
+            >
+              CUSEC {year}
+            </a>
+          ))}
+          <span aria-current="page" className="text-white">
+            CUSEC 2026
+          </span>
+          <a
+            href="https://2027.cusec.net"
+            className="text-white hover:text-white/80 transition-colors duration-200"
+          >
+            CUSEC 2027
+          </a>
         </div>
       </footer>
       {/* Credits Modal - Outside footer to avoid positioning issues */}

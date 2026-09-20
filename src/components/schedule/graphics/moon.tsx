@@ -9,7 +9,7 @@ export default function Moon() {
       >
         <Image
           src="/images/schedule/moon.svg"
-          alt="Moon"
+          alt=""
           fill
           className="object-contain"
         />

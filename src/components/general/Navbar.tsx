@@ -25,6 +25,7 @@ const Navbar: React.FC = () => {
   };
   if (scheduleEnabled) navItems.Schedule = "/schedule";
   navItems["Scavenger Hunt"] = "/scavenger";
+  navItems["CUSEC 2027"] = "https://2027.cusec.net";
 
   const standaloneNavItems: Record<string, string> = {
     "Begin Hunting": "/scavenger",
@@ -33,6 +34,7 @@ const Navbar: React.FC = () => {
   standaloneNavItems["Speakers"] = "/speakers";
   standaloneNavItems["Team"] = "/team";
   standaloneNavItems["Other Details"] = "/";
+  standaloneNavItems["CUSEC 2027"] = "https://2027.cusec.net";
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -82,7 +84,7 @@ const Navbar: React.FC = () => {
             <div className="w-8 h-8 relative">
               <Image
                 src="/images/logo.svg"
-                alt="CUSEC Logo"
+                alt="CUSEC 2026 logo"
                 fill
                 priority
                 className="object-contain"

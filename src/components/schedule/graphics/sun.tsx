@@ -9,7 +9,7 @@ export default function Sun() {
       >
         <Image
           src="/images/schedule/sun.svg"
-          alt="Sun"
+          alt=""
           fill
           className="object-contain"
         />
