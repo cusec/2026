@@ -114,10 +114,10 @@ const conferenceJsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://cusec.net/#organization",
+      "@id": "https://www.cusec.net/#organization",
       name: "CUSEC",
       alternateName: "Canadian University Software Engineering Conference",
-      url: "https://cusec.net",
+      url: "https://www.cusec.net",
       logo: "https://2026.cusec.net/images/logo.png",
       sameAs: [
         "https://2027.cusec.net",
@@ -129,10 +129,10 @@ const conferenceJsonLd = {
     },
     {
       "@type": "EventSeries",
-      "@id": "https://cusec.net/#series",
+      "@id": "https://www.cusec.net/#series",
       name: "Canadian University Software Engineering Conference",
-      url: "https://cusec.net",
-      organizer: { "@id": "https://cusec.net/#organization" },
+      url: "https://www.cusec.net",
+      organizer: { "@id": "https://www.cusec.net/#organization" },
     },
     {
       "@type": "Event",
@@ -143,8 +143,8 @@ const conferenceJsonLd = {
       endDate: "2026-01-10",
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-      superEvent: { "@id": "https://cusec.net/#series" },
-      organizer: { "@id": "https://cusec.net/#organization" },
+      superEvent: { "@id": "https://www.cusec.net/#series" },
+      organizer: { "@id": "https://www.cusec.net/#organization" },
     },
     {
       "@type": "Event",
@@ -164,8 +164,8 @@ const conferenceJsonLd = {
           addressCountry: "CA",
         },
       },
-      superEvent: { "@id": "https://cusec.net/#series" },
-      organizer: { "@id": "https://cusec.net/#organization" },
+      superEvent: { "@id": "https://www.cusec.net/#series" },
+      organizer: { "@id": "https://www.cusec.net/#organization" },
     },
   ],
 };
