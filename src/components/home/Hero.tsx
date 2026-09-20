@@ -96,22 +96,41 @@ const Hero: React.FC = () => {
             className="ml-2"
           />
         </Link> */}
-        <a
-          className="relative inline-flex w-full overflow-hidden rounded-2xl p-[1.5px] focus-visible:outline-none"
-          href="https://forms.gle/SLSRzfstSLETexj4A"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span
-            className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] cta-border-spin"
-            aria-hidden="true"
-          />
-          <span className="relative inline-flex w-full items-center justify-center rounded-[14px] bg-[#4433a1ee] px-6 py-3 overflow-hidden">
-            <span className="font-bebas-neue! relative z-10 text-2xl tracking-[0.3em] text-white">
-              Join the 2027 CUSEC team
+        <div className="flex flex-col gap-4 w-full">
+          <p className="text-base md:text-lg text-light-mode/90">
+            CUSEC 2026 wrapped up on January 10<sup>th</sup>, 2026. The 26
+            <sup>th</sup> edition,{" "}
+            <a
+              className="underline underline-offset-4 decoration-secondary"
+              href="https://2027.cusec.net"
+            >
+              CUSEC 2027
+            </a>
+            , runs in Montr&eacute;al in January 2027.
+          </p>
+          <a
+            className="relative inline-flex w-full overflow-hidden rounded-2xl p-[1.5px] focus-visible:outline-none"
+            href="https://2027.cusec.net"
+          >
+            <span
+              className="absolute inset-[-1000%] animate-[spin_5s_linear_infinite] cta-border-spin"
+              aria-hidden="true"
+            />
+            <span className="relative inline-flex w-full items-center justify-center rounded-[14px] bg-[#4433a1ee] px-6 py-3 overflow-hidden">
+              <span className="font-bebas-neue! relative z-10 text-2xl tracking-[0.3em] text-white">
+                Visit CUSEC 2027
+              </span>
             </span>
-          </span>
-        </a>
+          </a>
+          <a
+            className="font-space-grotesk! w-full rounded-2xl px-6 py-3 text-center text-lg border-2 border-secondary/50 register-hover"
+            href="https://forms.gle/SLSRzfstSLETexj4A"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join the 2027 CUSEC team
+          </a>
+        </div>
       </div>
     </div>
   );

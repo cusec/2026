@@ -55,6 +55,12 @@ const Footer: React.FC = () => {
 
           {/* Center Links */}
           <div className="flex items-center gap-6 md:gap-16 text-white">
+            <a
+              href="https://2027.cusec.net"
+              className="text-sm md:text-base hover:text-white/80 transition-colors duration-200 font-jost"
+            >
+              CUSEC 2027
+            </a>
             <Link
               href="/code-of-conduct"
               className="text-sm md:text-base hover:text-white/80 transition-colors duration-200 font-jost"
